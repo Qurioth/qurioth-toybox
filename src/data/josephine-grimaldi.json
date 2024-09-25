@@ -1,0 +1,378 @@
+{
+  "name": "Josephine Grimaldi",
+  "occupation": "サーカス団員(DEX系アスリート)",
+  "age": "24",
+  "sex": "女性",
+  "residence": "不定",
+  "birthplace": "アメリカ合衆国 ネバダ州",
+  "characteristics": {
+    "str": 70,
+    "con": 55,
+    "pow": 55,
+    "dex": 70,
+    "app": 35,
+    "siz": 40,
+    "int": 65,
+    "edu": 70
+  },
+  "attribute": {
+    "hp": 9,
+    "mp": 11,
+    "mov": 9,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 55,
+      "max": 99
+    },
+    "luck": 45
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 65,
+      "edited": true
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "芸術／製作（ダンス）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 25,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 80,
+      "edited": true
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "登攀",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "図書館",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 35,
+      "edited": true
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（日本語）",
+      "value": 41,
+      "edited": true
+    },
+    {
+      "name": "母国語（英語）",
+      "value": 70,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "目星",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "身長 147cm、体重 48kg、体脂肪率 11％"
+        },
+        {
+          "text": "赤毛、碧眼、そばかす、ダサい服装"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "人を楽しませる。魅了する。"
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "サーカスの団員"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "ステージの上、観客の前",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "初めて行ったサーカスのパンフレット"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "身体が柔らかい(コントーション可)"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "幼少期に見たサーカスに衝撃を受け、13歳でサーカス団員になる。\n感動のあまり泣いたことを母によくいじられる。\n演目は身長が低いことと跳躍力の高さからバンキンでの頂上を任されることが多い。しかし、筋力もあるため男性とペアでのスタチューや自身一人で行うエアリアル、クラウンなど様々。\n移動サーカス団員として世界中を転々としている事が多く、家にはあまり帰らない。\n日本のアニメが好き\n愛称：ジョセ",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=45 幸運\nCC<=70 STR\nCC<=55 CON\nCC<=55 POW\nCC<=70 DEX\nCC<=35 APP\nCC<=40 SIZ\nCC<=65 INT\nCC<=65 アイデア\nCC<=70 知識\nCC<=50 運転（自動車）\nCC<=50 応急手当\nCC<=65 回避\nCC<=20 聞き耳\nCC<=50 近接戦闘（格闘）\nCC<=50 芸術／製作（ダンス）\nCC<=50 射撃（拳銃）\nCC<=25 信用\nCC<=80 跳躍\nCC<=50 投擲\nCC<=50 登攀\nCC<=20 図書館\nCC<=35 変装\nCC<=41 ほかの言語（日本語）\nCC<=70 母国語（英語）\nCC<=30 魅惑\nCC<=25 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/E2gL3UjqAbO6FWVLe2QXf?v=K6HQdAt5jm"
+}

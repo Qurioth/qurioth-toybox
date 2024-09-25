@@ -1,0 +1,385 @@
+{
+  "name": "上田 九見子",
+  "occupation": "占い師(クトゥルフ2020)",
+  "age": "21",
+  "sex": "女性",
+  "residence": "東京都 荒川区",
+  "birthplace": "長野県",
+  "characteristics": {
+    "str": 30,
+    "con": 50,
+    "pow": 62,
+    "dex": 40,
+    "app": 70,
+    "siz": 70,
+    "int": 60,
+    "edu": 64
+  },
+  "attribute": {
+    "hp": 12,
+    "mp": 12,
+    "mov": 7,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 64,
+      "max": 99
+    },
+    "luck": 50
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 65,
+      "edited": true
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 26,
+      "edited": true
+    },
+    {
+      "name": "科学（天文学）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "科学（物理学）",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "芸術／製作（服飾）",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "芸術／製作（書道）",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 15,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 75,
+      "edited": true
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 64,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "目星",
+      "value": 65,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "高身長(168cm)\n身長が高いことと胸が大きいことを気にしており、猫背になりがち"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "この世には超能力や超常現象があると信じている。\n幼少期に母に見せてもらったマジックを超能力と信じていた。当時ほどではないが、心のどこかであるのではないかと思っている。",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "マジシャンの母"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "祖母の書道教室"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "友達(ペットのハムスターと亀)"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "特徴的な笑い方"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "都内の占い店に勤務。占星術とタロットでの占いを中心に行う。\n物理学者の父とマジシャンの母の間に出生\n幼少期、母にマジックを教えられたが、手先が不器用で出来なかったため超能力と信じていた。\nまた、祖母の書道教室に通っていたため、字がきれい。",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=50 幸運\nCC<=30 STR\nCC<=50 CON\nCC<=62 POW\nCC<=40 DEX\nCC<=70 APP\nCC<=70 SIZ\nCC<=60 INT\nCC<=60 アイデア\nCC<=64 知識\nCC<=65 オカルト\nCC<=26 回避\nCC<=50 科学（天文学）\nCC<=30 科学（物理学）\nCC<=20 聞き耳\nCC<=25 近接戦闘（格闘）\nCC<=45 芸術／製作（書道）\nCC<=15 信用\nCC<=75 心理学\nCC<=45 説得\nCC<=60 図書館\nCC<=64 母国語（日本語）\nCC<=30 魅惑\nCC<=65 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/AzRrt00UR_YJPDSMdhSff?v=-ktf4jCcQY"
+}

@@ -1,0 +1,407 @@
+{
+  "name": "Abbey Priestly",
+  "occupation": "ファッションデザイナー",
+  "age": "34",
+  "sex": "女性",
+  "residence": "日本",
+  "birthplace": "オーストラリア",
+  "characteristics": {
+    "str": 30,
+    "con": 45,
+    "pow": 50,
+    "dex": 70,
+    "app": 55,
+    "siz": 90,
+    "int": 60,
+    "edu": 80
+  },
+  "attribute": {
+    "hp": 13,
+    "mp": 10,
+    "mov": 7,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 40,
+      "max": 94
+    },
+    "luck": 12
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 35,
+      "edited": false
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 40,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 33,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（ファッション）",
+      "value": 85,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 37,
+      "edited": true
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（日本語）",
+      "value": 31,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（フランス語）",
+      "value": 71,
+      "edited": true
+    },
+    {
+      "name": "母国語（英語）",
+      "value": 80,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [],
+  "credit": {
+    "spendingLevel": "$1,000",
+    "cash": "$6,000",
+    "assetsDetails": "$600,000"
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "高身長"
+        },
+        {
+          "text": "激ヤセ"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": []
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "双子の妹(3:兄弟姉妹)",
+          "keyConnection": true
+        },
+        {
+          "text": "自身よりも才能がある妹がいたが病死している(8:後悔)",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "書斎(4:落ち着いた、熟考できる場所)"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "ZIPPOライター(2022/05/14 林檎は笑う通過により追加)"
+        },
+        {
+          "text": "シュシュ(2023/04/02 学校にまにあわない通過により追加)"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "2:動物に懐かれやすい"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": [
+        {
+          "text": "黒い仔山羊"
+        },
+        {
+          "text": "ゴーツウッドのノーム"
+        },
+        {
+          "text": "ゴグ=フール"
+        }
+      ]
+    }
+  ],
+  "fellows": [
+    {
+      "name": "##### 林檎は笑う #####",
+      "url": ""
+    },
+    {
+      "name": "西海 健吾",
+      "url": "https://iachara.com/char/3505860/view"
+    },
+    {
+      "name": "古井戸 絹",
+      "url": "https://iachara.com/char/3620656/view"
+    },
+    {
+      "name": "##### 学校にまにあわない #####",
+      "url": ""
+    },
+    {
+      "name": "春芽 亞州漏",
+      "url": "https://charaeno.com/7th/jkacFft973f1R0tQ_3ATd"
+    }
+  ],
+  "note": "元パリコレモデル\n身長182cm、体重52kg\n\nヘビースモーカー マルボロメンソールライト\n\n-----★-----★-----★-----★-----★-----★-----★-----\n■通過シナリオ\n・林檎は笑う 2022/05/14 \n・学校にまにあわない 2023/04/02\n\n-----★-----★-----★-----★-----★-----★-----★-----\n[メイン] : 3D6 STR (3D6) ＞ 11[1,5,5] ＞ 11\n[メイン] : 3D6 CON (3D6) ＞ 9[2,5,2] ＞ 9\n[メイン] : 2D6+6 SIZ (2D6+6) ＞ 12[6,6]+6 ＞ 18\n[メイン] : 3D6 DEX (3D6) ＞ 14[5,3,6] ＞ 14\n[メイン] : 3D6 APP (3D6) ＞ 6[1,2,3] ＞ 6\n[メイン] : 2D6+6 INT (2D6+6) ＞ 6[5,1]+6 ＞ 12\n[メイン] : 3D6 POW (3D6) ＞ 10[4,4,2] ＞ 10\n[メイン] : 2D6+6 EDU (2D6+6) ＞ 10[5,5]+6 ＞ 16\n[メイン] : 3D6 幸運 (3D6) ＞ 8[3,2,3] ＞ 8\n[メイン] : 1D100<=80 EDU上達チェック (1D100<=80) ＞ 44 ＞ 成功\n\nSTRとAPPを入れ替え\n(EDU上達なし)",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=12 幸運\nCC<=30 STR\nCC<=45 CON\nCC<=50 POW\nCC<=70 DEX\nCC<=55 APP\nCC<=90 SIZ\nCC<=60 INT\nCC<=60 アイデア\nCC<=80 知識\nCC<=30 運転（自動車）\nCC<=35 回避\nCC<=40 聞き耳\nCC<=33 近接戦闘（格闘）\nCC<=5 クトゥルフ神話\nCC<=85 芸術／製作（ファッション）\nCC<=60 射撃（拳銃）\nCC<=60 信用\nCC<=37 人類学\nCC<=70 図書館\nCC<=31 ほかの言語（日本語）\nCC<=71 ほかの言語（フランス語）\nCC<=80 母国語（英語）\nCC<=55 目星",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/9HIhWHE4W0Lyd99MHfhR8?v=nL29Fu1xp0"
+}

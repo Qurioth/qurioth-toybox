@@ -1,0 +1,446 @@
+{
+  "name": "大和 晶",
+  "occupation": "警察官",
+  "age": "25",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 60,
+    "con": 55,
+    "pow": 42,
+    "dex": 65,
+    "app": 60,
+    "siz": 85,
+    "int": 45,
+    "edu": 55
+  },
+  "attribute": {
+    "hp": 14,
+    "mp": 8,
+    "mov": 7,
+    "build": 1,
+    "db": "+1D4",
+    "san": {
+      "value": 59,
+      "max": 88
+    },
+    "luck": 48
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 24,
+      "edited": true
+    },
+    {
+      "name": "運転（バイク）",
+      "value": 38,
+      "edited": true
+    },
+    {
+      "name": "応急手当",
+      "value": 66,
+      "edited": true
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 32,
+      "edited": false
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 94,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 11,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（お菓子）",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 63,
+      "edited": true
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 18,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 54,
+      "edited": true
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 34,
+      "edited": true
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 43,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 28,
+      "edited": true
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 25,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 55,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 69,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "85",
+      "damage": "1D3+DB",
+      "range": "タッチ",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    },
+    {
+      "name": "警棒",
+      "value": "85",
+      "damage": "1D6+DB",
+      "range": "タッチ",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    },
+    {
+      "name": "38口径(9mm)リボルバー",
+      "value": "60",
+      "damage": "1D10",
+      "range": "15m",
+      "attacks": "1(3)",
+      "ammo": "6",
+      "malfunction": "100"
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "でかい(175cm)"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "10:弱点は克服すべきだと考えている(クトゥルフ2020)"
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "8:有名人(棚橋弘至)\n2:彼らは何かをあなたに教えてくれた(プロレス)"
+        },
+        {
+          "text": "御影 マリア\nシナリオM'OTHER通過により追加"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "3:行きつけの店(クトゥルフ2020)"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "7:棚橋弘至のサイン(思い出のプレゼント(クトゥルフ2020))"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "8:忠誠心が強い(友人を助ける、決して約束を違えない)",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": [
+        {
+          "text": "嘘を嫌い、真実を追求する。"
+        }
+      ]
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": [
+        {
+          "text": "「幻惑に閉じ込める」※解呪も可\n　コスト\n　　20MP 10POW （複数人参加可能）\n　　2d20SAN（各自）\nキャスティングロール未成功"
+        }
+      ]
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": [
+        {
+          "text": "黒い仔山羊"
+        },
+        {
+          "text": "ミ=ゴ"
+        },
+        {
+          "text": "ティンダロスの猟犬"
+        },
+        {
+          "text": "食屍鬼"
+        }
+      ]
+    }
+  ],
+  "fellows": [
+    {
+      "name": "===== ひかる廃屋 =====",
+      "url": ""
+    },
+    {
+      "name": "大文字 石矢",
+      "url": "https://charaeno.com/7th/TgIQNS-c-H0OObCVkM3J-"
+    },
+    {
+      "name": "光金 嬢",
+      "url": "https://charaeno.com/7th/UQF3wBlG6Sx49ek2DQpfI"
+    },
+    {
+      "name": "===== M'OTHER =====",
+      "url": ""
+    },
+    {
+      "name": "美奈子",
+      "url": "https://charaeno.com/7th/QXNtmCtKoPLdo7aevO8XW"
+    },
+    {
+      "name": "明日 来早",
+      "url": "https://charaeno.com/7th/abF55rD7bO2KPl6qDB3KS"
+    },
+    {
+      "name": "念仏 悟",
+      "url": "https://charaeno.com/7th/W-VeVbPkVTihoVvSK2byz"
+    }
+  ],
+  "note": "プロレスが趣味で実際に学生時代は選手としてプレイしていた。\nお菓子作りが趣味。学生時代はケーキ店でバイト。\n大学は法学部を選考。大学在学中に普通自動車・大型二輪免許を取得。\n卒業後は警察学校へ入学し警察官となる。\n現在は白バイ隊員として勤続\n\n----- ★ ----- 通過シナリオ ----- ★ -----\n6版\n・アクセス ????/??/??\n・死を忘る事なかれ ????/??/??\n7版\n・ひかる廃屋 2022/06/18 \n・M'OTHER 2023/04/30\n\n----- ★ ----- 6版から移行時の技能値修正 ----- ★ -----\n6版移行のキャラクターのため職業技能はEDU×4で算出\n・言いくるめ 職業P：50\n　→ 説得 職業P：35 （警察官へ職業を変更に伴い、説得のほうが妥当と感じたため）\n　　 信用 職業P：15 （7版移行に伴い信用を取得する必要あるため）\n・組み付き 職業P：40\n　→ 射撃（拳銃） 職業P：40 \n（近接戦闘へ移行すると100超えるため、警察官の職業技能から戦闘系で取得）\n・武道（プロレス） 職業P：60\n　→ 近接戦闘（格闘） 職業P：60\n\n----- ★ ----- 年齢加算によるステータスの修正 ----- ★ -----\n17歳から25歳へ成長\nSTR、SIZ +5\nEDU上達チェック失敗\n『cc<=55 EDU上達チェック (1D100<=55) ボーナス・ペナルティダイス[0] ＞ 6 ＞ 6 ＞ イクストリーム成功』\n\n----- ★ ----- 年齢加算における訓練での技能成長 ----- ★ -----\n大学(4年)の間に警官になるための訓練\n大学法学部 48ヶ月(12回) 同時に2技能まで同期間で訓練\n・法律 6回\n　1d100<=5 法律 (1D100<=5) ＞ 60 ＞ 失敗\n　1d10 法律 (1D10) ＞ 5\n　1d100<=10 法律 (1D100<=10) ＞ 86 ＞ 失敗\n　1d10 法律 (1D10) ＞ 1\n　1d100<=11 法律 (1D100<=11) ＞ 38 ＞ 失敗\n　1d10 法律 (1D10) ＞ 3\n　1d100<=14 法律 (1D100<=14) ＞ 51 ＞ 失敗\n　1d10 法律 (1D10) ＞ 2\n　1d100<=16 法律 (1D100<=16) ＞ 19 ＞ 失敗\n　1d10 法律 (1D10) ＞ 9\n　1d100<=25 法律 (1D100<=25) ＞ 18 ＞ 成功\n\n・運転（自動車） 3回\n　1d100<=20 運転（自動車） (1D100<=20) ＞ 64 ＞ 失敗\n　1d10 運転（自動車） (1D10) ＞ 4\n　1d100<=24 運転（自動車） (1D100<=24) ＞ 12 ＞ 成功\n　1d100<=24 運転（自動車） (1D100<=24) ＞ 13 ＞ 成功\n\n・運転（バイク） 3回 + 3回\n　1d100<=20 運転（バイク） (1D100<=20) ＞ 64 ＞ 失敗\n　1d10 運転（バイク）成長 (1D10) ＞ 6\n　1d100<=26 運転（バイク） (1D100<=26) ＞ 70 ＞ 失敗\n　1d10 運転（バイク） (1D10) ＞ 10\n　1d100<=36 運転（バイク） (1D100<=36) ＞ 25 ＞ 成功\n　1d100<=36 運転（バイク） (1D100<=36) ＞ 33 ＞ 成功\n　1d100<=36 運転（バイク） (1D100<=36) ＞ 53 ＞ 失敗\n　1d10 運転（バイク） (1D10) ＞ 2\n　1d100<=38 運転（バイク） (1D100<=38) ＞ 14 ＞ 成功\n\n・ナビゲート 3回\n　1d100<=10 ナビゲート (1D100<=10) ＞ 65 ＞ 失敗\n　1d10 ナビゲート (1D10) ＞ 5\n　1d100<=15 ナビゲート (1D100<=15) ＞ 41 ＞ 失敗\n　1d10 ナビゲート (1D10) ＞ 8\n　1d100<=23 ナビゲート (1D100<=23) ＞ 54 ＞ 失敗\n　1d10 ナビゲート (1D10) ＞ 5\n\n・投擲 3回\n　1d100<=20 投擲 (1D100<=20) ＞ 55 ＞ 失敗\n　1d10 投擲 (1D10) ＞ 6\n　1d100<=26 投擲 (1D100<=26) ＞ 7 ＞ 成功\n　1d100<=26 投擲 (1D100<=26) ＞ 70 ＞ 失敗\n　1d10 投擲 (1D10) ＞ 8\n\n・跳躍 3回\n　1d100<=45 跳躍 (1D100<=45) ＞ 21 ＞ 成功\n　1d100<=45 跳躍 (1D100<=45) ＞ 71 ＞ 失敗\n　1d10 跳躍 (1D10) ＞ 5\n　1d100<=50 跳躍 (1D100<=50) ＞ 88 ＞ 失敗\n　1d10 跳躍 (1D10) ＞ 4\n\n----- ★ ----- 基本ルルブ P75 - 選択ルール使用時の特記 ----- ★ -----\n近接戦闘(格闘)が90%以上のため、すべての近接戦闘にプラス20%\n射撃(拳銃)が50%以上のため、すべての射撃にプラス10%\n\n----- ★ ----- 6版キャラクターシート ----- ★ -----\nhttps://charaeno.com/6th/Ri53mTDQUro7EO41jDmCP",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=48 幸運\nCC<=60 STR\nCC<=55 CON\nCC<=42 POW\nCC<=65 DEX\nCC<=60 APP\nCC<=85 SIZ\nCC<=45 INT\nCC<=45 アイデア\nCC<=55 知識\nCC<=24 運転（自動車）\nCC<=38 運転（バイク）\nCC<=66 応急手当\nCC<=32 回避\nCC<=20 聞き耳\nCC<=94 近接戦闘（格闘）\nCC<=11 クトゥルフ神話\nCC<=55 芸術／製作（お菓子）\nCC<=63 射撃（拳銃）\nCC<=18 信用\nCC<=45 説得\nCC<=54 跳躍\nCC<=34 投擲\nCC<=43 図書館\nCC<=28 ナビゲート\nCC<=25 法律\nCC<=55 母国語（日本語）\nCC<=69 目星\n1D3+{DB} 素手\n1D6+{DB} 警棒\n1D10 38口径(9mm)リボルバー",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/ZZELnmmErYpSHRFr1pqJ0?v=9eR1xUiitI"
+}

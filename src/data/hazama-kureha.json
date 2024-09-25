@@ -1,0 +1,392 @@
+{
+  "name": "間 紅葉",
+  "occupation": "医師",
+  "age": "36",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 40,
+    "con": 50,
+    "pow": 50,
+    "dex": 50,
+    "app": 85,
+    "siz": 70,
+    "int": 75,
+    "edu": 75
+  },
+  "attribute": {
+    "hp": 12,
+    "mp": 10,
+    "mov": 7,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 38,
+      "max": 58
+    },
+    "luck": 57
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 93,
+      "edited": true
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 72,
+      "edited": true
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "科学（薬学）",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 29,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 41,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（）",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 79,
+      "edited": true
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 73,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 75,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [
+    {
+      "name": "簡易手術道具",
+      "count": "1",
+      "detail": "メス等の手術道具"
+    }
+  ],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": []
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": []
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "母(幼少期に他界)",
+          "keyConnection": true
+        },
+        {
+          "text": "けが人(救助対象)"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": []
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": []
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "泣き虫"
+        },
+        {
+          "text": "読書家"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": [
+        {
+          "text": "精神病院へ1年間通院し正気度の回復を実施済み"
+        }
+      ]
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": [
+        {
+          "text": "神話生物マニア"
+        }
+      ]
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": [
+        {
+          "text": "『CTHAAT AQUADINGEN』\n著者：清水 正弘 \n研究済み\n――――― ★ ――――― ★ ―――――\n「深き者との接触」\n　キャスティングロール未実施\n「神格との接触/クトゥルフ」\n　キャスティングロール未実施\n「ショゴスの消滅」\n　MP1D3\n　POW −5\n　SAN1D6\n　2ラウンド使用\n　COC技能＋2\n「ナーク＝ティトの障壁」P252\n「深淵の息」P246\n　キャスティングロール未実施\n「忘却の波」P256\n　キャスティングロール未実施\n「ルルイエの霧の創造」P259\n　キャスティングロール未実施\n――――― ★ ――――― ★ ―――――"
+        },
+        {
+          "text": "『怪物とその眷属』P223\n英語版\n12ヶ月間研究済み\n全ての呪文を取得済み(キャスティングロール未実施)"
+        },
+        {
+          "text": "「封じ込めの玉」\nティンダロス種に対しての特効\n投擲命中時ティンダロス１体の封印"
+        },
+        {
+          "text": "「惑ふ諸島」\n日本語、勝間正国著、1920年。\nマリアナ諸島を視察した大日本帝国海軍大佐である勝間正国が著した体験記。\n島の先住民族であるチャモロ人についての古い文献や遺構を分析し、かつて生活様式や文化体系、土着信仰などについて研究した歴史書という側面もある\nしかし後半になるにしたがって主題は『深海に潜む指導者』なる怪物の目撃談へと転じていき、世間から「ほら話」として非難される機会で支離滅裂な内容が続くようになる。\n150ページ程度の冊子として数十部が印刷されたものの「海軍大佐にあるまじき妄言である」として帝国海軍の怒りを買い、その多くは処分されてしまっている\n\n正気度喪失:1d8\n【クトゥルフ神話】+3%/+6%\n神話レーティング:15\n研究期間:3週間\n呪文:「深海に潜む指導者との謁見」"
+        }
+      ]
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "幼少期母親が他界、そのことから医師を目指しだす。\n現在は都内の病院に勤務している。\n非常に腕が立つことから「レッド・クイーン」との異名で呼ばれることがあるが、本人はあまり気に入ってない。\n可愛い物に目がなく休憩中はよく院内の小児科病棟にいって子どもたちと遊んでいる。\nメスは腕の立つ刀鍛冶に作ってもらっている特注品。\n野球が好きで高校まではソフトボール部で外野をやっていた。カープ女子\n本を読むことが好きで鞄の中には常に文庫を持ち歩いている。\n\n6版のキャラシ\nhttps://charaeno.com/6th/Fbwz9VvvMaKk9P9gKXnwM",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=57 幸運\nCC<=40 STR\nCC<=50 CON\nCC<=50 POW\nCC<=50 DEX\nCC<=85 APP\nCC<=70 SIZ\nCC<=75 INT\nCC<=75 アイデア\nCC<=75 知識\nCC<=93 医学\nCC<=72 応急手当\nCC<=25 回避\nCC<=55 科学（薬学）\nCC<=20 聞き耳\nCC<=29 近接戦闘（格闘）\nCC<=41 クトゥルフ神話\nCC<=70 信用\nCC<=55 心理学\nCC<=79 精神分析\nCC<=55 投擲\nCC<=73 図書館\nCC<=75 母国語（日本語）\nCC<=60 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/46A8QRjUcPPbekAZ08x7-?v=upSHX0D2qa"
+}

@@ -1,0 +1,395 @@
+{
+  "name": "伊庭 玲奈",
+  "occupation": "科学捜査研究員",
+  "age": "28",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 35,
+    "con": 55,
+    "pow": 75,
+    "dex": 65,
+    "app": 45,
+    "siz": 65,
+    "int": 40,
+    "edu": 70
+  },
+  "attribute": {
+    "hp": 12,
+    "mp": 15,
+    "mov": 8,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 77,
+      "max": 99
+    },
+    "luck": 41
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 41,
+      "edited": true
+    },
+    {
+      "name": "科学（法医学）",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 26,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "芸術／製作（写真術）",
+      "value": 25,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 62,
+      "edited": true
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 40,
+      "edited": true
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 23,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 52,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 35,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（ラテン語）",
+      "value": 15,
+      "edited": true
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 70,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 61,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "インナーカラーが入ったショートヘアー\n濃い化粧"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "死体は語る"
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "死体",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "安置室"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "バナナ"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "風呂嫌い"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": [
+        {
+          "text": "蛇人間の外皮で作ったスーツ"
+        },
+        {
+          "text": "蛇人間の心臓"
+        }
+      ]
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [
+    {
+      "name": "===== いのちのこたえ =====",
+      "url": ""
+    },
+    {
+      "name": "ラフ ",
+      "url": "https://charaeno.com/7th/KYVLSLhumPBbhRNboXEdZ"
+    },
+    {
+      "name": "燃堂 猛",
+      "url": "https://charaeno.com/7th/A5_2fjIeBV6JIAz05OpEI"
+    }
+  ],
+  "note": "法医学医として主に勤務\n解剖後のデータを3D化し被害者の死因などを説明することもある。\nそれもあって時折、画像や破損したデータの解析なども依頼されることもあるが本人はあまり好きじゃない。\n執刀中は『Garbage』の曲をよく流しているが、ともに執刀する医師たちからは気が滅入ると不評\nおっとりとしており色々と抜けている。\nよくバナナを食べてる。\n汚部屋の主\n\n===== 法医学医を取材した記事の一部 =====\n「法医学医を目指した理由？」\n「うーん？何だったっけ？」\n「子供の頃よく膝擦りむいたりして怪我しててー保健室の先生とか看護師さんに憧れてたんだ」\n「それである日理科の授業でカエルの解剖をしたんだよね」\n「カエルのお腹開いて血が出てきてみんな気持ち悪がってたなー」\n「でも、その時かな？外科医になりたいって思ったの」\n「それで勉強して大学のとき研修で手術に立ち会ったんだよね」\n「だけど、カエルを解剖したときほどの感覚はなかったんだー」\n「なんでだろう？って思ってたら、その時たまたま司法解剖も行うってことで見せてもらったんだけど、あー、私は言葉を話せなくなった子の言葉が聞きたかったんだって思ったんだ」\n「法医学医になりたいって教授に言ったら、お前には無理だって怒られたっけ？」\n「なんとかなったんだけどねｗｗ」",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=41 幸運\nCC<=35 STR\nCC<=55 CON\nCC<=75 POW\nCC<=65 DEX\nCC<=45 APP\nCC<=65 SIZ\nCC<=40 INT\nCC<=40 アイデア\nCC<=70 知識\nCC<=70 医学\nCC<=41 回避\nCC<=70 科学（法医学）\nCC<=26 聞き耳\nCC<=25 近接戦闘（格闘）\nCC<=25 芸術／製作（写真術）\nCC<=62 コンピューター\nCC<=40 射撃（拳銃）\nCC<=23 信用\nCC<=52 図書館\nCC<=35 法律\nCC<=15 ほかの言語（ラテン語）\nCC<=70 母国語（日本語）\nCC<=61 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/hS7Vf898vs2GqAiXC6xCe?v=au1SG7F8va"
+}

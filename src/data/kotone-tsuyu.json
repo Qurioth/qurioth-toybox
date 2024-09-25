@@ -1,0 +1,414 @@
+{
+  "name": "小刀禰 月結",
+  "occupation": "刀匠(クトゥルフ2020 - 工匠準拠)",
+  "age": "32",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 80,
+    "con": 65,
+    "pow": 70,
+    "dex": 90,
+    "app": 45,
+    "siz": 55,
+    "int": 75,
+    "edu": 79
+  },
+  "attribute": {
+    "hp": 12,
+    "mp": 14,
+    "mov": 9,
+    "build": 1,
+    "db": "+1D4",
+    "san": {
+      "value": 64,
+      "max": 94
+    },
+    "luck": 26
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 45,
+      "edited": false
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "機械修理",
+      "value": 30,
+      "edited": true
+    },
+    {
+      "name": "聞き耳",
+      "value": 23,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（刀剣）",
+      "value": 62,
+      "edited": true
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（刀剣）",
+      "value": 85,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 25,
+      "edited": true
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 54,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（中国語）",
+      "value": 16,
+      "edited": true
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 79,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "伝承(妖怪)",
+      "value": 60,
+      "edited": true
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    },
+    {
+      "name": "日本刀",
+      "value": "60",
+      "damage": "1D6+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "￥100,000",
+    "cash": "￥540,000",
+    "assetsDetails": "￥54,000,000"
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "低身長"
+        },
+        {
+          "text": "伸び切った髪"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "森羅万象のものに神は宿る"
+        },
+        {
+          "text": "捨てる神あれば拾う神あり"
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "祖父"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": []
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "さゝのつゆ (日本刀)",
+          "keyConnection": true
+        },
+        {
+          "text": "無銘 (日本刀) (2023/02/26 世界を視た男通過により追加)"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "ものを捨てれない"
+        },
+        {
+          "text": "動物をよく拾ってくる"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [
+    {
+      "name": "♤♤♤♤♤ 世界を視た男 ♤♤♤♤♤",
+      "url": ""
+    },
+    {
+      "name": "皮噛 富江",
+      "url": "https://charaeno.com/7th/mPkzmf7JRyFhuhZuvtD_g"
+    },
+    {
+      "name": "前園 まさお",
+      "url": "https://iachara.com/char/view/5472728"
+    },
+    {
+      "name": "♤♤♤♤♤ ガシャン ♤♤♤♤♤",
+      "url": ""
+    }
+  ],
+  "note": "刀鍛冶の家系の生まれ(母方)\n幼少の頃より刀に興味を持ち祖父にくっついていた。\nそんな祖父から刀の打ち方を教わり、\n高校を卒業する頃には祖父の代わりに刀を打っていた。\n\nそんな幼少期を過ごす折、祖父から日本神話や妖怪についての話を聞くことが多く\n本を読むことも好きだった事もあって、日本の伝承に詳しい。\n\nまた、中国の刀術に興味をもっていた時期があり、太極拳の剣術を学んだことがある。\n普段は黙々と刀を打っているため、人と関わる事が少なくあまり容姿を気にしていないが\nコミュニケーションが取れないわけではない。\n\n何かと幸薄い。なぜか靴紐が切れる。\n改札は5回に1回引っかかる。\n\n家宝の日本刀の手入れが日課\n犬とネコを2匹ずつ飼っており、ほかに亀と鯉も飼っている。\n\n----- ★ ----- ダイスロール結果  -----★ -----\n3d6*5 STR (3D6*5) ＞ 16[5,5,6]*5 ＞ 80\n3d6*5 CON (3D6*5) ＞ 13[2,6,5]*5 ＞ 65\n3d6*5 POW (3D6*5) ＞ 14[6,5,3]*5 ＞ 70\n3d6*5 DEX (3D6*5) ＞ 9[5,1,3]*5 ＞ 45\n3d6*5 APP (3D6*5) ＞ 9[4,3,2]*5 ＞ 45\n(2d6+6)*5 SIZ  ((2D6+6)*5) ＞ (5[3,2]+6)*5 ＞ 55\n(2d6+6)*5 EDU ((2D6+6)*5) ＞ (6[4,2]+6)*5 ＞ 60\n(2d6+6)*5 INT ((2D6+6)*5) ＞ (9[4,5]+6)*5 ＞ 75\n3d6*5 幸運 (3D6*5) ＞ 5[1,3,1]*5 ＞ 25\n\n振り直し\n3d6*5 DEX (3D6*5) ＞ 18[6,6,6]*5 ＞ 90\n(2d6+6)*5 EDU ((2D6+6)*5) ＞ (9[3,6]+6)*5 ＞ 75\n\n1d100<=75 EDU上達チェック (1D100<=75) ＞ 91 ＞ 失敗\n1d10 EDU上達 (1D10) ＞ 4",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=26 幸運\nCC<=80 STR\nCC<=65 CON\nCC<=70 POW\nCC<=90 DEX\nCC<=45 APP\nCC<=55 SIZ\nCC<=75 INT\nCC<=75 アイデア\nCC<=79 知識\nCC<=30 運転（自動車）\nCC<=45 回避\nCC<=70 鑑定\nCC<=30 機械修理\nCC<=23 聞き耳\nCC<=25 近接戦闘（格闘）\nCC<=62 近接戦闘（刀剣）\nCC<=5 クトゥルフ神話\nCC<=85 芸術／製作（刀剣）\nCC<=25 経理\nCC<=54 信用\nCC<=70 図書館\nCC<=16 ほかの言語（中国語）\nCC<=79 母国語（日本語）\nCC<=60 目星\nCC<=45 歴史\nCC<=60 伝承(妖怪)\n1D3+{DB} 素手\n1D6+{DB} 日本刀",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/z4uRUI8q_XnOP1ZxNmX6b?v=smhhgJg_mK"
+}

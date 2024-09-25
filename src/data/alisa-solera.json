@@ -1,0 +1,407 @@
+{
+  "name": "アリサ＝ソレーラ",
+  "occupation": "カジノディーラー(クトゥルフ2015 ギャンブラー)",
+  "age": "27",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 35,
+    "con": 50,
+    "pow": 35,
+    "dex": 60,
+    "app": 25,
+    "siz": 65,
+    "int": 45,
+    "edu": 95
+  },
+  "attribute": {
+    "hp": 11,
+    "mp": 7,
+    "mov": 7,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 49,
+      "max": 94
+    },
+    "luck": 35
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（イカサマ）",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 35,
+      "edited": true
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 10,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 80,
+      "edited": true
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（日本語）",
+      "value": 41,
+      "edited": true
+    },
+    {
+      "name": "母国語（イタリア語）",
+      "value": 95,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [
+    {
+      "name": "飴",
+      "count": "",
+      "detail": "鼈甲、甘露、薄荷、純露、小梅、ざらめなど"
+    },
+    {
+      "name": "ロケット",
+      "count": "",
+      "detail": "ファミリーの写真が入っている"
+    },
+    {
+      "name": "懐中時計",
+      "count": "",
+      "detail": "育ての親より19歳の誕生日にもらった。壊れて動かない"
+    },
+    {
+      "name": "デリンジャー",
+      "count": "1",
+      "detail": ""
+    }
+  ],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "顔や全身に火傷痕\n"
+        },
+        {
+          "text": "紫に変色した右目"
+        },
+        {
+          "text": "右目を隠すように伸ばした前髪"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": []
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "ファミリー"
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "ファミリーの家"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "ロケット",
+          "keyConnection": true
+        },
+        {
+          "text": "懐中時計"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "甘党"
+        },
+        {
+          "text": "まれにギャンブル時に豪運を発揮する"
+        },
+        {
+          "text": "自身の納得の行かないことには引かない不屈の精神力"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "幼少期親の借金のカタで売り飛ばされる。\nその後イタリアのマフィアのもとで可愛がられながら本当のファミリーのように育つ。\n名前はアリサ（有紗）であるとわかったが、苗字は不明であったためファミリーのボスが太陽のように明るい子に育って欲しいという願いより太陽(Sole)の単語が入ったソレーラという苗字をもらう。\n幸せに暮らしていたが、19歳の誕生日ファミリーが抗争で壊滅。その際、全身に傷を負った。\nその後は組員たちから教わったイカサマを使い闇カジノで日々食いつなぐ生活を続けるが、やがてイカサマがバレる。しかし、その腕を買われディーラーとして雇われる。\n特別実の両親に対して思い入れもないが、日本に本当の家族を捜しに来日する。その際は自分を売ったジャパニーズマフィアの手を借りている。\n元々はファミリーを照らすような明るい性格だったが現在は暗い性格で、あまり人と関わりを持とうとしない。",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=35 幸運\nCC<=35 STR\nCC<=50 CON\nCC<=35 POW\nCC<=60 DEX\nCC<=25 APP\nCC<=65 SIZ\nCC<=45 INT\nCC<=45 アイデア\nCC<=95 知識\nCC<=45 言いくるめ\nCC<=30 回避\nCC<=50 聞き耳\nCC<=60 近接戦闘（格闘）\nCC<=5 クトゥルフ神話\nCC<=70 芸術／製作（イカサマ）\nCC<=35 射撃（拳銃）\nCC<=10 信用\nCC<=80 心理学\nCC<=60 手さばき\nCC<=20 図書館\nCC<=41 ほかの言語（日本語）\nCC<=95 母国語（イタリア語）\nCC<=70 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/6kGmOU5IlpvYX1y5Gd9kF?v=udpudRt3hn"
+}

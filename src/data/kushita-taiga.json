@@ -1,0 +1,363 @@
+{
+  "name": "串田 大河",
+  "occupation": "なんでも屋(私立探偵準拠)",
+  "age": "16",
+  "sex": "男性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 45,
+    "con": 60,
+    "pow": 50,
+    "dex": 70,
+    "app": 55,
+    "siz": 55,
+    "int": 60,
+    "edu": 40
+  },
+  "attribute": {
+    "hp": 11,
+    "mp": 10,
+    "mov": 8,
+    "build": 0,
+    "db": "+0",
+    "san": {
+      "value": 49,
+      "max": 99
+    },
+    "luck": 39
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 65,
+      "edited": true
+    },
+    {
+      "name": "回避",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "芸術／製作（写真術）",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 10,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 40,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 20,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（英語）",
+      "value": 21,
+      "edited": true
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 40,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 70,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "金髪"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": []
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "兄(某大学大学院の法学部)",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": [
+        {
+          "text": "近所の裏山(人目がなく静かな場所)"
+        }
+      ]
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": []
+    },
+    {
+      "name": "特徴",
+      "entries": []
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": []
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "高校中退\n仕事はしたくなく定職につかない\n家にいると親からの目が痛い\n浮気調査や逃げたペットの捜索などで日銭を稼ぐ日々",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=39 幸運\nCC<=45 STR\nCC<=60 CON\nCC<=50 POW\nCC<=70 DEX\nCC<=55 APP\nCC<=55 SIZ\nCC<=60 INT\nCC<=60 アイデア\nCC<=40 知識\nCC<=45 言いくるめ\nCC<=65 隠密\nCC<=55 回避\nCC<=20 聞き耳\nCC<=55 近接戦闘（格闘）\nCC<=45 芸術／製作（写真術）\nCC<=10 信用\nCC<=70 追跡\nCC<=40 図書館\nCC<=20 法律\nCC<=21 ほかの言語（英語）\nCC<=40 母国語（日本語）\nCC<=70 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/0G9RBpkhMsoNTmyIDXLyU?v=GqXISNgd57"
+}

@@ -1,0 +1,389 @@
+{
+  "name": "葉室 アマナ",
+  "occupation": "居候(放浪者)",
+  "age": "16",
+  "sex": "女性",
+  "residence": "",
+  "birthplace": "",
+  "characteristics": {
+    "str": 20,
+    "con": 30,
+    "pow": 50,
+    "dex": 25,
+    "app": 65,
+    "siz": 45,
+    "int": 50,
+    "edu": 35
+  },
+  "attribute": {
+    "hp": 7,
+    "mp": 10,
+    "mov": 7,
+    "build": -1,
+    "db": "-1",
+    "san": {
+      "value": 57,
+      "max": 94
+    },
+    "luck": 59
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（二輪）",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 67,
+      "edited": true
+    },
+    {
+      "name": "回避",
+      "value": 32,
+      "edited": true
+    },
+    {
+      "name": "科学（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 46,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（歌唱）",
+      "value": 45,
+      "edited": true
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（）",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "跳躍",
+      "value": 40,
+      "edited": true
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 35,
+      "edited": true
+    },
+    {
+      "name": "図書館",
+      "value": 37,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（英語）",
+      "value": 13,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（ねこ語）",
+      "value": 31,
+      "edited": true
+    },
+    {
+      "name": "ほかの言語（ヘビ語）",
+      "value": 11,
+      "edited": true
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 39,
+      "edited": true
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [
+    {
+      "name": "バイク",
+      "count": "1",
+      "detail": "HONDA XR250 赤"
+    }
+  ],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "",
+    "cash": "",
+    "assetsDetails": ""
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "黒髪の長髪、白のメッシュが入っている。\n赤い目\n"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": []
+    },
+    {
+      "name": "重要な人々",
+      "entries": [
+        {
+          "text": "道陽(居候先の資産家)\nhttps://charaeno.com/7th/qRtojFR3WSZxCRCtt83xD",
+          "keyConnection": true
+        }
+      ]
+    },
+    {
+      "name": "意味のある場所",
+      "entries": []
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": [
+        {
+          "text": "芽の出ない植木鉢(187年後に完全成長、37年後に芽が出る)"
+        }
+      ]
+    },
+    {
+      "name": "特徴",
+      "entries": []
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": [
+        {
+          "text": "「所有者の刻印」MP3：ものを自分のものにする\n「バステトの招来と退散」"
+        },
+        {
+          "text": "魔晶石の指輪(MP5)"
+        },
+        {
+          "text": "ヴルトゥームの種子"
+        }
+      ]
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": []
+    }
+  ],
+  "fellows": [],
+  "note": "日がな一日寝て過ごす。\n時々道陽と遊んであげる。\n\n6版キャラクターシート\nhttps://charaeno.com/6th/i1LHCW6tei1rFwCCUflho",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=59 幸運\nCC<=20 STR\nCC<=30 CON\nCC<=50 POW\nCC<=25 DEX\nCC<=65 APP\nCC<=45 SIZ\nCC<=50 INT\nCC<=50 アイデア\nCC<=35 知識\nCC<=60 運転（二輪）\nCC<=67 隠密\nCC<=32 回避\nCC<=46 聞き耳\nCC<=25 近接戦闘（格闘）\nCC<=5 クトゥルフ神話\nCC<=45 芸術／製作（歌唱）\nCC<=5 信用\nCC<=40 跳躍\nCC<=35 登攀\nCC<=37 図書館\nCC<=13 ほかの言語（英語）\nCC<=31 ほかの言語（ねこ語）\nCC<=11 ほかの言語（ヘビ語）\nCC<=39 母国語（日本語）\nCC<=60 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/W0MIjlq7IDGPKBXZFOpSM?v=-3yZQIwQvz"
+}
