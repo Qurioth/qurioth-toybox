@@ -52,7 +52,7 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
 
   return (
     <div
-      className={`shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 h-[452px] ${
+      className={`shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[920px] lg:h-[452px] ${
         classChanging && "animate-rotate-y"
       }`}
       onClick={async () => {
@@ -63,7 +63,7 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
       }}
     >
       {!classChanging && (
-        <div className="animate-fade grid grid-cols-2 gap-2">
+        <div className="animate-fade grid grid-cols-1 lg:grid-cols-2 gap-2">
           <div className="justify-center content-center">
             <div className="h-12 font-serif text-4xl font-semibold italic mt-2 ml-2">
               {data.name}
