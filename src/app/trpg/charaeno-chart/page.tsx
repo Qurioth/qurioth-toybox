@@ -32,7 +32,7 @@ export default function Home() {
   const yamatoAkiraJson: Investigator = yamatoAkira;
 
   const characterList = [
-    { characterData: abbeyPriestlyJson, portraitSize: 290 },
+    { characterData: abbeyPriestlyJson, portraitSize: 315 },
     { characterData: alisaSoleraJson, portraitSize: 420 },
     { characterData: hamuroAmanaJson, portraitSize: 420 },
     { characterData: hamuroMichiharuJson, portraitSize: 420 },
@@ -43,7 +43,7 @@ export default function Home() {
     { characterData: kotoneTsuyuJson, portraitSize: 420 },
     { characterData: kushitaTaigaJson, portraitSize: 420 },
     { characterData: uedaKumikoJson, portraitSize: 420 },
-    { characterData: yamatoAkiraJson, portraitSize: 330 },
+    { characterData: yamatoAkiraJson, portraitSize: 350 },
   ];
 
   return (
