@@ -70,7 +70,7 @@ const config: Config = {
             width: "8px",
           },
           "&::-webkit-scrollbar-thumb": {
-            background: "#1e293b",
+            background: "#64748b",
             width: "6px",
             "border-radius": "5px",
           },
