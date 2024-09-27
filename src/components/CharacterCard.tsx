@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import ReaderChart from "@/components/recharts/ReaderChart";
 import { Investigator } from "@/types/Charaeno7th";
+import humanIcon from "@/image/human-icon.png";
+import Image from "next/image";
 import { useState } from "react";
 
 const CharacterCard = (props: { data: Investigator }) => {
@@ -148,11 +150,22 @@ const CharacterCard = (props: { data: Investigator }) => {
           >
             <div className="h-[440px]">
               <div className="w-auto grid grid-cols-1 justify-items-center content-center">
-                <img
-                  className="object-contain h-[440px] animate-in fade-in duration-1000"
-                  src={data.portraitURL || ""}
-                  alt="ortrait"
-                />
+                {data.portraitURL ? (
+                  <img
+                    className="object-contain h-[440px] animate-in fade-in duration-1000"
+                    src={data.portraitURL || "/image/human_icon.png"}
+                    alt="ortrait"
+                  />
+                ) : (
+                  <Image
+                    className="animate-in fade-in duration-1000"
+                    src={humanIcon}
+                    alt="ortrait"
+                    width={500}
+                    height={500}
+                    objectFit="contain"
+                  />
+                )}
               </div>
             </div>
           </div>
