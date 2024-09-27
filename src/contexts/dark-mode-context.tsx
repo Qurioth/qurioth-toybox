@@ -17,9 +17,22 @@ export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const isDark = localStorage.getItem("darkMode") === "true";
-    setIsDarkMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
+    // ローカルストレージの設定を取得
+    const storedDarkMode = localStorage.getItem("darkMode");
+
+    // ローカルストレージに設定がある場合はそれを優先
+    if (storedDarkMode !== null) {
+      const isDark = storedDarkMode === "true";
+      setIsDarkMode(isDark);
+      document.documentElement.classList.toggle("dark", isDark);
+    } else {
+      // ローカルストレージに設定がない場合、デバイスのダークモード設定を確認
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setIsDarkMode(systemPrefersDark);
+      document.documentElement.classList.toggle("dark", systemPrefersDark);
+    }
   }, []);
 
   const toggleDarkMode = () => {
