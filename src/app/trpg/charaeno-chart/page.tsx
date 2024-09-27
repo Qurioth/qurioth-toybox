@@ -32,18 +32,18 @@ export default function Home() {
   const yamatoAkiraJson: Investigator = yamatoAkira;
 
   const characterList = [
-    { characterData: abbeyPriestlyJson, portraitSize: 315 },
-    { characterData: alisaSoleraJson, portraitSize: 420 },
-    { characterData: hamuroAmanaJson, portraitSize: 420 },
-    { characterData: hamuroMichiharuJson, portraitSize: 420 },
-    { characterData: hazamaKurehaJson, portraitSize: 420 },
-    { characterData: ibaRenaJson, portraitSize: 420 },
-    { characterData: josephineGrimaldiJson, portraitSize: 420 },
-    { characterData: kawasakiSoraJson, portraitSize: 420 },
-    { characterData: kotoneTsuyuJson, portraitSize: 420 },
-    { characterData: kushitaTaigaJson, portraitSize: 420 },
-    { characterData: uedaKumikoJson, portraitSize: 420 },
-    { characterData: yamatoAkiraJson, portraitSize: 350 },
+    { characterData: abbeyPriestlyJson },
+    { characterData: alisaSoleraJson },
+    { characterData: hamuroAmanaJson },
+    { characterData: hamuroMichiharuJson },
+    { characterData: hazamaKurehaJson },
+    { characterData: ibaRenaJson },
+    { characterData: josephineGrimaldiJson },
+    { characterData: kawasakiSoraJson },
+    { characterData: kotoneTsuyuJson },
+    { characterData: kushitaTaigaJson },
+    { characterData: uedaKumikoJson },
+    { characterData: yamatoAkiraJson },
   ];
 
   return (
@@ -52,10 +52,7 @@ export default function Home() {
         {characterList.map((character, index) => {
           return (
             <div key={`chart-card-${index}`}>
-              <ChartCard
-                data={character.characterData}
-                portraitSize={character.portraitSize}
-              />
+              <ChartCard data={character.characterData} />
             </div>
           );
         })}

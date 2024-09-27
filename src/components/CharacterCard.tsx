@@ -3,7 +3,7 @@ import ReaderChart from "@/components/recharts/ReaderChart";
 import { Investigator } from "@/types/Charaeno7th";
 import { useState } from "react";
 
-const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
+const CharacterCard = (props: { data: Investigator }) => {
   const data = props.data;
   const characteristics: {
     subject: string;
@@ -52,7 +52,7 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
 
   return (
     <div
-      className={`shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[920px] lg:h-[452px] ${
+      className={`shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[920px] md:h-[452px] ${
         classChanging && "animate-rotate-y"
       }`}
       onClick={async () => {
@@ -63,7 +63,7 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
       }}
     >
       {!classChanging && (
-        <div className="animate-fade grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="justify-center content-center">
             <div className="h-12 font-serif text-4xl font-semibold italic mt-2 ml-2">
               {data.name}
@@ -161,7 +161,7 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
             className="grid grid-cols-1"
             style={{ display: reverse ? "block" : "none" }}
           >
-            <div className="scrollbar-thin h-[434px] overflow-y-auto bg-slate-50 dark:bg-slate-800 border-2 m-2">
+            <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 border-2 m-2">
               <div className="m-2">
                 {data.note.split("\n").map((note, index) => {
                   return <div key={`${data.name}-note-${index}`}>{note}</div>;
@@ -175,4 +175,4 @@ const ChartCard = (props: { data: Investigator; portraitSize: number }) => {
   );
 };
 
-export default ChartCard;
+export default CharacterCard;
