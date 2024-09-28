@@ -17,8 +17,7 @@ export default function Home() {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: {},
+    formState: { errors },
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -30,14 +29,13 @@ export default function Home() {
     json.name = json.name.replace(/[\(\{\[\<（][^\)\}\]\>]*[\)\}\]\>）]/g, "");
     json.name = json.name.replace(/\s+$/, "");
     setCharacterData(json);
-    reset();
   };
 
   return (
     <Template>
       <div className="w-full">
         <div className="grid grid-cols-1 justify-items-center">
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full mb-6">
             <div className="flex flex-row gap-3 justify-center">
               <div className="relative z-0 basis-1/2 mb-5 group">
                 <input
@@ -45,12 +43,13 @@ export default function Home() {
                   id="character_sheet_url"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
+                  required
                   {...register("url", {
                     maxLength: 200,
                     pattern: {
                       value:
                         /^https:\/\/charaeno.com\/7th\/[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+$/,
-                      message: "URLの形式が不正です",
+                      message: "URLの形式が不正です。",
                     },
                   })}
                 />
@@ -70,7 +69,13 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            {/* <ErrorMessage errors={errors} name="email" /> */}
+            {errors.url && (
+              <div className="flex justify-center">
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.url.message}
+                </p>
+              </div>
+            )}
           </form>
 
           <div className="xl:w-1/2 w-full">
