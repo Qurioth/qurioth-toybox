@@ -7,6 +7,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
@@ -58,6 +59,7 @@ const config: Config = {
   plugins: [
     require("tailwindcss-animate"),
     require("tailwindcss-animated"),
+    require("flowbite/plugin"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".scrollbar-none": {
