@@ -17,7 +17,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Qurioth's Toybox",
   description:
-    "This website is Qurioth's toy box and he implements whatever he wants to implement.",
+    "In [Qurioth's Toybox], Qurioth freely publishes and creates tools and scenarios related to Table Talk RPGs. If you have time to translate this English text, it would be more useful to study for one of the qualifications!",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-100 dark:bg-slate-900`}
       >
         <DarkModeProvider>{children}</DarkModeProvider>
       </body>
