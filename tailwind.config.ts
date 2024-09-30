@@ -14,6 +14,10 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        filter: {
+          "blur-20": "blur(20px)",
+          "blur-25": "blur(25px)",
+        },
       },
       animation: {
         "fade-in-down": "fade-in-down 0.5s ease-out",
@@ -47,19 +51,13 @@ const config: Config = {
             opacity: "1",
           },
         },
-        colors: {
-          filter: {
-            "blur-20": "blur(20px)",
-            "blur-25": "blur(25px)",
-          },
-        },
       },
     },
   },
   plugins: [
+    require("flowbite/plugin"),
     require("tailwindcss-animate"),
     require("tailwindcss-animated"),
-    require("flowbite/plugin"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".scrollbar-none": {
