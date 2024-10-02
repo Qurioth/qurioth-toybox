@@ -52,12 +52,64 @@ const config: Config = {
           },
         },
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: "#1f2937",
+            a: {
+              color: "#3b82f6",
+              "&:hover": {
+                color: "#1d4ed8",
+              },
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: "#f3f4f6",
+            a: {
+              color: "#60a5fa",
+              "&:hover": {
+                color: "#2563eb",
+              },
+            },
+            h1: {
+              color: "#f8fafc",
+            },
+            h2: {
+              color: "#f8fafc",
+            },
+            h3: {
+              color: "#f8fafc",
+            },
+            h4: {
+              color: "#f8fafc",
+            },
+            h5: {
+              color: "#f8fafc",
+            },
+            h6: {
+              color: "#f8fafc",
+            },
+            p: {
+              color: "#d1d5db",
+            },
+            strong: {
+              color: "#f3f4f6",
+            },
+            blockquote: {
+              color: "#9ca3af",
+            },
+          },
+        },
+      },
     },
   },
   plugins: [
     require("flowbite/plugin"),
     require("tailwindcss-animate"),
     require("tailwindcss-animated"),
+    require("@tailwindcss/typography"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".scrollbar-none": {
