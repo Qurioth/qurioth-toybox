@@ -20,6 +20,7 @@ const convertDicelog = (htmlString: string) => {
       .replace(/<p style=\".*">|<\/p>/g, "")
       .split(/(?<=<\/span>)/g);
     const dicelog: DiceLog = { tab: "", name: "", content: "" };
+
     dicelogList.forEach((dicelogStr) => {
       switch (true) {
         case tabReg.test(dicelogStr):
@@ -39,7 +40,6 @@ const convertDicelog = (htmlString: string) => {
     result.push(dicelog);
   });
 
-  console.log(result);
   return result;
 };
 
