@@ -10,8 +10,6 @@ export default function Home() {
     const responseList: JSX.Element[] = [];
 
     for (const key in scenarios) {
-      console.log(key as string, scenarios[key]);
-
       responseList.push(
         <div>
           <a href={`/trpg/scenario/${key}`}>
