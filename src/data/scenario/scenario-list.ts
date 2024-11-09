@@ -24,8 +24,8 @@ const list: {
     title: "狂気の王の眠り姫",
     overview: `
 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
-  プレイ時間は探索者の作成時間を含まずに 3 時間程度だろう。  
-  舞台は現代の日本。亡くなった芸術家の屋敷で事件は展開する。`,
+　プレイ時間は探索者の作成時間を含まずに 3 時間程度だろう。  
+　舞台は現代の日本。亡くなった芸術家の屋敷で事件は展開する。`,
     markdown: dasDornroschenDesWahnsinnigenKonigs,
   },
   TheSoundOfSteppingOnFog: {

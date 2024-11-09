@@ -11,7 +11,7 @@ export default function Home() {
 
     for (const key in scenarios) {
       responseList.push(
-        <div>
+        <div className="mb-6">
           <a href={`/trpg/scenario/${key}`}>
             <h1>{scenarios[key].title}</h1>
           </a>
