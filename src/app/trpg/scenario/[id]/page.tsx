@@ -13,7 +13,7 @@ export default function Home({ params }: { params: { id: string } }) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             img: ({ node, ...props }) => (
               // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-              <img {...props} className="size-60 float-right m-2" />
+              <img {...props} className="size-40 md:size-60 float-right m-2" />
             ),
           }}
         >
