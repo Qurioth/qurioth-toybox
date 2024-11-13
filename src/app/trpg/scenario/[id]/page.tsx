@@ -3,6 +3,14 @@ import scenarios from "@/data/scenario/scenario-list";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+const copyright = `
+本作は、「株式会社アークライト」及び「株式会社KADOKAWA」が権利を有する『クトゥルフ神話TRPG』シリーズの二次創作物です。
+
+Call of Cthulhu is copyright ©1981, 2015, 2019 by Chaosium Inc. ;all rights reserved. Arranged by Arclight Inc.
+Call of Cthulhu is a registered trademark of Chaosium Inc.
+PUBLISHED BY KADOKAWA CORPORATION　「クトゥルフ神話TRPG」「新クトゥルフ神話TRPG」
+`;
+
 export default function Home({ params }: { params: { id: string } }) {
   return (
     <Template>
@@ -19,6 +27,7 @@ export default function Home({ params }: { params: { id: string } }) {
         >
           {scenarios[params.id]?.markdown}
         </ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{copyright}</ReactMarkdown>
       </div>
     </Template>
   );
