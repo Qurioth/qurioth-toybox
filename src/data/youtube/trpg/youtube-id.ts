@@ -1,4 +1,6 @@
 export const videoIds: string[] = [
+  "KW3foTANKPw", // 20241014_壁の中にいる
+  "e5s-PgwXyGw", // 20241014_毒入りスープ
   "X0qGQvNeXJY", // 20240916_霧を踏む音
   "xjFX7PaMKUY", // 20240818_夕日色の輪廻
   "BKRiwWJoLj8", // 20240615_Queen of the Sea

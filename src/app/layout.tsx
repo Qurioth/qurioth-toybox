@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
+        id="qurioths-toybox"
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-100 dark:bg-slate-900`}
       >
         <DarkModeProvider>{children}</DarkModeProvider>
