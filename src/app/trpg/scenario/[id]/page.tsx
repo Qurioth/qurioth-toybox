@@ -1,5 +1,6 @@
 import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
+import { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -10,6 +11,22 @@ Call of Cthulhu is copyright ©1981, 2015, 2019 by Chaosium Inc. ;all rights res
 Call of Cthulhu is a registered trademark of Chaosium Inc.  
 PUBLISHED BY KADOKAWA CORPORATION　「クトゥルフ神話TRPG」「新クトゥルフ神話TRPG」
 `;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const articleTitle = scenarios[params.id]?.title;
+
+  if (articleTitle) {
+    return {
+      title: articleTitle,
+    };
+  } else {
+    return {};
+  }
+}
 
 export default function Home({ params }: { params: { id: string } }) {
   return (
