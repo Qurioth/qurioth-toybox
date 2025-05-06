@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useDarkMode } from "@/contexts/dark-mode-context";
 import { Moon, Sun } from "lucide-react";
@@ -24,14 +23,6 @@ const Header = () => {
       >
         <div className="flex lg:flex-1">
           <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <span className="sr-only">Your Company</span>
-            {/* <Image
-              aria-hidden
-              src="https://tailwindui.com/img/logos/mark.svg"
-              alt="File icon"
-              width={36}
-              height={36}
-            /> */}
             <h1 className="hidden text-xl font-bold lg:flex">
               <Link href="/">{`Qurioth's Toybox`}</Link>
             </h1>
@@ -78,16 +69,7 @@ const Header = () => {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-200 dark:bg-gray-700 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <Image
-                aria-hidden
-                src="https://tailwindui.com/img/logos/mark.svg"
-                alt="File icon"
-                width={30}
-                height={30}
-              />
-            </a>
+            <a href="#" className="-m-1.5 p-1.5"></a>
             <div>
               <button
                 onClick={toggleDarkMode}
