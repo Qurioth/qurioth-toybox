@@ -3,6 +3,7 @@
 import Template from "@/components/Template";
 import { links } from "@/data/photograph/dropbox-link";
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 function splitArray<T>(array: T[], parts: number): T[][] {
   const result: T[][] = Array.from({ length: parts }, () => []);
@@ -12,7 +13,7 @@ function splitArray<T>(array: T[], parts: number): T[][] {
   return result;
 }
 
-function ImageWithSkeleton(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+function ImageWithSkeleton(props: React.ComponentProps<typeof Image>) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -29,19 +30,21 @@ function ImageWithSkeleton(props: React.ImgHTMLAttributes<HTMLImageElement>) {
           <span className="text-gray-500">画像の読み込みに失敗しました</span>
         </div>
       )}
-      <img
+      <Image
         {...props}
         loading="lazy"
         decoding="async"
         style={{
           ...(loaded ? {} : { visibility: "hidden" }),
           objectFit: "cover",
-          width: "100%",
-          height: "100%",
         }}
         onLoad={() => setLoaded(true)}
+        width={props.width}
+        height={props.height}
+        alt={props.alt}
         onError={() => setError(true)}
         className="rounded-lg"
+        unoptimized
       />
     </div>
   );
@@ -79,11 +82,6 @@ export default function Home() {
         }
         return newCount;
       });
-      // // スクロール位置を10px上に調整
-      // window.scrollTo({
-      //   top: window.scrollY - 10,
-      //   behavior: "smooth",
-      // });
     }
   }, [isLoading]);
 
@@ -115,6 +113,8 @@ export default function Home() {
                 <ImageWithSkeleton
                   className="h-auto max-w-full rounded-lg"
                   src={`https://www.dropbox.com/scl/fi/${img.id}/${img.name}?rlkey=${img.rlkey}&st=${img.st}&raw=1`}
+                  width={img.orientation === "landscape" ? 600 : 400}
+                  height={img.orientation === "landscape" ? 400 : 600}
                   alt={img.name}
                 />
               </div>
