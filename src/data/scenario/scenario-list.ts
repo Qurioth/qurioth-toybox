@@ -1,15 +1,19 @@
-// import preparation from "@/data/scenario/preparation";
+import agnusDeiQuiTollisPeccataMundi from "@/data/scenario/agnus-dei-qui-tollis-peccata-mundi";
 import dasDornroschenDesWahnsinnigenKonigs from "@/data/scenario/das-dornröschen-des-wahnsinnigen-königs";
 import theSoundOfSteppingOnFog from "@/data/scenario/the-sound-of-stepping-on-fog";
 
 const list: {
   [key: string]: { title: string; overview: string; markdown: string };
 } = {
-  // AgnusDeiQuiTollisPeccataMundi: {
-  //   title: "Agnus Dei, qui tollis peccata mundi",
-  //   overview: ``,
-  //   markdown: preparation,
-  // },
+  AgnusDeiQuiTollisPeccataMundi: {
+    title: "Agnus Dei, qui tollis peccata mundi",
+    overview: `
+　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
+　プレイ時間は探索者の作成時間を含まずに 5 時間程度だろう。  
+　舞台は現代の日本。探索者たちが教会へ訪れたときから事件は展開する。  
+　なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
+    markdown: agnusDeiQuiTollisPeccataMundi,
+  },
   // PalateOfTheCrawling: {
   //   title: "蠢く口蓋",
   //   overview: ``,
