@@ -1,6 +1,7 @@
 import agnusDeiQuiTollisPeccataMundi from "@/data/scenario/agnus-dei-qui-tollis-peccata-mundi";
 import dasDornroschenDesWahnsinnigenKonigs from "@/data/scenario/das-dornröschen-des-wahnsinnigen-königs";
 import theSoundOfSteppingOnFog from "@/data/scenario/the-sound-of-stepping-on-fog";
+import silentJourney from "@/data/scenario/silent-journey";
 
 const list: {
   [key: string]: { title: string; overview: string; markdown: string };
@@ -41,6 +42,14 @@ const list: {
 　シナリオの設定上、少なくとも一人の探索者の知人に **笹本 霧江** という大学生がいることとなる。  
 　なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
     markdown: theSoundOfSteppingOnFog,
+  },
+  SilentJourney: {
+    title: "Silent Journey",
+    overview: `
+　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
+　プレイ時間は探索者の作成時間を含まずに 3 ～ 4 時間程度だろう。  
+　舞台は現代の日本。探索者たちが駅で一人の男性とぶつかるところから事件は展開する。`,
+    markdown: silentJourney,
   },
   // LieDownOnBambooLeaves: {
   //   title: "竹の葉に寝転ぶ",
