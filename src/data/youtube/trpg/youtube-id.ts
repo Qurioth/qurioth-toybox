@@ -1,4 +1,9 @@
 export const videoIds: string[] = [
+  "-7_P-cYzyf8", // 20250831_白夜の歌
+  "HnmnKK-WouY", // 20250812_白夜の歌
+  "yUz-r8LgHDE", // 20241228_杉山屋敷怪異譚
+  "PuP8U8812Q0", // 20241214_nuts bite
+  "HaSRb7D9v_c", // 20241116_狂気の王の眠り姫
   "KW3foTANKPw", // 20241014_壁の中にいる
   "e5s-PgwXyGw", // 20241014_毒入りスープ
   "X0qGQvNeXJY", // 20240916_霧を踏む音
