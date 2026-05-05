@@ -1110,7 +1110,7 @@ Galleyがいるはずだった。Elleが、Stefanoがいるはずだった。
 ### ED1 【夢の終着駅】
 
 現実に帰った。  
-正気度回復: 2D6
+正気度回復: 1D8
 
 ### ED2 【Welcome to Mundo de Sueños.】
 
@@ -1127,6 +1127,10 @@ Galleyがいるはずだった。Elleが、Stefanoがいるはずだった。
 #### 全員生還
 
 正気度回復:1D4
+
+#### 最も火室に入った人
+
+正気度回復:1D6
 `;
 
 export default markdownString;
