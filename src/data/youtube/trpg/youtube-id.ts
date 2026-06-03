@@ -531,15 +531,15 @@ export const replayVideos: ReplayVideo[] = [
   {
     videoId: "4b_Z7VKOJ68",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
-    scenarioName: "狂気山脈",
+    scenarioName: "狂気山脈 ～邪神の山嶺～",
     characters: [
       { characterName: "マキシム･マルバネ･クワガタ", playerName: "kayuna" },
       { characterName: "平 均", playerName: "よしを" },
       { characterName: "森永 誠太", playerName: "いそたろ" },
     ],
-    gmName: "Qurioth",
+    gmName: "つばき",
     playedAt: "2023-03-11",
-    note: "サブKP",
+    note: "サブKP: Qurioth",
   },
   {
     videoId: "4I_xYiWPWE4",
