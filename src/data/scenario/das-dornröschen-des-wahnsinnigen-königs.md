@@ -1,4 +1,3 @@
-
 _― Das Dornröschen des Wahnsinnigen Königs ―_
 
 # 狂気の王の眠り姫
@@ -25,17 +24,17 @@ _― Das Dornröschen des Wahnsinnigen Königs ―_
 
 ### 天城 雅信 （あまぎ まさのぶ）
 
-![天城雅信](/images/das-dornröschen-des-wahnsinnigen-königs/masanobu.png)
+![天城 雅信](/images/das-dornröschen-des-wahnsinnigen-königs/masanobu.png)
 享年 52 歳。生前、独創的な芸術家として評価を受けていたが、亡くなる直前は狂気に取り憑かれたかのような異様な作品を制作していた。**「黄衣の王」** の戯曲に取り憑かれ、次第に正常な判断を失い、最愛の娘をも巻き込む形でハスターへの儀式にのめり込んでいく。遺作の中には名状し難いものも多く、人々には理解されず、作品の評価も大きく下がるが、一部のマニアはその狂気に惹かれ、高値で取引されている。
 
 ### 天城 沙月 （あまぎ さつき）
 
-![天城沙月](/images/das-dornröschen-des-wahnsinnigen-königs/satsuki.png)
+![天城 沙月](/images/das-dornröschen-des-wahnsinnigen-königs/satsuki.png)
 **天城 雅信** の娘で、バレエダンサーとして活動していた。父の命で **「黄衣の王」** の戯曲を演じ、ハスターの依代として黄衣の王に変貌する。沙月自身の意識は失われ、黄衣の王として屋敷に現れることがある。探索者たちは時折、彼女を依代とした黄衣の王と対峙することになるだろう。
 
 ### 桐原 由紀子 （きりはら ゆきこ）
 
-![桐原由紀子](/images/das-dornröschen-des-wahnsinnigen-königs/yukiko.png)
+![桐原 由紀子](/images/das-dornröschen-des-wahnsinnigen-königs/yukiko.png)
 **天城 雅信** の作品を収集・展示していた美術館の学芸員。天城の異様な作品に対しては興味と恐れを抱いている。彼女は天城の遺作が後世にどのような影響を与えるのかを見定めたいと考え、探索者に遺品整理を依頼する。しかし、**黄衣の王** や **ハスター** については知識はなく、その恐怖の本質を理解していない。
 
 ## プロローグ
