@@ -1,46 +1,670 @@
-export const videoIds: string[] = [
-  "-7_P-cYzyf8", // 20250831_白夜の歌
-  "HnmnKK-WouY", // 20250812_白夜の歌
-  "yUz-r8LgHDE", // 20241228_杉山屋敷怪異譚
-  "PuP8U8812Q0", // 20241214_nuts bite
-  "HaSRb7D9v_c", // 20241116_狂気の王の眠り姫
-  "KW3foTANKPw", // 20241014_壁の中にいる
-  "e5s-PgwXyGw", // 20241014_毒入りスープ
-  "X0qGQvNeXJY", // 20240916_霧を踏む音
-  "xjFX7PaMKUY", // 20240818_夕日色の輪廻
-  "BKRiwWJoLj8", // 20240615_Queen of the Sea
-  "qulCB5-MrdY", // 20240424_パティシエール☆パーティー
-  "oiFYzHmM0UA", // 20231216_蠢く口蓋
-  "JoQ8DY31ma0", // 20231122_惑ふ諸島
-  "11NMo_2qxc8", // 20231119_眠らぬ街の白い顔たち
-  "kwfRhW4ewaU", // 20230716_いのちの答え
-  "MqqIeWJaqqg", // 20230624_夜想曲
-  "x7qWBcZ5qYM", // 20230618_復讐するは我にあり
-  "9K5u2PqqI1Y", // 20230520_前髪なき女神の微笑み
-  "Sl3gzBfU-iM", // 20230514_咲くは何れか
-  "Acaifuyk_s0", // 20230505_悪霊の家
-  "E7hfjuFmX5E", // 20230430_暴の断章
-  "y7dypuHxiQ8", // 20230430_M'OTHER
-  "_FvnNdsY22c", // 20230430_Hi-Standard
-  "V6Vhwwm5ibU", // 20230429_パラサイト
-  "ezNq4RbpPvc", // 20230429_きさらぎ駅
-  "6_-j2o3o8Iw", // 20230416_No-Title
-  "EA58Cdl1OlI", // 20230416_ガシャン!
-  "VcFdEKpRFQA", // 20230402_学校に間に合わない
-  "w7JrH6nKDdM", // 20230402_学校に間に合わない
-  "EEAKaZGe0aw", // 20230321_影の羽
-  "UF9XN5_sTo4", // 20230319_夜病棟
-  "NzJd6sDQiXo", // 20230311_毒入りスープ
-  "4b_Z7VKOJ68", // 20230311_狂気山脈
-  "4I_xYiWPWE4", // 20230226_世界を視た男
-  "pgWioaT6QHQ", // 20230205_コーヒー一杯分の恐怖
-  "2dTUerGEu7c", // 20230121_沼男は誰だ？
-  "RyYr9GDQTac", // 20221120_杉山屋敷怪異譚
-  "5xfy4pnYt3s", // 20221009_杉山屋敷怪異譚
-  "o6yK_QiOieM", // 20221001_ショクザイ
-  "28xdeBlHX3I", // 20220926_杉山屋敷怪異譚
-  "glYSwpdg_Zo", // 20220730_花火をしよう！
-  "uVQfWvJPJmg", // 20220730_おつかいゆうれい
+export type ReplayCharacter = {
+  characterName: string;
+  playerName?: string;
+};
+
+export type ReplayVideo = {
+  videoId: string;
+  trpgSystemName?: string;
+  scenarioName?: string;
+  characters?: ReplayCharacter[];
+  gmName?: string;
+  playedAt?: string;
+  note?: string;
+  passwords?: string[];
+};
+
+export const replayVideos: ReplayVideo[] = [
+  {
+    videoId: "raCT03SOn_U",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "まれびとの島",
+    characters: [
+      { characterName: "写野 千映", playerName: "Qurioth" },
+      { characterName: "西海 健吾", playerName: "つばき" },
+      { characterName: "野中 しおん", playerName: "pon" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-05-30",
+  },
+  {
+    videoId: "Rj9fOFzphp4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "Agnus Dei, qui tollis peccata mundi",
+    characters: [
+      { characterName: "土河 香", playerName: "こーへい" },
+      { characterName: "五十嵐 郷", playerName: "pon" },
+      { characterName: "園浦 誠", playerName: "リアン" },
+      { characterName: "恩田 恵", playerName: "つばき" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2026-05-16",
+  },
+  {
+    videoId: "ILA1kaMBbKo",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "Silent Journey",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      { characterName: "東雲 怜", playerName: "pon" },
+      { characterName: "筒井 日奈子", playerName: "リアン" },
+      { characterName: "臥榻 聖司一", playerName: "よしを" },
+      {
+        characterName: "モンテストリアーノ・ボンバイヌ",
+        playerName: "ももみざわ",
+      },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2026-05-05",
+  },
+  {
+    videoId: "jpT3_dezUqw",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ショクザイ",
+    characters: [
+      { characterName: "Elizaveta Vavilova", playerName: "Qurioth" },
+      { characterName: "琢杯 九太", playerName: "ももみざわ" },
+      { characterName: "黒伊 豹", playerName: "Haruku" },
+      { characterName: "黒瀬 恒一", playerName: "pon" },
+      { characterName: "皮噛 富江", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-05-05",
+  },
+  {
+    videoId: "ulx80B1WL7M",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "灰色の産土",
+    characters: [
+      { characterName: "Josephine Grimaldi", playerName: "Qurioth" },
+      { characterName: "土河 香", playerName: "こーへい" },
+      { characterName: "東雲 怜", playerName: "pon" },
+      { characterName: "武田 桃", playerName: "つばき" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-05-04",
+  },
+  {
+    videoId: "-7_P-cYzyf8",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "白夜の歌",
+    characters: [
+      { characterName: "飯星 見世", playerName: "夜桜" },
+      { characterName: "阿比留 四郎", playerName: "つばき" },
+      { characterName: "渡辺 壮亮", playerName: "ももみざわ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2025-08-31",
+  },
+  {
+    videoId: "HnmnKK-WouY",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "白夜の歌",
+    characters: [
+      { characterName: "加藤 児半", playerName: "よしを" },
+      { characterName: "五十嵐 郷", playerName: "pon" },
+      { characterName: "希励 亜澄歌", playerName: "Haruku" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2025-08-12",
+  },
+  {
+    videoId: "ytmJ7GMSOyg",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "星の海を超えて",
+    characters: [
+      { characterName: "武田 桃", playerName: "つばき" },
+      { characterName: "澤村 ハル", playerName: "ひな" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2025-02-15",
+    passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
+  },
+  {
+    videoId: "yUz-r8LgHDE",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "杉山屋敷怪異譚",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      { characterName: "としあき", playerName: "pon" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-12-27",
+  },
+  {
+    videoId: "PuP8U8812Q0",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "nuts bite",
+    characters: [
+      { characterName: "佐々木 百愛", playerName: "しおり" },
+      { characterName: "川崎 空", playerName: "Qurioth" },
+      { characterName: "鈴鹿 さきと", playerName: "ちよこ" },
+    ],
+    gmName: "リアン",
+    playedAt: "2024-12-14",
+  },
+  {
+    videoId: "HaSRb7D9v_c",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "狂気の王の眠り姫",
+    characters: [
+      { characterName: "春芽 亞州漏", playerName: "よしを" },
+      { characterName: "黒石 ジャック", playerName: "Haruku" },
+      { characterName: "丹波 翔", playerName: "pon" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-11-15",
+  },
+  {
+    videoId: "KW3foTANKPw",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "壁の中にいる",
+    characters: [
+      { characterName: "瀬山 葉虎", playerName: "よしを" },
+      { characterName: "黒石 ジャック", playerName: "Haruku" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-10-14",
+  },
+  {
+    videoId: "e5s-PgwXyGw",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "毒入りスープ",
+    characters: [{ characterName: "黒石 ジャック", playerName: "Haruku" }],
+    gmName: "Qurioth",
+    playedAt: "2024-10-14",
+  },
+  {
+    videoId: "X0qGQvNeXJY",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "霧を踏む音",
+    characters: [
+      { characterName: "臥榻 聖司", playerName: "よしを" },
+      { characterName: "武田 桃", playerName: "つばき" },
+      { characterName: "黒石 ジャック", playerName: "Haruku" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-09-16",
+  },
+  {
+    videoId: "xjFX7PaMKUY",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "夕日色の輪廻",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      { characterName: "まさみつ", playerName: "pon" },
+      { characterName: "MM", playerName: "よしを" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-08-18",
+  },
+  {
+    videoId: "BKRiwWJoLj8",
+    trpgSystemName: "駆け出しアイドルRPG ビギニングアイドル",
+    scenarioName: "Queen of the Sea",
+    characters: [
+      { characterName: "一社 遙", playerName: "なつきち" },
+      { characterName: "光本 なな", playerName: "ちよこ" },
+      { characterName: "ルイス・メイリン", playerName: "いそたろ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-06-15",
+  },
+  {
+    videoId: "cdxYZa1Lfu4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "迷宮より叫ぶもの",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      { characterName: "伊知 嵐", playerName: "よしを" },
+      { characterName: "としあき", playerName: "pon" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-04-29",
+    passwords: [
+      "スフィンクスの子ら",
+      "屍食鬼",
+      "無貌の神",
+      "暗黒のスフィンクス",
+      "ニャルラトホテプ",
+    ],
+  },
+  {
+    videoId: "qulCB5-MrdY",
+    trpgSystemName: "駆け出しアイドルRPG ビギニングアイドル",
+    scenarioName: "パティシエール☆パーティー",
+    characters: [
+      { characterName: "成金 ウタ", playerName: "やぬ" },
+      { characterName: "東山 佳緒", playerName: "天上天下唯我独尊" },
+      { characterName: "広瀬 ヘレン", playerName: "つばき" },
+      { characterName: "藤城 いろは", playerName: "しおり" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2024-04-24",
+  },
+  {
+    videoId: "oiFYzHmM0UA",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "蠢く口蓋",
+    characters: [
+      { characterName: "松島 政宗", playerName: "つばき" },
+      { characterName: "三島 毅", playerName: "夜桜" },
+      { characterName: "春芽 亞州漏", playerName: "よしを" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-12-16",
+  },
+  {
+    videoId: "JoQ8DY31ma0",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "惑ふ諸島",
+    characters: [{ characterName: "間 紅葉", playerName: "Qurioth" }],
+    gmName: "リアン",
+    playedAt: "2023-11-22",
+  },
+  {
+    videoId: "11NMo_2qxc8",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "眠らぬ街の白い顔たち",
+    characters: [
+      { characterName: "貴和 瑠衣", playerName: "いそたろ" },
+      { characterName: "内田 美奈子", playerName: "まりあんヌ" },
+      { characterName: "甘木 ハルオ", playerName: "よしを" },
+      { characterName: "上田 九見子", playerName: "Qurioth" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-11-19",
+  },
+  {
+    videoId: "kwfRhW4ewaU",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "いのちのこたえ",
+    characters: [
+      { characterName: "伊庭 玲奈", playerName: "Qurioth" },
+      { characterName: "ラフ", playerName: "さくらい" },
+      { characterName: "燃堂 猛", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-07-16",
+  },
+  {
+    videoId: "MqqIeWJaqqg",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "夜想曲",
+    characters: [
+      { characterName: "伊吹 円", playerName: "ωata" },
+      { characterName: "江ノ口 凪", playerName: "天上天下唯我独尊" },
+      { characterName: "地井 和佳世", playerName: "いそたろ" },
+      { characterName: "剛田 力", playerName: "やぬ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-06-24",
+  },
+  {
+    videoId: "x7qWBcZ5qYM",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "復讐するは我にあり",
+    characters: [
+      { characterName: "高橋 高次", playerName: "さくらい" },
+      { characterName: "串田 大河", playerName: "Qurioth" },
+      { characterName: "御影 晶助", playerName: "リアン" },
+    ],
+    gmName: "よしを",
+    playedAt: "2023-06-18",
+  },
+  {
+    videoId: "9K5u2PqqI1Y",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "前髪なき女神の微笑み",
+    characters: [
+      { characterName: "稲荷木 流衣", playerName: "リアン" },
+      { characterName: "MM", playerName: "よしを" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-20",
+  },
+  {
+    videoId: "tDt0uJnUR2Q",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "星の海を超えて",
+    characters: [
+      { characterName: "熱血 麺太郎", playerName: "Shou" },
+      { characterName: "江ノ口 凪", playerName: "天上天下唯我独尊" },
+      { characterName: "森田 莉央", playerName: "ωata" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-16",
+    passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
+  },
+  {
+    videoId: "Sl3gzBfU-iM",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "咲くは何れか",
+    characters: [{ characterName: "葉室 アマナ", playerName: "Qurioth" }],
+    gmName: "リアン",
+    playedAt: "2023-05-14",
+  },
+  {
+    videoId: "iNv6N6FqfcE",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "星の海を超えて",
+    characters: [
+      { characterName: "加藤 児半", playerName: "よしを" },
+      { characterName: "松田 悠玖", playerName: "Haruku" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-07",
+    passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
+  },
+  {
+    videoId: "5RqIy1TlfTg",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "混血の子ら",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      { characterName: "大海・ウルフリック", playerName: "よしを" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-07",
+    passwords: [
+      "グール",
+      "ニョグタ",
+      "ニョグタの落し子",
+      "シュブニグラス",
+      "シュブ＝ニグラス",
+      "パンの大神",
+    ],
+  },
+  {
+    videoId: "Acaifuyk_s0",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "悪霊の家",
+    characters: [
+      { characterName: "伊知 嵐", playerName: "よしを" },
+      { characterName: "ひろぽん", playerName: "ひろぽん" },
+      { characterName: "横田 凛太郎", playerName: "kayuna" },
+      { characterName: "大文字 石矢", playerName: "夜桜" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-05",
+  },
+  {
+    videoId: "E7hfjuFmX5E",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "暴の断章",
+    characters: [
+      { characterName: "内田 美奈子", playerName: "まりあんヌ" },
+      { characterName: "間 紅葉", playerName: "Qurioth" },
+      { characterName: "大海・ウルフリック", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-30",
+  },
+  {
+    videoId: "y7dypuHxiQ8",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "M'OTHER",
+    characters: [
+      { characterName: "美奈子", playerName: "まりあんヌ" },
+      { characterName: "明日 来早", playerName: "こつ" },
+      { characterName: "大和 晶", playerName: "Qurioth" },
+      { characterName: "念仏 悟", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-30",
+  },
+  {
+    videoId: "_FvnNdsY22c",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "Hi-Standard",
+    characters: [
+      { characterName: "明日 来早", playerName: "こつ" },
+      { characterName: "烏光 レオン", playerName: "Qurioth" },
+      { characterName: "夜桜 みか", playerName: "夜桜" },
+      { characterName: "愚作", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-30",
+  },
+  {
+    videoId: "V6Vhwwm5ibU",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "きさらぎ駅",
+    characters: [
+      { characterName: "内山 美奈子", playerName: "まりあんヌ" },
+      { characterName: "念仏 悟", playerName: "よしを" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-04-29",
+  },
+  {
+    videoId: "ezNq4RbpPvc",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "パラサイト",
+    characters: [
+      { characterName: "内山 美奈子", playerName: "まりあんヌ" },
+      { characterName: "森 統一郎", playerName: "よしを" },
+      { characterName: "夜桜 美香", playerName: "夜桜" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-04-29",
+  },
+  {
+    videoId: "6_-j2o3o8Iw",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "No Title",
+    characters: [
+      { characterName: "川崎 空", playerName: "Qurioth" },
+      { characterName: "まりあんヌ", playerName: "まりあんヌ" },
+      { characterName: "村川 武雄", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-16",
+  },
+  {
+    videoId: "EA58Cdl1OlI",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ガシャン！",
+    characters: [
+      { characterName: "小刀禰 月結", playerName: "Qurioth" },
+      { characterName: "保子 鎮", playerName: "ヨーグルト爆弾" },
+      { characterName: "春芽 亞州漏", playerName: "よしを" },
+      { characterName: "まりあんヌ", playerName: "まりあんヌ" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-16",
+  },
+  {
+    videoId: "VcFdEKpRFQA",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "学校に間に合わない",
+    characters: [
+      { characterName: "石狩 輝夫", playerName: "ちよこ" },
+      { characterName: "一 十一", playerName: "リアン" },
+      { characterName: "ニコラオス 上須 大地", playerName: "Qurioth" },
+    ],
+    gmName: "よしを",
+    playedAt: "2023-04-02",
+  },
+  {
+    videoId: "w7JrH6nKDdM",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "学校に間に合わない",
+    characters: [
+      { characterName: "Abbey Priestly", playerName: "Qurioth" },
+      { characterName: "春芽 亞州漏", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-02",
+  },
+  {
+    videoId: "EEAKaZGe0aw",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "影の羽",
+    characters: [
+      { characterName: "甘木 ハルオ", playerName: "よしを" },
+      { characterName: "伊藤 正二", playerName: "ぷるさあ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-03-22",
+  },
+  {
+    videoId: "UF9XN5_sTo4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "夜病院",
+    characters: [
+      { characterName: "野原 耕一", playerName: "しおり" },
+      { characterName: "田中 卓也", playerName: "ちよこ" },
+      { characterName: "富嶽 雷理", playerName: "Qurioth" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-03-19",
+  },
+  {
+    videoId: "NzJd6sDQiXo",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "毒入りスープ",
+    characters: [{ characterName: "皮噛 富江", playerName: "よしを" }],
+    gmName: "Qurioth",
+    playedAt: "2023-03-11",
+  },
+  {
+    videoId: "4b_Z7VKOJ68",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "狂気山脈",
+    characters: [
+      { characterName: "マキシム･マルバネ･クワガタ", playerName: "kayuna" },
+      { characterName: "平 均", playerName: "よしを" },
+      { characterName: "森永 誠太", playerName: "いそたろ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-03-11",
+    note: "サブKP",
+  },
+  {
+    videoId: "4I_xYiWPWE4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "世界を視た男",
+    characters: [
+      { characterName: "小刀禰 月結", playerName: "Qurioth" },
+      { characterName: "前園 まさお", playerName: "ちよこ" },
+      { characterName: "皮噛 富江", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-02-26",
+  },
+  {
+    videoId: "pgWioaT6QHQ",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "コーヒー一杯分の恐怖",
+    characters: [{ characterName: "鈴花 瑠香", playerName: "Qurioth" }],
+    gmName: "リアン",
+    playedAt: "2023-02-05",
+  },
+  {
+    videoId: "2dTUerGEu7c",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "沼男は誰だ？",
+    characters: [
+      { characterName: "久間 太郎", playerName: "いそたろ" },
+      { characterName: "ブータン・ド・マルコ", playerName: "よしを" },
+      { characterName: "平岡 昌弘", playerName: "kayuna" },
+      { characterName: "武田 桃", playerName: "つばき" },
+      { characterName: "久出 白奈", playerName: "英佳" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-01-21",
+  },
+  {
+    videoId: "sktQ6gApgNU",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "迷宮より叫ぶもの",
+    characters: [
+      { characterName: "嵐山 舞", playerName: "つばき" },
+      { characterName: "横田 凛太郎", playerName: "kayuna" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-12-03",
+    passwords: [
+      "スフィンクスの子ら",
+      "屍食鬼",
+      "無貌の神",
+      "暗黒のスフィンクス",
+      "ニャルラトホテプ",
+    ],
+  },
+  {
+    videoId: "RyYr9GDQTac",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "杉山屋敷怪異譚",
+    characters: [
+      { characterName: "湯利 小百合", playerName: "おじさん" },
+      { characterName: "伊知 嵐", playerName: "よしを" },
+      { characterName: "夜見 輝", playerName: "いそたろ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-11-20",
+  },
+  {
+    videoId: "5xfy4pnYt3s",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "杉山屋敷怪異譚",
+    characters: [
+      { characterName: "鬼木 祐樹", playerName: "kayuna" },
+      { characterName: "武田 桃", playerName: "つばき" },
+      { characterName: "柊 まみ", playerName: "英佳" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-10-09",
+  },
+  {
+    videoId: "o6yK_QiOieM",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ショクザイ",
+    characters: [
+      { characterName: "両角 ダガ男", playerName: "ちよこ" },
+      { characterName: "瑞銀 鈴花", playerName: "Qurioth" },
+      { characterName: "夢見 華", playerName: "しおり" },
+    ],
+    gmName: "リアン",
+    playedAt: "2022-10-01",
+  },
+  {
+    videoId: "28xdeBlHX3I",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "杉山屋敷怪異譚",
+    characters: [
+      { characterName: "石狩 克也", playerName: "夜桜" },
+      { characterName: "ジャンボリアン・ボンバイエ", playerName: "ももみざわ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-09-25",
+  },
+  {
+    videoId: "glYSwpdg_Zo",
+    trpgSystemName: "ふしぎもののけRPG ゆうやけこやけ",
+    scenarioName: "花火をしよう！",
+    characters: [
+      { characterName: "さんばん", playerName: "リアン" },
+      { characterName: "いなほ", playerName: "しおり" },
+      { characterName: "メリー", playerName: "ちよこ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-07-30",
+  },
+  {
+    videoId: "uVQfWvJPJmg",
+    trpgSystemName: "ふしぎもののけRPG ゆうやけこやけ",
+    scenarioName: "おつかいゆうれい",
+    characters: [
+      { characterName: "さんばん", playerName: "リアン" },
+      { characterName: "いなほ", playerName: "しおり" },
+      { characterName: "メリー", playerName: "ちよこ" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2022-07-30",
+  },
 ];
 
+export const videoIds: string[] = replayVideos.map(({ videoId }) => videoId);
 export const playlistIds: string[] = [];
