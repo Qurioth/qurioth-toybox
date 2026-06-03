@@ -1,4 +1,4 @@
-const markdownString = `
+
 _― Das Dornröschen des Wahnsinnigen Königs ―_
 
 # 狂気の王の眠り姫
@@ -451,6 +451,3 @@ STR: 110 DEX: 120 CON: 300 POW: 175 SIZ: 60
 #### 黄衣の王の戯曲を持ち帰る
 
 正気度回復:1D6
-`;
-
-export default markdownString;

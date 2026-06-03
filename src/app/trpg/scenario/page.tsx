@@ -1,5 +1,3 @@
-"use client";
-
 import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
 import ReactMarkdown from "react-markdown";

@@ -1,8 +1,15 @@
-import agnusDeiQuiTollisPeccataMundi from "@/data/scenario/agnus-dei-qui-tollis-peccata-mundi";
-import bubbleOnWetHands from "@/data/scenario/bubble-on-wet-hands";
-import dasDornroschenDesWahnsinnigenKonigs from "@/data/scenario/das-dornröschen-des-wahnsinnigen-königs";
-import theSoundOfSteppingOnFog from "@/data/scenario/the-sound-of-stepping-on-fog";
-import silentJourney from "@/data/scenario/silent-journey";
+import fs from "node:fs";
+import path from "node:path";
+import { escapeMarkdownText } from "@/utils/markdown-utils";
+
+const readScenarioMarkdown = (fileName: string) => {
+  const markdown = fs.readFileSync(
+    path.join(process.cwd(), "src", "data", "scenario", fileName),
+    "utf8"
+  );
+
+  return escapeMarkdownText(markdown);
+};
 
 const list: {
   [key: string]: { title: string; overview: string; markdown: string };
@@ -14,7 +21,7 @@ const list: {
 　プレイ時間は探索者の作成時間を含まずに 5 時間程度だろう。  
 　舞台は現代の日本。探索者たちが教会へ訪れたときから事件は展開する。  
 　なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
-    markdown: agnusDeiQuiTollisPeccataMundi,
+    markdown: readScenarioMarkdown("agnus-dei-qui-tollis-peccata-mundi.md"),
   },
   BubbleOnWetHands: {
     title: "濡れた手の泡沫",
@@ -22,7 +29,7 @@ const list: {
 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 5 ～ 6 時間程度だろう。  
 　舞台は現代の日本。探索者たちは共通の知人である**沖嶋 深月**の依頼で一人の男性を捜し、海沿いの町へ赴くこととなる。`,
-    markdown: bubbleOnWetHands,
+    markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
   },
   // PalateOfTheCrawling: {
   //   title: "蠢く口蓋",
@@ -40,7 +47,9 @@ const list: {
 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 3 時間程度だろう。  
 　舞台は現代の日本。亡くなった芸術家の屋敷で事件は展開する。`,
-    markdown: dasDornroschenDesWahnsinnigenKonigs,
+    markdown: readScenarioMarkdown(
+      "das-dornröschen-des-wahnsinnigen-königs.md"
+    ),
   },
   TheSoundOfSteppingOnFog: {
     title: "霧を踏む音",
@@ -50,7 +59,7 @@ const list: {
 　舞台は現代の日本。山間の片田舎で事件は展開する。  
 　シナリオの設定上、少なくとも一人の探索者の知人に**笹本 霧江**という大学生がいることとなる。  
 　なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
-    markdown: theSoundOfSteppingOnFog,
+    markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
   SilentJourney: {
     title: "Silent Journey",
@@ -58,7 +67,7 @@ const list: {
 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 3 ～ 4 時間程度だろう。  
 　舞台は現代の日本。探索者たちが駅で一人の男性とぶつかるところから事件は展開する。`,
-    markdown: silentJourney,
+    markdown: readScenarioMarkdown("silent-journey.md"),
   },
   // LieDownOnBambooLeaves: {
   //   title: "竹の葉に寝転ぶ",
