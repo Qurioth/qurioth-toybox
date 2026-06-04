@@ -7,10 +7,58 @@ import {
   ReplayVideo,
   replayVideos,
 } from "@/data/youtube/trpg/youtube-id";
+import { Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 const loadSize = 10;
+const suggestionLimit = 8;
 const emptyText = "未設定";
+
+type SearchField = "scenario" | "system" | "gm" | "player" | "character";
+
+type SearchTarget = {
+  field: SearchField;
+  label: string;
+  value: string;
+};
+
+type ParsedSearchQuery = {
+  targets: SearchTarget[];
+  freeQuery: string;
+};
+
+const searchFieldLabels: Record<SearchField, string> = {
+  scenario: "シナリオタイトル",
+  system: "システム名",
+  gm: "GM名",
+  player: "プレイヤー名",
+  character: "キャラクター名",
+};
+
+const searchFieldAliases: Record<string, SearchField> = {
+  scenario: "scenario",
+  sc: "scenario",
+  title: "scenario",
+  シナリオ: "scenario",
+  シナリオタイトル: "scenario",
+  system: "system",
+  sys: "system",
+  システム: "system",
+  システム名: "system",
+  gm: "gm",
+  GM: "gm",
+  GM名: "gm",
+  player: "player",
+  pl: "player",
+  pcplayer: "player",
+  プレイヤー: "player",
+  プレイヤー名: "player",
+  character: "character",
+  chara: "character",
+  pc: "character",
+  キャラクター: "character",
+  キャラクター名: "character",
+};
 
 const displayText = (value?: string) => {
   return value && value.trim().length > 0 ? value : emptyText;
@@ -18,6 +66,181 @@ const displayText = (value?: string) => {
 
 const hasText = (value?: string) => {
   return Boolean(value && value.trim().length > 0);
+};
+
+const normalizeSearchText = (value: string) => {
+  return value.normalize("NFKC").trim().toLocaleLowerCase();
+};
+
+const normalizeSearchField = (value: string) => {
+  return value.normalize("NFKC").trim().toLocaleLowerCase();
+};
+
+const getSearchField = (value: string) => {
+  return searchFieldAliases[normalizeSearchField(value)];
+};
+
+const createSearchTarget = (
+  field: SearchField,
+  value: string,
+): SearchTarget => {
+  return {
+    field,
+    label: searchFieldLabels[field],
+    value,
+  };
+};
+
+const getSearchTargetKey = ({ field, value }: SearchTarget) => {
+  return `${field}:${normalizeSearchText(value)}`;
+};
+
+const getReplaySearchTargets = (replay: ReplayVideo): SearchTarget[] => {
+  const targets: SearchTarget[] = [];
+
+  if (hasText(replay.scenarioName)) {
+    targets.push(createSearchTarget("scenario", replay.scenarioName as string));
+  }
+
+  if (hasText(replay.trpgSystemName)) {
+    targets.push(createSearchTarget("system", replay.trpgSystemName as string));
+  }
+
+  if (hasText(replay.gmName)) {
+    targets.push(createSearchTarget("gm", replay.gmName as string));
+  }
+
+  replay.characters?.forEach(({ characterName, playerName }) => {
+    if (hasText(characterName)) {
+      targets.push(createSearchTarget("character", characterName));
+    }
+
+    if (hasText(playerName)) {
+      targets.push(createSearchTarget("player", playerName as string));
+    }
+  });
+
+  return targets;
+};
+
+const parseSearchQuery = (query: string): ParsedSearchQuery => {
+  const targets: SearchTarget[] = [];
+  const freeWords: string[] = [];
+
+  query
+    .split(/[\s,、]+/)
+    .map((word) => word.trim())
+    .filter(Boolean)
+    .forEach((word) => {
+      const match = word.match(/^([^:：]+)[:：](.+)$/);
+
+      if (!match) {
+        freeWords.push(word);
+        return;
+      }
+
+      const field = getSearchField(match[1]);
+
+      if (!field) {
+        freeWords.push(word);
+        return;
+      }
+
+      targets.push(createSearchTarget(field, match[2].trim()));
+    });
+
+  return {
+    targets,
+    freeQuery: freeWords.join(" "),
+  };
+};
+
+const replayMatchesSearch = (replay: ReplayVideo, query: string) => {
+  const words = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+
+  if (words.length === 0) {
+    return true;
+  }
+
+  const targetText = getReplaySearchTargets(replay)
+    .map(({ value }) => normalizeSearchText(value))
+    .join(" ");
+
+  return words.every((word) => targetText.includes(word));
+};
+
+const replayMatchesSearchTarget = (
+  replay: ReplayVideo,
+  selectedTarget: SearchTarget,
+) => {
+  return getReplaySearchTargets(replay).some((target) => {
+    return (
+      target.field === selectedTarget.field &&
+      normalizeSearchText(target.value) ===
+        normalizeSearchText(selectedTarget.value)
+    );
+  });
+};
+
+const getSearchSuggestionQuery = (query: string) => {
+  const words = query.split(/[\s,、]+/);
+  const currentWord = words[words.length - 1] ?? "";
+  const match = currentWord.match(/^([^:：]+)[:：](.*)$/);
+
+  if (!match) {
+    return {
+      field: undefined,
+      query: currentWord,
+    };
+  }
+
+  return {
+    field: getSearchField(match[1]),
+    query: match[2],
+  };
+};
+
+const getSearchSuggestions = (
+  query: string,
+  selectedTargets: SearchTarget[],
+) => {
+  const suggestionQuery = getSearchSuggestionQuery(query);
+  const normalizedQuery = normalizeSearchText(suggestionQuery.query);
+
+  if (!normalizedQuery) {
+    return [];
+  }
+
+  const selectedKeys = new Set(selectedTargets.map(getSearchTargetKey));
+  const suggestions = new Map<string, SearchTarget>();
+
+  for (const replay of replayVideos) {
+    for (const target of getReplaySearchTargets(replay)) {
+      if (suggestionQuery.field && target.field !== suggestionQuery.field) {
+        continue;
+      }
+
+      const key = getSearchTargetKey(target);
+
+      if (selectedKeys.has(key)) {
+        continue;
+      }
+
+      if (!normalizeSearchText(target.value).includes(normalizedQuery)) {
+        continue;
+      }
+
+      if (!suggestions.has(key)) {
+        suggestions.set(key, target);
+      }
+
+      if (suggestions.size >= suggestionLimit) {
+        return Array.from(suggestions.values());
+      }
+    }
+  }
+
+  return Array.from(suggestions.values());
 };
 
 const normalizePassword = (value: string) => {
@@ -150,12 +373,82 @@ const ReplayCard = ({ replay }: { replay: ReplayVideo }) => {
 };
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSearchTargets, setSelectedSearchTargets] = useState<
+    SearchTarget[]
+  >([]);
   const [visibleCount, setVisibleCount] = useState(loadSize);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const hasMore = visibleCount < replayVideos.length;
+  const parsedSearchQuery = useMemo(() => {
+    return parseSearchQuery(searchQuery);
+  }, [searchQuery]);
+  const activeSearchTargets = useMemo(() => {
+    const targets = [...selectedSearchTargets];
+    const targetKeys = new Set(targets.map(getSearchTargetKey));
+
+    for (const target of parsedSearchQuery.targets) {
+      const key = getSearchTargetKey(target);
+
+      if (!targetKeys.has(key)) {
+        targets.push(target);
+        targetKeys.add(key);
+      }
+    }
+
+    return targets;
+  }, [parsedSearchQuery.targets, selectedSearchTargets]);
+  const filteredReplayVideos = useMemo(() => {
+    return replayVideos.filter(
+      (replay) =>
+        activeSearchTargets.every((target) =>
+          replayMatchesSearchTarget(replay, target),
+        ) && replayMatchesSearch(replay, parsedSearchQuery.freeQuery),
+    );
+  }, [activeSearchTargets, parsedSearchQuery.freeQuery]);
+  const searchSuggestions = useMemo(() => {
+    return getSearchSuggestions(searchQuery, activeSearchTargets);
+  }, [activeSearchTargets, searchQuery]);
+  const hasMore = visibleCount < filteredReplayVideos.length;
   const visibleReplayVideos = useMemo(() => {
-    return replayVideos.slice(0, visibleCount);
-  }, [visibleCount]);
+    return filteredReplayVideos.slice(0, visibleCount);
+  }, [filteredReplayVideos, visibleCount]);
+
+  useEffect(() => {
+    setVisibleCount(loadSize);
+  }, [activeSearchTargets, searchQuery]);
+
+  const onChangeSearchQuery = (value: string) => {
+    setSearchQuery(value);
+  };
+
+  const onSelectSuggestion = (suggestion: SearchTarget) => {
+    setSelectedSearchTargets((currentTargets) => {
+      const suggestionKey = getSearchTargetKey(suggestion);
+      const alreadySelected = currentTargets.some((target) => {
+        return getSearchTargetKey(target) === suggestionKey;
+      });
+
+      if (alreadySelected) {
+        return currentTargets;
+      }
+
+      return [...currentTargets, suggestion];
+    });
+    setSearchQuery("");
+  };
+
+  const onRemoveSearchTarget = (targetKey: string) => {
+    setSelectedSearchTargets((currentTargets) =>
+      currentTargets.filter((target) => {
+        return getSearchTargetKey(target) !== targetKey;
+      }),
+    );
+  };
+
+  const onClearSearch = () => {
+    setSearchQuery("");
+    setSelectedSearchTargets([]);
+  };
 
   useEffect(() => {
     const loadMoreElement = loadMoreRef.current;
@@ -168,7 +461,10 @@ export default function Home() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisibleCount((currentCount) => {
-            return Math.min(currentCount + loadSize, replayVideos.length);
+            return Math.min(
+              currentCount + loadSize,
+              filteredReplayVideos.length,
+            );
           });
         }
       },
@@ -182,22 +478,114 @@ export default function Home() {
     return () => {
       observer.disconnect();
     };
-  }, [hasMore]);
+  }, [filteredReplayVideos.length, hasMore]);
 
   return (
     <Template>
+      <div className="mx-auto mb-8 w-full max-w-[66rem]">
+        <div className="relative">
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-zinc-400"
+              aria-hidden="true"
+            />
+            <input
+              id="replay-search"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => onChangeSearchQuery(event.target.value)}
+              className="w-full rounded-md border border-zinc-300 bg-white py-3 pl-10 pr-11 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-zinc-100"
+              placeholder="シナリオタイトル、システム名、プレイヤー名、GM名、キャラクター名"
+              autoComplete="off"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:text-zinc-300 dark:hover:bg-slate-700 dark:hover:text-zinc-100"
+                onClick={onClearSearch}
+                aria-label="検索キーワードをクリア"
+              >
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            )}
+          </div>
+
+          {searchSuggestions.length > 0 && (
+            <div className="absolute z-10 mt-2 w-full overflow-hidden rounded-md border border-zinc-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-800">
+              <ul className="max-h-72 overflow-y-auto py-1">
+                {searchSuggestions.map((suggestion) => (
+                  <li key={getSearchTargetKey(suggestion)}>
+                    <button
+                      type="button"
+                      className="flex w-full items-center gap-3 px-4 py-2 text-left text-sm transition hover:bg-zinc-100 focus:bg-zinc-100 focus:outline-none dark:hover:bg-slate-700 dark:focus:bg-slate-700"
+                      onClick={() => onSelectSuggestion(suggestion)}
+                    >
+                      <span className="shrink-0 rounded bg-zinc-100 px-2 py-1 text-xs font-semibold text-zinc-600 dark:bg-slate-700 dark:text-zinc-200">
+                        {suggestion.label}
+                      </span>
+                      <span className="min-w-0 truncate text-zinc-900 dark:text-zinc-100">
+                        {suggestion.value}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {selectedSearchTargets.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {selectedSearchTargets.map((target) => {
+                const targetKey = getSearchTargetKey(target);
+
+                return (
+                  <span
+                    key={targetKey}
+                    className="inline-flex max-w-full items-center gap-2 rounded bg-zinc-100 px-2 py-1 text-sm text-zinc-700 dark:bg-slate-700 dark:text-zinc-100"
+                  >
+                    <span className="shrink-0 text-xs font-semibold text-zinc-500 dark:text-zinc-300">
+                      {target.label}
+                    </span>
+                    <span className="min-w-0 truncate">{target.value}</span>
+                    <button
+                      type="button"
+                      className="flex size-5 shrink-0 items-center justify-center rounded text-zinc-500 transition hover:bg-zinc-200 hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:text-zinc-300 dark:hover:bg-slate-600 dark:hover:text-zinc-100"
+                      onClick={() => onRemoveSearchTarget(targetKey)}
+                      aria-label={`${target.label} ${target.value}を削除`}
+                    >
+                      <X className="size-3.5" aria-hidden="true" />
+                    </button>
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            {filteredReplayVideos.length}件 / {replayVideos.length}件
+          </p>
+        </div>
+      </div>
+
       <div className="mx-auto grid w-full max-w-[66rem] grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
         {visibleReplayVideos.map((replay) => {
           return <ReplayCard key={replay.videoId} replay={replay} />;
         })}
       </div>
-      <div
-        ref={loadMoreRef}
-        className="mt-8 h-8 text-sm text-zinc-500 dark:text-zinc-400"
-        aria-live="polite"
-      >
-        {hasMore ? "読み込み中..." : "すべて表示しました"}
-      </div>
+
+      {filteredReplayVideos.length === 0 ? (
+        <p className="mt-8 text-sm text-zinc-500 dark:text-zinc-400">
+          条件に一致するリプレイはありません。
+        </p>
+      ) : (
+        <div
+          ref={loadMoreRef}
+          className="mt-8 h-8 text-sm text-zinc-500 dark:text-zinc-400"
+          aria-live="polite"
+        >
+          {hasMore ? "読み込み中..." : "すべて表示しました"}
+        </div>
+      )}
     </Template>
   );
 }
