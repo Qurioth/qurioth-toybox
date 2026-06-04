@@ -21,6 +21,20 @@ export const metadata: Metadata = {
   },
   description:
     "In [Qurioth's Toybox], Qurioth freely publishes and creates tools and scenarios related to Table Talk RPGs. If you have time to translate this English text, it would be more useful to study for one of the qualifications!",
+  icons: {
+    icon: [
+      {
+        url: "/favicon-light.png",
+        media: "(prefers-color-scheme: light)",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-dark.png",
+        media: "(prefers-color-scheme: dark)",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
