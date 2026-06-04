@@ -1,9 +1,53 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
-import ReaderChart from "@/components/recharts/ReaderChart";
 import { Investigator } from "@/types/Charaeno7th";
 import humanIcon from "@/image/human-icon.png";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
+
+const ReaderChart = dynamic(() => import("@/components/recharts/ReaderChart"), {
+  ssr: false,
+});
+
+const backstoryLabels = [
+  "容姿の描写",
+  "イデオロギー／信念",
+  "重要な人々",
+  "意味のある場所",
+  "秘蔵の品",
+  "特徴",
+  "負傷、傷跡",
+  "恐怖症、マニア",
+  "魔道書、呪文、アーティファクト",
+  "遭遇した超自然の存在",
+];
+
+const fullWidthNameCharacterPattern =
+  /[\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uff01-\uff60\uffe0-\uffe6]/;
+
+const getNameTextSizeClass = (name: string) => {
+  const fullWidthLength = Array.from(name).filter((character) =>
+    fullWidthNameCharacterPattern.test(character),
+  ).length;
+
+  if (fullWidthLength >= 16) {
+    return "text-2xl";
+  }
+
+  if (fullWidthLength >= 12) {
+    return "text-3xl";
+  }
+
+  return "text-4xl";
+};
+
+const getNoteParagraphs = (note: string) =>
+  note
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter((paragraph) => paragraph !== "");
 
 const CharacterCard = (props: { data: Investigator }) => {
   const data = props.data;
@@ -14,6 +58,17 @@ const CharacterCard = (props: { data: Investigator }) => {
   }[] = [];
   const [reverse, setReverse] = useState(false);
   const [classChanging, setClassChanging] = useState(false);
+  const nameTextSizeClass = getNameTextSizeClass(data.name);
+  const noteParagraphs = getNoteParagraphs(data.note);
+  const backstories = data.backstory
+    .map((backstory, index) => ({
+      ...backstory,
+      name: backstoryLabels[index] || backstory.name,
+      entries: backstory.entries.filter(
+        (entry) => entry.text.trim() !== "" && entry.text.length > 0,
+      ),
+    }))
+    .filter((backstory) => backstory.entries.length > 0);
 
   Object.keys(data.characteristics).map((key: string) => {
     let characteristicsData = 0;
@@ -67,7 +122,9 @@ const CharacterCard = (props: { data: Investigator }) => {
       {!classChanging && (
         <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="justify-center content-center">
-            <div className="h-12 font-serif text-4xl font-semibold italic mt-2 ml-2">
+            <div
+              className={`h-12 overflow-hidden text-ellipsis whitespace-nowrap font-serif ${nameTextSizeClass} font-semibold italic leading-tight mt-2 ml-2`}
+            >
               {data.name}
             </div>
             <div
@@ -174,11 +231,51 @@ const CharacterCard = (props: { data: Investigator }) => {
             className="grid grid-cols-1"
             style={{ display: reverse ? "block" : "none" }}
           >
-            <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 border-2 m-2">
+            <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 m-2">
               <div className="m-2">
-                {data.note.split("\n").map((note, index) => {
-                  return <div key={`${data.name}-note-${index}`}>{note}</div>;
-                })}
+                {backstories.length > 0 &&
+                  backstories.map((backstory, backstoryIndex) => (
+                    <section
+                      key={`${data.name}-backstory-${backstoryIndex}`}
+                      className="mb-3"
+                    >
+                      <h3 className="font-serif font-semibold">
+                        {backstory.name}
+                      </h3>
+                      <div className="pl-5">
+                        <ul className="list-disc pl-5">
+                          {backstory.entries.map((entry, entryIndex) => (
+                            <li
+                              key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
+                            >
+                              {entry.text.split("\n").map((line, lineIndex) => (
+                                <div
+                                  key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
+                                >
+                                  {line}
+                                </div>
+                              ))}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+                  ))}
+                {noteParagraphs.length > 0 && (
+                  <div className="mt-4">
+                    <h3 className="font-serif font-semibold">メモ</h3>
+                    <div className="pl-5">
+                      {noteParagraphs.map((paragraph, index) => (
+                        <p
+                          key={`${data.name}-note-${index}`}
+                          className="mb-3 whitespace-pre-line last:mb-0"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
