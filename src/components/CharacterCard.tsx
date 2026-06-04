@@ -69,6 +69,13 @@ const CharacterCard = (props: { data: Investigator }) => {
       ),
     }))
     .filter((backstory) => backstory.entries.length > 0);
+  const editedSkills = data.skills.filter((skill) => skill.edited);
+  const attributes = [
+    { label: "HP", value: data.attribute.hp },
+    { label: "MP", value: data.attribute.mp },
+    { label: "SAN", value: data.attribute.san.value },
+    { label: "幸運", value: data.attribute.luck },
+  ];
 
   Object.keys(data.characteristics).map((key: string) => {
     let characteristicsData = 0;
@@ -107,181 +114,321 @@ const CharacterCard = (props: { data: Investigator }) => {
     });
   });
 
-  return (
+  const renderName = () => (
     <div
-      className={`shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[920px] md:h-[452px] ${
-        classChanging && "animate-rotate-y"
-      }`}
-      onClick={async () => {
-        setClassChanging(true);
-        await new Promise((resolve) => setTimeout(resolve, 880));
-        setReverse(!reverse);
-        setClassChanging(false);
-      }}
+      className={`h-12 overflow-hidden text-ellipsis whitespace-nowrap font-serif ${nameTextSizeClass} font-semibold italic leading-tight mt-2 ml-2`}
     >
-      {!classChanging && (
-        <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="justify-center content-center">
-            <div
-              className={`h-12 overflow-hidden text-ellipsis whitespace-nowrap font-serif ${nameTextSizeClass} font-semibold italic leading-tight mt-2 ml-2`}
-            >
-              {data.name}
-            </div>
-            <div
-              className="h-96 m-2"
-              style={{ display: reverse ? "none" : "block" }}
-            >
-              <div className="flex flex-row w-full h-72 justify-center content-center">
-                <ReaderChart
-                  name={data.name}
-                  dataKey={"characteristics"}
-                  data={characteristics}
-                />
-              </div>
-              <div className="grid grid-cols-4 gap-4">
-                <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                  <div className="flex justify-center font-semibold pb-2">
-                    HP
-                  </div>
-                  <div className="flex justify-center font-semibold pt-2">
-                    {data.attribute.hp}
-                  </div>
-                </div>
-                <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                  <div className="flex justify-center font-semibold pb-2">
-                    MP
-                  </div>
-                  <div className="flex justify-center font-semibold pt-2">
-                    {data.attribute.mp}
-                  </div>
-                </div>
-                <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                  <div className="flex justify-center font-semibold pb-2">
-                    SAN
-                  </div>
-                  <div className="flex justify-center font-semibold pt-2">
-                    {data.attribute.san.value}
-                  </div>
-                </div>
-                <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                  <div className="flex justify-center font-semibold pb-2">
-                    幸運
-                  </div>
-                  <div className="flex justify-center font-semibold pt-2">
-                    {data.attribute.luck}
-                  </div>
-                </div>
-              </div>
-            </div>
+      {data.name}
+    </div>
+  );
 
-            <div
-              className="table-wrp block h-96 m-2 p-2"
-              style={{ display: reverse ? "block" : "none" }}
-            >
-              <div className="scrollbar-thin h-full overflow-y-auto">
-                <table className="w-full border-separate border border-slate-500">
-                  <tbody>
-                    {data.skills.map((skill, index) => {
-                      if (skill.edited) {
-                        return (
-                          <tr key={`${data.name}-skill-${index}`}>
-                            <td className="w-5/6 border border-slate-600 font-serif font-semibold">
-                              {skill.name}
-                            </td>
-                            <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
-                              {skill.value}
-                            </td>
-                          </tr>
-                        );
-                      }
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+  const renderPortrait = (heightClass: string) => (
+    <div className="w-auto grid grid-cols-1 justify-items-center content-center">
+      {data.portraitURL ? (
+        <img
+          className={`object-contain ${heightClass} max-w-full animate-in fade-in duration-1000`}
+          src={data.portraitURL || "/image/human_icon.png"}
+          alt="portrait"
+        />
+      ) : (
+        <Image
+          className={`object-contain ${heightClass} max-w-full animate-in fade-in duration-1000`}
+          src={humanIcon}
+          alt="portrait"
+          width={500}
+          height={500}
+        />
+      )}
+    </div>
+  );
+
+  const renderAttributeCards = () => (
+    <div className="grid grid-cols-4 gap-2 sm:gap-4">
+      {attributes.map((attribute) => (
+        <div
+          key={`${data.name}-${attribute.label}`}
+          className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900"
+        >
+          <div className="flex justify-center font-semibold pb-2">
+            {attribute.label}
           </div>
-
-          <div
-            className="grid grid-cols-1 content-center h-[448px]"
-            style={{ display: reverse ? "none" : "block" }}
-          >
-            <div className="h-[440px]">
-              <div className="w-auto grid grid-cols-1 justify-items-center content-center">
-                {data.portraitURL ? (
-                  <img
-                    className="object-contain h-[440px] animate-in fade-in duration-1000"
-                    src={data.portraitURL || "/image/human_icon.png"}
-                    alt="ortrait"
-                  />
-                ) : (
-                  <Image
-                    className="animate-in fade-in duration-1000"
-                    src={humanIcon}
-                    alt="ortrait"
-                    width={500}
-                    height={500}
-                    objectFit="contain"
-                  />
-                )}
-              </div>
-            </div>
+          <div className="flex justify-center font-semibold pt-2">
+            {attribute.value}
           </div>
+        </div>
+      ))}
+    </div>
+  );
 
-          <div
-            className="grid grid-cols-1"
-            style={{ display: reverse ? "block" : "none" }}
+  const renderSkillTable = () => (
+    <table className="w-full border-separate border border-slate-500">
+      <tbody>
+        {editedSkills.map((skill, index) => (
+          <tr key={`${data.name}-skill-${index}`}>
+            <td className="w-5/6 border border-slate-600 font-serif font-semibold">
+              {skill.name}
+            </td>
+            <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
+              {skill.value}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
+  const renderBackstoriesAndNotes = () => (
+    <div className="m-2">
+      {backstories.length > 0 &&
+        backstories.map((backstory, backstoryIndex) => (
+          <section
+            key={`${data.name}-backstory-${backstoryIndex}`}
+            className="mb-3"
           >
-            <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 m-2">
-              <div className="m-2">
-                {backstories.length > 0 &&
-                  backstories.map((backstory, backstoryIndex) => (
-                    <section
-                      key={`${data.name}-backstory-${backstoryIndex}`}
-                      className="mb-3"
-                    >
-                      <h3 className="font-serif font-semibold">
-                        {backstory.name}
-                      </h3>
-                      <div className="pl-5">
-                        <ul className="list-disc pl-5">
-                          {backstory.entries.map((entry, entryIndex) => (
-                            <li
-                              key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
-                            >
-                              {entry.text.split("\n").map((line, lineIndex) => (
-                                <div
-                                  key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
-                                >
-                                  {line}
-                                </div>
-                              ))}
-                            </li>
-                          ))}
-                        </ul>
+            <h3 className="font-serif font-semibold">{backstory.name}</h3>
+            <div className="pl-5">
+              <ul className="list-disc pl-5">
+                {backstory.entries.map((entry, entryIndex) => (
+                  <li
+                    key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
+                  >
+                    {entry.text.split("\n").map((line, lineIndex) => (
+                      <div
+                        key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
+                      >
+                        {line}
                       </div>
-                    </section>
-                  ))}
-                {noteParagraphs.length > 0 && (
-                  <div className="mt-4">
-                    <h3 className="font-serif font-semibold">メモ</h3>
-                    <div className="pl-5">
-                      {noteParagraphs.map((paragraph, index) => (
-                        <p
-                          key={`${data.name}-note-${index}`}
-                          className="mb-3 whitespace-pre-line last:mb-0"
-                        >
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+                    ))}
+                  </li>
+                ))}
+              </ul>
             </div>
+          </section>
+        ))}
+      {noteParagraphs.length > 0 && (
+        <div className="mt-4">
+          <h3 className="font-serif font-semibold">メモ</h3>
+          <div className="pl-5">
+            {noteParagraphs.map((paragraph, index) => (
+              <p
+                key={`${data.name}-note-${index}`}
+                className="mb-3 whitespace-pre-line last:mb-0"
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
       )}
     </div>
+  );
+
+  return (
+    <>
+      <div
+        className={`hidden md:block shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
+          classChanging && "animate-rotate-y"
+        }`}
+        onClick={async () => {
+          setClassChanging(true);
+          await new Promise((resolve) => setTimeout(resolve, 880));
+          setReverse(!reverse);
+          setClassChanging(false);
+        }}
+      >
+        {!classChanging && (
+          <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="justify-center content-center">
+              <div
+                className={`h-12 overflow-hidden text-ellipsis whitespace-nowrap font-serif ${nameTextSizeClass} font-semibold italic leading-tight mt-2 ml-2`}
+              >
+                {data.name}
+              </div>
+              <div
+                className="h-96 m-2"
+                style={{ display: reverse ? "none" : "block" }}
+              >
+                <div className="flex flex-row w-full h-72 justify-center content-center">
+                  <ReaderChart
+                    name={data.name}
+                    dataKey={"characteristics"}
+                    data={characteristics}
+                  />
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
+                    <div className="flex justify-center font-semibold pb-2">
+                      HP
+                    </div>
+                    <div className="flex justify-center font-semibold pt-2">
+                      {data.attribute.hp}
+                    </div>
+                  </div>
+                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
+                    <div className="flex justify-center font-semibold pb-2">
+                      MP
+                    </div>
+                    <div className="flex justify-center font-semibold pt-2">
+                      {data.attribute.mp}
+                    </div>
+                  </div>
+                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
+                    <div className="flex justify-center font-semibold pb-2">
+                      SAN
+                    </div>
+                    <div className="flex justify-center font-semibold pt-2">
+                      {data.attribute.san.value}
+                    </div>
+                  </div>
+                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
+                    <div className="flex justify-center font-semibold pb-2">
+                      幸運
+                    </div>
+                    <div className="flex justify-center font-semibold pt-2">
+                      {data.attribute.luck}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="table-wrp block h-96 m-2 p-2"
+                style={{ display: reverse ? "block" : "none" }}
+              >
+                <div className="scrollbar-thin h-full overflow-y-auto">
+                  <table className="w-full border-separate border border-slate-500">
+                    <tbody>
+                      {data.skills.map((skill, index) => {
+                        if (skill.edited) {
+                          return (
+                            <tr key={`${data.name}-skill-${index}`}>
+                              <td className="w-5/6 border border-slate-600 font-serif font-semibold">
+                                {skill.name}
+                              </td>
+                              <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
+                                {skill.value}
+                              </td>
+                            </tr>
+                          );
+                        }
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="grid grid-cols-1 content-center h-[448px]"
+              style={{ display: reverse ? "none" : "block" }}
+            >
+              <div className="h-[440px]">
+                <div className="w-auto grid grid-cols-1 justify-items-center content-center">
+                  {data.portraitURL ? (
+                    <img
+                      className="object-contain h-[440px] animate-in fade-in duration-1000"
+                      src={data.portraitURL || "/image/human_icon.png"}
+                      alt="ortrait"
+                    />
+                  ) : (
+                    <Image
+                      className="animate-in fade-in duration-1000"
+                      src={humanIcon}
+                      alt="ortrait"
+                      width={500}
+                      height={500}
+                      objectFit="contain"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="grid grid-cols-1"
+              style={{ display: reverse ? "block" : "none" }}
+            >
+              <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 m-2">
+                <div className="m-2">
+                  {backstories.length > 0 &&
+                    backstories.map((backstory, backstoryIndex) => (
+                      <section
+                        key={`${data.name}-backstory-${backstoryIndex}`}
+                        className="mb-3"
+                      >
+                        <h3 className="font-serif font-semibold">
+                          {backstory.name}
+                        </h3>
+                        <div className="pl-5">
+                          <ul className="list-disc pl-5">
+                            {backstory.entries.map((entry, entryIndex) => (
+                              <li
+                                key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
+                              >
+                                {entry.text
+                                  .split("\n")
+                                  .map((line, lineIndex) => (
+                                    <div
+                                      key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
+                                    >
+                                      {line}
+                                    </div>
+                                  ))}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </section>
+                    ))}
+                  {noteParagraphs.length > 0 && (
+                    <div className="mt-4">
+                      <h3 className="font-serif font-semibold">メモ</h3>
+                      <div className="pl-5">
+                        {noteParagraphs.map((paragraph, index) => (
+                          <p
+                            key={`${data.name}-note-${index}`}
+                            className="mb-3 whitespace-pre-line last:mb-0"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="md:hidden">
+        <section className="shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50">
+          {renderName()}
+          <div className="px-2 pb-4">
+            <div className="min-h-[320px] flex items-end justify-center">
+              {renderPortrait("h-[320px]")}
+            </div>
+            <div className="flex flex-row w-full h-72 justify-center content-center">
+              <ReaderChart
+                name={data.name}
+                dataKey={"characteristics"}
+                data={characteristics}
+              />
+            </div>
+            {renderAttributeCards()}
+          </div>
+          <div className="px-2 pb-4 space-y-4">
+            <div className="table-wrp">
+              {renderSkillTable()}
+            </div>
+            <div className="overflow-x-hidden">
+              {renderBackstoriesAndNotes()}
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 
