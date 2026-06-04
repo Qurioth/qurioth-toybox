@@ -14,16 +14,16 @@ const readScenarioMarkdown = (fileName: string) => {
 const list: {
   [key: string]: { title: string; overview: string; markdown: string };
 } = {
-  //   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
-  //     title: "硝子檻の虜囚は星海にて夢を見る",
-  //     overview: `
-  // 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 i ～ j 人向けにデザインされている。
-  // 　プレイ時間は探索者の作成時間を含まずに n 時間程度だろう。
-  // 　舞台は現代。探索者たちはバーチャルYouTuber **天戌 ノア** の配信を見ているところから開始する。`,
-  //     markdown: readScenarioMarkdown(
-  //       "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
-  //     ),
-  //   },
+  ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
+    title: "硝子檻の虜囚は星海にて夢を見る",
+    overview: `
+　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 i ～ j 人向けにデザインされている。
+　プレイ時間は探索者の作成時間を含まずに n 時間程度だろう。
+　舞台は現代。探索者たちはバーチャルYouTuber **天戌 ノア** の配信を見ているところから開始する。`,
+    markdown: readScenarioMarkdown(
+      "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
+    ),
+  },
   BubbleOnWetHands: {
     title: "濡れた手の泡沫",
     overview: `
