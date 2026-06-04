@@ -1,0 +1,429 @@
+{
+  "name": "富嶽 雷理",
+  "occupation": "プログラマー(コンピューター技術者)",
+  "age": "27",
+  "sex": "男性",
+  "residence": "",
+  "birthplace": "長崎",
+  "characteristics": {
+    "str": 50,
+    "con": 55,
+    "pow": 56,
+    "dex": 70,
+    "app": 55,
+    "siz": 75,
+    "int": 60,
+    "edu": 84
+  },
+  "attribute": {
+    "hp": 13,
+    "mp": 11,
+    "mov": 7,
+    "build": 1,
+    "db": "+1D4",
+    "san": {
+      "value": 63,
+      "max": 94
+    },
+    "luck": 27
+  },
+  "skills": [
+    {
+      "name": "威圧",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "言いくるめ",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "医学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "運転（自動車）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "運転（二輪車）",
+      "value": 40,
+      "edited": true
+    },
+    {
+      "name": "応急手当",
+      "value": 30,
+      "edited": false
+    },
+    {
+      "name": "オカルト",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "隠密",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "回避",
+      "value": 60,
+      "edited": true
+    },
+    {
+      "name": "科学（数学）",
+      "value": 54,
+      "edited": true
+    },
+    {
+      "name": "鍵開け",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "鑑定",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "機械修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "聞き耳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "近接戦闘（格闘）",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "近接戦闘（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "クトゥルフ神話",
+      "value": 5,
+      "edited": true
+    },
+    {
+      "name": "芸術／製作（）",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "経理",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "考古学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "コンピューター",
+      "value": 96,
+      "edited": true
+    },
+    {
+      "name": "サバイバル（）",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "自然",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "射撃（拳銃）",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "射撃（ライフル／ショットガン）",
+      "value": 25,
+      "edited": false
+    },
+    {
+      "name": "射撃（）",
+      "value": 0,
+      "edited": false
+    },
+    {
+      "name": "重機械操作",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "乗馬",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "信用",
+      "value": 25,
+      "edited": true
+    },
+    {
+      "name": "心理学",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "人類学",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "水泳",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "精神分析",
+      "value": 1,
+      "edited": false
+    },
+    {
+      "name": "説得",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "操縦（ドローン）",
+      "value": 55,
+      "edited": true
+    },
+    {
+      "name": "跳躍",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "追跡",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "手さばき",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電気修理",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "電子工学",
+      "value": 76,
+      "edited": true
+    },
+    {
+      "name": "投擲",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "登攀",
+      "value": 20,
+      "edited": false
+    },
+    {
+      "name": "図書館",
+      "value": 80,
+      "edited": true
+    },
+    {
+      "name": "ナビゲート",
+      "value": 10,
+      "edited": false
+    },
+    {
+      "name": "変装",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "法律",
+      "value": 5,
+      "edited": false
+    },
+    {
+      "name": "ほかの言語（英語）",
+      "value": 57,
+      "edited": true
+    },
+    {
+      "name": "母国語（日本語）",
+      "value": 84,
+      "edited": false
+    },
+    {
+      "name": "魅惑",
+      "value": 15,
+      "edited": false
+    },
+    {
+      "name": "目星",
+      "value": 50,
+      "edited": true
+    },
+    {
+      "name": "歴史",
+      "value": 5,
+      "edited": false
+    }
+  ],
+  "possessions": [
+    {
+      "name": "大型バイク(900cc)",
+      "count": "",
+      "detail": "TRIUMPH SCRAMBLER 900 MATT KHAKI"
+    },
+    {
+      "name": "ドローン",
+      "count": "",
+      "detail": "DJI Mavic 3 バッテリー3本"
+    },
+    {
+      "name": "ノートPC",
+      "count": "",
+      "detail": "ASUS ROG Flow Z13"
+    },
+    {
+      "name": "モバイルWi-fi",
+      "count": "",
+      "detail": "WiMAX"
+    }
+  ],
+  "weapons": [
+    {
+      "name": "素手",
+      "value": "25",
+      "damage": "1D3+DB",
+      "range": "",
+      "attacks": "",
+      "ammo": "",
+      "malfunction": ""
+    }
+  ],
+  "credit": {
+    "spendingLevel": "¥20,000",
+    "cash": "¥100,000",
+    "assetsDetails": "¥2,500,000"
+  },
+  "backstory": [
+    {
+      "name": "容姿の描写",
+      "entries": [
+        {
+          "text": "高身長"
+        }
+      ]
+    },
+    {
+      "name": "イデオロギー／信念",
+      "entries": [
+        {
+          "text": "明日できることは明日やる",
+          "keyConnection": true
+        },
+        {
+          "text": "頑張らない"
+        }
+      ]
+    },
+    {
+      "name": "重要な人々",
+      "entries": []
+    },
+    {
+      "name": "意味のある場所",
+      "entries": []
+    },
+    {
+      "name": "秘蔵の品",
+      "entries": []
+    },
+    {
+      "name": "特徴",
+      "entries": [
+        {
+          "text": "楽天家"
+        },
+        {
+          "text": "笑い上戸"
+        }
+      ]
+    },
+    {
+      "name": "負傷、傷跡",
+      "entries": []
+    },
+    {
+      "name": "恐怖症、マニア",
+      "entries": []
+    },
+    {
+      "name": "魔導書、呪文、アーティファクト",
+      "entries": [
+        {
+          "text": "死者の霊魂との接触(キャスティングロール未実施)"
+        },
+        {
+          "text": "AI's(コンピュータ、科学(数学)の技能2倍)"
+        },
+        {
+          "text": "謎の記憶媒体(破損済み)"
+        }
+      ]
+    },
+    {
+      "name": "遭遇した超自然の存在",
+      "entries": [
+        {
+          "text": "無形の落とし子"
+        }
+      ]
+    }
+  ],
+  "fellows": [
+    {
+      "name": "――――― AI's ―――――",
+      "url": ""
+    },
+    {
+      "name": "白田 卓志",
+      "url": "https://iachara.com/char/view/4532790"
+    },
+    {
+      "name": "木古都 律",
+      "url": "https://iachara.com/char/view/4532700"
+    },
+    {
+      "name": "――――― 夜病院 ―――――",
+      "url": ""
+    },
+    {
+      "name": "野原 耕一",
+      "url": "https://iachara.com/char/view/4272834"
+    },
+    {
+      "name": "田中 卓也",
+      "url": "https://iachara.com/char/view/4526147"
+    }
+  ],
+  "note": "頑張ることが嫌い、サボるためになら頑張る。\nなんとかなるよの精神\n歩きスマホを続けているうちに人を見ないで避けられるようになっていった。\n座ってばかりで筋力が落ちてきたと感じたため、\nキックボクシングジムに通うようになった。\n週末はバイクに乗ってドローンで動画を取りに行くのが趣味\n\n――――― 通過シナリオ ―――――\nAI's - 2022/11/04 - 2022/11/05\n夜病院 - 2023/03/19\n\n――――― 名付けメモ ―――――\n富嶽 : スーパーコンピュータ『富岳』\n雷理 : Google創業者『ラリー・ペイジ』、Perl開発者『ラリー・ウォール』\n\n――――― 元ステータス ―――――\nSTR 50 DEX 70 INT 60\nCON 55 APP 55 POW 60\nSIZ 75 EDU 84 MOV 7\nHP 13 MP 12 SAN 60 幸運 45",
+  "chatpalette": "CC<={SAN} 正気度ロール\nCC<=27 幸運\nCC<=50 STR\nCC<=55 CON\nCC<=56 POW\nCC<=70 DEX\nCC<=55 APP\nCC<=75 SIZ\nCC<=60 INT\nCC<=60 アイデア\nCC<=84 知識\nCC<=40 運転（二輪車）\nCC<=60 回避\nCC<=54 科学（数学）\nCC<=20 聞き耳\nCC<=50 近接戦闘（格闘）\nCC<=5 クトゥルフ神話\nCC<=96 コンピューター\nCC<=25 信用\nCC<=55 操縦（ドローン）\nCC<=76 電子工学\nCC<=80 図書館\nCC<=57 ほかの言語（英語）\nCC<=84 母国語（日本語）\nCC<=50 目星\n1D3+{DB} 素手",
+  "portraitURL": "https://object-storage.tyo2.conoha.io/v1/nc_8d0b8b8762ee4050b883be8088ea3a37/charaeno/5PBX7Kx_Ab_bDiYihUTNv?v=_4PdCmVIyJ"
+}
