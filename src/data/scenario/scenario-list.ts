@@ -4,7 +4,7 @@ import { escapeMarkdownText } from "@/utils/markdown-utils";
 
 const readScenarioMarkdown = (fileName: string) => {
   const markdown = fs.readFileSync(
-    path.join(process.cwd(), "src", "data", "scenario", fileName),
+    path.join(process.cwd(), "src", "data", "scenario", "markdown", fileName),
     "utf8"
   );
 
