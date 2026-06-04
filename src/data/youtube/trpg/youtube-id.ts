@@ -444,7 +444,7 @@ export const replayVideos: ReplayVideo[] = [
     characters: [
       { characterName: "内山 美奈子", playerName: "まりあんヌ" },
       { characterName: "森 統一郎", playerName: "よしを" },
-      { characterName: "夜桜 美香", playerName: "夜桜" },
+      { characterName: "夜桜 みか", playerName: "夜桜" },
     ],
     gmName: "Qurioth",
     playedAt: "2023-04-29",
