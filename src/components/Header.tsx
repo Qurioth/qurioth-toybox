@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useDarkMode } from "@/contexts/dark-mode-context";
 import { Moon, Sun } from "lucide-react";
 import { useState } from "react";
@@ -18,6 +19,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const themeIcon = isDarkMode ? <Sun size={20} /> : <Moon size={20} />;
+  const logoSrc = isDarkMode ? "/favicon-dark.png" : "/favicon-light.png";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-zinc-100/90 backdrop-blur dark:bg-slate-900/90">
@@ -27,8 +29,16 @@ const Header = () => {
       >
         <div className="flex min-w-0 lg:flex-1">
           <h1 className="min-w-0 text-base font-bold leading-6 text-gray-900 dark:text-white lg:text-xl">
-            <Link href="/" className="block truncate">
-              {siteTitle}
+            <Link href="/" className="flex min-w-0 items-center gap-2">
+              <Image
+                src={logoSrc}
+                alt=""
+                width={28}
+                height={28}
+                className="h-7 w-7 shrink-0"
+                priority
+              />
+              <span className="block truncate">{siteTitle}</span>
             </Link>
           </h1>
         </div>
@@ -77,8 +87,16 @@ const Header = () => {
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-1.5 min-w-0 p-1.5 text-lg font-bold leading-6 text-gray-900 dark:text-white"
+              className="-m-1.5 flex min-w-0 items-center gap-2 p-1.5 text-lg font-bold leading-6 text-gray-900 dark:text-white"
             >
+              <Image
+                src={logoSrc}
+                alt=""
+                width={28}
+                height={28}
+                className="h-7 w-7 shrink-0"
+                priority
+              />
               <span className="block truncate">{siteTitle}</span>
             </Link>
             <div className="flex shrink-0 items-center gap-2">
