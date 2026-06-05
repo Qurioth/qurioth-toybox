@@ -48,7 +48,7 @@ export const replayVideos: ReplayVideo[] = [
       { characterName: "松田 波瑠駆", playerName: "Haruku" },
       { characterName: "東雲 怜", playerName: "pon" },
       { characterName: "筒井 日奈子", playerName: "リアン" },
-      { characterName: "臥榻 聖司一", playerName: "よしを" },
+      { characterName: "臥榻 聖司", playerName: "よしを" },
       {
         characterName: "モンテストリアーノ・ボンバイヌ",
         playerName: "ももみざわ",

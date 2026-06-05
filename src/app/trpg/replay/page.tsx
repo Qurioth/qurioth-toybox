@@ -495,7 +495,7 @@ export default function Home() {
               value={searchQuery}
               onChange={(event) => onChangeSearchQuery(event.target.value)}
               className="w-full rounded-md border border-zinc-300 bg-white py-3 pl-10 pr-11 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-zinc-100"
-              placeholder="シナリオタイトル、システム名、プレイヤー名、GM名、キャラクター名"
+              placeholder="シナリオタイトル、システム名、GM名、プレイヤー名、キャラクター名"
               autoComplete="off"
             />
             {searchQuery && (
