@@ -16,6 +16,32 @@ export type ReplayVideo = {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    videoId: "Z341PkZ3Yts",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "アルゴ - 形而上の晩餐会",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      {
+        characterName: "モンテストリアーノ・ボンバイヌ",
+        playerName: "ももみざわ",
+      },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-06",
+    note: "後ろで見てる人: Qurioth",
+  },
+  {
+    videoId: "hQc7hhHHa6w",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "アルゴ - 形而上の晩餐会",
+    characters: [
+      { characterName: "滝川 リリ", playerName: "Qurioth" },
+      { characterName: "陀村 権蔵", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-06",
+  },
+  {
     videoId: "rhpCrDWSGvg",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "コーヒー一杯分の恐怖",
