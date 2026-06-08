@@ -100,6 +100,9 @@ const config: Config = {
             blockquote: {
               color: "#9ca3af",
             },
+            th: {
+              color: "#f8fafc",
+            },
           },
         },
       },
