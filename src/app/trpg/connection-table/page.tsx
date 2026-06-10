@@ -2,7 +2,7 @@
 
 import Template from "@/components/Template";
 import { Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CONNECTION_LIST = [
   "好意",
@@ -19,6 +19,7 @@ export const CONNECTION_LIST = [
 
 const STRENGTH_LIST = [1, 2, 3, 4, 5];
 const TOWN_ID = "town";
+const STORAGE_KEY = "qurioth-toybox:trpg:connection-table";
 
 type Participant = {
   id: string;
@@ -36,6 +37,11 @@ const TOWN_CONNECTION: Connection = {
 };
 
 type ConnectionMap = Record<string, Connection>;
+
+type StoredConnectionTable = {
+  participants: Participant[];
+  connections: ConnectionMap;
+};
 
 const initialParticipants: Participant[] = [
   { id: TOWN_ID, name: "町" },
@@ -76,12 +82,96 @@ const createInitialConnections = (participants: Participant[]) => {
   }, {});
 };
 
+const isConnection = (value: unknown): value is Connection => {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const connection = value as Connection;
+  return (
+    typeof connection.content === "string" &&
+    (connection.strength === "" ||
+      (typeof connection.strength === "number" &&
+        STRENGTH_LIST.includes(connection.strength)))
+  );
+};
+
+const restoreConnectionTable = (value: string): StoredConnectionTable | null => {
+  try {
+    const parsedValue = JSON.parse(value) as Partial<StoredConnectionTable>;
+
+    if (!Array.isArray(parsedValue.participants)) {
+      return null;
+    }
+
+    const restoredParticipants = parsedValue.participants.filter(
+      (participant): participant is Participant =>
+        typeof participant?.id === "string" &&
+        typeof participant.name === "string",
+    );
+
+    if (
+      restoredParticipants.length === 0 ||
+      restoredParticipants[0].id !== TOWN_ID
+    ) {
+      return null;
+    }
+
+    const restoredConnections = Object.fromEntries(
+      Object.entries(parsedValue.connections ?? {}).filter(([, connection]) =>
+        isConnection(connection),
+      ),
+    );
+
+    return {
+      participants: [
+        { id: TOWN_ID, name: "町" },
+        ...restoredParticipants.filter(
+          (participant) => participant.id !== TOWN_ID,
+        ),
+      ],
+      connections: restoredConnections,
+    };
+  } catch {
+    return null;
+  }
+};
+
 export default function ConnectionTablePage() {
   const [participants, setParticipants] =
     useState<Participant[]>(initialParticipants);
   const [connections, setConnections] = useState<ConnectionMap>(() =>
     createInitialConnections(initialParticipants),
   );
+  const [isRestored, setIsRestored] = useState(false);
+
+  useEffect(() => {
+    const storedValue = window.localStorage.getItem(STORAGE_KEY);
+
+    if (storedValue) {
+      const restoredValue = restoreConnectionTable(storedValue);
+
+      if (restoredValue) {
+        setParticipants(restoredValue.participants);
+        setConnections(restoredValue.connections);
+      }
+    }
+
+    setIsRestored(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isRestored) {
+      return;
+    }
+
+    const storedValue: StoredConnectionTable = {
+      participants,
+      connections,
+    };
+
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(storedValue));
+  }, [connections, isRestored, participants]);
 
   const updateParticipantName = (id: string, name: string) => {
     if (id === TOWN_ID) {
