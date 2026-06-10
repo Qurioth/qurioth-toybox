@@ -96,7 +96,9 @@ const isConnection = (value: unknown): value is Connection => {
   );
 };
 
-const restoreConnectionTable = (value: string): StoredConnectionTable | null => {
+const restoreConnectionTable = (
+  value: string,
+): StoredConnectionTable | null => {
   try {
     const parsedValue = JSON.parse(value) as Partial<StoredConnectionTable>;
 
@@ -376,7 +378,7 @@ export default function ConnectionTablePage() {
                       </th>
                     ))}
                     <th className="w-24 border-b border-r border-orange-200 bg-orange-100 p-2 text-center font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50">
-                      合計
+                      ふしぎ
                     </th>
                   </tr>
                 </thead>
@@ -532,7 +534,7 @@ export default function ConnectionTablePage() {
                   ))}
                   <tr>
                     <th className="sticky left-0 z-10 border-b border-r border-orange-200 bg-orange-100 p-1.5 text-center font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50">
-                      合計
+                      想い
                     </th>
                     {participants.map((participant) => (
                       <td
@@ -542,13 +544,7 @@ export default function ConnectionTablePage() {
                         {getColumnTotal(participant.id)}
                       </td>
                     ))}
-                    <td className="h-16 border-b border-r border-orange-200 bg-orange-200 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-[#1E3A8A] dark:text-slate-50">
-                      {participants.reduce(
-                        (total, participant) =>
-                          total + getRowTotal(participant.id),
-                        0,
-                      )}
-                    </td>
+                    <td className="h-16 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50"></td>
                   </tr>
                 </tbody>
               </table>
