@@ -20,6 +20,8 @@ export const CONNECTION_LIST = [
 const STRENGTH_LIST = [1, 2, 3, 4, 5];
 const TOWN_ID = "town";
 const STORAGE_KEY = "qurioth-toybox:trpg:connection-table";
+const CONNECTION_DATALIST_ID = "connection-content-options";
+const STRENGTH_DATALIST_ID = "connection-strength-options";
 
 type Participant = {
   id: string;
@@ -66,6 +68,18 @@ const isTownConnection = (fromId: string, toId: string) =>
 
 const toTotalStrength = (strength: Connection["strength"]) => {
   return strength === "" ? 0 : strength;
+};
+
+const parseStrengthInput = (value: string): Connection["strength"] | null => {
+  if (value === "") {
+    return "";
+  }
+
+  if (/^[1-5]$/.test(value)) {
+    return Number(value);
+  }
+
+  return null;
 };
 
 const createInitialConnections = (participants: Participant[]) => {
@@ -230,12 +244,6 @@ export default function ConnectionTablePage() {
   };
 
   const confirmRemoveParticipant = (participant: Participant) => {
-    const displayName = participant.name || "この行";
-
-    if (!window.confirm(`${displayName}を削除しますか？`)) {
-      return;
-    }
-
     removeParticipant(participant.id);
   };
 
@@ -322,14 +330,22 @@ export default function ConnectionTablePage() {
     <Template>
       <div className="w-full max-w-7xl">
         <div className="flex flex-col gap-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-[#020617] sm:p-6">
+          <datalist id={CONNECTION_DATALIST_ID}>
+            {CONNECTION_LIST.map((connectionName) => (
+              <option key={connectionName} value={connectionName} />
+            ))}
+          </datalist>
+          <datalist id={STRENGTH_DATALIST_ID}>
+            {STRENGTH_LIST.map((strength) => (
+              <option key={strength} value={strength} />
+            ))}
+          </datalist>
+
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-extrabold text-gray-950 dark:text-white">
                 つながり
               </h2>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                縦軸が「あなた」、横軸が「あいて」です。各マスで内容と強さを管理できます。
-              </p>
             </div>
             <button
               type="button"
@@ -391,7 +407,7 @@ export default function ConnectionTablePage() {
                             町
                           </span>
                         ) : (
-                          <div className="relative flex h-full items-center">
+                          <div className="flex h-full flex-col justify-center gap-2">
                             <input
                               size={1}
                               type="text"
@@ -403,14 +419,14 @@ export default function ConnectionTablePage() {
                                   event.target.value,
                                 )
                               }
-                              className="h-20 w-full min-w-0 rounded-md border border-orange-100 bg-white px-2 pb-6 text-center font-extrabold text-gray-900 outline-none focus:border-lime-700 focus:ring-2 focus:ring-lime-200 dark:bg-[#1E293B] dark:text-slate-50 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                              className="h-20 w-full min-w-0 rounded-md border border-orange-100 bg-white px-2 text-center font-extrabold text-gray-900 outline-none focus:border-lime-700 focus:ring-2 focus:ring-lime-200 dark:bg-[#1E293B] dark:text-slate-50 dark:focus:border-blue-400 dark:focus:ring-blue-900"
                             />
                             <button
                               type="button"
                               onClick={() =>
                                 confirmRemoveParticipant(fromParticipant)
                               }
-                              className="absolute bottom-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md bg-black/5 text-black/70 transition-colors hover:bg-black/10 hover:text-black focus:outline-none focus:ring-4 focus:ring-black/10 dark:bg-white/10 dark:text-white/70 dark:hover:bg-white/20 dark:hover:text-white dark:focus:ring-white/20"
+                              className="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-md bg-black/5 text-black/70 transition-colors hover:bg-black/10 hover:text-black focus:outline-none focus:ring-4 focus:ring-black/10 dark:bg-white/10 dark:text-white/70 dark:hover:bg-white/20 dark:hover:text-white dark:focus:ring-white/20"
                               aria-label={`${fromParticipant.name}を削除`}
                             >
                               <Trash2 aria-hidden="true" size={16} />
@@ -448,34 +464,37 @@ export default function ConnectionTablePage() {
                                   <div className="flex h-9 w-full shrink-0 items-center justify-center rounded-md bg-orange-500 px-2 text-sm font-extrabold text-white dark:bg-[#1E3A8A]">
                                     {connection.content}
                                   </div>
-                                  <select
+                                  <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    list={STRENGTH_DATALIST_ID}
                                     value={connection.strength}
                                     aria-label={`${fromParticipant.name}から${toParticipant.name}へのつながりの強さ`}
-                                    onChange={(event) =>
+                                    onChange={(event) => {
+                                      const strength = parseStrengthInput(
+                                        event.target.value,
+                                      );
+
+                                      if (strength === null) {
+                                        return;
+                                      }
+
                                       updateConnection(
                                         fromParticipant.id,
                                         toParticipant.id,
                                         {
-                                          strength:
-                                            event.target.value === ""
-                                              ? ""
-                                              : Number(event.target.value),
+                                          strength,
                                         },
-                                      )
-                                    }
-                                    className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white px-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
-                                  >
-                                    <option value=""></option>
-                                    {STRENGTH_LIST.map((strength) => (
-                                      <option key={strength} value={strength}>
-                                        {strength}
-                                      </option>
-                                    ))}
-                                  </select>
+                                      );
+                                    }}
+                                    className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white pl-10 pr-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
+                                  />
                                 </div>
                               ) : (
                                 <div className="flex h-full flex-col gap-2">
-                                  <select
+                                  <input
+                                    type="text"
+                                    list={CONNECTION_DATALIST_ID}
                                     value={connection.content}
                                     aria-label={`${fromParticipant.name}から${toParticipant.name}へのつながり内容`}
                                     onChange={(event) =>
@@ -485,42 +504,33 @@ export default function ConnectionTablePage() {
                                         { content: event.target.value },
                                       )
                                     }
-                                    className="h-9 w-full shrink-0 rounded-md border border-gray-300 bg-white px-2 text-center text-sm font-bold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
-                                  >
-                                    <option value=""></option>
-                                    {CONNECTION_LIST.map((connectionName) => (
-                                      <option
-                                        key={connectionName}
-                                        value={connectionName}
-                                      >
-                                        {connectionName}
-                                      </option>
-                                    ))}
-                                  </select>
-                                  <select
+                                    className="h-9 w-full shrink-0 rounded-md border border-gray-300 bg-white pl-6 pr-2 text-center text-sm font-bold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
+                                  />
+                                  <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    list={STRENGTH_DATALIST_ID}
                                     value={connection.strength}
                                     aria-label={`${fromParticipant.name}から${toParticipant.name}へのつながりの強さ`}
-                                    onChange={(event) =>
+                                    onChange={(event) => {
+                                      const strength = parseStrengthInput(
+                                        event.target.value,
+                                      );
+
+                                      if (strength === null) {
+                                        return;
+                                      }
+
                                       updateConnection(
                                         fromParticipant.id,
                                         toParticipant.id,
                                         {
-                                          strength:
-                                            event.target.value === ""
-                                              ? ""
-                                              : Number(event.target.value),
+                                          strength,
                                         },
-                                      )
-                                    }
-                                    className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white px-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
-                                  >
-                                    <option value=""></option>
-                                    {STRENGTH_LIST.map((strength) => (
-                                      <option key={strength} value={strength}>
-                                        {strength}
-                                      </option>
-                                    ))}
-                                  </select>
+                                      );
+                                    }}
+                                    className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white pl-10 pr-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
+                                  />
                                 </div>
                               )}
                             </div>
