@@ -49,7 +49,7 @@ const list: {
       max: 6,
     },
     summary:
-      "現代日本。探索者たちは知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
+      "現代日本。知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
     markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
   },
   SilentJourney: {
@@ -65,7 +65,7 @@ const list: {
       max: 4,
     },
     summary:
-      "駅がある時代、世界であれば、いつ、どこでも。探索者たちは駅で一人の男性とぶつかる。",
+      "駅がある時代、世界であれば、いつ、どこでも。駅で一人の男性とぶつかることから始まる。",
     markdown: readScenarioMarkdown("silent-journey.md"),
   },
   AgnusDeiQuiTollisPeccataMundi: {
@@ -113,7 +113,7 @@ const list: {
       max: 5,
     },
     summary:
-      "現代日本。探索者たちは知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
+      "現代日本。知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
   PalateOfTheCrawling: {
@@ -128,7 +128,7 @@ const list: {
       min: 3,
       max: 3,
     },
-    summary: "現代日本。探索者たちは知人の家へ行くことから始まる。",
+    summary: "現代日本。知人の家を訪れることから始まる。",
     markdown: readScenarioMarkdown("palate-of-the-crawling.md"),
   },
   TheSmileOfTheBangsLessGoddess: {
@@ -159,7 +159,7 @@ const list: {
       min: 2,
       max: 3,
     },
-    summary: "現代日本。探索者たちは体調不良の知人の家を尋ねる。",
+    summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
     markdown: readScenarioMarkdown("parasite.md"),
   },
   ShadowFeather: {
@@ -174,7 +174,7 @@ const list: {
       min: 3,
       max: 3,
     },
-    summary: "現代日本。探索者たちはここ数日、悪夢を見続けてみていた。",
+    summary: "現代日本。探索者たちはここ数日、悪夢を見続けていた。",
     markdown: readScenarioMarkdown("shadow-feather.md"),
   },
   Nocturne: {
@@ -189,7 +189,7 @@ const list: {
       min: 5,
       max: 5,
     },
-    summary: "現代日本。探索者たちは知人の誘いに乗ってライブに行くことになる。",
+    summary: "現代日本。知人の誘いに乗ってライブに行くことになる。",
     markdown: readScenarioMarkdown("nocturne.md"),
   },
 };
