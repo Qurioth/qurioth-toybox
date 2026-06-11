@@ -140,7 +140,7 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary: "現代日本。知人の家を訪れることから始まる。",
@@ -155,7 +155,7 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary:
@@ -171,8 +171,8 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 2,
-      max: 3,
+      min: 3,
+      max: 4,
     },
     summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
     markdown: readScenarioMarkdown("parasite.md"),
@@ -186,7 +186,7 @@ const list: {
       max: 3,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary: "現代日本。探索者たちはここ数日、悪夢を見続けていた。",
