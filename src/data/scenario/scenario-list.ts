@@ -116,30 +116,82 @@ const list: {
       "現代日本。探索者たちは知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
-  // PalateOfTheCrawling: {
-  //   title: "蠢く口蓋",
-  //   markdown: preparation,
-  // },
-  // ShadowFeather: {
-  //   title: "影の羽",
-  //   markdown: preparation,
-  // },
-  // LieDownOnBambooLeaves: {
-  //   title: "竹の葉に寝転ぶ",
-  //   markdown: preparation,
-  // },
-  // Nocturne: {
-  //   title: "夜想曲",
-  //   markdown: preparation,
-  // },
-  // Parasite: {
-  //   title: "パラサイト",
-  //   markdown: preparation,
-  // },
-  // TheSmileOfTheBangsLessGoddess: {
-  //   title: "前髪なき女神の微笑み",
-  //   markdown: preparation,
-  // },
+  PalateOfTheCrawling: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "蠢く口蓋",
+    titleKana: "うごめくこうがい",
+    players: {
+      min: 3,
+      max: 4,
+    },
+    playTimeHours: {
+      min: 3,
+      max: 3,
+    },
+    summary: "現代日本。探索者たちは知人の家へ行くことから始まる。",
+    markdown: readScenarioMarkdown("palate-of-the-crawling.md"),
+  },
+  TheSmileOfTheBangsLessGoddess: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "前髪なき女神の微笑み",
+    titleKana: "まえがみなきめがみのほほえみ",
+    players: {
+      min: 2,
+      max: 4,
+    },
+    playTimeHours: {
+      min: 3,
+      max: 3,
+    },
+    summary:
+      "現代日本。探索者たちは全員知り合いだ。みんなで遠出した後、帰りの高速道路で渋滞に巻き込まれる。",
+    markdown: readScenarioMarkdown("the-smile-of-the-bangs-less-goddess.md"),
+  },
+  Parasite: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "パラサイト",
+    titleKana: "ぱらさいと",
+    players: {
+      min: 2,
+      max: 4,
+    },
+    playTimeHours: {
+      min: 2,
+      max: 3,
+    },
+    summary: "現代日本。探索者たちは体調不良の知人の家を尋ねる。",
+    markdown: readScenarioMarkdown("parasite.md"),
+  },
+  ShadowFeather: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "影の羽",
+    titleKana: "かげのはね",
+    players: {
+      min: 2,
+      max: 3,
+    },
+    playTimeHours: {
+      min: 3,
+      max: 3,
+    },
+    summary: "現代日本。探索者たちはここ数日、悪夢を見続けてみていた。",
+    markdown: readScenarioMarkdown("shadow-feather.md"),
+  },
+  Nocturne: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "夜想曲",
+    titleKana: "やそうきょく",
+    players: {
+      min: 3,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 5,
+      max: 5,
+    },
+    summary: "現代日本。探索者たちは知人の誘いに乗ってライブに行くことになる。",
+    markdown: readScenarioMarkdown("nocturne.md"),
+  },
 };
 
 export default list;
