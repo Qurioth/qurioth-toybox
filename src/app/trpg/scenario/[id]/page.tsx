@@ -12,6 +12,9 @@ Call of Cthulhu is a registered trademark of Chaosium Inc.
 PUBLISHED BY KADOKAWA CORPORATION　「クトゥルフ神話TRPG」「新クトゥルフ神話TRPG」
 `;
 
+const isCthulhuScenario = (system?: string) =>
+  system?.includes("クトゥルフ神話TRPG") ?? false;
+
 export async function generateMetadata(
   paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>
 ): Promise<Metadata> {
@@ -33,6 +36,7 @@ export default async function Home(
 ) {
   const { params } = await paramsObj;
   const resolvedParams = await params;
+  const scenario = scenarios[resolvedParams.id];
 
   return (
     <Template>
@@ -47,9 +51,11 @@ export default async function Home(
             ),
           }}
         >
-          {scenarios[resolvedParams.id]?.markdown}
+          {scenario?.markdown}
         </ReactMarkdown>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{copyright}</ReactMarkdown>
+        {isCthulhuScenario(scenario?.system) && (
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{copyright}</ReactMarkdown>
+        )}
       </div>
     </Template>
   );
