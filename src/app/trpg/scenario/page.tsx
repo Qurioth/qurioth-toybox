@@ -1,31 +1,24 @@
 import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import ScenarioList, { ScenarioListItem } from "./ScenarioList";
 
 export default function Home() {
-  const displaySenarios = () => {
-    const responseList: JSX.Element[] = [];
-
-    for (const key in scenarios) {
-      responseList.push(
-        <div key={key} className="mb-6">
-          <a href={`/trpg/scenario/${key}`}>
-            <h1>{scenarios[key].title}</h1>
-          </a>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {scenarios[key].overview}
-          </ReactMarkdown>
-        </div>
-      );
-    }
-    return responseList;
-  };
+  const scenarioItems: ScenarioListItem[] = Object.entries(scenarios).map(
+    ([id, scenario]) => ({
+      id,
+      title: scenario.title,
+      titleKana: scenario.titleKana,
+      system: scenario.system,
+      players: scenario.players,
+      playTimeHours: scenario.playTimeHours,
+      summary: scenario.summary,
+    }),
+  );
 
   return (
     <Template>
-      <div className="prose dark:prose-dark w-full flex flex-col justify-center">
-        {displaySenarios()}
+      <div className="mx-auto min-h-[calc(100vh-16rem)] w-full max-w-[66rem]">
+        <ScenarioList scenarios={scenarioItems} />
       </div>
     </Template>
   );
