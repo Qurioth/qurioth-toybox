@@ -1,16 +1,8 @@
 import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
 
-const renderOverview = (overview: string) =>
-  overview
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line, index) => (
-      <p key={index} className="my-1 indent-[1em]">
-        {line}
-      </p>
-    ));
+const formatRange = (min: number, max: number) =>
+  min === max ? `${min}` : `${min}～${max}`;
 
 export default function Home() {
   const displaySenarios = () => {
@@ -24,7 +16,16 @@ export default function Home() {
           <a href={`/trpg/scenario/${key}`}>
             <h1>{scenario.title}</h1>
           </a>
-          {renderOverview(scenario.overview)}
+          <p className="my-1 text-sm opacity-80">
+            {scenario.system} / {scenario.players.min}～{scenario.players.max}
+            人 /{" "}
+            {formatRange(
+              scenario.playTimeHours.min,
+              scenario.playTimeHours.max,
+            )}
+            時間程度
+          </p>
+          <p className="my-1 indent-[1em]">{scenario.summary}</p>
         </div>,
       );
     }

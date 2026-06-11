@@ -13,8 +13,17 @@ const readScenarioMarkdown = (fileName: string) => {
 
 type Scenario = {
   title: string;
+  titleKana: string;
   system: string;
-  overview: string;
+  players: {
+    min: number;
+    max: number;
+  };
+  playTimeHours: {
+    min: number;
+    max: number;
+  };
+  summary: string;
   markdown: string;
 };
 
@@ -23,10 +32,6 @@ const list: {
 } = {
   //   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
   //     title: "硝子檻の虜囚は星海にて夢を見る",
-  //     overview: `
-  // 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 i ～ j 人向けにデザインされている。
-  // 　プレイ時間は探索者の作成時間を含まずに n 時間程度だろう。
-  // 　舞台は現代。探索者たちはバーチャルYouTuber **天戌 ノア** の配信を見ているところから開始する。`,
   //     markdown: readScenarioMarkdown(
   //       "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
   //     ),
@@ -34,34 +39,63 @@ const list: {
   BubbleOnWetHands: {
     system: "クトゥルフ神話TRPG 7版",
     title: "濡れた手の泡沫",
-    overview: `このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
-プレイ時間は探索者の作成時間を含まずに 6 時間程度だろう。  
-舞台は現代の日本。探索者たちは共通の知人である 沖嶋 深月 の依頼で一人の男性を捜し、海沿いの町へ赴くこととなる。`,
+    titleKana: "ぬれたてのほうまつ",
+    players: {
+      min: 3,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 5,
+      max: 6,
+    },
+    summary:
+      "現代日本。探索者たちは知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
     markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
   },
   SilentJourney: {
     system: "クトゥルフ神話TRPG 7版",
     title: "Silent Journey",
-    overview: `このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
-プレイ時間は探索者の作成時間を含まずに 3 時間程度だろう。  
-舞台は現代の日本。探索者たちが駅で一人の男性とぶつかるところから事件は展開する。`,
+    titleKana: "さいれんとじゃーにー",
+    players: {
+      min: 3,
+      max: 4,
+    },
+    playTimeHours: {
+      min: 3,
+      max: 4,
+    },
+    summary:
+      "駅がある時代、世界であれば、いつ、どこでも。探索者たちは駅で一人の男性とぶつかる。",
     markdown: readScenarioMarkdown("silent-journey.md"),
   },
   AgnusDeiQuiTollisPeccataMundi: {
     system: "クトゥルフ神話TRPG 7版",
     title: "Agnus Dei, qui tollis peccata mundi",
-    overview: `このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
-プレイ時間は探索者の作成時間を含まずに 6 時間程度だろう。  
-舞台は現代の日本。探索者たちが教会へ訪れたときから事件は展開する。  
-なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
+    titleKana: "あにゅすでいくいとりすぺっかーたむんでぃ",
+    players: {
+      min: 3,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 6,
+      max: 6,
+    },
+    summary: "現代日本。とある教会と併設する孤児院で事件は展開する。",
     markdown: readScenarioMarkdown("agnus-dei-qui-tollis-peccata-mundi.md"),
   },
   DasDornroschenDesWahnsinnigenKonigs: {
     system: "クトゥルフ神話TRPG 7版",
     title: "狂気の王の眠り姫",
-    overview: `このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
-プレイ時間は探索者の作成時間を含まずに 4 時間程度だろう。  
-舞台は現代の日本。亡くなった芸術家の屋敷で事件は展開する。`,
+    titleKana: "きょうきのおうのねむりひめ",
+    players: {
+      min: 3,
+      max: 4,
+    },
+    playTimeHours: {
+      min: 4,
+      max: 4,
+    },
+    summary: "現代日本。亡くなった芸術家の屋敷を訪れることになる。",
     markdown: readScenarioMarkdown(
       "das-dornröschen-des-wahnsinnigen-königs.md",
     ),
@@ -69,41 +103,41 @@ const list: {
   TheSoundOfSteppingOnFog: {
     system: "クトゥルフ神話TRPG 7版",
     title: "霧を踏む音",
-    overview: `このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
-プレイ時間は探索者の作成時間を含まずに 5 時間程度だろう。  
-舞台は現代の日本。山間の片田舎で事件は展開する。  
-シナリオの設定上、少なくとも一人の探索者の知人に 笹本 霧江 という大学生がいることとなる。  
-なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
+    titleKana: "きりをふむおと",
+    players: {
+      min: 3,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 5,
+      max: 5,
+    },
+    summary:
+      "現代日本。探索者たちは知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
   // PalateOfTheCrawling: {
   //   title: "蠢く口蓋",
-  //   overview: ``,
   //   markdown: preparation,
   // },
   // ShadowFeather: {
   //   title: "影の羽",
-  //   overview: "",
   //   markdown: preparation,
   // },
   // LieDownOnBambooLeaves: {
   //   title: "竹の葉に寝転ぶ",
-  //   overview: "",
   //   markdown: preparation,
   // },
   // Nocturne: {
   //   title: "夜想曲",
-  //   overview: "",
   //   markdown: preparation,
   // },
   // Parasite: {
   //   title: "パラサイト",
-  //   overview: "",
   //   markdown: preparation,
   // },
   // TheSmileOfTheBangsLessGoddess: {
   //   title: "前髪なき女神の微笑み",
-  //   overview: "",
   //   markdown: preparation,
   // },
 };
