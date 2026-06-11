@@ -16,6 +16,59 @@ export type ReplayVideo = {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    videoId: "Z341PkZ3Yts",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "アルゴ - 形而上の晩餐会",
+    characters: [
+      { characterName: "松田 波瑠駆", playerName: "Haruku" },
+      {
+        characterName: "モンテストリアーノ・ボンバイヌ",
+        playerName: "ももみざわ",
+      },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-06",
+    note: "後ろで見てる人: Qurioth",
+  },
+  {
+    videoId: "hQc7hhHHa6w",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "アルゴ - 形而上の晩餐会",
+    characters: [
+      { characterName: "滝川 リリ", playerName: "Qurioth" },
+      { characterName: "陀村 権蔵", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-06",
+  },
+  {
+    videoId: "rhpCrDWSGvg",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "コーヒー一杯分の恐怖",
+    characters: [
+      { characterName: "安御鯉 日向", playerName: "夜桜" },
+      { characterName: "茶々頼 真治", playerName: "ももみざわ" },
+      { characterName: "七五三掛 夏生", playerName: "ぷあた" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2026-06-06",
+  },
+  {
+    videoId: "OvdCC9ulNqs",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "濡れた手の泡沫",
+    characters: [
+      { characterName: "安御鯉 日向", playerName: "夜桜" },
+      {
+        characterName: "モティーガ･トゥーキタイナー",
+        playerName: "ももみざわ",
+      },
+      { characterName: "七五三掛 夏生", playerName: "ぷあた" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2026-06-06",
+  },
+  {
     videoId: "raCT03SOn_U",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "まれびとの島",
@@ -48,7 +101,7 @@ export const replayVideos: ReplayVideo[] = [
       { characterName: "松田 波瑠駆", playerName: "Haruku" },
       { characterName: "東雲 怜", playerName: "pon" },
       { characterName: "筒井 日奈子", playerName: "リアン" },
-      { characterName: "臥榻 聖司一", playerName: "よしを" },
+      { characterName: "臥榻 聖司", playerName: "よしを" },
       {
         characterName: "モンテストリアーノ・ボンバイヌ",
         playerName: "ももみざわ",
@@ -475,6 +528,17 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-16",
   },
   {
+    videoId: "w7JrH6nKDdM",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "学校に間に合わない",
+    characters: [
+      { characterName: "Abbey Priestly", playerName: "Qurioth" },
+      { characterName: "春芽 亞州漏", playerName: "よしを" },
+    ],
+    gmName: "リアン",
+    playedAt: "2023-04-02",
+  },
+  {
     videoId: "VcFdEKpRFQA",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "学校に間に合わない",
@@ -484,17 +548,6 @@ export const replayVideos: ReplayVideo[] = [
       { characterName: "ニコラオス 上須 大地", playerName: "Qurioth" },
     ],
     gmName: "よしを",
-    playedAt: "2023-04-02",
-  },
-  {
-    videoId: "w7JrH6nKDdM",
-    trpgSystemName: "クトゥルフ神話TRPG 7版",
-    scenarioName: "学校に間に合わない",
-    characters: [
-      { characterName: "Abbey Priestly", playerName: "Qurioth" },
-      { characterName: "春芽 亞州漏", playerName: "よしを" },
-    ],
-    gmName: "リアン",
     playedAt: "2023-04-02",
   },
   {

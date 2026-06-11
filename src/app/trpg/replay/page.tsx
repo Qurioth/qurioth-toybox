@@ -482,7 +482,14 @@ export default function Home() {
 
   return (
     <Template>
+      <div className="w-full min-h-[calc(100vh-16rem)]">
       <div className="mx-auto mb-8 w-full max-w-[66rem]">
+        <div className="mb-5">
+          <h1 className="mb-2 text-4xl font-bold text-zinc-950 dark:text-white">
+            Replay
+          </h1>
+        </div>
+
         <div className="relative">
           <div className="relative">
             <Search
@@ -495,7 +502,7 @@ export default function Home() {
               value={searchQuery}
               onChange={(event) => onChangeSearchQuery(event.target.value)}
               className="w-full rounded-md border border-zinc-300 bg-white py-3 pl-10 pr-11 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-zinc-100"
-              placeholder="シナリオタイトル、システム名、プレイヤー名、GM名、キャラクター名"
+              placeholder="シナリオタイトル、システム名、GM名、プレイヤー名、キャラクター名"
               autoComplete="off"
             />
             {searchQuery && (
@@ -574,7 +581,7 @@ export default function Home() {
       </div>
 
       {filteredReplayVideos.length === 0 ? (
-        <p className="mt-8 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mx-auto mt-8 w-full max-w-[66rem] text-sm text-zinc-500 dark:text-zinc-400">
           条件に一致するリプレイはありません。
         </p>
       ) : (
@@ -586,6 +593,7 @@ export default function Home() {
           {hasMore ? "読み込み中..." : "すべて表示しました"}
         </div>
       )}
+      </div>
     </Template>
   );
 }

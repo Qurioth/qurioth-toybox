@@ -1,7 +1,7 @@
 "use client";
 
 import { DICELOG_RESULT } from "@/assets/Const";
-import { INVESTIGATER_NAME, SUCCESS_LEVEL } from "@/assets/Message";
+import { CHARACTER_NAME, SUCCESS_LEVEL } from "@/assets/Message";
 import CopyTextBox from "@/components/CopyTextBox";
 import FileInput from "@/components/forms/FileInput";
 import HorizontailCheckBox from "@/components/forms/HorizontailCheckBox";
@@ -66,7 +66,7 @@ export default function Home() {
 
   const onClickExecute = async () => {
     setResultText(
-      grepDicelog(dicelog.current, selectName.current, checkLevelList.current)
+      grepDicelog(dicelog.current, selectName.current, checkLevelList.current),
     );
   };
 
@@ -77,7 +77,7 @@ export default function Home() {
           <FileInput label={"CCFOLIA LOG FILE"} readFile={readFile} />
           <Select
             selectList={nameList}
-            placeholder={INVESTIGATER_NAME}
+            placeholder={CHARACTER_NAME}
             onChangeSelectBox={onChangeSelectBox}
           />
           <HorizontailCheckBox
