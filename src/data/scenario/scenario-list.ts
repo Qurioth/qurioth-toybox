@@ -17,7 +17,7 @@ const list: {
   //   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
   //     title: "硝子檻の虜囚は星海にて夢を見る",
   //     overview: `
-  // 　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 i ～ j 人向けにデザインされている。
+  // 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 i ～ j 人向けにデザインされている。
   // 　プレイ時間は探索者の作成時間を含まずに n 時間程度だろう。
   // 　舞台は現代。探索者たちはバーチャルYouTuber **天戌 ノア** の配信を見ているところから開始する。`,
   //     markdown: readScenarioMarkdown(
@@ -27,7 +27,7 @@ const list: {
   BubbleOnWetHands: {
     title: "濡れた手の泡沫",
     overview: `
-　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
+　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 6 時間程度だろう。  
 　舞台は現代の日本。探索者たちは共通の知人である **沖嶋 深月** の依頼で一人の男性を捜し、海沿いの町へ赴くこととなる。`,
     markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
@@ -35,7 +35,7 @@ const list: {
   SilentJourney: {
     title: "Silent Journey",
     overview: `
-　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
+　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 3 時間程度だろう。  
 　舞台は現代の日本。探索者たちが駅で一人の男性とぶつかるところから事件は展開する。`,
     markdown: readScenarioMarkdown("silent-journey.md"),
@@ -43,7 +43,7 @@ const list: {
   AgnusDeiQuiTollisPeccataMundi: {
     title: "Agnus Dei, qui tollis peccata mundi",
     overview: `
-　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
+　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 6 時間程度だろう。  
 　舞台は現代の日本。探索者たちが教会へ訪れたときから事件は展開する。  
 　なお、あらかじめ探索者同士は知り合いだったほうが、ゲームはスムーズに展開する。`,
@@ -52,7 +52,7 @@ const list: {
   DasDornroschenDesWahnsinnigenKonigs: {
     title: "狂気の王の眠り姫",
     overview: `
-　このシナリオは"新クトゥルフ神話 TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
+　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 4 時間程度だろう。  
 　舞台は現代の日本。亡くなった芸術家の屋敷で事件は展開する。`,
     markdown: readScenarioMarkdown(
