@@ -11,8 +11,15 @@ const readScenarioMarkdown = (fileName: string) => {
   return escapeMarkdownText(markdown);
 };
 
+type Scenario = {
+  title: string;
+  system: string;
+  overview: string;
+  markdown: string;
+};
+
 const list: {
-  [key: string]: { title: string; overview: string; markdown: string };
+  [key: string]: Scenario;
 } = {
   //   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
   //     title: "硝子檻の虜囚は星海にて夢を見る",
@@ -25,6 +32,7 @@ const list: {
   //     ),
   //   },
   BubbleOnWetHands: {
+    system: "クトゥルフ神話TRPG 7版",
     title: "濡れた手の泡沫",
     overview: `
 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
@@ -33,6 +41,7 @@ const list: {
     markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
   },
   SilentJourney: {
+    system: "クトゥルフ神話TRPG 7版",
     title: "Silent Journey",
     overview: `
 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
@@ -41,6 +50,7 @@ const list: {
     markdown: readScenarioMarkdown("silent-journey.md"),
   },
   AgnusDeiQuiTollisPeccataMundi: {
+    system: "クトゥルフ神話TRPG 7版",
     title: "Agnus Dei, qui tollis peccata mundi",
     overview: `
 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
@@ -50,6 +60,7 @@ const list: {
     markdown: readScenarioMarkdown("agnus-dei-qui-tollis-peccata-mundi.md"),
   },
   DasDornroschenDesWahnsinnigenKonigs: {
+    system: "クトゥルフ神話TRPG 7版",
     title: "狂気の王の眠り姫",
     overview: `
 　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 4 人向けにデザインされている。  
@@ -60,9 +71,10 @@ const list: {
     ),
   },
   TheSoundOfSteppingOnFog: {
+    system: "クトゥルフ神話TRPG 7版",
     title: "霧を踏む音",
     overview: `
-　このシナリオは"新クトゥルフ神話TRPG ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
+　このシナリオは"クトゥルフ神話TRPG 7版 ルールブック"に対応したシナリオで、探索者 3 ～ 5 人向けにデザインされている。  
 　プレイ時間は探索者の作成時間を含まずに 5 時間程度だろう。  
 　舞台は現代の日本。山間の片田舎で事件は展開する。  
 　シナリオの設定上、少なくとも一人の探索者の知人に **笹本 霧江** という大学生がいることとなる。  
