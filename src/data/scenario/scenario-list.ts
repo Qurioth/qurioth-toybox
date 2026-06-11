@@ -116,6 +116,21 @@ const list: {
       "現代日本。知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
+  QueenOfTheSea: {
+    system: "駆け出しアイドルRPG ビギニングアイドル",
+    title: "Queen of the Sea",
+    titleKana: "くいーんおぶざしー",
+    players: {
+      min: 2,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 4,
+      max: 5,
+    },
+    summary: "水族館 ビッグ・ブルー で行われるイベントに呼ばれる。",
+    markdown: readScenarioMarkdown("queen-of-the-sea.md"),
+  },
   PalateOfTheCrawling: {
     system: "クトゥルフ神話TRPG 7版",
     title: "蠢く口蓋",
