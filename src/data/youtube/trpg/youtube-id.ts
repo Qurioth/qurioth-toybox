@@ -16,6 +16,19 @@ export type ReplayVideo = {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    videoId: "-viT9tu6jXU",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "黄泉比良坂江戸城下",
+    characters: [
+      { characterName: "雷山", playerName: "pon" },
+      { characterName: "喪造", playerName: "よしを" },
+      { characterName: "川崎 風右衛門 鳴時", playerName: "Qurioth" },
+      { characterName: "幸風", playerName: "Haruku" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-13",
+  },
+  {
     videoId: "Z341PkZ3Yts",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "アルゴ - 形而上の晩餐会",
