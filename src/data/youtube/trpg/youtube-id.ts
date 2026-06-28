@@ -25,6 +25,18 @@ export type ReplayVideo = ReplayMedia & {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    videoId: "bl9JU0pjiZ4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ワールドエンド・dilenmma",
+    characters: [
+      { characterName: "玉利 響子", playerName: "pon" },
+      { characterName: "井上 ゆかり", playerName: "Qurioth" },
+      { characterName: "浮羽 希", playerName: "Haruku" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-27",
+  },
+  {
     videoId: "-viT9tu6jXU",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "黄泉比良坂江戸城下",
