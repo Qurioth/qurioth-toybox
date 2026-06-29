@@ -127,6 +127,21 @@ const list: {
       "現代日本。知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
   },
+  QueenOfTheSea: {
+    system: "駆け出しアイドルRPG ビギニングアイドル",
+    title: "Queen of the Sea",
+    titleKana: "くいーんおぶざしー",
+    players: {
+      min: 2,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 4,
+      max: 5,
+    },
+    summary: "水族館 ビッグ・ブルー で行われるイベントに呼ばれる。",
+    markdown: readScenarioMarkdown("queen-of-the-sea.md"),
+  },
   PalateOfTheCrawling: {
     system: "クトゥルフ神話TRPG 7版",
     title: "蠢く口蓋",
@@ -136,7 +151,7 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary: "現代日本。知人の家を訪れることから始まる。",
@@ -151,7 +166,7 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary:
@@ -167,8 +182,8 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 2,
-      max: 3,
+      min: 3,
+      max: 4,
     },
     summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
     markdown: readScenarioMarkdown("parasite.md"),
@@ -182,7 +197,7 @@ const list: {
       max: 3,
     },
     playTimeHours: {
-      min: 3,
+      min: 2,
       max: 3,
     },
     summary: "現代日本。探索者たちはここ数日、悪夢を見続けていた。",

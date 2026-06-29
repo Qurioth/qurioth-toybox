@@ -3,8 +3,17 @@ export type ReplayCharacter = {
   playerName?: string;
 };
 
-export type ReplayVideo = {
-  videoId: string;
+type ReplayMedia =
+  | {
+      videoId: string;
+      playlistId?: never;
+    }
+  | {
+      videoId?: never;
+      playlistId: string;
+    };
+
+export type ReplayVideo = ReplayMedia & {
   trpgSystemName?: string;
   scenarioName?: string;
   characters?: ReplayCharacter[];
@@ -15,6 +24,31 @@ export type ReplayVideo = {
 };
 
 export const replayVideos: ReplayVideo[] = [
+  {
+    videoId: "bl9JU0pjiZ4",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ワールドエンド・dilenmma",
+    characters: [
+      { characterName: "玉利 響子", playerName: "pon" },
+      { characterName: "井上 ゆかり", playerName: "Qurioth" },
+      { characterName: "浮羽 希", playerName: "Haruku" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-27",
+  },
+  {
+    videoId: "-viT9tu6jXU",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "黄泉比良坂江戸城下",
+    characters: [
+      { characterName: "雷山", playerName: "pon" },
+      { characterName: "喪造", playerName: "よしを" },
+      { characterName: "川崎 風右衛門 鳴時", playerName: "Qurioth" },
+      { characterName: "幸風", playerName: "Haruku" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-06-13",
+  },
   {
     videoId: "Z341PkZ3Yts",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
@@ -138,6 +172,18 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2026-05-04",
   },
   {
+    playlistId: "PLIq5hEr_wjTCh70M8hzkNY8ubOQpwN7rm",
+    trpgSystemName: "マルチジャンル・ホラーRPG インセイン",
+    scenarioName: "五月病",
+    characters: [
+      { characterName: "稗田 北朗", playerName: "あたぷけ" },
+      { characterName: "黒井 美沙", playerName: "小鳥" },
+      { characterName: "屍々戸 愚流", playerName: "Qurioth" },
+    ],
+    gmName: "しおり",
+    playedAt: "2026-01-08, 2026-01-15",
+  },
+  {
     videoId: "-7_P-cYzyf8",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "白夜の歌",
@@ -240,7 +286,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2024-09-16",
   },
   {
-    videoId: "xjFX7PaMKUY",
+    playlistId: "PLrdFEBvtujbY_wZ7UUjzqUiI4sGEdtvZq",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "夕日色の輪廻",
     characters: [
@@ -329,7 +375,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-11-19",
   },
   {
-    videoId: "kwfRhW4ewaU",
+    playlistId: "PLrdFEBvtujbblkE_RCGPMquFj5TCaAvJf",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "いのちのこたえ",
     characters: [
@@ -341,7 +387,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-07-16",
   },
   {
-    videoId: "MqqIeWJaqqg",
+    playlistId: "PLrdFEBvtujbZXAMf_d46NLNALmdjVFJKy",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "夜想曲",
     characters: [
@@ -354,7 +400,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-06-24",
   },
   {
-    videoId: "x7qWBcZ5qYM",
+    playlistId: "PLrdFEBvtujbY4I1AP9aPBPV0M_ltEdbmP",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "復讐するは我にあり",
     characters: [
@@ -366,7 +412,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-06-18",
   },
   {
-    videoId: "9K5u2PqqI1Y",
+    playlistId: "PLrdFEBvtujbau88bhbmXLmX48K8ZzqjdE",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "前髪なき女神の微笑み",
     characters: [
@@ -377,7 +423,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-05-20",
   },
   {
-    videoId: "tDt0uJnUR2Q",
+    playlistId: "PLrdFEBvtujbanduBt3t3tnUOcYT5qo45i",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "星の海を超えて",
     characters: [
@@ -390,7 +436,7 @@ export const replayVideos: ReplayVideo[] = [
     passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
   },
   {
-    videoId: "Sl3gzBfU-iM",
+    playlistId: "PLrdFEBvtujbYDhfynhHKJry88qdQR91Jm",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "咲くは何れか",
     characters: [{ characterName: "葉室 アマナ", playerName: "Qurioth" }],
@@ -398,19 +444,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-05-14",
   },
   {
-    videoId: "iNv6N6FqfcE",
-    trpgSystemName: "クトゥルフ神話TRPG 7版",
-    scenarioName: "星の海を超えて",
-    characters: [
-      { characterName: "加藤 児半", playerName: "よしを" },
-      { characterName: "松田 悠玖", playerName: "Haruku" },
-    ],
-    gmName: "Qurioth",
-    playedAt: "2023-05-07",
-    passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
-  },
-  {
-    videoId: "5RqIy1TlfTg",
+    playlistId: "PLrdFEBvtujbZTXh9b1YWKtQjp86b7wNxW",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "混血の子ら",
     characters: [
@@ -429,7 +463,19 @@ export const replayVideos: ReplayVideo[] = [
     ],
   },
   {
-    videoId: "Acaifuyk_s0",
+    playlistId: "PLrdFEBvtujbb2_ttt8_eBr-p3mrJuqsvq",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "星の海を超えて",
+    characters: [
+      { characterName: "加藤 児半", playerName: "よしを" },
+      { characterName: "松田 悠玖", playerName: "Haruku" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2023-05-07",
+    passwords: ["ヒプノス", "ヒュプノス", "タナトス"],
+  },
+  {
+    playlistId: "PLrdFEBvtujbaamHbdv3kqaP2qReAsW2My",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "悪霊の家",
     characters: [
@@ -442,7 +488,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-05-05",
   },
   {
-    videoId: "E7hfjuFmX5E",
+    playlistId: "PLrdFEBvtujbaIN5XQPNnPzjgEQRp0-D8U",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "暴の断章",
     characters: [
@@ -454,7 +500,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-30",
   },
   {
-    videoId: "y7dypuHxiQ8",
+    playlistId: "PLrdFEBvtujbbSRE8F_BPZYIhq62yRNpBy",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "M'OTHER",
     characters: [
@@ -467,7 +513,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-30",
   },
   {
-    videoId: "_FvnNdsY22c",
+    playlistId: "PLrdFEBvtujbZO6q4_TAdr4g8gFPT4W9cj",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "Hi-Standard",
     characters: [
@@ -480,7 +526,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-30",
   },
   {
-    videoId: "V6Vhwwm5ibU",
+    playlistId: "PLrdFEBvtujbZvK2TAgGtI3EWXz7Jsk3wb",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "きさらぎ駅",
     characters: [
@@ -491,7 +537,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-29",
   },
   {
-    videoId: "ezNq4RbpPvc",
+    playlistId: "PLrdFEBvtujbZUMUrG5OAZHQCUy0dgHkkT",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "パラサイト",
     characters: [
@@ -503,7 +549,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-29",
   },
   {
-    videoId: "6_-j2o3o8Iw",
+    playlistId: "PLrdFEBvtujbb8DMNbcOUUheYjRha396G3",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "No Title",
     characters: [
@@ -515,7 +561,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-16",
   },
   {
-    videoId: "EA58Cdl1OlI",
+    playlistId: "PLrdFEBvtujbYCEX98sCENF6_PpfFxyqNb",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "ガシャン！",
     characters: [
@@ -551,7 +597,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-04-02",
   },
   {
-    videoId: "EEAKaZGe0aw",
+    playlistId: "PLrdFEBvtujbbZlqZjBZPvx7j2g13I8HnV",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "影の羽",
     characters: [
@@ -562,7 +608,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-03-22",
   },
   {
-    videoId: "UF9XN5_sTo4",
+    playlistId: "PLrdFEBvtujbYk8dvrddAT_M1Ucyl0iQBD",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "夜病院",
     characters: [
@@ -582,7 +628,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-03-11",
   },
   {
-    videoId: "4b_Z7VKOJ68",
+    playlistId: "PLrdFEBvtujbZDJJW6lJ1vbtuj1oLuuINz",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "狂気山脈 ～邪神の山嶺～",
     characters: [
@@ -595,7 +641,7 @@ export const replayVideos: ReplayVideo[] = [
     note: "サブKP: Qurioth",
   },
   {
-    videoId: "4I_xYiWPWE4",
+    playlistId: "PLrdFEBvtujbYdQBkD7Ule1Keg1vxAHHVs",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "世界を視た男",
     characters: [
@@ -615,7 +661,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-02-05",
   },
   {
-    videoId: "2dTUerGEu7c",
+    playlistId: "PLrdFEBvtujbb2Cdoduzc1Gcz9wW5ZgbMp",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "沼男は誰だ？",
     characters: [
@@ -629,7 +675,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2023-01-21",
   },
   {
-    videoId: "sktQ6gApgNU",
+    playlistId: "PLrdFEBvtujbZH_Ym-N3ezCfLRpvw3wUw2",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "迷宮より叫ぶもの",
     characters: [
@@ -647,7 +693,7 @@ export const replayVideos: ReplayVideo[] = [
     ],
   },
   {
-    videoId: "RyYr9GDQTac",
+    playlistId: "PLrdFEBvtujbZv7pzX-KDh6dPPXEMbEWEz",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "杉山屋敷怪異譚",
     characters: [
@@ -659,7 +705,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2022-11-20",
   },
   {
-    videoId: "5xfy4pnYt3s",
+    playlistId: "PLrdFEBvtujbYo_7nqSlpPc39rR4AjOkEh",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "杉山屋敷怪異譚",
     characters: [
@@ -671,7 +717,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2022-10-09",
   },
   {
-    videoId: "o6yK_QiOieM",
+    playlistId: "PLrdFEBvtujbbbLBkAFsb-w0L3rN7J6dMF",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "ショクザイ",
     characters: [
@@ -683,7 +729,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2022-10-01",
   },
   {
-    videoId: "28xdeBlHX3I",
+    playlistId: "PLrdFEBvtujbb0_cJWIiprCarc2X06rXMY",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "杉山屋敷怪異譚",
     characters: [
@@ -694,7 +740,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2022-09-25",
   },
   {
-    videoId: "glYSwpdg_Zo",
+    playlistId: "PLrdFEBvtujbYEzkBaT0Qik5Ly1KaoX0bV",
     trpgSystemName: "ふしぎもののけRPG ゆうやけこやけ",
     scenarioName: "花火をしよう！",
     characters: [
@@ -706,7 +752,7 @@ export const replayVideos: ReplayVideo[] = [
     playedAt: "2022-07-30",
   },
   {
-    videoId: "uVQfWvJPJmg",
+    playlistId: "PLrdFEBvtujbYQDedwpvj_ZHjUL2PuaiMy",
     trpgSystemName: "ふしぎもののけRPG ゆうやけこやけ",
     scenarioName: "おつかいゆうれい",
     characters: [
@@ -719,5 +765,9 @@ export const replayVideos: ReplayVideo[] = [
   },
 ];
 
-export const videoIds: string[] = replayVideos.map(({ videoId }) => videoId);
-export const playlistIds: string[] = [];
+export const videoIds: string[] = replayVideos.flatMap(({ videoId }) =>
+  videoId ? [videoId] : [],
+);
+export const playlistIds: string[] = replayVideos.flatMap(({ playlistId }) =>
+  playlistId ? [playlistId] : [],
+);
