@@ -46,7 +46,7 @@ export default async function Home(
           components={{
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             img: ({ node, ...props }) => (
-              // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+              // biome-ignore lint/performance/noImgElement: markdown-provided image, size unknown at build time
               <img {...props} className="size-40 md:size-60 float-right m-2" />
             ),
           }}
