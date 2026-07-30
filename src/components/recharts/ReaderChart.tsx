@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: recharts data shape varies per chart
 const ReaderChart = (props: { name: string; dataKey: string; data: any[] }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">

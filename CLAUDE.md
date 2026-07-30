@@ -14,7 +14,7 @@
 pnpm dev      # 開発サーバー起動 (http://localhost:3000)
 pnpm build    # 本番ビルド
 pnpm start    # 本番サーバー起動
-pnpm lint     # ESLint (next/core-web-vitals, next/typescript)
+pnpm lint     # Biome lint(旧 next lint / ESLint から移行)
 ```
 
 パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
@@ -68,7 +68,9 @@ src/
 
 - Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
   依存関係の更新は当面手動で行う。
-- lint/build/test を実行する CI は未整備。
+- `.github/workflows/ci.yml` — push (master) / pull_request で `pnpm install` → `pnpm lint`
+  → `pnpm build` を実行する([ADR-0004](docs/adr/0004-add-ci-workflow.md))。テストフレームワーク
+  未導入のため test ステップはまだ無い。
 
 ## 開発フロー(Spec-Driven Development)
 
