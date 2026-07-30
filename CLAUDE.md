@@ -11,13 +11,14 @@
 ## 開発コマンド
 
 ```bash
-yarn dev      # 開発サーバー起動 (http://localhost:3000)
-yarn build    # 本番ビルド
-yarn start    # 本番サーバー起動
-yarn lint     # ESLint (next/core-web-vitals, next/typescript)
+pnpm dev      # 開発サーバー起動 (http://localhost:3000)
+pnpm build    # 本番ビルド
+pnpm start    # 本番サーバー起動
+pnpm lint     # ESLint (next/core-web-vitals, next/typescript)
 ```
 
-パッケージマネージャは yarn(`yarn.lock` を使用)。テストフレームワークは未導入。
+パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
+`packageManager` に固定したバージョンを実行)。テストフレームワークは未導入。
 
 ## 技術スタック
 
