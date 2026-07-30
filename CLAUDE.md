@@ -65,8 +65,9 @@ src/
 
 ## CI / 自動化
 
-- `.github/workflows/renovate.yml` — Renovate による依存関係の自動更新のみ。lint/build/test を
-  実行する CI は未整備。
+- Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
+  依存関係の更新は当面手動で行う。
+- lint/build/test を実行する CI は未整備。
 
 ## 開発フロー(Spec-Driven Development)
 
