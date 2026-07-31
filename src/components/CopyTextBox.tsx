@@ -22,6 +22,7 @@ const CopyTextBox = (props: { textList: string[] }) => {
       <div className="relative bg-gray-100 dark:bg-gray-700 rounded-lg shadow-lg w-full">
         {/* コピーアイコンボタン */}
         <button
+          type="button"
           onClick={handleCopy}
           className="absolute top-4 right-4 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 focus:outline-none"
           title="Copy"
@@ -33,6 +34,7 @@ const CopyTextBox = (props: { textList: string[] }) => {
         <div className="p-6 rounded-lg shadow-lg h-96 scrollbar-thin overflow-x-hidden overflow-y-auto">
           {textList.map((text, index) => {
             return (
+              // biome-ignore lint/suspicious/noArrayIndexKey: lines may repeat, no natural id
               <p key={`text-${index}`} className="text-sm">
                 {text}
               </p>

@@ -2,7 +2,8 @@
 
 import Template from "@/components/Template";
 import { links } from "@/data/photograph/dropbox-link";
-import React, { useState, useEffect, useCallback } from "react";
+import type React from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 function splitArray<T>(array: T[], parts: number): T[][] {
@@ -101,12 +102,13 @@ export default function Home() {
       }, 500); // 500ms後にisLoadingをfalseに
       return () => clearTimeout(timer);
     }
-  }, [visibleCount, isLoading]);
+  }, [isLoading]);
 
   return (
     <Template>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:mx-24">
         {columns.map((col, colIdx) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: fixed-count layout columns, order never changes
           <div className="grid gap-4" key={colIdx}>
             {col.map((img) => (
               <div key={img.name}>

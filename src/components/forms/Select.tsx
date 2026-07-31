@@ -18,9 +18,9 @@ const Select = (props: {
         <option value="default" hidden>
           {placeholder}
         </option>
-        {selectList.map((selectItem, index) => {
+        {selectList.map((selectItem) => {
           return (
-            <option key={`select-item-${index}`} value={selectItem}>
+            <option key={selectItem} value={selectItem}>
               {selectItem}
             </option>
           );

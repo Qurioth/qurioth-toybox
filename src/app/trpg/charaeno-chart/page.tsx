@@ -2,9 +2,9 @@
 
 import CharacterCard from "@/components/CharacterCard";
 import Template from "@/components/Template";
-import { Investigator } from "@/types/Charaeno7th";
+import type { Investigator } from "@/types/Charaeno7th";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { getFetch } from "@/utils/fetch-utils";
 import { useState } from "react";
 
@@ -26,7 +26,7 @@ export default function Home() {
     const json = await getFetch(charaeno7thApiUrl);
 
     json.name = json.name.replace(
-      /[\(\{\[\<（【][^\)\}\]\>）】]*[\)\}\]\>）】]/g,
+      /[({[<（【][^)}\]>）】]*[)}\]>）】]/g,
       "",
     );
     json.name = json.name.replace(/(^\s+|\s+$)/, "");

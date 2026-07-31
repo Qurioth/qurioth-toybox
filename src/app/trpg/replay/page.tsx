@@ -3,12 +3,12 @@
 import Template from "@/components/Template";
 import YouTubeEmbed from "@/components/YoutubeEmbed";
 import {
-  ReplayCharacter,
-  ReplayVideo,
+  type ReplayCharacter,
+  type ReplayVideo,
   replayVideos,
 } from "@/data/youtube/trpg/youtube-id";
 import { Search, X } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 const loadSize = 10;
 const suggestionLimit = 8;
@@ -420,6 +420,7 @@ export default function Home() {
     return filteredReplayVideos.slice(0, visibleCount);
   }, [filteredReplayVideos, visibleCount]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally reset visibleCount when search filters change
   useEffect(() => {
     setVisibleCount(loadSize);
   }, [activeSearchTargets, searchQuery]);

@@ -1,6 +1,6 @@
 import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -44,10 +44,13 @@ export default async function Home(
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            img: ({ node, ...props }) => (
+            img: ({ node, alt, ...props }) => (
               // biome-ignore lint/performance/noImgElement: markdown-provided image, size unknown at build time
-              <img {...props} className="size-40 md:size-60 float-right m-2" />
+              <img
+                {...props}
+                alt={alt ?? ""}
+                className="size-40 md:size-60 float-right m-2"
+              />
             ),
           }}
         >

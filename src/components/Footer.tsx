@@ -21,6 +21,7 @@ const Footer = () => {
           className="flex items-center space-x-2 text-blue-500"
         >
           <svg
+            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
             viewBox="0 0 576 512"
