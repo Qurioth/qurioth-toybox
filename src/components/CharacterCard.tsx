@@ -235,12 +235,20 @@ const CharacterCard = (props: { data: Investigator }) => {
 
   return (
     <>
-      <button
-        type="button"
-        className={`hidden md:block text-left shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
+      {/* biome-ignore lint/a11y/useSemanticElements: a real <button> breaks the animate-rotate-y 3D flip rendering in Chromium */}
+      <div
+        role="button"
+        tabIndex={0}
+        className={`hidden md:block shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
           classChanging && "animate-rotate-y"
         }`}
         onClick={flipCard}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            flipCard();
+          }
+        }}
       >
         {!classChanging && (
           <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -406,7 +414,7 @@ const CharacterCard = (props: { data: Investigator }) => {
             </div>
           </div>
         )}
-      </button>
+      </div>
 
       <div className="md:hidden">
         <section className="shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50">
