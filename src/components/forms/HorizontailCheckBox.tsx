@@ -13,10 +13,10 @@ const HorizontailCheckBox = (props: {
         {label}
       </h3>
       <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-        {checkItemList.map((checkItem, index) => {
+        {checkItemList.map((checkItem) => {
           return (
             <li
-              key={`check-item-${index}`}
+              key={checkItem}
               className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
             >
               <div className="flex items-center ps-3">
@@ -24,11 +24,7 @@ const HorizontailCheckBox = (props: {
                   id={checkItem}
                   type="checkbox"
                   value={checkItem}
-                  defaultChecked={
-                    defaultCheckItemList.find((item) => item === checkItem)
-                      ? true
-                      : false
-                  }
+                  defaultChecked={defaultCheckItemList.includes(checkItem)}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   onChange={(event) => {
                     const value = event.target.value;

@@ -2,7 +2,7 @@
 
 import CharacterCard from "@/components/CharacterCard";
 import Template from "@/components/Template";
-import { Investigator } from "@/types/Charaeno7th";
+import type { Investigator } from "@/types/Charaeno7th";
 
 import fugakuRairi from "@/data/sample-character/fugaku-rairi.json";
 import hamuroAmana from "@/data/sample-character/hamuro-amana.json";
@@ -31,9 +31,9 @@ export default function Home() {
   return (
     <Template>
       <div className="grid gap-6 xl:grid-cols-2 grid-cols-1">
-        {characterList.map((character, index) => {
+        {characterList.map((character) => {
           return (
-            <div key={`chart-card-${index}`}>
+            <div key={character.characterData.name}>
               <CharacterCard data={character.characterData} />
             </div>
           );

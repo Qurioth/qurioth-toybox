@@ -28,3 +28,4 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | [0004](0004-migrate-yarn-to-pnpm.md) | パッケージマネージャをyarnからpnpmに移行する | Accepted |
 | [0005](0005-add-ci-workflow.md) | lint/buildを実行するCIワークフローを追加する | Accepted |
 | [0006](0006-migrate-eslint-to-biome.md) | ESLint (next lint) からBiomeに移行する | Accepted |
+| [0007](0007-enable-biome-recommended-lint.md) | Biomeのrecommendedプリセットを有効化する | Accepted |

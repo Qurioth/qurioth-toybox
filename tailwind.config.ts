@@ -113,7 +113,7 @@ const config: Config = {
     require("tailwindcss-animate"),
     require("tailwindcss-animated"),
     require("@tailwindcss/typography"),
-    plugin(function ({ addUtilities }) {
+    plugin(({ addUtilities }) => {
       addUtilities({
         ".scrollbar-none": {
           "&::-webkit-scrollbar": {

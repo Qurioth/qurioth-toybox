@@ -1,7 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-import { Investigator } from "@/types/Charaeno7th";
+import type { Investigator } from "@/types/Charaeno7th";
 import humanIcon from "@/image/human-icon.png";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -77,7 +76,7 @@ const CharacterCard = (props: { data: Investigator }) => {
     { label: "幸運", value: data.attribute.luck },
   ];
 
-  Object.keys(data.characteristics).map((key: string) => {
+  Object.keys(data.characteristics).forEach((key: string) => {
     let characteristicsData = 0;
     switch (key) {
       case "str":
@@ -125,6 +124,7 @@ const CharacterCard = (props: { data: Investigator }) => {
   const renderPortrait = (heightClass: string) => (
     <div className="w-auto grid grid-cols-1 justify-items-center content-center">
       {data.portraitURL ? (
+        // biome-ignore lint/performance/noImgElement: external portrait URL, domain unknown at build time
         <img
           className={`object-contain ${heightClass} max-w-full animate-in fade-in duration-1000`}
           src={data.portraitURL || "/image/human_icon.png"}
@@ -163,8 +163,8 @@ const CharacterCard = (props: { data: Investigator }) => {
   const renderSkillTable = () => (
     <table className="w-full border-separate border border-slate-500">
       <tbody>
-        {editedSkills.map((skill, index) => (
-          <tr key={`${data.name}-skill-${index}`}>
+        {editedSkills.map((skill) => (
+          <tr key={`${data.name}-skill-${skill.name}`}>
             <td className="w-5/6 border border-slate-600 font-serif font-semibold">
               {skill.name}
             </td>
@@ -182,7 +182,7 @@ const CharacterCard = (props: { data: Investigator }) => {
       {backstories.length > 0 &&
         backstories.map((backstory, backstoryIndex) => (
           <section
-            key={`${data.name}-backstory-${backstoryIndex}`}
+            key={`${data.name}-backstory-${backstory.name}`}
             className="mb-3"
           >
             <h3 className="font-serif font-semibold">{backstory.name}</h3>
@@ -190,10 +190,12 @@ const CharacterCard = (props: { data: Investigator }) => {
               <ul className="list-disc pl-5">
                 {backstory.entries.map((entry, entryIndex) => (
                   <li
+                    // biome-ignore lint/suspicious/noArrayIndexKey: entries have no natural id, list order is static
                     key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
                   >
                     {entry.text.split("\n").map((line, lineIndex) => (
                       <div
+                        // biome-ignore lint/suspicious/noArrayIndexKey: text lines have no natural id, list order is static
                         key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
                       >
                         {line}
@@ -211,6 +213,7 @@ const CharacterCard = (props: { data: Investigator }) => {
           <div className="pl-5">
             {noteParagraphs.map((paragraph, index) => (
               <p
+                // biome-ignore lint/suspicious/noArrayIndexKey: paragraphs have no natural id, list order is static
                 key={`${data.name}-note-${index}`}
                 className="mb-3 whitespace-pre-line last:mb-0"
               >
@@ -223,18 +226,21 @@ const CharacterCard = (props: { data: Investigator }) => {
     </div>
   );
 
+  const flipCard = async () => {
+    setClassChanging(true);
+    await new Promise((resolve) => setTimeout(resolve, 880));
+    setReverse(!reverse);
+    setClassChanging(false);
+  };
+
   return (
     <>
-      <div
-        className={`hidden md:block shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
+      <button
+        type="button"
+        className={`hidden md:block text-left shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
           classChanging && "animate-rotate-y"
         }`}
-        onClick={async () => {
-          setClassChanging(true);
-          await new Promise((resolve) => setTimeout(resolve, 880));
-          setReverse(!reverse);
-          setClassChanging(false);
-        }}
+        onClick={flipCard}
       >
         {!classChanging && (
           <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -298,20 +304,16 @@ const CharacterCard = (props: { data: Investigator }) => {
                 <div className="scrollbar-thin h-full overflow-y-auto">
                   <table className="w-full border-separate border border-slate-500">
                     <tbody>
-                      {data.skills.map((skill, index) => {
-                        if (skill.edited) {
-                          return (
-                            <tr key={`${data.name}-skill-${index}`}>
-                              <td className="w-5/6 border border-slate-600 font-serif font-semibold">
-                                {skill.name}
-                              </td>
-                              <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
-                                {skill.value}
-                              </td>
-                            </tr>
-                          );
-                        }
-                      })}
+                      {editedSkills.map((skill) => (
+                        <tr key={`${data.name}-skill-${skill.name}`}>
+                          <td className="w-5/6 border border-slate-600 font-serif font-semibold">
+                            {skill.name}
+                          </td>
+                          <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
+                            {skill.value}
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -325,10 +327,11 @@ const CharacterCard = (props: { data: Investigator }) => {
               <div className="h-[440px]">
                 <div className="w-auto grid grid-cols-1 justify-items-center content-center">
                   {data.portraitURL ? (
+                    // biome-ignore lint/performance/noImgElement: external portrait URL, domain unknown at build time
                     <img
                       className="object-contain h-[440px] animate-in fade-in duration-1000"
                       src={data.portraitURL || "/image/human_icon.png"}
-                      alt="ortrait"
+                      alt="portrait"
                     />
                   ) : (
                     <Image
@@ -353,7 +356,7 @@ const CharacterCard = (props: { data: Investigator }) => {
                   {backstories.length > 0 &&
                     backstories.map((backstory, backstoryIndex) => (
                       <section
-                        key={`${data.name}-backstory-${backstoryIndex}`}
+                        key={`${data.name}-backstory-${backstory.name}`}
                         className="mb-3"
                       >
                         <h3 className="font-serif font-semibold">
@@ -363,12 +366,14 @@ const CharacterCard = (props: { data: Investigator }) => {
                           <ul className="list-disc pl-5">
                             {backstory.entries.map((entry, entryIndex) => (
                               <li
+                                // biome-ignore lint/suspicious/noArrayIndexKey: entries have no natural id, list order is static
                                 key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
                               >
                                 {entry.text
                                   .split("\n")
                                   .map((line, lineIndex) => (
                                     <div
+                                      // biome-ignore lint/suspicious/noArrayIndexKey: text lines have no natural id, list order is static
                                       key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
                                     >
                                       {line}
@@ -386,6 +391,7 @@ const CharacterCard = (props: { data: Investigator }) => {
                       <div className="pl-5">
                         {noteParagraphs.map((paragraph, index) => (
                           <p
+                            // biome-ignore lint/suspicious/noArrayIndexKey: paragraphs have no natural id, list order is static
                             key={`${data.name}-note-${index}`}
                             className="mb-3 whitespace-pre-line last:mb-0"
                           >
@@ -400,7 +406,7 @@ const CharacterCard = (props: { data: Investigator }) => {
             </div>
           </div>
         )}
-      </div>
+      </button>
 
       <div className="md:hidden">
         <section className="shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50">

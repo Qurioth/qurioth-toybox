@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useState, useContext, useEffect } from "react";
+import type React from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 type DarkModeContextType = {
   isDarkMode: boolean;

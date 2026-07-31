@@ -1,4 +1,4 @@
-import { DiceLog } from "@/types/DiceLog";
+import type { DiceLog } from "@/types/DiceLog";
 
 const grepDicelog = (
   dicelog: DiceLog[],

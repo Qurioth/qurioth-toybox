@@ -1,4 +1,4 @@
-import { DiceLog } from "@/types/DiceLog";
+import type { DiceLog } from "@/types/DiceLog";
 
 // const reg = /<p>.*?<\/p>/g;
 const tabReg = /<span> \[.*\]<\/span>/g;
@@ -10,14 +10,14 @@ const htmlTagReg =
 const convertDicelog = (htmlString: string) => {
   const result: DiceLog[] = [];
   const html: string[] = htmlString
-    .replace(/  /g, "")
+    .replace(/ {2}/g, "")
     .replace(htmlTagReg, "")
     .replace(/\n/g, "")
     .split(/(?<=<\/p>)/g);
 
   html.forEach((str) => {
     const dicelogList = str
-      .replace(/<p style=\".*">|<\/p>/g, "")
+      .replace(/<p style=".*">|<\/p>/g, "")
       .split(/(?<=<\/span>)/g);
     const dicelog: DiceLog = { tab: "", name: "", content: "" };
 

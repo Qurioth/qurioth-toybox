@@ -7,7 +7,7 @@ import FileInput from "@/components/forms/FileInput";
 import HorizontailCheckBox from "@/components/forms/HorizontailCheckBox";
 import Select from "@/components/forms/Select";
 import Template from "@/components/Template";
-import { DiceLog } from "@/types/DiceLog";
+import type { DiceLog } from "@/types/DiceLog";
 import { convertDicelog } from "@/utils/convert-utils";
 import { grepCharactername, grepDicelog } from "@/utils/grep-utils";
 import { useState, useRef } from "react";
