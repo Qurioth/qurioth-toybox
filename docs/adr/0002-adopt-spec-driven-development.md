@@ -2,7 +2,7 @@
 
 ## ステータス
 
-Accepted
+Superseded by [ADR-0009](0009-adopt-official-spec-kit-cli.md)
 
 ## 日付
 

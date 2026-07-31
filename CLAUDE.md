@@ -75,15 +75,22 @@ src/
 ## 開発フロー(Spec-Driven Development)
 
 このプロジェクトでは、ある程度まとまった機能追加・変更について
-[spec-driven development (SDD)](docs/adr/0002-adopt-spec-driven-development.md) を採用する。
-[spec-kit](https://github.com/github/spec-kit) の構成に準拠したテンプレートを `.specify/` と
-`.claude/commands/` に用意している。
+[spec-driven development (SDD)](docs/adr/0009-adopt-official-spec-kit-cli.md) を採用する。
+[spec-kit](https://github.com/github/spec-kit) 公式CLI(`uv tool install specify-cli` で導入)を
+使い、`.claude/skills/speckit-*` のスキルと `.specify/` のテンプレート・スクリプトで運用する。
 
-1. `/specify` — 何を・なぜ作るかを `specs/<番号>-<slug>/spec.md` にまとめる(実装方法は書かない)。
-2. `/plan` — 技術方針を `plan.md` に落とし込む。
-3. `/tasks` — 実行可能な作業単位に分解する。
-4. 実装を行い、必要なら [ADR](docs/adr/) に大きな技術判断を記録する。
+1. `/speckit-specify` — 何を・なぜ作るかを `specs/<番号>-<slug>/spec.md` にまとめる
+   (実装方法は書かない)。
+2. `/speckit-plan` — 技術方針を `plan.md` に落とし込む。
+3. `/speckit-tasks` — 実行可能な作業単位に分解する。
+4. 必要に応じて `/speckit-clarify`(曖昧点の解消)、`/speckit-analyze`(spec/plan/tasksの整合性
+   チェック)、`/speckit-checklist`(品質チェックリスト作成)を挟む。
+5. `/speckit-implement` — tasks.md に沿って実装する。実装途中で仕様と乖離した既存コードがあれば
+   `/speckit-converge` で残作業を棚卸しできる。
+6. 必要なら [ADR](docs/adr/) に大きな技術判断を記録する。
 
+spec/plan/tasksのテンプレートは公式のもの(英語の見出し構造、ユーザーストーリーの優先度付け
+P1/P2/P3、`FR-XXX`/`SC-XXX`形式の要件・成功基準など)を使うが、実際に書く内容は日本語でよい。
 小さな修正(typo、微調整、依存更新など)にはこのフローは不要。プロジェクトの原則は
 [.specify/memory/constitution.md](.specify/memory/constitution.md) を参照。
 

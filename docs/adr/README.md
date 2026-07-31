@@ -23,9 +23,11 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | ID | タイトル | ステータス |
 | --- | --- | --- |
 | [0001](0001-record-architecture-decisions.md) | Architecture Decision Recordを記録する | Accepted |
-| [0002](0002-adopt-spec-driven-development.md) | Spec-Driven Development (spec-kit) を導入する | Accepted |
+| [0002](0002-adopt-spec-driven-development.md) | Spec-Driven Development (spec-kit) を導入する | Superseded by [ADR-0009](0009-adopt-official-spec-kit-cli.md) |
 | [0003](0003-drop-renovate.md) | Renovateによる依存関係自動更新を廃止する | Accepted |
 | [0004](0004-migrate-yarn-to-pnpm.md) | パッケージマネージャをyarnからpnpmに移行する | Accepted |
 | [0005](0005-add-ci-workflow.md) | lint/buildを実行するCIワークフローを追加する | Accepted |
 | [0006](0006-migrate-eslint-to-biome.md) | ESLint (next lint) からBiomeに移行する | Accepted |
 | [0007](0007-enable-biome-recommended-lint.md) | Biomeのrecommendedプリセットを有効化する | Accepted |
+| [0008](0008-adopt-testing-trophy-and-vitest.md) | テスト戦略にテスティングトロフィー、テストランナーにVitestを採用する | Accepted |
+| [0009](0009-adopt-official-spec-kit-cli.md) | spec-kit公式CLIを導入し、手動再現していたSDD構成を置き換える | Accepted |
