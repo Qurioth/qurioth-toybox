@@ -69,7 +69,7 @@ src/
 - Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
   依存関係の更新は当面手動で行う。
 - `.github/workflows/ci.yml` — push (master) / pull_request で `pnpm install` → `pnpm lint`
-  → `pnpm build` を実行する([ADR-0004](docs/adr/0004-add-ci-workflow.md))。テストフレームワーク
+  → `pnpm build` を実行する([ADR-0005](docs/adr/0005-add-ci-workflow.md))。テストフレームワーク
   未導入のため test ステップはまだ無い。
 
 ## 開発フロー(Spec-Driven Development)

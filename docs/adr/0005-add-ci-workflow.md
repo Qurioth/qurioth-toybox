@@ -1,4 +1,4 @@
-# 0004. lint/build を実行する CI ワークフローを追加する
+# 0005. lint/build を実行する CI ワークフローを追加する
 
 ## ステータス
 
@@ -12,7 +12,7 @@ Accepted
 
 これまで `qurioth-toybox` には lint/build/test を実行する CI が存在せず、壊れた変更がそのまま
 マージされても気づけない状態だった。実際、`next lint` が Next.js 16 で廃止されていたにも
-関わらず誰も気づかないまま放置されていた([ADR-0005](docs/adr/0005-migrate-eslint-to-biome.md)
+関わらず誰も気づかないまま放置されていた([ADR-0006](docs/adr/0006-migrate-eslint-to-biome.md)
 参照)。テストフレームワークはまだ導入していないため、まずは lint と build の自動チェックから
 始める。
 

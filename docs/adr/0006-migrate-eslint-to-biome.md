@@ -1,4 +1,4 @@
-# 0005. ESLint (next lint) から Biome に移行する
+# 0006. ESLint (next lint) から Biome に移行する
 
 ## ステータス
 
