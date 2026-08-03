@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { Investigator } from "@/types/Charaeno7th";
@@ -92,6 +92,19 @@ describe("CharacterCard", () => {
 
     await user.click(screen.getByRole("button"));
     await waitFor(() => expect(card.getByText("HP")).toBeVisible(), {
+      timeout: 2000,
+    });
+  });
+
+  it("フリップ中にもう一度クリックしても、表示は一度分しか切り替わらない(既存の挙動)", async () => {
+    render(<CharacterCard data={sampleData} />);
+    const card = within(screen.getByRole("button"));
+
+    fireEvent.click(screen.getByRole("button"));
+    await new Promise((resolve) => setTimeout(resolve, 200)); // アニメーション中に再度クリック
+    fireEvent.click(screen.getByRole("button"));
+
+    await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
       timeout: 2000,
     });
   });

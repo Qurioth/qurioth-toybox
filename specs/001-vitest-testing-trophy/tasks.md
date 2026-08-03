@@ -92,12 +92,14 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 ### Implementation for User Story 2
 
 - [X] T008 [P] [US2] `CharacterCard` の結合テストを作成 — `src/components/CharacterCard.test.tsx`
-      (`ReaderChart` を `vi.mock` で差し替え、クリック/キーボード操作での表裏切り替えを検証。
-      spec.md User Story 2 Acceptance Scenario 1・2に対応)
+      (`ReaderChart` を `vi.mock` で差し替え、クリック/キーボード操作での表裏切り替え、
+      フリップ中の連打時の挙動(Edge Case)を検証。spec.md User Story 2 Acceptance
+      Scenario 1・2、Edge Caseに対応)
 - [X] T009 [P] [US2] `ccfolia-grep` ページの結合テストを作成 —
       `src/app/trpg/ccfolia-grep/page.test.tsx`
-      (ファイルアップロード→キャラクター名選択→Submit→結果表示。デフォルトの成功度
-      チェックのまま実行。spec.md User Story 2 Acceptance Scenario 3に対応)
+      (ファイルアップロード→キャラクター名選択→Submit→結果表示、成功度チェックを
+      外した場合の除外、ファイル未選択のままSubmitした場合の挙動(Edge Case)を検証。
+      spec.md User Story 2 Acceptance Scenario 3、Edge Caseに対応)
 
 **Checkpoint**: この時点で User Story 1・2 がともに独立して完了・検証可能。
 

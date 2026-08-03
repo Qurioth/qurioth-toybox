@@ -42,6 +42,26 @@ Technical Contextに `NEEDS CLARIFICATION` は無い。技術選定自体は本f
   差し替えることで `ResizeObserver` 問題そのものを回避する。スタブはchartを使う他のテストが
   将来増えた場合の保険として残す)。
 
+## Decision: Testing Libraryの明示的クリーンアップ
+
+- **Rationale**: `globals: false` にしているため、Testing Libraryが自動クリーンアップに
+  使う `afterEach` がグローバルに存在せず、自動クリーンアップの仕組みが機能しない
+  (実装中に、テスト間でレンダリング結果が残留し `getByRole` が複数要素にマッチして
+  失敗する不具合として発覚)。`vitest.setup.ts` に `afterEach(() => cleanup())` を
+  明示的に追加する。
+- **Alternatives considered**: `globals: true` にしてTesting Libraryの自動検出に任せる
+  (「明示import」というプロジェクトの既存スタイルと矛盾するため見送り)。
+
+## Decision: `window.matchMedia` のスタブ
+
+- **Rationale**: jsdomは `window.matchMedia` を実装しておらず、`DarkModeContext` が
+  初期表示時にこれを呼び出すため、`DarkModeProvider` を含む画面(`ccfolia-grep`ページ等)の
+  結合テストで `TypeError` になる。`vitest.setup.ts` にダーク/ライト判定を常に `false` で
+  返す薄いスタブを追加する。
+- **Alternatives considered**: `ccfolia-grep` ページのテストで `DarkModeProvider` を
+  使わない(`Template` コンポーネントが内部で `Header` を経由して依存しているため、
+  プロバイダ無しでのレンダリングは不可能)。
+
 ## Decision: テストファイルの配置 — コロケーション
 
 - **Rationale**: テスト対象と同じディレクトリに `*.test.ts(x)` を置く。個人開発で

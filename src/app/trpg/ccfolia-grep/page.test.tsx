@@ -41,4 +41,38 @@ describe("ccfolia-grep page", () => {
       screen.queryByText("[メイン] キャラクター花子 1d100<=50 → 88 失敗"),
     ).not.toBeInTheDocument();
   });
+
+  it("ファイル未選択のままSubmitすると、空の見出し付き結果が表示される(既存の挙動)", async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+
+    // dicelog.current・selectName.currentが初期値(空)のままgrepDicelogが実行され、
+    // "**" + "**" = "****" という見出しと空のコードブロックが表示される
+    expect(await screen.findByText("****")).toBeInTheDocument();
+  });
+
+  it("成功度のチェックを外すと、対応する行が結果から除外される", async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    const file = new File([sampleLogHtml], "log.txt", { type: "text/plain" });
+    await user.upload(screen.getByLabelText("CCFOLIA LOG FILE"), file);
+    const select = await screen.findByRole("combobox");
+    await waitFor(() => expect(select).toHaveTextContent("キャラクター太郎"));
+    await user.selectOptions(select, "キャラクター太郎");
+
+    // デフォルトでチェック済みの「成功」を外す
+    await user.click(screen.getByRole("checkbox", { name: "成功" }));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+
+    // 「成功」を外したので、太郎の行(成功)が結果から除外される
+    await waitFor(() =>
+      expect(screen.getByText("**キャラクター太郎**")).toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByText("[メイン] キャラクター太郎 1d100<=50 → 23 成功"),
+    ).not.toBeInTheDocument();
+  });
 });
