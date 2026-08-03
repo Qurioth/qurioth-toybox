@@ -82,7 +82,7 @@ specs/001-vitest-testing-trophy/
 Single project(Next.js App Router)構成。新規に追加するファイルは以下の通り。
 
 ```text
-vitest.config.ts               # 新規: environment: "jsdom", @/* エイリアス, setupFiles
+vitest.config.mts               # 新規: environment: "jsdom", @/* エイリアス, setupFiles
 vitest.setup.ts                # 新規: jest-dom, next/imageモック, ResizeObserverスタブ
 
 src/
@@ -106,7 +106,7 @@ CLAUDE.md                        # 変更: テスト方針・実行コマンド�
 **Structure Decision**: 既存のディレクトリ構成(`src/utils/`、`src/components/`、
 `src/app/`)をそのまま使い、`tests/` のような別ツリーは作らない。テストファイルは対象と
 同じディレクトリに `*.test.ts(x)` としてコロケーション配置する(research.md参照)。
-Vitest本体の設定ファイル(`vitest.config.ts`・`vitest.setup.ts`)のみリポジトリルートに
+Vitest本体の設定ファイル(`vitest.config.mts`・`vitest.setup.ts`)のみリポジトリルートに
 新規追加する。
 
 ## Complexity Tracking

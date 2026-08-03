@@ -34,16 +34,16 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 **Purpose**: Vitestとテストライブラリの導入・設定
 
-- [ ] T001 Vitest関連の依存を追加 — `package.json`
+- [X] T001 Vitest関連の依存を追加 — `package.json`
       (`vitest`, `@vitejs/plugin-react`, `jsdom`, `@testing-library/react`,
       `@testing-library/jest-dom`, `@testing-library/user-event`)
-- [ ] T002 [P] Vitest設定を作成 — `vitest.config.ts`
+- [X] T002 [P] Vitest設定を作成 — `vitest.config.mts`
       (`environment: "jsdom"`、`@/*` エイリアス、`setupFiles: ["./vitest.setup.ts"]`)。
-      T001に依存。
-- [ ] T003 [P] Vitestセットアップファイルを作成 — `vitest.setup.ts`
+      T001に依存。(ESM警告を避けるため`.ts`ではなく`.mts`拡張子を使用)
+- [X] T003 [P] Vitestセットアップファイルを作成 — `vitest.setup.ts`
       (`@testing-library/jest-dom` 読み込み、`next/image` モック、`ResizeObserver` スタブ。
       research.md参照)。T001に依存。
-- [ ] T004 `test` スクリプトを追加 — `package.json`(`"test": "vitest run"`)。
+- [X] T004 `test` スクリプトを追加 — `package.json`(`"test": "vitest run"`)。
       T001〜T003に依存。
 
 ---
@@ -54,7 +54,7 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 **⚠️ CRITICAL**: このフェーズが完了するまで、いずれのユーザーストーリーにも着手できない
 
-- [ ] T005 `pnpm test` がテスト0件でもエラー無く実行できることを確認する。T001〜T004に依存。
+- [X] T005 `pnpm test` がテスト0件でもエラー無く実行できることを確認する。T001〜T004に依存。
 
 **Checkpoint**: テスト基盤の土台が完成。ここからユーザーストーリーごとの実装(テスト追加)に
 着手できる。
@@ -72,9 +72,9 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 ### Implementation for User Story 1
 
-- [ ] T006 [P] [US1] `grepDicelog` / `grepCharactername` のユニットテストを作成 —
+- [X] T006 [P] [US1] `grepDicelog` / `grepCharactername` のユニットテストを作成 —
       `src/utils/grep-utils.test.ts`(spec.md User Story 1 Acceptance Scenario 2・3に対応)
-- [ ] T007 [P] [US1] `convertDicelog` のユニットテストを作成 —
+- [X] T007 [P] [US1] `convertDicelog` のユニットテストを作成 —
       `src/utils/convert-utils.test.ts`(spec.md User Story 1 Acceptance Scenario 1に対応)
 
 **Checkpoint**: この時点で User Story 1 は独立して完了・検証可能。
@@ -91,13 +91,13 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 ### Implementation for User Story 2
 
-- [ ] T008 [P] [US2] `CharacterCard` の結合テストを作成 — `src/components/CharacterCard.test.tsx`
+- [X] T008 [P] [US2] `CharacterCard` の結合テストを作成 — `src/components/CharacterCard.test.tsx`
       (`ReaderChart` を `vi.mock` で差し替え、クリック/キーボード操作での表裏切り替えを検証。
       spec.md User Story 2 Acceptance Scenario 1・2に対応)
-- [ ] T009 [P] [US2] `ccfolia-grep` ページの結合テストを作成 —
+- [X] T009 [P] [US2] `ccfolia-grep` ページの結合テストを作成 —
       `src/app/trpg/ccfolia-grep/page.test.tsx`
-      (ファイルアップロード→キャラクター名選択→チェックボックス→Submit→結果表示。
-      spec.md User Story 2 Acceptance Scenario 3に対応)
+      (ファイルアップロード→キャラクター名選択→Submit→結果表示。デフォルトの成功度
+      チェックのまま実行。spec.md User Story 2 Acceptance Scenario 3に対応)
 
 **Checkpoint**: この時点で User Story 1・2 がともに独立して完了・検証可能。
 
