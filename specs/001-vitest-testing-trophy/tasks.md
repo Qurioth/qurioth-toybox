@@ -112,7 +112,7 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 ### Implementation for User Story 3
 
-- [ ] T010 [US3] CIにTestステップを追加 — `.github/workflows/ci.yml`
+- [X] T010 [US3] CIにTestステップを追加 — `.github/workflows/ci.yml`
       (`Lint` と `Build` の間に `pnpm test` を追加)。T006〜T009に依存
       (テストが存在し手元でパスする状態でないと、CI導入時点でワークフローが壊れるため)。
 
@@ -124,9 +124,9 @@ Single project(Next.js App Router)。既存の `src/utils/`、`src/components/`�
 
 **Purpose**: 複数ユーザーストーリーにまたがるドキュメント整備・最終確認
 
-- [ ] T011 [P] テスト方針(テスティングトロフィーの考え方、`pnpm test`、テストファイルの
+- [X] T011 [P] テスト方針(テスティングトロフィーの考え方、`pnpm test`、テストファイルの
       配置規則)を追記 — `CLAUDE.md`
-- [ ] T012 [quickstart.md](quickstart.md) の手順を通しで実行し、全ステップが期待通り
+- [X] T012 [quickstart.md](quickstart.md) の手順を通しで実行し、全ステップが期待通り
       動作することを確認する。T001〜T011に依存。
 
 ---
