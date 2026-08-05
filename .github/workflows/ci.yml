@@ -18,10 +18,14 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
+      - name: Read Node.js version from mise.toml
+        id: mise
+        run: echo "node-version=$(sed -n 's/^node = "\(.*\)"/\1/p' mise.toml)" >> "$GITHUB_OUTPUT"
+
       - name: Setup Node.js
         uses: actions/setup-node@v7.0.0
         with:
-          node-version: 22
+          node-version: ${{ steps.mise.outputs.node-version }}
           cache: pnpm
 
       - name: Install dependencies

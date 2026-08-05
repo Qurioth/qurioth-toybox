@@ -19,7 +19,8 @@ pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
 ```
 
 パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
-`packageManager` に固定したバージョンを実行)。
+`packageManager` に固定したバージョンを実行)。Node.js のバージョンは `mise.toml` で固定し、
+CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-version.md))。
 
 ## 技術スタック
 
