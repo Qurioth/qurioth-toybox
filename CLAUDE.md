@@ -15,10 +15,11 @@ pnpm dev      # 開発サーバー起動 (http://localhost:3000)
 pnpm build    # 本番ビルド
 pnpm start    # 本番サーバー起動
 pnpm lint     # Biome lint(旧 next lint / ESLint から移行)
+pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
 ```
 
 パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
-`packageManager` に固定したバージョンを実行)。テストフレームワークは未導入。
+`packageManager` に固定したバージョンを実行)。
 
 ## 技術スタック
 
@@ -69,8 +70,19 @@ src/
 - Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
   依存関係の更新は当面手動で行う。
 - `.github/workflows/ci.yml` — push (master) / pull_request で `pnpm install` → `pnpm lint`
-  → `pnpm build` を実行する([ADR-0005](docs/adr/0005-add-ci-workflow.md))。テストフレームワーク
-  未導入のため test ステップはまだ無い。
+  → `pnpm test` → `pnpm build` を実行する([ADR-0005](docs/adr/0005-add-ci-workflow.md))。
+
+## テスト方針
+
+- テスト戦略は**テスティングトロフィー**([ADR-0008](docs/adr/0008-adopt-testing-trophy-and-vitest.md))。
+  静的解析(TypeScript strict / Biome)を土台に、結合テスト(React Testing Library)を主軸とし、
+  複雑なロジックを持つ純粋関数にはユニットテストを書く。E2Eは現状導入していない。
+- テストランナーは Vitest(`environment: "jsdom"`)。設定は `vitest.config.mts` / `vitest.setup.ts`。
+- テストファイルはテスト対象と同じディレクトリに `*.test.ts(x)` として配置する(コロケーション、
+  `__tests__/` のような別ツリーは作らない)。
+- `describe` / `it` / `expect` は `vitest` から明示 import する(グローバル化しない)。
+- カバレッジの数値目標は設定しない。個人開発のスコープに見合わない重厚なテスト基盤を
+  目的化しない(`.specify/memory/constitution.md` 原則6)。
 
 ## 開発フロー(Spec-Driven Development)
 
