@@ -4,7 +4,7 @@ import { DICELOG_RESULT } from "@/assets/Const";
 import { CHARACTER_NAME, SUCCESS_LEVEL } from "@/assets/Message";
 import CopyTextBox from "@/components/CopyTextBox";
 import FileInput from "@/components/forms/FileInput";
-import HorizontailCheckBox from "@/components/forms/HorizontailCheckBox";
+import HorizontalCheckBox from "@/components/forms/HorizontalCheckBox";
 import Select from "@/components/forms/Select";
 import Template from "@/components/Template";
 import type { DiceLog } from "@/types/DiceLog";
@@ -80,7 +80,7 @@ export default function Home() {
             placeholder={CHARACTER_NAME}
             onChangeSelectBox={onChangeSelectBox}
           />
-          <HorizontailCheckBox
+          <HorizontalCheckBox
             label={SUCCESS_LEVEL}
             checkItemList={LEVEL_LIST}
             defaultCheckItemList={checkLevelList.current}

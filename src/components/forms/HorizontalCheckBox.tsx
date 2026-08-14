@@ -1,4 +1,4 @@
-const HorizontailCheckBox = (props: {
+const HorizontalCheckBox = (props: {
   label: string;
   checkItemList: string[];
   defaultCheckItemList: string[];
@@ -47,4 +47,4 @@ const HorizontailCheckBox = (props: {
   );
 };
 
-export default HorizontailCheckBox;
+export default HorizontalCheckBox;

@@ -6,9 +6,12 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
 
-const ReaderChart = dynamic(() => import("@/components/recharts/ReaderChart"), {
-  ssr: false,
-});
+const CharacteristicsRadarChart = dynamic(
+  () => import("@/components/recharts/CharacteristicsRadarChart"),
+  {
+    ssr: false,
+  },
+);
 
 const backstoryLabels = [
   "容姿の描写",
@@ -263,7 +266,7 @@ const CharacterCard = (props: { data: Investigator }) => {
                 style={{ display: reverse ? "none" : "block" }}
               >
                 <div className="flex flex-row w-full h-72 justify-center content-center">
-                  <ReaderChart
+                  <CharacteristicsRadarChart
                     name={data.name}
                     dataKey={"characteristics"}
                     data={characteristics}
@@ -424,7 +427,7 @@ const CharacterCard = (props: { data: Investigator }) => {
               {renderPortrait("h-[320px]")}
             </div>
             <div className="flex flex-row w-full h-72 justify-center content-center">
-              <ReaderChart
+              <CharacteristicsRadarChart
                 name={data.name}
                 dataKey={"characteristics"}
                 data={characteristics}
