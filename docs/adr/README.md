@@ -33,3 +33,4 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | [0009](0009-adopt-official-spec-kit-cli.md) | spec-kit公式CLIを導入し、手動再現していたSDD構成を置き換える | Accepted |
 | [0010](0010-adopt-mise-for-node-version.md) | Node.jsのバージョン管理にmiseを採用する | Accepted |
 | [0011](0011-enable-biome-formatter.md) | Biomeのフォーマッタを有効化する | Accepted |
+| [0012](0012-tidy-dependencies.md) | 依存関係を棚卸しし、未使用パッケージの削除と区分の是正を行う | Accepted |

@@ -28,9 +28,12 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
 
 - Next.js 16 (App Router) / React 19 / TypeScript (strict)
 - Tailwind CSS 3 系 + `tailwind-merge` / `tailwindcss-animate` / `tailwindcss-animated`
-- UI 部品: `@headlessui/react`, `lucide-react`, `@heroicons/react`
-  (`flowbite-react` は依存関係にあるが現状 `src` 配下での import は見当たらない)
-- フォーム: `react-hook-form`(依存関係にあるが現状未使用。導入予定 or 整理待ちの可能性あり)
+- UI 部品: `@headlessui/react`, `lucide-react`, `@heroicons/react`, `react-icons`
+- `flowbite` は **Tailwind プラグインとしてのみ**使用している。JS コンポーネントは import して
+  いないが、プラグインが注入するフォーム要素のベーススタイル(`[type=checkbox]` 等)に
+  `src/components/forms/` の UI が依存しているため削除できない
+  ([ADR-0012](docs/adr/0012-tidy-dependencies.md))。
+- フォーム: `react-hook-form`(`trpg/charaeno-chart` の URL 入力フォームで使用)
 - グラフ: `recharts`(`charaeno-chart` のレーダーチャート等)
 - Markdown 描画: `react-markdown` + `remark-gfm`(シナリオ本文の表示に使用)
 - パスエイリアス: `@/*` → `./src/*`(`tsconfig.json`)
