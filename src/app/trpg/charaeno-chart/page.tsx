@@ -25,10 +25,7 @@ export default function Home() {
     const charaeno7thApiUrl = `https://charaeno.com/api/v1/7th/${characterId}/summary`;
     const json = await getFetch(charaeno7thApiUrl);
 
-    json.name = json.name.replace(
-      /[({[<（【][^)}\]>）】]*[)}\]>）】]/g,
-      "",
-    );
+    json.name = json.name.replace(/[({[<（【][^)}\]>）】]*[)}\]>）】]/g, "");
     json.name = json.name.replace(/(^\s+|\s+$)/, "");
     setCharacterData(json);
   };

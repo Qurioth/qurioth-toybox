@@ -15,6 +15,8 @@ pnpm dev      # 開発サーバー起動 (http://localhost:3000)
 pnpm build    # 本番ビルド
 pnpm start    # 本番サーバー起動
 pnpm lint     # Biome lint(旧 next lint / ESLint から移行)
+pnpm format   # Biome フォーマッタで整形(検査のみは pnpm format:check)
+pnpm typecheck # TypeScript の型チェック(tsc --noEmit)
 pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
 ```
 
@@ -26,9 +28,12 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
 
 - Next.js 16 (App Router) / React 19 / TypeScript (strict)
 - Tailwind CSS 3 系 + `tailwind-merge` / `tailwindcss-animate` / `tailwindcss-animated`
-- UI 部品: `@headlessui/react`, `lucide-react`, `@heroicons/react`
-  (`flowbite-react` は依存関係にあるが現状 `src` 配下での import は見当たらない)
-- フォーム: `react-hook-form`(依存関係にあるが現状未使用。導入予定 or 整理待ちの可能性あり)
+- UI 部品: `@headlessui/react`, `lucide-react`, `@heroicons/react`, `react-icons`
+- `flowbite` は **Tailwind プラグインとしてのみ**使用している。JS コンポーネントは import して
+  いないが、プラグインが注入するフォーム要素のベーススタイル(`[type=checkbox]` 等)に
+  `src/components/forms/` の UI が依存しているため削除できない
+  ([ADR-0012](docs/adr/0012-tidy-dependencies.md))。
+- フォーム: `react-hook-form`(`trpg/charaeno-chart` の URL 入力フォームで使用)
 - グラフ: `recharts`(`charaeno-chart` のレーダーチャート等)
 - Markdown 描画: `react-markdown` + `remark-gfm`(シナリオ本文の表示に使用)
 - パスエイリアス: `@/*` → `./src/*`(`tsconfig.json`)
@@ -65,13 +70,16 @@ src/
 - クライアントコンポーネントには先頭に `"use client"` を明示(例: `src/app/trpg/page.tsx`)。
 - UI 文言は日本語が基本(TRPGコミュニティ向けの個人サイトのため)。
 - スタイリングは Tailwind のユーティリティクラスを直接記述し、`clsx` / `tailwind-merge` で結合。
+- 整形は Biome のフォーマッタに任せる(2スペースインデント / ダブルクォート / LF。
+  [ADR-0011](docs/adr/0011-enable-biome-formatter.md))。手で整形し直さないこと。
 
 ## CI / 自動化
 
 - Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
   依存関係の更新は当面手動で行う。
 - `.github/workflows/ci.yml` — push (master) / pull_request で `pnpm install` → `pnpm lint`
-  → `pnpm test` → `pnpm build` を実行する([ADR-0005](docs/adr/0005-add-ci-workflow.md))。
+  → `pnpm format:check` → `pnpm typecheck` → `pnpm test` → `pnpm build` を実行する
+  ([ADR-0005](docs/adr/0005-add-ci-workflow.md))。
 
 ## テスト方針
 
