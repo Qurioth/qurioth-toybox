@@ -433,9 +433,7 @@ const CharacterCard = (props: { data: Investigator }) => {
             {renderAttributeCards()}
           </div>
           <div className="px-2 pb-4 space-y-4">
-            <div className="table-wrp">
-              {renderSkillTable()}
-            </div>
+            <div className="table-wrp">{renderSkillTable()}</div>
             <div className="overflow-x-hidden">
               {renderBackstoriesAndNotes()}
             </div>

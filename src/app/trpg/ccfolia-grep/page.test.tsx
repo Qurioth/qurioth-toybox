@@ -26,9 +26,7 @@ describe("ccfolia-grep page", () => {
     await user.upload(fileInput, file);
 
     const select = await screen.findByRole("combobox");
-    await waitFor(() =>
-      expect(select).toHaveTextContent("キャラクター太郎"),
-    );
+    await waitFor(() => expect(select).toHaveTextContent("キャラクター太郎"));
 
     await user.selectOptions(select, "キャラクター太郎");
     await user.click(screen.getByRole("button", { name: "Submit" }));

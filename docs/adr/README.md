@@ -32,3 +32,4 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | [0008](0008-adopt-testing-trophy-and-vitest.md) | テスト戦略にテスティングトロフィー、テストランナーにVitestを採用する | Accepted |
 | [0009](0009-adopt-official-spec-kit-cli.md) | spec-kit公式CLIを導入し、手動再現していたSDD構成を置き換える | Accepted |
 | [0010](0010-adopt-mise-for-node-version.md) | Node.jsのバージョン管理にmiseを採用する | Accepted |
+| [0011](0011-enable-biome-formatter.md) | Biomeのフォーマッタを有効化する | Accepted |

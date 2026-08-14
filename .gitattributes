@@ -1,0 +1,4 @@
+# Biome のフォーマッタは LF を出力するため、作業ツリーの改行も LF に固定する。
+# これがないと core.autocrlf=true の Windows 環境でチェックアウトのたびに
+# 全ファイルが「未整形」と判定される。
+* text=auto eol=lf

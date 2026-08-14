@@ -16,7 +16,7 @@ const isCthulhuScenario = (system?: string) =>
   system?.includes("クトゥルフ神話TRPG") ?? false;
 
 export async function generateMetadata(
-  paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>
+  paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>,
 ): Promise<Metadata> {
   const { params } = await paramsObj;
   const resolvedParams = await params;
@@ -32,7 +32,7 @@ export async function generateMetadata(
 }
 
 export default async function Home(
-  paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>
+  paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>,
 ) {
   const { params } = await paramsObj;
   const resolvedParams = await params;

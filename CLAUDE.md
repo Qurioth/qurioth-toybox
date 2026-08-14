@@ -15,6 +15,7 @@ pnpm dev      # 開発サーバー起動 (http://localhost:3000)
 pnpm build    # 本番ビルド
 pnpm start    # 本番サーバー起動
 pnpm lint     # Biome lint(旧 next lint / ESLint から移行)
+pnpm format   # Biome フォーマッタで整形(検査のみは pnpm format:check)
 pnpm typecheck # TypeScript の型チェック(tsc --noEmit)
 pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
 ```
@@ -66,13 +67,15 @@ src/
 - クライアントコンポーネントには先頭に `"use client"` を明示(例: `src/app/trpg/page.tsx`)。
 - UI 文言は日本語が基本(TRPGコミュニティ向けの個人サイトのため)。
 - スタイリングは Tailwind のユーティリティクラスを直接記述し、`clsx` / `tailwind-merge` で結合。
+- 整形は Biome のフォーマッタに任せる(2スペースインデント / ダブルクォート / LF。
+  [ADR-0011](docs/adr/0011-enable-biome-formatter.md))。手で整形し直さないこと。
 
 ## CI / 自動化
 
 - Renovate による自動依存更新は運用が定着せず廃止した([ADR-0003](docs/adr/0003-drop-renovate.md))。
   依存関係の更新は当面手動で行う。
 - `.github/workflows/ci.yml` — push (master) / pull_request で `pnpm install` → `pnpm lint`
-  → `pnpm typecheck` → `pnpm test` → `pnpm build` を実行する
+  → `pnpm format:check` → `pnpm typecheck` → `pnpm test` → `pnpm build` を実行する
   ([ADR-0005](docs/adr/0005-add-ci-workflow.md))。
 
 ## テスト方針

@@ -1,55 +1,58 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
-	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-	"files": { "ignoreUnknown": false, "includes": ["**", "!**/*.css"] },
-	"formatter": { "enabled": false },
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"preset": "recommended",
-			"complexity": {
-				"noBannedTypes": "error",
-				"noUselessTypeConstraint": "error"
-			},
-			"correctness": {
-				"noBeforeInteractiveScriptOutsideDocument": "warn",
-				"noNextAsyncClientComponent": "warn",
-				"noPrecisionLoss": "error",
-				"noUnusedVariables": "error",
-				"useInlineScriptId": "error"
-			},
-			"performance": {
-				"noImgElement": "warn",
-				"noSyncScripts": "error",
-				"noUnwantedPolyfillio": "warn",
-				"useGoogleFontPreconnect": "warn"
-			},
-			"style": {
-				"noCommonJs": "error",
-				"noHeadElement": "warn",
-				"noNamespace": "error",
-				"useArrayLiterals": "error",
-				"useAsConstAssertion": "error"
-			},
-			"suspicious": {
-				"noDocumentImportInPage": "error",
-				"noDuplicateEnumValues": "error",
-				"noExplicitAny": "error",
-				"noExtraNonNullAssertion": "error",
-				"noHeadImportInDocument": "error",
-				"noMisleadingInstantiator": "error",
-				"noNonNullAssertedOptionalChain": "error",
-				"noUnsafeDeclarationMerging": "error",
-				"useGoogleFontDisplay": "warn"
-			}
-		}
-	},
-	"javascript": { "formatter": { "quoteStyle": "double" } },
-	"assist": { "enabled": false },
-	"overrides": [
-		{
-			"includes": ["tailwind.config.ts"],
-			"linter": { "rules": { "style": { "noCommonJs": "off" } } }
-		}
-	]
+  "$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!**/*.css", "!.specify"]
+  },
+  "formatter": { "enabled": true, "indentStyle": "space" },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "complexity": {
+        "noBannedTypes": "error",
+        "noUselessTypeConstraint": "error"
+      },
+      "correctness": {
+        "noBeforeInteractiveScriptOutsideDocument": "warn",
+        "noNextAsyncClientComponent": "warn",
+        "noPrecisionLoss": "error",
+        "noUnusedVariables": "error",
+        "useInlineScriptId": "error"
+      },
+      "performance": {
+        "noImgElement": "warn",
+        "noSyncScripts": "error",
+        "noUnwantedPolyfillio": "warn",
+        "useGoogleFontPreconnect": "warn"
+      },
+      "style": {
+        "noCommonJs": "error",
+        "noHeadElement": "warn",
+        "noNamespace": "error",
+        "useArrayLiterals": "error",
+        "useAsConstAssertion": "error"
+      },
+      "suspicious": {
+        "noDocumentImportInPage": "error",
+        "noDuplicateEnumValues": "error",
+        "noExplicitAny": "error",
+        "noExtraNonNullAssertion": "error",
+        "noHeadImportInDocument": "error",
+        "noMisleadingInstantiator": "error",
+        "noNonNullAssertedOptionalChain": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "useGoogleFontDisplay": "warn"
+      }
+    }
+  },
+  "javascript": { "formatter": { "quoteStyle": "double" } },
+  "assist": { "enabled": false },
+  "overrides": [
+    {
+      "includes": ["tailwind.config.ts"],
+      "linter": { "rules": { "style": { "noCommonJs": "off" } } }
+    }
+  ]
 }

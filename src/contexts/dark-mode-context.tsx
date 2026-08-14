@@ -9,7 +9,7 @@ type DarkModeContextType = {
 };
 
 const DarkModeContext = createContext<DarkModeContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -29,7 +29,7 @@ export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({
     } else {
       // ローカルストレージに設定がない場合、デバイスのダークモード設定を確認
       const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
       setIsDarkMode(systemPrefersDark);
       document.documentElement.classList.toggle("dark", systemPrefersDark);

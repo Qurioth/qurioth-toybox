@@ -3,7 +3,7 @@ import type { DiceLog } from "@/types/DiceLog";
 const grepDicelog = (
   dicelog: DiceLog[],
   selectName: string,
-  checkLevelList: string[]
+  checkLevelList: string[],
 ) => {
   const writeTextList = [];
   writeTextList.push(`**${selectName}**`);
@@ -14,13 +14,13 @@ const grepDicelog = (
         checkLevelList.forEach((level) => {
           if (log.content.indexOf(level) > -1) {
             writeTextList.push(
-              `${log.tab} ${log.name} ${log.content.replace(/&lt;/g, "<")}`
+              `${log.tab} ${log.name} ${log.content.replace(/&lt;/g, "<")}`,
             );
           }
         });
       } else {
         writeTextList.push(
-          `${log.tab} ${log.name} ${log.content.replace(/&lt;/g, "<")}`
+          `${log.tab} ${log.name} ${log.content.replace(/&lt;/g, "<")}`,
         );
       }
     }
