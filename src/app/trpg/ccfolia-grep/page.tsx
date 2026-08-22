@@ -1,7 +1,7 @@
 "use client";
 
-import { DICELOG_RESULT } from "@/assets/Const";
-import { CHARACTER_NAME, SUCCESS_LEVEL } from "@/assets/Message";
+import { DICELOG_RESULT } from "@/constants/dicelog";
+import { CHARACTER_NAME, SUCCESS_LEVEL } from "@/constants/message";
 import CopyTextBox from "@/components/CopyTextBox";
 import FileInput from "@/components/forms/FileInput";
 import HorizontalCheckBox from "@/components/forms/HorizontalCheckBox";

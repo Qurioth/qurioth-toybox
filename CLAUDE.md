@@ -49,7 +49,9 @@ src/
   components/     再利用UIコンポーネント(animata/, forms/, recharts/ にサブ分類)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
   contexts/       React Context
-  lib/, utils/, types/, image/, assets/
+  constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
+  utils/          純粋関数のユーティリティ(`<用途>-utils.ts` で命名)
+  types/, image/
 ```
 
 ### `src/app/trpg` 配下の主なツール
