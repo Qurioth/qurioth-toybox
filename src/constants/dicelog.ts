@@ -1,5 +1,4 @@
-export const USER_NAME = { SYSTEM: "system" };
-
+/** CCFOLIA のダイスログに現れる成功度の表記 */
 export const DICELOG_RESULT = {
   CRITICAL: "クリティカル",
   SUCCESS: "成功",

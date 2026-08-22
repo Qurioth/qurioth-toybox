@@ -100,7 +100,7 @@ function CardLink({
   );
 }
 
-export default function Home() {
+export default function TrpgPage() {
   return (
     <Template>
       <div className="flex w-full max-w-5xl flex-col gap-10">

@@ -51,7 +51,7 @@ function ImageWithSkeleton(props: React.ComponentProps<typeof Image>) {
   );
 }
 
-export default function Home() {
+export default function PhotographPage() {
   const BATCH_SIZE = 20;
   const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
   const [columnCount, setColumnCount] = useState(4);

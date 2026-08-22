@@ -11,7 +11,7 @@ import hazamaKureha from "@/data/sample-character/hazama-kureha.json";
 import kawasakiSora from "@/data/sample-character/kawasaki-sora.json";
 import yamatoAkira from "@/data/sample-character/yamato-akira.json";
 
-export default function Home() {
+export default function SampleCharacterPage() {
   const fugakuRairiJson: Investigator = fugakuRairi;
   const hamuroAmanaJson: Investigator = hamuroAmana;
   const hamuroMichiharuJson: Investigator = hamuroMichiharu;

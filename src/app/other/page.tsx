@@ -2,7 +2,7 @@
 
 import Template from "@/components/Template";
 
-export default function Home() {
+export default function OtherPage() {
   return (
     <Template>
       <div className="flex flex-col gap-8">

@@ -12,7 +12,7 @@ type Inputs = {
   url: string;
 };
 
-export default function Home() {
+export default function CharaenoChartPage() {
   const [characterData, setCharacterData] = useState<Investigator>();
   const {
     register,

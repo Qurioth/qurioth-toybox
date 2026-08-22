@@ -10,7 +10,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { Investigator } from "@/types/Charaeno7th";
 import CharacterCard from "./CharacterCard";
 
-vi.mock("@/components/recharts/ReaderChart", () => ({
+vi.mock("@/components/recharts/CharacteristicsRadarChart", () => ({
   default: () => null,
 }));
 

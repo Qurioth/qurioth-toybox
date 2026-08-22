@@ -49,7 +49,9 @@ src/
   components/     再利用UIコンポーネント(animata/, forms/, recharts/ にサブ分類)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
   contexts/       React Context
-  lib/, utils/, types/, image/, assets/
+  constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
+  utils/          純粋関数のユーティリティ(`<用途>-utils.ts` で命名)
+  types/, image/
 ```
 
 ### `src/app/trpg` 配下の主なツール
@@ -67,6 +69,8 @@ src/
 ## コーディング規約
 
 - コンポーネントは PascalCase のファイル名(例: `CharacterCard.tsx`)。
+- ページコンポーネント(`app/**/page.tsx` の default export)は `<機能名>Page` と命名する
+  (例: `CcfoliaGrepPage`、`ScenarioDetailPage`)。`Home` のような汎用名は使わない。
 - クライアントコンポーネントには先頭に `"use client"` を明示(例: `src/app/trpg/page.tsx`)。
 - UI 文言は日本語が基本(TRPGコミュニティ向けの個人サイトのため)。
 - スタイリングは Tailwind のユーティリティクラスを直接記述し、`clsx` / `tailwind-merge` で結合。

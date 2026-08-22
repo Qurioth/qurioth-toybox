@@ -7,8 +7,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// biome-ignore lint/suspicious/noExplicitAny: recharts data shape varies per chart
-const ReaderChart = (props: { name: string; dataKey: string; data: any[] }) => {
+const CharacteristicsRadarChart = (props: {
+  name: string;
+  dataKey: string;
+  // biome-ignore lint/suspicious/noExplicitAny: recharts data shape varies per chart
+  data: any[];
+}) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={props.data}>
@@ -27,4 +31,4 @@ const ReaderChart = (props: { name: string; dataKey: string; data: any[] }) => {
   );
 };
 
-export default ReaderChart;
+export default CharacteristicsRadarChart;
