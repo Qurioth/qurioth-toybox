@@ -19,7 +19,7 @@ const LEVEL_LIST = [
   DICELOG_RESULT.FUMBLE,
 ];
 
-export default function Home() {
+export default function CcfoliaGrepPage() {
   const [nameList, setNameList] = useState<string[]>([]);
   const [resultText, setResultText] = useState<string[]>([]);
   const dicelog = useRef<DiceLog[]>([]);

@@ -67,6 +67,8 @@ src/
 ## コーディング規約
 
 - コンポーネントは PascalCase のファイル名(例: `CharacterCard.tsx`)。
+- ページコンポーネント(`app/**/page.tsx` の default export)は `<機能名>Page` と命名する
+  (例: `CcfoliaGrepPage`、`ScenarioDetailPage`)。`Home` のような汎用名は使わない。
 - クライアントコンポーネントには先頭に `"use client"` を明示(例: `src/app/trpg/page.tsx`)。
 - UI 文言は日本語が基本(TRPGコミュニティ向けの個人サイトのため)。
 - スタイリングは Tailwind のユーティリティクラスを直接記述し、`clsx` / `tailwind-merge` で結合。

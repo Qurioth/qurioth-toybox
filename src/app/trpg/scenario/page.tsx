@@ -2,7 +2,7 @@ import Template from "@/components/Template";
 import scenarios from "@/data/scenario/scenario-list";
 import ScenarioList, { type ScenarioListItem } from "./ScenarioList";
 
-export default function Home() {
+export default function ScenarioPage() {
   const scenarioItems: ScenarioListItem[] = Object.entries(scenarios).map(
     ([id, scenario]) => ({
       id,

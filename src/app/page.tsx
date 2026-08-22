@@ -1,6 +1,6 @@
 import Template from "@/components/Template";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Template>
       <div className="w-11/12 flex gap-6 flex-col p-2">

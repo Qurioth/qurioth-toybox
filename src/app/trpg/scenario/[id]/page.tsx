@@ -31,7 +31,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function Home(
+export default async function ScenarioDetailPage(
   paramsObj: { params: { id: string } } | Promise<{ params: { id: string } }>,
 ) {
   const { params } = await paramsObj;

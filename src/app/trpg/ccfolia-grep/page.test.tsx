@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { DarkModeProvider } from "@/contexts/dark-mode-context";
-import Home from "./page";
+import CcfoliaGrepPage from "./page";
 
 const sampleLogHtml = `
   <p style="margin: 0px;"><span> [メイン]</span><span>キャラクター太郎</span> :<span>1d100&lt;=50 → 23 成功</span></p>
@@ -12,7 +12,7 @@ const sampleLogHtml = `
 const renderPage = () =>
   render(
     <DarkModeProvider>
-      <Home />
+      <CcfoliaGrepPage />
     </DarkModeProvider>,
   );
 

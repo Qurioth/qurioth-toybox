@@ -379,7 +379,7 @@ const ReplayCard = ({ replay }: { replay: ReplayVideo }) => {
   );
 };
 
-export default function Home() {
+export default function ReplayPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSearchTargets, setSelectedSearchTargets] = useState<
     SearchTarget[]

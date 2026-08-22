@@ -1,6 +1,6 @@
 import BlurryBlob from "@/components/animata/background/blurry-blob";
 
-export default function BlurryBlobDemo() {
+export default function BlurryBlobDemoPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8">
       <h1 className="text-3xl font-bold mb-8 animate-in fade-in duration-500">
