@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { convertDicelog } from "./convert-utils";
 
+/** CCFOLIA のログ1行分のHTMLを組み立てる */
+const logHtml = (tab: string, name: string, content: string) =>
+  `<p style="margin: 0px;"><span> [${tab}]</span><span>${name}</span> :<span>${content}</span></p>`;
+
 describe("convertDicelog", () => {
   it("CCFOLIAのダイスログHTMLをDiceLog配列に変換する", () => {
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
@@ -33,5 +37,55 @@ describe("convertDicelog", () => {
 
   it("空文字列を渡すと空のDiceLogを1件返す", () => {
     expect(convertDicelog("")).toEqual([{ tab: "", name: "", content: "" }]);
+  });
+
+  it("キャラクター名が1文字でもnameとcontentを取り違えない", () => {
+    const html = [
+      logHtml("メイン", "あ", "1d100&lt;=50 → 1 成功"),
+      logHtml(
+        "メイン",
+        "とてもとても長いキャラクター名前です",
+        "1d100&lt;=50 → 2 失敗",
+      ),
+      logHtml("メイン", "い", "1d100&lt;=50 → 3 成功"),
+    ].join("");
+
+    expect(convertDicelog(html)).toEqual([
+      { tab: "[メイン]", name: "あ", content: "1d100&lt;=50 → 1 成功" },
+      {
+        tab: "[メイン]",
+        name: "とてもとても長いキャラクター名前です",
+        content: "1d100&lt;=50 → 2 失敗",
+      },
+      { tab: "[メイン]", name: "い", content: "1d100&lt;=50 → 3 成功" },
+    ]);
+  });
+
+  it("タブ名の長さが行ごとに違ってもタブを取り違えない", () => {
+    const html = [
+      logHtml("メイン", "アリス", "1d100&lt;=50 → 1 成功"),
+      logHtml("とても長いタブ名です", "ボブ", "1d100&lt;=50 → 2 失敗"),
+      logHtml("A", "キャロル", "1d100&lt;=50 → 3 成功"),
+    ].join("");
+
+    expect(convertDicelog(html).map((log) => log.tab)).toEqual([
+      "[メイン]",
+      "[とても長いタブ名です]",
+      "[A]",
+    ]);
+  });
+
+  it("spanがタブだけの行が混ざっても後続の行が壊れない", () => {
+    const html = [
+      logHtml("メイン", "アリス", "1d100&lt;=50 → 1 成功"),
+      `<p style="margin: 0px;"><span> [メイン]</span></p>`,
+      logHtml("メイン", "ボブ", "1d100&lt;=50 → 2 失敗"),
+    ].join("");
+
+    expect(convertDicelog(html)).toEqual([
+      { tab: "[メイン]", name: "アリス", content: "1d100&lt;=50 → 1 成功" },
+      { tab: "[メイン]", name: "", content: "" },
+      { tab: "[メイン]", name: "ボブ", content: "1d100&lt;=50 → 2 失敗" },
+    ]);
   });
 });

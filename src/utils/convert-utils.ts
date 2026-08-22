@@ -1,9 +1,12 @@
 import type { DiceLog } from "@/types/DiceLog";
 
-// const reg = /<p>.*?<\/p>/g;
-const tabReg = /<span> \[.*\]<\/span>/g;
-const nameReg = /<span>.*<\/span>/g;
-// const contentReg = / :<span>.*<\/span>/g;
+// 1行を span 単位に分割したあと、どの span なのかを形で判別する。
+// gフラグは付けないこと。test() が lastIndex を持ち越し、直前に何を判定したかで
+// 結果が変わってしまうため(キャラクター名が短い行で name と content が入れ替わる)。
+// また前後をアンカーで固定しないと、nameReg が content の span (" :<span>...")にも
+// マッチしてしまう。
+const tabReg = /^<span> \[.*\]<\/span>$/;
+const nameReg = /^<span>.*<\/span>$/;
 const htmlTagReg =
   /<!DOCTYPE html>|<.*html.*>|<.*head.*>|<.*meta.*>|<title>.*<\/title>|<.*body.*>/g;
 
@@ -29,9 +32,6 @@ const convertDicelog = (htmlString: string) => {
         case nameReg.test(dicelogStr):
           dicelog.name = dicelogStr.replace(/<span>|<\/span>/g, "");
           break;
-        // case contentReg.test(dicelogStr):
-        //   dicelog.content = dicelogStr.replace(/ :<span>|<\/span>/g, "");
-        //   break;
         default:
           dicelog.content = dicelogStr.replace(/ :<span>|<\/span>/g, "");
           break;
