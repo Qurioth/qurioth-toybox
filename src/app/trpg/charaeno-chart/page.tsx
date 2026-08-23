@@ -1,6 +1,8 @@
 "use client";
 
 import CharacterCard from "@/components/CharacterCard";
+import PillLink from "@/components/PillLink";
+import SubmitButton from "@/components/forms/SubmitButton";
 import Template from "@/components/Template";
 import {
   CHARACTER_SHEET_FETCH_FAILED,
@@ -83,12 +85,7 @@ export default function CharaenoChartPage() {
                 </label>
               </div>
               <div className="mb-5">
-                <button
-                  type="submit"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Submit
-                </button>
+                <SubmitButton className="w-full sm:w-auto">Submit</SubmitButton>
               </div>
             </div>
             {errors.url && (
@@ -113,12 +110,9 @@ export default function CharaenoChartPage() {
         </div>
 
         <div className="flex justify-center m-6">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 animate-in zoom-in duration-300"
-            href="/trpg/charaeno-chart/sample-character"
-          >
+          <PillLink href="/trpg/charaeno-chart/sample-character">
             Sample Characters
-          </a>
+          </PillLink>
         </div>
       </div>
     </Template>

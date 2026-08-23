@@ -33,6 +33,10 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
   いないが、プラグインが注入するフォーム要素のベーススタイル(`[type=checkbox]` 等)に
   `src/components/forms/` の UI が依存しているため削除できない
   ([ADR-0012](docs/adr/0012-tidy-dependencies.md))。
+- **注意**: flowbite プラグインは `blue` パレット全体を差し替える(`blue-900` は Tailwind 既定の
+  `#1e3a8a` ではなく `#233876`)。既定の色を使いたい場合はパレット名では指せないため、
+  `tailwind.config.ts` の `theme.extend.colors` に名前を付ける(例: `connection-accent`)。
+  `slate` など他のパレットは差し替えられていない。
 - フォーム: `react-hook-form`(`trpg/charaeno-chart` の URL 入力フォームで使用)
 - グラフ: `recharts`(`charaeno-chart` のレーダーチャート等)
 - Markdown 描画: `react-markdown` + `remark-gfm`(シナリオ本文の表示に使用)

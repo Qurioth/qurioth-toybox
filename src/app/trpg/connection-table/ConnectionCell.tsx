@@ -33,10 +33,10 @@ const ConnectionCell = ({
   const isTown = isTownConnection(from.id, to.id);
 
   return (
-    <td className="h-40 border-b border-r border-orange-100 bg-orange-50 p-2 align-top dark:bg-[#020617]">
+    <td className="h-40 border-b border-r border-orange-100 bg-orange-50 p-2 align-top dark:bg-slate-950">
       <div className="flex h-full flex-col gap-2">
         {isTown ? (
-          <div className="flex h-9 w-full shrink-0 items-center justify-center rounded-md bg-orange-500 px-2 text-sm font-extrabold text-white dark:bg-[#1E3A8A]">
+          <div className="flex h-9 w-full shrink-0 items-center justify-center rounded-md bg-orange-500 px-2 text-sm font-extrabold text-white dark:bg-connection-accent">
             {connection.content}
           </div>
         ) : (
@@ -46,7 +46,7 @@ const ConnectionCell = ({
             value={connection.content}
             aria-label={`${fromLabel}から${toLabel}へのつながり内容`}
             onChange={(event) => onChange({ content: event.target.value })}
-            className="h-9 w-full shrink-0 rounded-md border border-gray-300 bg-white pl-6 pr-2 text-center text-sm font-bold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
+            className="h-9 w-full shrink-0 rounded-md border border-gray-300 bg-white pl-6 pr-2 text-center text-sm font-bold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-slate-800 dark:text-slate-50"
           />
         )}
         <input
@@ -64,7 +64,7 @@ const ConnectionCell = ({
 
             onChange({ strength });
           }}
-          className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white pl-10 pr-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
+          className="min-h-0 flex-1 w-full rounded-md border border-gray-300 bg-white pl-10 pr-2 text-center text-2xl font-extrabold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-slate-800 dark:text-slate-50"
         />
       </div>
     </td>

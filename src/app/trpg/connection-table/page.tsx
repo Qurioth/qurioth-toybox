@@ -31,7 +31,7 @@ export default function ConnectionTablePage() {
   return (
     <Template>
       <div className="w-full max-w-7xl">
-        <div className="flex flex-col gap-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-[#020617] sm:p-6">
+        <div className="flex flex-col gap-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-slate-950 sm:p-6">
           <datalist id={CONNECTION_DATALIST_ID}>
             {CONNECTION_LIST.map((connectionName) => (
               <option key={connectionName} value={connectionName} />
@@ -61,7 +61,7 @@ export default function ConnectionTablePage() {
 
           <div className="scrollbar-none w-full overflow-x-auto">
             <div className="mx-auto w-max overflow-hidden rounded-lg border border-gray-200">
-              <table className="table-fixed border-collapse bg-stone-50 text-sm dark:bg-[#020617]">
+              <table className="table-fixed border-collapse bg-stone-50 text-sm dark:bg-slate-950">
                 <colgroup>
                   <col className="w-40" />
                   {participants.map((participant) => (
@@ -71,7 +71,7 @@ export default function ConnectionTablePage() {
                 </colgroup>
                 <thead>
                   <tr>
-                    <th className="sticky left-0 z-20 border-b border-r border-orange-200 bg-orange-400 p-1.5 text-left font-bold text-white dark:bg-[#1E3A8A]">
+                    <th className="sticky left-0 z-20 border-b border-r border-orange-200 bg-orange-400 p-1.5 text-left font-bold text-white dark:bg-connection-accent">
                       <span className="block text-xs text-orange-50 dark:text-slate-100">
                         あなた
                       </span>
@@ -82,14 +82,14 @@ export default function ConnectionTablePage() {
                     {participants.map((participant) => (
                       <th
                         key={participant.id}
-                        className="w-40 border-b border-r border-orange-200 bg-orange-100 p-2 text-center font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50"
+                        className="w-40 border-b border-r border-orange-200 bg-orange-100 p-2 text-center font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50"
                       >
-                        <span className="block h-10 rounded-md bg-white/60 px-3 py-2 dark:bg-[#1E3A8A]/70">
+                        <span className="block h-10 rounded-md bg-white/60 px-3 py-2 dark:bg-connection-accent/70">
                           {participant.id === TOWN_ID ? "町" : participant.name}
                         </span>
                       </th>
                     ))}
-                    <th className="w-24 border-b border-r border-orange-200 bg-orange-100 p-2 text-center font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50">
+                    <th className="w-24 border-b border-r border-orange-200 bg-orange-100 p-2 text-center font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50">
                       ふしぎ
                     </th>
                   </tr>
@@ -109,7 +109,7 @@ export default function ConnectionTablePage() {
                         fromParticipant.id === toParticipant.id ? (
                           <td
                             key={toParticipant.id}
-                            className="h-40 border-b border-r border-orange-200 bg-orange-50 dark:bg-[#020617]"
+                            className="h-40 border-b border-r border-orange-200 bg-orange-50 dark:bg-slate-950"
                             aria-label="同じ対象"
                           />
                         ) : (
@@ -139,7 +139,7 @@ export default function ConnectionTablePage() {
                           />
                         ),
                       )}
-                      <td className="h-40 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50">
+                      <td className="h-40 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50">
                         {getRowTotal(
                           participants,
                           connections,
@@ -149,13 +149,13 @@ export default function ConnectionTablePage() {
                     </tr>
                   ))}
                   <tr>
-                    <th className="sticky left-0 z-10 border-b border-r border-orange-200 bg-orange-100 p-1.5 text-center font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50">
+                    <th className="sticky left-0 z-10 border-b border-r border-orange-200 bg-orange-100 p-1.5 text-center font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50">
                       想い
                     </th>
                     {participants.map((participant) => (
                       <td
                         key={participant.id}
-                        className="h-16 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50"
+                        className="h-16 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50"
                       >
                         {getColumnTotal(
                           participants,
@@ -164,7 +164,7 @@ export default function ConnectionTablePage() {
                         )}
                       </td>
                     ))}
-                    <td className="h-16 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-[#1E293B] dark:text-slate-50"></td>
+                    <td className="h-16 border-b border-r border-orange-200 bg-orange-100 p-2 text-center align-middle text-2xl font-extrabold text-orange-950 dark:bg-slate-800 dark:text-slate-50"></td>
                   </tr>
                 </tbody>
               </table>
