@@ -3,16 +3,20 @@ import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   darkMode: "class",
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  // src 配下をまとめて対象にする。個別に列挙していた頃は data/ や contexts/ が
+  // 漏れていて、そこにクラス名を書くと生成されない罠があった
+  // (存在しない src/pages/ も残っていた)。
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // コネクション表のダークモードの見出し・アクセント色。
+        // Tailwind 既定の blue-900 と同じ値だが、flowbite プラグインが blue
+        // パレット全体を差し替える(blue-900 は #233876 になる)ため、
+        // パレット名では指せない。ここに名前を付けて一箇所で管理する。
+        "connection-accent": "#1E3A8A",
         filter: {
           "blur-20": "blur(20px)",
           "blur-25": "blur(25px)",

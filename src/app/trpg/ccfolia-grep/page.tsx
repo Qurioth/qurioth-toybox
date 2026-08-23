@@ -6,6 +6,7 @@ import CopyTextBox from "@/components/CopyTextBox";
 import FileInput from "@/components/forms/FileInput";
 import HorizontalCheckBox from "@/components/forms/HorizontalCheckBox";
 import Select from "@/components/forms/Select";
+import SubmitButton from "@/components/forms/SubmitButton";
 import Template from "@/components/Template";
 import type { DiceLog } from "@/types/DiceLog";
 import { convertDicelog } from "@/utils/convert-utils";
@@ -86,15 +87,14 @@ export default function CcfoliaGrepPage() {
             defaultCheckItemList={checkLevelList.current}
             onChangeCheckBox={onChangeCheckBox}
           />
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          <SubmitButton
+            className="w-full"
             onClick={() => {
               onClickExecute();
             }}
           >
             Submit
-          </button>
+          </SubmitButton>
           <CopyTextBox textList={resultText} />
         </div>
       </div>

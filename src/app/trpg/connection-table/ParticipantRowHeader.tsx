@@ -18,9 +18,9 @@ const ParticipantRowHeader = ({
   onChangeName,
   onRemove,
 }: Props) => (
-  <th className="sticky left-0 z-10 border-b border-r border-orange-200 bg-orange-400 p-1.5 text-left font-extrabold text-white dark:bg-[#1E3A8A]">
+  <th className="sticky left-0 z-10 border-b border-r border-orange-200 bg-orange-400 p-1.5 text-left font-extrabold text-white dark:bg-connection-accent">
     {participant.id === TOWN_ID ? (
-      <span className="block h-10 rounded-md bg-white/25 px-2 py-2 text-center dark:bg-[#1E293B]/70">
+      <span className="block h-10 rounded-md bg-white/25 px-2 py-2 text-center dark:bg-slate-800/70">
         町
       </span>
     ) : (
@@ -31,7 +31,7 @@ const ParticipantRowHeader = ({
           value={participant.name}
           aria-label={`${label}の名前`}
           onChange={(event) => onChangeName(event.target.value)}
-          className="h-20 w-full min-w-0 rounded-md border border-orange-100 bg-white px-2 text-center font-extrabold text-gray-900 outline-none focus:border-lime-700 focus:ring-2 focus:ring-lime-200 dark:bg-[#1E293B] dark:text-slate-50 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+          className="h-20 w-full min-w-0 rounded-md border border-orange-100 bg-white px-2 text-center font-extrabold text-gray-900 outline-none focus:border-lime-700 focus:ring-2 focus:ring-lime-200 dark:bg-slate-800 dark:text-slate-50 dark:focus:border-blue-400 dark:focus:ring-blue-900"
         />
         <button
           type="button"

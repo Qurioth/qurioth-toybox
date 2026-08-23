@@ -70,7 +70,7 @@ function CardLink({
 }: CardLinkProps) {
   return (
     <a
-      className="group flex h-full flex-col justify-between rounded-lg border border-black/[.08] bg-white p-5 text-left shadow-sm transition-colors hover:border-sky-500 hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-100 dark:border-white/[.145] dark:bg-[#020617] dark:hover:border-sky-400 dark:hover:bg-[#0f172a] dark:focus:ring-sky-950"
+      className="group flex h-full flex-col justify-between rounded-lg border border-black/[.08] bg-white p-5 text-left shadow-sm transition-colors hover:border-sky-500 hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-100 dark:border-white/[.145] dark:bg-slate-950 dark:hover:border-sky-400 dark:hover:bg-slate-900 dark:focus:ring-sky-950"
       href={href}
     >
       <div className="flex flex-col gap-4">
