@@ -3,9 +3,10 @@
 import { useMediaQuery } from "@/hooks/use-media-query";
 import type { Investigator } from "@/types/Charaeno7th";
 import humanIcon from "@/image/human-icon.png";
+import { cn } from "@/utils/class-utils";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { type KeyboardEvent, useState } from "react";
 
 const CharacteristicsRadarChart = dynamic(
   () => import("@/components/recharts/CharacteristicsRadarChart"),
@@ -240,83 +241,88 @@ const CharacterCard = (props: { data: Investigator }) => {
     setClassChanging(false);
   };
 
-  return (
-    <>
-      {/* biome-ignore lint/a11y/useSemanticElements: a real <button> breaks the animate-rotate-y 3D flip rendering in Chromium */}
-      <div
-        role="button"
-        tabIndex={0}
-        className={`hidden md:block shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50 max-w-[858px] h-[452px] ${
-          classChanging && "animate-rotate-y"
-        }`}
-        onClick={flipCard}
-        onKeyDown={(event) => {
+  // md未満では表裏の区別がなく、6要素すべてを縦に並べる。
+  // md以上でだけ、表(レーダー・能力値・立ち絵)と裏(技能表・バックストーリー)を切り替える。
+  const hiddenOnBack = reverse ? "md:hidden" : undefined;
+  const hiddenOnFront = reverse ? undefined : "md:hidden";
+
+  // 反転はデスクトップだけの操作。モバイルでは押しても意味がないので、
+  // ボタンとしてのロールもキーボード操作も付けない。
+  const flipProps = isDesktop
+    ? {
+        role: "button",
+        tabIndex: 0,
+        onClick: flipCard,
+        onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             flipCard();
           }
-        }}
-      >
-        {!classChanging && (
-          <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div className="justify-center content-center">
-              {renderName()}
-              <div
-                className="h-96 m-2"
-                style={{ display: reverse ? "none" : "block" }}
-              >
-                {renderRadarChart(isDesktopChartVisible)}
-                {renderAttributeCards()}
-              </div>
+        },
+      }
+    : {};
 
-              <div
-                className="block h-96 m-2 p-2"
-                style={{ display: reverse ? "block" : "none" }}
-              >
-                <div className="scrollbar-thin h-full overflow-y-auto">
-                  {renderSkillTable()}
-                </div>
-              </div>
-            </div>
+  return (
+    // 反転する要素を実際の <button> にすると animate-rotate-y の3D描画が
+    // Chromium で壊れるため、role で代用している(キーボード操作は flipProps で補う)
+    <section
+      {...flipProps}
+      className={cn(
+        "shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50",
+        "md:max-w-[858px] md:h-[452px]",
+        classChanging && "animate-rotate-y",
+      )}
+    >
+      {!classChanging && (
+        // md以上では2カラム。左に名前と表裏の主内容、右に立ち絵かバックストーリーを置く。
+        // 配置を md:col-start / md:row-start で明示しているのは、DOM順をモバイルの
+        // 表示順(名前→立ち絵→レーダー→能力値→技能表→背景)に合わせているため。
+        <div className="animate-fade grid grid-cols-1 md:grid-cols-2 md:gap-2">
+          <div className="md:col-start-1 md:row-start-1">{renderName()}</div>
 
-            <div
-              className="grid grid-cols-1 content-center h-[448px]"
-              style={{ display: reverse ? "none" : "block" }}
-            >
-              <div className="h-[440px]">{renderPortrait("h-[440px]")}</div>
-            </div>
-
-            <div
-              className="grid grid-cols-1"
-              style={{ display: reverse ? "block" : "none" }}
-            >
-              <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 m-2">
-                {renderBackstoriesAndNotes()}
-              </div>
-            </div>
+          <div
+            className={cn(
+              "flex min-h-[320px] items-end justify-center px-2",
+              "md:col-start-2 md:row-start-1 md:row-span-2 md:min-h-0 md:items-center md:px-0",
+              hiddenOnBack,
+            )}
+          >
+            {renderPortrait("h-[320px] md:h-[440px]")}
           </div>
-        )}
-      </div>
 
-      <div className="md:hidden">
-        <section className="shadow-md bg-slate-50 dark:bg-slate-800 rounded border-2 border-purple-50">
-          {renderName()}
-          <div className="px-2 pb-4">
-            <div className="min-h-[320px] flex items-end justify-center">
-              {renderPortrait("h-[320px]")}
-            </div>
-            {renderRadarChart(isMobileChartVisible)}
+          <div
+            className={cn(
+              "m-2 md:col-start-1 md:row-start-2 md:h-96",
+              hiddenOnBack,
+            )}
+          >
+            {renderRadarChart(isDesktopChartVisible || isMobileChartVisible)}
             {renderAttributeCards()}
           </div>
-          <div className="px-2 pb-4 space-y-4">
-            {renderSkillTable()}
-            <div className="overflow-x-hidden">
-              {renderBackstoriesAndNotes()}
+
+          <div
+            className={cn(
+              "m-2 md:col-start-1 md:row-start-2 md:h-96 md:p-2",
+              hiddenOnFront,
+            )}
+          >
+            <div className="md:scrollbar-thin md:h-full md:overflow-y-auto">
+              {renderSkillTable()}
             </div>
           </div>
-        </section>
-      </div>
-    </>
+
+          <div
+            className={cn(
+              "m-2 overflow-x-hidden",
+              "md:col-start-2 md:row-start-1 md:row-span-2 md:scrollbar-thin md:h-[434px] md:overflow-y-auto",
+              hiddenOnFront,
+            )}
+          >
+            {renderBackstoriesAndNotes()}
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 
