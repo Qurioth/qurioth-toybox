@@ -1,4 +1,5 @@
 import type { ReplayVideo } from "@/data/youtube/trpg/youtube-id";
+import { matchesAllWords, normalizeSearchText } from "@/utils/text-utils";
 
 /**
  * リプレイ一覧の検索ロジック。
@@ -56,10 +57,6 @@ const searchFieldAliases: Record<string, SearchField> = {
   キャラクター: "character",
   キャラクター名: "character",
 };
-
-/** 全角半角や大文字小文字の違いを吸収して比較できる形にする */
-export const normalizeSearchText = (value: string) =>
-  value.normalize("NFKC").trim().toLocaleLowerCase();
 
 const hasText = (value?: string): value is string =>
   Boolean(value && value.trim().length > 0);
@@ -137,17 +134,13 @@ export const parseSearchQuery = (query: string): ParsedSearchQuery => {
 
 /** フリーワードのAND検索。空なら全件通す */
 export const replayMatchesSearch = (replay: ReplayVideo, query: string) => {
-  const words = normalizeSearchText(query).split(/\s+/).filter(Boolean);
-
-  if (words.length === 0) {
-    return true;
-  }
-
+  // 値ごとに正規化してから連結する。生のまま連結すると、値の前後の空白が残って
+  // 語の境界がずれることがある
   const targetText = getReplaySearchTargets(replay)
     .map(({ value }) => normalizeSearchText(value))
     .join(" ");
 
-  return words.every((word) => targetText.includes(word));
+  return matchesAllWords(targetText, query);
 };
 
 /** フィールド指定の絞り込み。値は正規化した上での完全一致 */
