@@ -1,5 +1,6 @@
 "use client";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
 import type { Investigator } from "@/types/Charaeno7th";
 import humanIcon from "@/image/human-icon.png";
 import dynamic from "next/dynamic";
@@ -64,6 +65,8 @@ const getNoteParagraphs = (note: string) =>
 
 const CharacterCard = (props: { data: Investigator }) => {
   const data = props.data;
+  // Tailwind の md ブレークポイントと揃える。カード自体はCSSで出し分けている
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const [reverse, setReverse] = useState(false);
   const [classChanging, setClassChanging] = useState(false);
   const nameTextSizeClass = getNameTextSizeClass(data.name);
@@ -122,13 +125,21 @@ const CharacterCard = (props: { data: Investigator }) => {
     </div>
   );
 
-  const renderRadarChart = () => (
+  /**
+   * 枠は常に描画し、チャート本体は表示中の側だけマウントする。
+   * 隠れている側でマウントすると、recharts が 0x0 のコンテナを測って警告を出し、
+   * 描画されない ResponsiveContainer と ResizeObserver だけが残るため。
+   * 枠を残すのは、ハイドレーション前後で高さが変わらないようにするため。
+   */
+  const renderRadarChart = (isVisible: boolean) => (
     <div className="flex flex-row w-full h-72 justify-center content-center">
-      <CharacteristicsRadarChart
-        name={data.name}
-        dataKey={"characteristics"}
-        data={characteristics}
-      />
+      {isVisible && (
+        <CharacteristicsRadarChart
+          name={data.name}
+          dataKey={"characteristics"}
+          data={characteristics}
+        />
+      )}
     </div>
   );
 
@@ -248,7 +259,7 @@ const CharacterCard = (props: { data: Investigator }) => {
                 className="h-96 m-2"
                 style={{ display: reverse ? "none" : "block" }}
               >
-                {renderRadarChart()}
+                {renderRadarChart(isDesktop)}
                 {renderAttributeCards()}
               </div>
 
@@ -288,7 +299,7 @@ const CharacterCard = (props: { data: Investigator }) => {
             <div className="min-h-[320px] flex items-end justify-center">
               {renderPortrait("h-[320px]")}
             </div>
-            {renderRadarChart()}
+            {renderRadarChart(!isDesktop)}
             {renderAttributeCards()}
           </div>
           <div className="px-2 pb-4 space-y-4">

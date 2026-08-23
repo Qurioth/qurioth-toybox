@@ -6,13 +6,31 @@ import {
   within,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Investigator } from "@/types/Charaeno7th";
 import CharacterCard from "./CharacterCard";
 
 vi.mock("@/components/recharts/CharacteristicsRadarChart", () => ({
-  default: () => null,
+  default: () => <div data-testid="radar-chart" />,
 }));
+
+/** matchMedia の一致結果を差し替える(既定のスタブは常に false) */
+const stubMatchMedia = (matches: boolean) => {
+  vi.stubGlobal("matchMedia", (query: string) => ({
+    matches,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }));
+};
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 const sampleData: Investigator = {
   name: "テスト太郎",
@@ -112,6 +130,38 @@ describe("CharacterCard", () => {
 
     await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
       timeout: 2000,
+    });
+  });
+
+  describe("レーダーチャートのマウント", () => {
+    it("デスクトップ幅ではデスクトップ側のカードにだけ描画する", () => {
+      stubMatchMedia(true);
+      const { container } = render(<CharacterCard data={sampleData} />);
+
+      const charts = screen.getAllByTestId("radar-chart");
+      expect(charts).toHaveLength(1);
+      // デスクトップ用カード(hidden md:block)の中にある
+      expect(container.querySelector(".md\\:hidden")).not.toContainElement(
+        charts[0],
+      );
+    });
+
+    it("モバイル幅ではモバイル側のカードにだけ描画する", () => {
+      stubMatchMedia(false);
+      const { container } = render(<CharacterCard data={sampleData} />);
+
+      const charts = screen.getAllByTestId("radar-chart");
+      expect(charts).toHaveLength(1);
+      expect(container.querySelector(".md\\:hidden")).toContainElement(
+        charts[0],
+      );
+    });
+
+    it("チャートを置く枠自体は両方に残る(高さを保つため)", () => {
+      stubMatchMedia(true);
+      const { container } = render(<CharacterCard data={sampleData} />);
+
+      expect(container.querySelectorAll("div.h-72")).toHaveLength(2);
     });
   });
 });

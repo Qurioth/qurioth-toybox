@@ -53,6 +53,7 @@ src/
   components/     再利用UIコンポーネント(animata/, forms/, recharts/ にサブ分類)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
   contexts/       React Context
+  hooks/          複数の画面から使う汎用フック(`use-<用途>.ts`)
   constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
   utils/          純粋関数のユーティリティ(`<用途>-utils.ts` で命名)
   types/, image/
