@@ -19,12 +19,17 @@ specs/
   `specs/NNN-ccfolia-grep/` のように対応させる。
 - 既存画面を改修するときは新しいディレクトリを作らず、その画面のディレクトリの
   `spec.md` を更新する。`spec.md` は「今どういう画面か」を表す現行仕様として維持する。
-- 全画面分を先回りして書き揃えることはしない。実際に改修する画面から作る
-  ([constitution.md](../.specify/memory/constitution.md) 原則1・5)。
+- 既存の9画面は [ADR-0013](../docs/adr/0013-spec-per-screen.md) を機に一度書き起こす。
+  以後に追加する画面は、その画面を作るときに spec を作る(先回りして枠だけ作らない)。
+- 詳細ページやサンプルページ(`trpg/scenario/[id]` 等)は独立したディレクトリを作らず、
+  親にあたる画面の spec に含める。UI実験用の `blurry-blob-demo` は対象外。
 - 画面に紐づかない横断的な判断(テスト戦略、ツールチェイン、CI構成など)は spec ではなく
   [docs/adr/](../docs/adr/) にADRとして記録する。
 - 番号は spec-kit公式CLIのスクリプトが既存ディレクトリを見て自動採番する(3桁ゼロ埋め)。
 - `<画面slug>` はその画面を表す短い kebab-case の名前(ルートのセグメント名を使うとよい)。
+  `/speckit-specify` を使うときは `--short-name` で英語のスラッグを明示すること。
+  スラッグの自動生成はASCII以外を落とすため、日本語の説明だけを渡すと
+  `specs/001-/` のように空スラッグのディレクトリができてしまう。
 - テンプレートは `.specify/templates/`(公式spec-kitのテンプレート)を参照。
 - 開発の進め方は [CLAUDE.md](../CLAUDE.md) の「開発フロー」節、原則は
   [.specify/memory/constitution.md](../.specify/memory/constitution.md) を参照。

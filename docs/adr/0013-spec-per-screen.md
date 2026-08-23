@@ -39,9 +39,16 @@ Accepted
   ADR-0008 の本文に取り込んだ。
 - 採番は spec-kit CLI(`create-new-feature.sh`)の自動採番に従う。上記の削除により採番は
   001 に戻るため、以後は画面ごとに 001 から振り直される。
+- 本ADRを機に、既存の9画面(トップ、`trpg`、`trpg/ccfolia-grep`、`trpg/charaeno-chart`、
+  `trpg/scenario`、`trpg/replay`、`trpg/connection-table`、`other`、`other/photograph`)は
+  一度 spec を書き起こす。画面と spec の対応が虫食いだと「この画面の仕様はどこか」を
+  探す手間が残り、方針変更の効果が出ないため。UI実験用の `blurry-blob-demo` は対象外とする。
+- 詳細ページやサンプルページ(`trpg/scenario/[id]`、`trpg/charaeno-chart/sample-character`)は
+  独立したディレクトリを作らず、親にあたる画面の spec に含める。
+- 以後に追加する画面は、その画面を作るときに spec を作る(先回りして枠だけ作らない)。
 - 小さな変更にSDDフローを課さない方針([constitution.md](../../.specify/memory/constitution.md)
-  原則5)は変更しない。画面ごとにディレクトリを持つからといって、全画面分の spec を
-  先回りして書き揃えることはしない。実際に改修する画面から作る。
+  原則5)は変更しない。既存画面のtypo修正やスタイル微調整で `spec.md` の更新を強制するもの
+  ではない。
 
 ## 影響・トレードオフ
 
