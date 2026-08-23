@@ -109,7 +109,12 @@ src/
 [spec-kit](https://github.com/github/spec-kit) 公式CLI(`uv tool install specify-cli` で導入)を
 使い、`.claude/skills/speckit-*` のスキルと `.specify/` のテンプレート・スクリプトで運用する。
 
-1. `/speckit-specify` — 何を・なぜ作るかを `specs/<番号>-<slug>/spec.md` にまとめる
+spec は **画面(ルート)ごと** に作り、`specs/<番号>-<画面slug>/` を画面と1対1で対応させる
+([ADR-0013](docs/adr/0013-spec-per-screen.md))。既存画面の改修では新しいディレクトリを作らず、
+その画面の `spec.md` を更新する。画面に紐づかない横断的な判断(テスト戦略、CI構成など)は
+spec ではなく [ADR](docs/adr/) に記録する。
+
+1. `/speckit-specify` — 何を・なぜ作るかを `specs/<番号>-<画面slug>/spec.md` にまとめる
    (実装方法は書かない)。
 2. `/speckit-plan` — 技術方針を `plan.md` に落とし込む。
 3. `/speckit-tasks` — 実行可能な作業単位に分解する。
