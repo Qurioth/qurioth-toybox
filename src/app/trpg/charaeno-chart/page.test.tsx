@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   CHARACTER_SHEET_FETCH_FAILED,
   CHARACTER_SHEET_UNEXPECTED_FORMAT,
+  CHARACTER_SHEET_URL_INVALID,
 } from "@/constants/message";
 import { DarkModeProvider } from "@/contexts/dark-mode-context";
 import CharaenoChartPage from "./page";
@@ -12,9 +13,10 @@ vi.mock("@/components/recharts/CharacteristicsRadarChart", () => ({
   default: () => null,
 }));
 
-const SHEET_URL = "https://charaeno.com/7th/abc123";
+const SHEET_URL_7TH = "https://charaeno.com/7th/abc123";
+const SHEET_URL_6TH = "https://charaeno.com/6th/xyz789";
 
-const validSummary = {
+const valid7thSummary = {
   name: "テスト太郎（てすとたろう）",
   note: "",
   skills: [],
@@ -33,6 +35,28 @@ const validSummary = {
   attribute: { hp: 10, mp: 10, luck: 50, san: { value: 50, max: 99 } },
 };
 
+/** 6版のレスポンス。バックストーリーと幸運が無く、代わりに3つの自由記述を持つ */
+const valid6thSummary = {
+  name: "六版太郎（ろくはんたろう）",
+  note: "",
+  skills: [],
+  portraitURL: "",
+  mentalDisorder: "",
+  mythosTomes: "『無名祭祀書』",
+  artifactsAndSpells: "",
+  characteristics: {
+    str: 15,
+    con: 10,
+    pow: 10,
+    dex: 10,
+    app: 17,
+    siz: 14,
+    int: 15,
+    edu: 15,
+  },
+  attribute: { hp: 12, mp: 10, db: "+1D4", san: { value: 52, max: 76 } },
+};
+
 const renderPage = () =>
   render(
     <DarkModeProvider>
@@ -40,10 +64,21 @@ const renderPage = () =>
     </DarkModeProvider>,
   );
 
-const submitUrl = async () => {
+const submitUrl = async (url = SHEET_URL_7TH) => {
   const user = userEvent.setup();
-  await user.type(screen.getByLabelText("Character Sheet URL"), SHEET_URL);
+  await user.type(screen.getByLabelText("Character Sheet URL"), url);
   await user.click(screen.getByRole("button", { name: "Submit" }));
+};
+
+const stubFetch = (summary: unknown) => {
+  const fetchMock = vi.fn().mockResolvedValue({
+    ok: true,
+    status: 200,
+    json: async () => summary,
+  });
+  vi.stubGlobal("fetch", fetchMock);
+
+  return fetchMock;
 };
 
 afterEach(() => {
@@ -57,7 +92,7 @@ describe("CharaenoChartPage", () => {
       vi.fn().mockResolvedValue({
         ok: true,
         status: 200,
-        json: async () => validSummary,
+        json: async () => valid7thSummary,
       }),
     );
 
@@ -125,6 +160,78 @@ describe("CharaenoChartPage", () => {
     );
   });
 
+  describe("版の判定", () => {
+    it("7版のURLなら7版の取得先を叩く", async () => {
+      const fetchMock = stubFetch(valid7thSummary);
+
+      renderPage();
+      await submitUrl(SHEET_URL_7TH);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        "https://charaeno.com/api/v1/7th/abc123/summary",
+        undefined,
+      );
+    });
+
+    it("6版のURLなら6版の取得先を叩く", async () => {
+      const fetchMock = stubFetch(valid6thSummary);
+
+      renderPage();
+      await submitUrl(SHEET_URL_6TH);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        "https://charaeno.com/api/v1/6th/xyz789/summary",
+        undefined,
+      );
+    });
+
+    it("6版のレスポンスでもカードを表示する", async () => {
+      stubFetch(valid6thSummary);
+
+      renderPage();
+      await submitUrl(SHEET_URL_6TH);
+
+      expect(await screen.findAllByText("六版太郎")).not.toHaveLength(0);
+      expect(screen.getByText("『無名祭祀書』")).toBeInTheDocument();
+    });
+
+    it("6版のカードには幸運の代わりにダメージ・ボーナスを出す", async () => {
+      stubFetch(valid6thSummary);
+
+      renderPage();
+      await submitUrl(SHEET_URL_6TH);
+
+      await screen.findAllByText("六版太郎");
+      expect(screen.getByText("SAN")).toBeInTheDocument();
+      expect(screen.getByText("DB")).toBeInTheDocument();
+      expect(screen.getByText("+1D4")).toBeInTheDocument();
+      expect(screen.queryByText("幸運")).not.toBeInTheDocument();
+    });
+
+    it("対応していない版のURLは取得せず、形式が不正であることを示す", async () => {
+      const fetchMock = stubFetch(valid7thSummary);
+
+      renderPage();
+      await submitUrl("https://charaeno.com/8th/abc123");
+
+      expect(
+        await screen.findByText(CHARACTER_SHEET_URL_INVALID),
+      ).toBeInTheDocument();
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("6版のURLに7版の形のJSONが返ってきたら形式エラーにする", async () => {
+      stubFetch(valid7thSummary);
+
+      renderPage();
+      await submitUrl(SHEET_URL_6TH);
+
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        CHARACTER_SHEET_UNEXPECTED_FORMAT,
+      );
+    });
+  });
+
   it("失敗のあとに成功すればエラー表示が消える", async () => {
     const fetchMock = vi
       .fn()
@@ -132,7 +239,7 @@ describe("CharaenoChartPage", () => {
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: async () => validSummary,
+        json: async () => valid7thSummary,
       });
     vi.stubGlobal("fetch", fetchMock);
     const consoleError = vi

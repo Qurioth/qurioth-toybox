@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { Investigator } from "@/types/Charaeno7th";
+import type { CharacterCardData } from "@/types/CharacterCard";
 import CharacterCard from "./CharacterCard";
 
 vi.mock("@/components/recharts/CharacteristicsRadarChart", () => ({
@@ -26,40 +26,27 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-const sampleData: Investigator = {
+/** 7版のカード相当(タイル4つ)。版ごとの変換は character-card-utils の担当 */
+const sampleData: CharacterCardData = {
   name: "テスト太郎",
-  occupation: "探偵",
-  age: "30",
-  sex: "男性",
-  residence: "東京",
-  birthplace: "東京",
-  characteristics: {
-    str: 50,
-    con: 50,
-    pow: 50,
-    dex: 50,
-    app: 50,
-    siz: 50,
-    int: 50,
-    edu: 50,
-  },
-  attribute: {
-    hp: 12,
-    mp: 10,
-    mov: 8,
-    build: 0,
-    db: "+0",
-    san: { value: 50, max: 99 },
-    luck: 60,
-  },
-  skills: [{ name: "目星", value: 70, edited: true }],
-  weapons: [],
-  possessions: [],
-  credit: { spendingLevel: "", cash: "", assetsDetails: "" },
-  backstory: [{ name: "容姿の描写", entries: [{ text: "黒髪" }] }],
-  fellows: [],
-  note: "",
-  chatpalette: "",
+  characteristics: [
+    { subject: "STR", value: 50 },
+    { subject: "CON", value: 50 },
+    { subject: "POW", value: 50 },
+    { subject: "DEX", value: 50 },
+    { subject: "APP", value: 50 },
+    { subject: "SIZ", value: 50 },
+    { subject: "INT", value: 50 },
+    { subject: "EDU", value: 50 },
+  ],
+  attributes: [
+    { label: "HP", value: 12 },
+    { label: "MP", value: 10 },
+    { label: "SAN", value: 50 },
+    { label: "幸運", value: 60 },
+  ],
+  skills: [{ name: "目星", value: 70 }],
+  sections: [{ heading: "容姿の描写", kind: "list", blocks: ["黒髪"] }],
 };
 
 /**
@@ -202,6 +189,67 @@ describe("CharacterCard", () => {
       render(<CharacterCard data={sampleData} />);
 
       expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    });
+  });
+
+  // カードは版を知らない。渡されたタイルとセクションの kind に素直に従う
+  describe("版によって中身が変わる部分", () => {
+    it("渡されたタイルをそのまま並べる", () => {
+      stubMatchMedia(true);
+      render(<CharacterCard data={sampleData} />);
+
+      expect(screen.getByText("幸運")).toBeInTheDocument();
+      expect(screen.getByText("60")).toBeInTheDocument();
+    });
+
+    it("数値でないタイルの値(6版のダメージ・ボーナス)もそのまま出す", () => {
+      stubMatchMedia(true);
+      render(
+        <CharacterCard
+          data={{
+            ...sampleData,
+            attributes: [
+              ...sampleData.attributes.slice(0, 3),
+              { label: "DB", value: "+1D4" },
+            ],
+          }}
+        />,
+      );
+
+      expect(screen.getByText("DB")).toBeInTheDocument();
+      expect(screen.getByText("+1D4")).toBeInTheDocument();
+      expect(screen.queryByText("幸運")).not.toBeInTheDocument();
+    });
+
+    it("kind が list のセクションは箇条書きにする", () => {
+      stubMatchMedia(true);
+      render(<CharacterCard data={sampleData} />);
+
+      expect(screen.getByText("黒髪").closest("li")).toBeInTheDocument();
+    });
+
+    it("kind が text のセクションは段落にする", () => {
+      stubMatchMedia(true);
+      render(
+        <CharacterCard
+          data={{
+            ...sampleData,
+            sections: [
+              {
+                heading: "読んだクトゥルフ神話の魔導書",
+                kind: "text",
+                blocks: ["一段落目", "二段落目"],
+              },
+            ],
+          }}
+        />,
+      );
+
+      expect(
+        screen.getByText("読んだクトゥルフ神話の魔導書"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("一段落目").tagName).toBe("P");
+      expect(screen.getByText("二段落目").tagName).toBe("P");
     });
   });
 
