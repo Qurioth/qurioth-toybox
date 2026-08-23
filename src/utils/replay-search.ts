@@ -31,6 +31,8 @@ const searchFieldLabels: Record<SearchField, string> = {
   character: "キャラクター名",
 };
 
+// getSearchField が normalizeSearchText を通してから引くため、キーは小文字で書くこと。
+// 大文字を含むキーは永久に一致しない。
 const searchFieldAliases: Record<string, SearchField> = {
   scenario: "scenario",
   sc: "scenario",
@@ -42,8 +44,7 @@ const searchFieldAliases: Record<string, SearchField> = {
   システム: "system",
   システム名: "system",
   gm: "gm",
-  GM: "gm",
-  GM名: "gm",
+  gm名: "gm",
   player: "player",
   pl: "player",
   pcplayer: "player",

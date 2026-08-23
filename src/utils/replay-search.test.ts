@@ -47,8 +47,19 @@ describe("getSearchField", () => {
     ["シナリオ", "scenario"],
     ["SYS", "system"],
     ["システム名", "system"],
+    // エイリアス表のキーが大文字だと、小文字化した入力と一致せず引けなくなる
+    ["GM名", "gm"],
+    ["ＧＭ名", "gm"],
   ])("%s は %s として解釈する", (input, expected) => {
     expect(getSearchField(input)).toBe(expected);
+  });
+
+  it("ラベルとして表示している項目名はすべて指定に使える", () => {
+    expect(getSearchField("シナリオタイトル")).toBe("scenario");
+    expect(getSearchField("システム名")).toBe("system");
+    expect(getSearchField("GM名")).toBe("gm");
+    expect(getSearchField("プレイヤー名")).toBe("player");
+    expect(getSearchField("キャラクター名")).toBe("character");
   });
 
   it("知らない項目名は undefined", () => {
