@@ -1,16 +1,50 @@
 import type { DiceLog } from "@/types/DiceLog";
 
-// const reg = /<p>.*?<\/p>/g;
-const tabReg = /<span> \[.*\]<\/span>/g;
-const nameReg = /<span>.*<\/span>/g;
-// const contentReg = / :<span>.*<\/span>/g;
+// 1行を span 単位に分割したあと、どの span なのかを形で判別する。
+// gフラグは付けないこと。test() が lastIndex を持ち越し、直前に何を判定したかで
+// 結果が変わってしまうため(キャラクター名が短い行で name と content が入れ替わる)。
+// また前後をアンカーで固定しないと、nameReg が content の span (" :<span>...")にも
+// マッチしてしまう。
+const tabReg = /^<span> \[.*\]<\/span>$/;
+const nameReg = /^<span>.*<\/span>$/;
 const htmlTagReg =
   /<!DOCTYPE html>|<.*html.*>|<.*head.*>|<.*meta.*>|<title>.*<\/title>|<.*body.*>/g;
+
+/**
+ * HTMLエスケープを元の文字に戻す。
+ * &amp; を先に戻すと "&amp;lt;" が "<" まで二重に復元されてしまうため、最後に処理する。
+ */
+const decodeHtmlEntities = (text: string) =>
+  text
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+
+/**
+ * content の span の中身を1行のプレーンテキストに整える。
+ *
+ * CCFOLIA は改行を <br> で書き出すが、grep結果は Discord のコードブロックに貼るため
+ * 1ログ=1行に収めたい。そこで <br> は " / " 区切りに置き換える。
+ * 各断片の前後の空白(段落先頭の全角スペースや行末の余白)も落とす。
+ *
+ * 区切りの分割はエスケープを戻す前に行う。先に戻すと、利用者が本文に打った
+ * "&lt;br&gt;" という文字列まで改行として扱ってしまうため。
+ */
+const toSingleLineContent = (text: string) =>
+  text
+    .split(/<br\s*\/?>/)
+    .map((part) => decodeHtmlEntities(part).trim())
+    .filter((part) => part !== "")
+    .join(" / ");
 
 const convertDicelog = (htmlString: string) => {
   const result: DiceLog[] = [];
   const html: string[] = htmlString
-    .replace(/ {2}/g, "")
+    // 行頭のインデントだけを落とす。/ {2}/g で全体から2連続スペースを消すと
+    // "1D6  (1D6)" のような本文中の空白まで壊れてしまう。
+    .replace(/^[ \t]+/gm, "")
     .replace(htmlTagReg, "")
     .replace(/\n/g, "")
     .split(/(?<=<\/p>)/g);
@@ -29,11 +63,10 @@ const convertDicelog = (htmlString: string) => {
         case nameReg.test(dicelogStr):
           dicelog.name = dicelogStr.replace(/<span>|<\/span>/g, "");
           break;
-        // case contentReg.test(dicelogStr):
-        //   dicelog.content = dicelogStr.replace(/ :<span>|<\/span>/g, "");
-        //   break;
         default:
-          dicelog.content = dicelogStr.replace(/ :<span>|<\/span>/g, "");
+          dicelog.content = toSingleLineContent(
+            dicelogStr.replace(/ :<span>|<\/span>/g, ""),
+          );
           break;
       }
     });
