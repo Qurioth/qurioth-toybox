@@ -10,6 +10,9 @@ import {
 type Props = {
   from: Participant;
   to: Participant;
+  /** 名前が未入力のときに行・列を指し示すための呼び名 */
+  fromLabel: string;
+  toLabel: string;
   connection: Connection;
   connectionDatalistId: string;
   strengthDatalistId: string;
@@ -20,6 +23,8 @@ type Props = {
 const ConnectionCell = ({
   from,
   to,
+  fromLabel,
+  toLabel,
   connection,
   connectionDatalistId,
   strengthDatalistId,
@@ -39,7 +44,7 @@ const ConnectionCell = ({
             type="text"
             list={connectionDatalistId}
             value={connection.content}
-            aria-label={`${from.name}から${to.name}へのつながり内容`}
+            aria-label={`${fromLabel}から${toLabel}へのつながり内容`}
             onChange={(event) => onChange({ content: event.target.value })}
             className="h-9 w-full shrink-0 rounded-md border border-gray-300 bg-white pl-6 pr-2 text-center text-sm font-bold text-gray-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:bg-[#1E293B] dark:text-slate-50"
           />
@@ -49,7 +54,7 @@ const ConnectionCell = ({
           inputMode="numeric"
           list={strengthDatalistId}
           value={connection.strength}
-          aria-label={`${from.name}から${to.name}へのつながりの強さ`}
+          aria-label={`${fromLabel}から${toLabel}へのつながりの強さ`}
           onChange={(event) => {
             const strength = parseStrengthInput(event.target.value);
 

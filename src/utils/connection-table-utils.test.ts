@@ -11,6 +11,7 @@ import {
   isTownConnection,
   parseStrengthInput,
   restoreConnectionTable,
+  toParticipantLabel,
   toTotalStrength,
 } from "./connection-table-utils";
 
@@ -41,6 +42,18 @@ describe("toTotalStrength", () => {
   it("空欄は0として数える", () => {
     expect(toTotalStrength("")).toBe(0);
     expect(toTotalStrength(3)).toBe(3);
+  });
+});
+
+describe("toParticipantLabel", () => {
+  it("名前があればそれを使う", () => {
+    expect(toParticipantLabel({ id: "p1", name: "アリス" }, 1)).toBe("アリス");
+    expect(toParticipantLabel({ id: TOWN_ID, name: "町" }, 0)).toBe("町");
+  });
+
+  it("名前が空なら行番号(1始まり)で区別する", () => {
+    expect(toParticipantLabel({ id: "p1", name: "" }, 1)).toBe("2行目");
+    expect(toParticipantLabel({ id: "p5", name: "" }, 5)).toBe("6行目");
   });
 });
 

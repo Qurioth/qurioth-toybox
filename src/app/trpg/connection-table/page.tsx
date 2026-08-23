@@ -8,6 +8,7 @@ import {
   getColumnTotal,
   getConnection,
   getRowTotal,
+  toParticipantLabel,
 } from "@/utils/connection-table-utils";
 import { Plus } from "lucide-react";
 import ConnectionCell from "./ConnectionCell";
@@ -94,16 +95,17 @@ export default function ConnectionTablePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {participants.map((fromParticipant) => (
+                  {participants.map((fromParticipant, fromIndex) => (
                     <tr key={fromParticipant.id}>
                       <ParticipantRowHeader
                         participant={fromParticipant}
+                        label={toParticipantLabel(fromParticipant, fromIndex)}
                         onChangeName={(name) =>
                           updateParticipantName(fromParticipant.id, name)
                         }
                         onRemove={() => removeParticipant(fromParticipant.id)}
                       />
-                      {participants.map((toParticipant) =>
+                      {participants.map((toParticipant, toIndex) =>
                         fromParticipant.id === toParticipant.id ? (
                           <td
                             key={toParticipant.id}
@@ -115,6 +117,11 @@ export default function ConnectionTablePage() {
                             key={toParticipant.id}
                             from={fromParticipant}
                             to={toParticipant}
+                            fromLabel={toParticipantLabel(
+                              fromParticipant,
+                              fromIndex,
+                            )}
+                            toLabel={toParticipantLabel(toParticipant, toIndex)}
                             connection={getConnection(
                               connections,
                               fromParticipant.id,

@@ -53,6 +53,15 @@ export const initialParticipants: Participant[] = [
   { id: "person-5", name: "" },
 ];
 
+/**
+ * aria-label で行を指し示すための呼び名。
+ * 名前が未入力だと全行が同じラベルになってしまうため、その場合は行番号で区別する。
+ *
+ * @param index participants 内の位置(0始まり)
+ */
+export const toParticipantLabel = (participant: Participant, index: number) =>
+  participant.name || `${index + 1}行目`;
+
 export const connectionKey = (fromId: string, toId: string) =>
   `${fromId}:${toId}`;
 

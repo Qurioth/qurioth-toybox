@@ -11,8 +11,8 @@ const renderPage = () =>
     </DarkModeProvider>,
   );
 
-/** 名前未入力の行は aria-label が重複するため、順番で取得する */
-const nameInputs = () => screen.getAllByLabelText(/行の名前$/);
+/** 名前未入力の行は「N行目の名前」になるため、順番で取得する */
+const nameInputs = () => screen.getAllByLabelText(/の名前$/);
 
 /** 「あなた」行の合計(ふしぎ列)を読む */
 const rowTotals = () =>
@@ -52,7 +52,7 @@ describe("ConnectionTablePage", () => {
 
     await user.type(nameInputs()[0], "アリス");
 
-    expect(screen.getByLabelText("アリス行の名前")).toHaveValue("アリス");
+    expect(screen.getByLabelText("アリスの名前")).toHaveValue("アリス");
     // 列見出しにも出る
     expect(screen.getAllByText("アリス").length).toBeGreaterThan(0);
   });
@@ -152,15 +152,39 @@ describe("ConnectionTablePage", () => {
     unmount();
     renderPage();
 
-    expect(await screen.findByLabelText("アリス行の名前")).toHaveValue(
-      "アリス",
-    );
+    expect(await screen.findByLabelText("アリスの名前")).toHaveValue("アリス");
     expect(screen.getByLabelText("アリスからボブへのつながり内容")).toHaveValue(
       "信頼",
     );
     expect(
       screen.getByLabelText("アリスからボブへのつながりの強さ"),
     ).toHaveValue("2");
+  });
+
+  it("名前が未入力でもaria-labelが行番号で区別される", () => {
+    renderPage();
+
+    // 未入力の5行が「2行目の名前」〜「6行目の名前」になる(1行目は町)
+    for (const rowNumber of [2, 3, 4, 5, 6]) {
+      expect(
+        screen.getByLabelText(`${rowNumber}行目の名前`),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: `${rowNumber}行目を削除` }),
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("初期表示のaria-labelがすべて一意である", () => {
+    const { container } = renderPage();
+
+    const labels = [...container.querySelectorAll("[aria-label]")].map(
+      (element) => element.getAttribute("aria-label"),
+    );
+    // 空セルの「同じ対象」は行ごとに1つずつ出るため対象外
+    const targetLabels = labels.filter((label) => label !== "同じ対象");
+
+    expect(new Set(targetLabels).size).toBe(targetLabels.length);
   });
 
   it("壊れた保存データは無視して初期状態で始まる", () => {
