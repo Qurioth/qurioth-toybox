@@ -12,8 +12,7 @@ Accepted
 
 `qurioth-toybox` はこれまでテストを一切持たず、実装方針も明文化せずに機能を継ぎ足してきた。
 今後リファクタリングを行うにあたり、変更のたびに全ページを手動確認する以外に回帰を検知する
-手段が無く、安全にリファクタリングを進められない状態だった
-([specs/0001-introduce-testing/spec.md](../../specs/0001-introduce-testing/spec.md) 参照)。
+手段が無く、安全にリファクタリングを進められない状態だった。
 
 テスト戦略として「テスティングトロフィー」(Kent C. Dodds提唱。静的解析を土台に、結合テストを
 主軸とし、ユニットテストとE2Eは必要な分だけ書く)と、従来の「テストピラミッド」(ユニット
@@ -35,8 +34,22 @@ Accepted
 - テストファイルはテスト対象と同じディレクトリに `*.test.ts(x)` として配置する
   (コロケーション)。
 - スナップショットテストとカバレッジ数値目標は採用しない。
-- 技術的な詳細・最初のテスト対象は
-  [specs/0001-introduce-testing/plan.md](../../specs/0001-introduce-testing/plan.md) を参照。
+- DOM環境は `jsdom` を使う。`ccfolia-grep` の `FileReader` や `next/image` などブラウザAPIの
+  網羅性が必要なため、より高速な happy-dom は採用しない。
+- `describe` / `it` / `expect` はグローバル化せず、各テストファイルで `vitest` から明示
+  import する(「暗黙より明示」という既存スタイルに合わせる)。
+- jsdom に無いブラウザAPIは `vitest.setup.ts` でまとめて補う。導入時点で必要だったのは以下:
+  - `next/image` を `<img {...props} />` を返す薄いモックに差し替える(画像最適化・loader
+    由来の警告やエラーがテストのノイズになるため)。
+  - `ResizeObserver` のグローバルスタブ(recharts の `ResponsiveContainer` が依存する)。
+    `CharacterCard` の結合テストでは `ReaderChart` 自体を `vi.mock` で差し替えて回避して
+    いるが、チャートを使うテストが増えた場合の保険として残す。
+  - `window.matchMedia` のスタブ(`DarkModeContext` が初期表示時に呼ぶため、
+    `DarkModeProvider` を含む画面の結合テストで必要)。
+  - `afterEach(() => cleanup())` の明示的な呼び出し。`globals: false` では Testing Library の
+    自動クリーンアップが働かず、テスト間でレンダリング結果が残留する。
+- 最初のテスト対象は `grep-utils.ts` / `convert-utils.ts`(ユニットテスト)と
+  `CharacterCard` / `ccfolia-grep` ページ(結合テスト)の4箇所に限定する。
 
 ## 影響・トレードオフ
 

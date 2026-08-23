@@ -1,7 +1,7 @@
-# Specification Quality Checklist: テスティングトロフィー戦略に基づくテスト基盤の導入
+# Specification Quality Checklist: その他コンテンツ一覧
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
-**Created**: 2026-07-31
+**Created**: 2026-08-23
 **Feature**: [spec.md](../spec.md)
 
 ## Content Quality
@@ -31,10 +31,9 @@
 
 ## Notes
 
-- 「実装詳細を書かない」という原則上、Vitest/React Testing Libraryといった具体的な技術名は
-  `Input`(ユーザーからの元の依頼文)にのみ登場し、Requirements/Success Criteriaの本文では
-  技術非依存な表現(「テストスイート」「結合テスト」等)に留めた。技術選定自体は既に
-  [ADR-0008](../../../docs/adr/0008-adopt-testing-trophy-and-vitest.md) で決定済みのため、
-  具体的な採用理由・代替案の比較は `plan.md` で扱う。
-- 全項目パス。`/speckit-clarify` は不要と判断(重要な曖昧点は事前の会話で解消済み)。
-  次は `/speckit-plan` に進める。
+- 本specは既存実装の現行仕様を書き起こしたもの。`plan.md` / `tasks.md` は実際にこの画面を
+  改修するときに作成する([ADR-0013](../../../docs/adr/0013-spec-per-screen.md))。
+- サイト共通のヘッダー・フッター・配色切替は [001-home](../../001-home/spec.md) が唯一の
+  記述箇所のため、本specでは扱わない。
+- 実装にはコメントアウトされた動画区分が残っているが、公開されていないため本specの対象外と
+  した。公開する場合は本specを先に更新する。
