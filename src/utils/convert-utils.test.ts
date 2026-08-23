@@ -29,9 +29,10 @@ describe("convertDicelog", () => {
     const result = convertDicelog(html);
 
     // tab は "<span> " と "</span>" のみを除去する実装のため、"[ ]" は残る(既存の挙動)
+    // content の "&lt;" はここで元の "<" に戻す
     expect(result).toEqual([
-      { tab: "[メイン]", name: "アリス", content: "1d100&lt;=50 → 23 成功" },
-      { tab: "[メイン]", name: "ボブ", content: "1d100&lt;=50 → 88 失敗" },
+      { tab: "[メイン]", name: "アリス", content: "1d100<=50 → 23 成功" },
+      { tab: "[メイン]", name: "ボブ", content: "1d100<=50 → 88 失敗" },
     ]);
   });
 
@@ -45,7 +46,7 @@ describe("convertDicelog", () => {
 
     expect(second).toEqual(first);
     expect(second).toEqual([
-      { tab: "[メイン]", name: "キャロル", content: "1d100&lt;=50 → 5 成功" },
+      { tab: "[メイン]", name: "キャロル", content: "1d100<=50 → 5 成功" },
     ]);
   });
 
@@ -65,13 +66,13 @@ describe("convertDicelog", () => {
     ].join("");
 
     expect(convertDicelog(html)).toEqual([
-      { tab: "[メイン]", name: "あ", content: "1d100&lt;=50 → 1 成功" },
+      { tab: "[メイン]", name: "あ", content: "1d100<=50 → 1 成功" },
       {
         tab: "[メイン]",
         name: "とてもとても長いキャラクター名前です",
-        content: "1d100&lt;=50 → 2 失敗",
+        content: "1d100<=50 → 2 失敗",
       },
-      { tab: "[メイン]", name: "い", content: "1d100&lt;=50 → 3 成功" },
+      { tab: "[メイン]", name: "い", content: "1d100<=50 → 3 成功" },
     ]);
   });
 
@@ -97,9 +98,9 @@ describe("convertDicelog", () => {
     ].join("");
 
     expect(convertDicelog(html)).toEqual([
-      { tab: "[メイン]", name: "アリス", content: "1d100&lt;=50 → 1 成功" },
+      { tab: "[メイン]", name: "アリス", content: "1d100<=50 → 1 成功" },
       { tab: "[メイン]", name: "", content: "" },
-      { tab: "[メイン]", name: "ボブ", content: "1d100&lt;=50 → 2 失敗" },
+      { tab: "[メイン]", name: "ボブ", content: "1d100<=50 → 2 失敗" },
     ]);
   });
 
@@ -120,7 +121,7 @@ describe("convertDicelog", () => {
       );
 
       expect(convertDicelog(html)[0].content).toBe(
-        "CC&lt;=65　【CON】 (1D100&lt;=65) ＞ 36 ＞ レギュラー成功",
+        "CC<=65　【CON】 (1D100<=65) ＞ 36 ＞ レギュラー成功",
       );
     });
 
@@ -154,6 +155,26 @@ describe("convertDicelog", () => {
       );
     });
 
+    it("HTMLエスケープを元の文字に戻す", () => {
+      const html = exportedLogHtml(
+        "main",
+        "アリス",
+        "CC&lt;=50 &quot;A&amp;B&quot; &gt;&gt; &#39;ok&#39;",
+      );
+
+      expect(convertDicelog(html)[0].content).toBe("CC<=50 \"A&B\" >> 'ok'");
+    });
+
+    it("本文に打たれた &lt;br&gt; は区切りではなく文字として扱う", () => {
+      const html = exportedLogHtml(
+        "other",
+        "アリス",
+        "改行は &lt;br&gt; と書く",
+      );
+
+      expect(convertDicelog(html)[0].content).toBe("改行は <br> と書く");
+    });
+
     it("複数エントリを続けて変換できる", () => {
       const html = [
         exportedLogHtml(
@@ -169,7 +190,7 @@ describe("convertDicelog", () => {
         {
           tab: "[main]",
           name: "アリス",
-          content: "CC&lt;=75 (1D100&lt;=75) ＞ 24 ＞ ハード成功",
+          content: "CC<=75 (1D100<=75) ＞ 24 ＞ ハード成功",
         },
         { tab: "[秘匿(リアン)]", name: "ボブ", content: "1D8+2  (1D8+2) ＞ 8" },
         { tab: "[info]", name: "KP", content: "・浅草裏長屋 / ・非人小屋" },

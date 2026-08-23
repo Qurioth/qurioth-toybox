@@ -11,16 +11,31 @@ const htmlTagReg =
   /<!DOCTYPE html>|<.*html.*>|<.*head.*>|<.*meta.*>|<title>.*<\/title>|<.*body.*>/g;
 
 /**
- * content の span の中身を1行のテキストに整える。
+ * HTMLエスケープを元の文字に戻す。
+ * &amp; を先に戻すと "&amp;lt;" が "<" まで二重に復元されてしまうため、最後に処理する。
+ */
+const decodeHtmlEntities = (text: string) =>
+  text
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+
+/**
+ * content の span の中身を1行のプレーンテキストに整える。
  *
  * CCFOLIA は改行を <br> で書き出すが、grep結果は Discord のコードブロックに貼るため
  * 1ログ=1行に収めたい。そこで <br> は " / " 区切りに置き換える。
  * 各断片の前後の空白(段落先頭の全角スペースや行末の余白)も落とす。
+ *
+ * 区切りの分割はエスケープを戻す前に行う。先に戻すと、利用者が本文に打った
+ * "&lt;br&gt;" という文字列まで改行として扱ってしまうため。
  */
 const toSingleLineContent = (text: string) =>
   text
     .split(/<br\s*\/?>/)
-    .map((part) => part.trim())
+    .map((part) => decodeHtmlEntities(part).trim())
     .filter((part) => part !== "")
     .join(" / ");
 
