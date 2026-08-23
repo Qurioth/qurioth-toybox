@@ -10,10 +10,26 @@ const nameReg = /^<span>.*<\/span>$/;
 const htmlTagReg =
   /<!DOCTYPE html>|<.*html.*>|<.*head.*>|<.*meta.*>|<title>.*<\/title>|<.*body.*>/g;
 
+/**
+ * content の span の中身を1行のテキストに整える。
+ *
+ * CCFOLIA は改行を <br> で書き出すが、grep結果は Discord のコードブロックに貼るため
+ * 1ログ=1行に収めたい。そこで <br> は " / " 区切りに置き換える。
+ * 各断片の前後の空白(段落先頭の全角スペースや行末の余白)も落とす。
+ */
+const toSingleLineContent = (text: string) =>
+  text
+    .split(/<br\s*\/?>/)
+    .map((part) => part.trim())
+    .filter((part) => part !== "")
+    .join(" / ");
+
 const convertDicelog = (htmlString: string) => {
   const result: DiceLog[] = [];
   const html: string[] = htmlString
-    .replace(/ {2}/g, "")
+    // 行頭のインデントだけを落とす。/ {2}/g で全体から2連続スペースを消すと
+    // "1D6  (1D6)" のような本文中の空白まで壊れてしまう。
+    .replace(/^[ \t]+/gm, "")
     .replace(htmlTagReg, "")
     .replace(/\n/g, "")
     .split(/(?<=<\/p>)/g);
@@ -33,7 +49,9 @@ const convertDicelog = (htmlString: string) => {
           dicelog.name = dicelogStr.replace(/<span>|<\/span>/g, "");
           break;
         default:
-          dicelog.content = dicelogStr.replace(/ :<span>|<\/span>/g, "");
+          dicelog.content = toSingleLineContent(
+            dicelogStr.replace(/ :<span>|<\/span>/g, ""),
+          );
           break;
       }
     });
