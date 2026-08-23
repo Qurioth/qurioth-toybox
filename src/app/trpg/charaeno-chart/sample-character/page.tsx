@@ -3,6 +3,7 @@
 import CharacterCard from "@/components/CharacterCard";
 import Template from "@/components/Template";
 import type { Investigator } from "@/types/Charaeno7th";
+import { toCardDataFrom7th } from "@/utils/character-card-utils";
 
 import fugakuRairi from "@/data/sample-character/fugaku-rairi.json";
 import hamuroAmana from "@/data/sample-character/hamuro-amana.json";
@@ -19,14 +20,15 @@ export default function SampleCharacterPage() {
   const kawasakiSoraJson: Investigator = kawasakiSora;
   const yamatoAkiraJson: Investigator = yamatoAkira;
 
+  // サンプルは7版のみ。カードは版に依存しない形しか受け取らないので、変換を通してから渡す
   const characterList = [
-    { characterData: hamuroMichiharuJson },
-    { characterData: hamuroAmanaJson },
-    { characterData: hazamaKurehaJson },
-    { characterData: yamatoAkiraJson },
-    { characterData: fugakuRairiJson },
-    { characterData: kawasakiSoraJson },
-  ];
+    hamuroMichiharuJson,
+    hamuroAmanaJson,
+    hazamaKurehaJson,
+    yamatoAkiraJson,
+    fugakuRairiJson,
+    kawasakiSoraJson,
+  ].map((investigator) => ({ characterData: toCardDataFrom7th(investigator) }));
 
   return (
     <Template>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import type { Investigator } from "@/types/Charaeno7th";
+import type { CharacterCardData } from "@/types/CharacterCard";
 import humanIcon from "@/image/human-icon.png";
 import { cn } from "@/utils/class-utils";
 import dynamic from "next/dynamic";
@@ -14,30 +14,6 @@ const CharacteristicsRadarChart = dynamic(
     ssr: false,
   },
 );
-
-const CHARACTERISTICS_KEYS = [
-  "str",
-  "con",
-  "pow",
-  "dex",
-  "app",
-  "siz",
-  "int",
-  "edu",
-] as const;
-
-const backstoryLabels = [
-  "容姿の描写",
-  "イデオロギー／信念",
-  "重要な人々",
-  "意味のある場所",
-  "秘蔵の品",
-  "特徴",
-  "負傷、傷跡",
-  "恐怖症、マニア",
-  "魔道書、呪文、アーティファクト",
-  "遭遇した超自然の存在",
-];
 
 const fullWidthNameCharacterPattern =
   /[\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uff01-\uff60\uffe0-\uffe6]/;
@@ -58,44 +34,13 @@ const getNameTextSizeClass = (name: string) => {
   return "text-4xl";
 };
 
-const getNoteParagraphs = (note: string) =>
-  note
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter((paragraph) => paragraph !== "");
-
-const CharacterCard = (props: { data: Investigator }) => {
+const CharacterCard = (props: { data: CharacterCardData }) => {
   const data = props.data;
   // Tailwind の md ブレークポイントと揃える。カード自体はCSSで出し分けている
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [reverse, setReverse] = useState(false);
   const [classChanging, setClassChanging] = useState(false);
   const nameTextSizeClass = getNameTextSizeClass(data.name);
-  const noteParagraphs = getNoteParagraphs(data.note);
-  const backstories = data.backstory
-    .map((backstory, index) => ({
-      ...backstory,
-      name: backstoryLabels[index] || backstory.name,
-      entries: backstory.entries.filter(
-        (entry) => entry.text.trim() !== "" && entry.text.length > 0,
-      ),
-    }))
-    .filter((backstory) => backstory.entries.length > 0);
-  const editedSkills = data.skills.filter((skill) => skill.edited);
-  const attributes = [
-    { label: "HP", value: data.attribute.hp },
-    { label: "MP", value: data.attribute.mp },
-    { label: "SAN", value: data.attribute.san.value },
-    { label: "幸運", value: data.attribute.luck },
-  ];
-
-  // レーダーチャートの軸。Object.keys ではAPIのJSONのキー順に依存してしまうため、
-  // 表示順をここで固定する。
-  const characteristics = CHARACTERISTICS_KEYS.map((key) => ({
-    subject: key.toUpperCase(),
-    characteristics: data.characteristics[key],
-    fullMark: 100,
-  }));
 
   const renderName = () => (
     <div
@@ -143,16 +88,17 @@ const CharacterCard = (props: { data: Investigator }) => {
       {isVisible && (
         <CharacteristicsRadarChart
           name={data.name}
-          dataKey={"characteristics"}
-          data={characteristics}
+          dataKey={"value"}
+          data={data.characteristics}
         />
       )}
     </div>
   );
 
   const renderAttributeCards = () => (
+    // 表面のタイルは版によらず4つ(7版は幸運、6版はダメージ・ボーナスが4枠目)
     <div className="grid grid-cols-4 gap-2 sm:gap-4">
-      {attributes.map((attribute) => (
+      {data.attributes.map((attribute) => (
         <div
           key={`${data.name}-${attribute.label}`}
           className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900"
@@ -171,7 +117,7 @@ const CharacterCard = (props: { data: Investigator }) => {
   const renderSkillTable = () => (
     <table className="w-full border-separate border border-slate-500">
       <tbody>
-        {editedSkills.map((skill) => (
+        {data.skills.map((skill) => (
           <tr key={`${data.name}-skill-${skill.name}`}>
             <td className="w-5/6 border border-slate-600 font-serif font-semibold">
               {skill.name}
@@ -185,52 +131,54 @@ const CharacterCard = (props: { data: Investigator }) => {
     </table>
   );
 
-  const renderBackstoriesAndNotes = () => (
-    <div className="m-2">
-      {backstories.length > 0 &&
-        backstories.map((backstory, backstoryIndex) => (
-          <section
-            key={`${data.name}-backstory-${backstory.name}`}
-            className="mb-3"
-          >
-            <h3 className="font-serif font-semibold">{backstory.name}</h3>
-            <div className="pl-5">
-              <ul className="list-disc pl-5">
-                {backstory.entries.map((entry, entryIndex) => (
-                  <li
-                    // biome-ignore lint/suspicious/noArrayIndexKey: entries have no natural id, list order is static
-                    key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
-                  >
-                    {entry.text.split("\n").map((line, lineIndex) => (
-                      <div
-                        // biome-ignore lint/suspicious/noArrayIndexKey: text lines have no natural id, list order is static
-                        key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
-                      >
-                        {line}
-                      </div>
-                    ))}
-                  </li>
-                ))}
-              </ul>
+  /** 記入欄が並ぶ項目(7版のバックストーリー)は箇条書きにする */
+  const renderListBlocks = (heading: string, blocks: Array<string>) => (
+    <ul className="list-disc pl-5">
+      {blocks.map((block, blockIndex) => (
+        <li
+          // biome-ignore lint/suspicious/noArrayIndexKey: blocks have no natural id, list order is static
+          key={`${data.name}-${heading}-${blockIndex}`}
+        >
+          {block.split("\n").map((line, lineIndex) => (
+            <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: text lines have no natural id, list order is static
+              key={`${data.name}-${heading}-${blockIndex}-${lineIndex}`}
+            >
+              {line}
             </div>
-          </section>
-        ))}
-      {noteParagraphs.length > 0 && (
-        <div className="mt-4">
-          <h3 className="font-serif font-semibold">メモ</h3>
+          ))}
+        </li>
+      ))}
+    </ul>
+  );
+
+  /** 自由記述の項目(メモ、6版の魔導書など)は段落にする */
+  const renderTextBlocks = (heading: string, blocks: Array<string>) =>
+    blocks.map((block, blockIndex) => (
+      <p
+        // biome-ignore lint/suspicious/noArrayIndexKey: paragraphs have no natural id, list order is static
+        key={`${data.name}-${heading}-${blockIndex}`}
+        className="mb-3 whitespace-pre-line last:mb-0"
+      >
+        {block}
+      </p>
+    ));
+
+  const renderSections = () => (
+    <div className="m-2">
+      {data.sections.map((section) => (
+        <section
+          key={`${data.name}-section-${section.heading}`}
+          className="mb-3 last:mb-0"
+        >
+          <h3 className="font-serif font-semibold">{section.heading}</h3>
           <div className="pl-5">
-            {noteParagraphs.map((paragraph, index) => (
-              <p
-                // biome-ignore lint/suspicious/noArrayIndexKey: paragraphs have no natural id, list order is static
-                key={`${data.name}-note-${index}`}
-                className="mb-3 whitespace-pre-line last:mb-0"
-              >
-                {paragraph}
-              </p>
-            ))}
+            {section.kind === "list"
+              ? renderListBlocks(section.heading, section.blocks)
+              : renderTextBlocks(section.heading, section.blocks)}
           </div>
-        </div>
-      )}
+        </section>
+      ))}
     </div>
   );
 
@@ -242,7 +190,7 @@ const CharacterCard = (props: { data: Investigator }) => {
   };
 
   // md未満では表裏の区別がなく、6要素すべてを縦に並べる。
-  // md以上でだけ、表(レーダー・能力値・立ち絵)と裏(技能表・バックストーリー)を切り替える。
+  // md以上でだけ、表(レーダー・能力値・立ち絵)と裏(技能表・設定)を切り替える。
   const hiddenOnBack = reverse ? "md:hidden" : undefined;
   const hiddenOnFront = reverse ? undefined : "md:hidden";
 
@@ -274,9 +222,9 @@ const CharacterCard = (props: { data: Investigator }) => {
       )}
     >
       {!classChanging && (
-        // md以上では2カラム。左に名前と表裏の主内容、右に立ち絵かバックストーリーを置く。
+        // md以上では2カラム。左に名前と表裏の主内容、右に立ち絵か設定を置く。
         // 配置を md:col-start / md:row-start で明示しているのは、DOM順をモバイルの
-        // 表示順(名前→立ち絵→レーダー→能力値→技能表→背景)に合わせているため。
+        // 表示順(名前→立ち絵→レーダー→能力値→技能表→設定)に合わせているため。
         <div className="animate-fade grid grid-cols-1 md:grid-cols-2 md:gap-2">
           <div className="md:col-start-1 md:row-start-1">{renderName()}</div>
 
@@ -318,7 +266,7 @@ const CharacterCard = (props: { data: Investigator }) => {
               hiddenOnFront,
             )}
           >
-            {renderBackstoriesAndNotes()}
+            {renderSections()}
           </div>
         </div>
       )}

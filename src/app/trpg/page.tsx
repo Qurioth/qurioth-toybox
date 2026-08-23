@@ -24,7 +24,7 @@ const toolCards = [
     href: "/trpg/charaeno-chart",
     description:
       "Charaeno に保管されたキャラクターのステータスをレーダーチャートで表示します。",
-    meta: "クトゥルフ神話TRPG 7版",
+    meta: "クトゥルフ神話TRPG",
     icon: ChartNoAxesCombined,
   },
   {

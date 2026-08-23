@@ -7,13 +7,22 @@ import Template from "@/components/Template";
 import {
   CHARACTER_SHEET_FETCH_FAILED,
   CHARACTER_SHEET_UNEXPECTED_FORMAT,
+  CHARACTER_SHEET_URL_INVALID,
 } from "@/constants/message";
-import type { Investigator } from "@/types/Charaeno7th";
+import type { CharacterCardData } from "@/types/CharacterCard";
 
 import { type SubmitHandler, useForm } from "react-hook-form";
 import {
-  isInvestigator,
+  toCardDataFrom6th,
+  toCardDataFrom7th,
+} from "@/utils/character-card-utils";
+import {
+  type Edition,
+  is6thInvestigator,
+  is7thInvestigator,
+  SHEET_URL_PATTERN,
   toDisplayName,
+  toSheetReference,
   toSummaryApiUrl,
 } from "@/utils/charaeno-utils";
 import { getFetch } from "@/utils/fetch-utils";
@@ -23,8 +32,29 @@ type Inputs = {
   url: string;
 };
 
+/**
+ * 版に応じた検証と変換を通す。どちらの版の形も満たさなければ undefined。
+ *
+ * 版はURLから決まっているので、レスポンスの中身から版を推測することはしない。
+ * 7版のURLに6版の形のJSONが返ってきた場合は、形式が想定と異なるものとして扱う。
+ */
+const toCardData = (
+  edition: Edition,
+  summary: unknown,
+): CharacterCardData | undefined => {
+  if (edition === "7th") {
+    return is7thInvestigator(summary)
+      ? toCardDataFrom7th({ ...summary, name: toDisplayName(summary.name) })
+      : undefined;
+  }
+
+  return is6thInvestigator(summary)
+    ? toCardDataFrom6th({ ...summary, name: toDisplayName(summary.name) })
+    : undefined;
+};
+
 export default function CharaenoChartPage() {
-  const [characterData, setCharacterData] = useState<Investigator>();
+  const [characterData, setCharacterData] = useState<CharacterCardData>();
   const [loadError, setLoadError] = useState("");
   const {
     register,
@@ -35,10 +65,19 @@ export default function CharaenoChartPage() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoadError("");
 
+    // 入力欄の検証を通っていれば必ず取れるが、版を確定させるために改めて解析する
+    const sheetReference = toSheetReference(data.url);
+
+    if (!sheetReference) {
+      setCharacterData(undefined);
+      setLoadError(CHARACTER_SHEET_URL_INVALID);
+      return;
+    }
+
     let summary: unknown;
 
     try {
-      summary = await getFetch(toSummaryApiUrl(data.url));
+      summary = await getFetch(toSummaryApiUrl(sheetReference));
     } catch (error) {
       console.error(error);
       setCharacterData(undefined);
@@ -46,13 +85,15 @@ export default function CharaenoChartPage() {
       return;
     }
 
-    if (!isInvestigator(summary)) {
+    const cardData = toCardData(sheetReference.edition, summary);
+
+    if (!cardData) {
       setCharacterData(undefined);
       setLoadError(CHARACTER_SHEET_UNEXPECTED_FORMAT);
       return;
     }
 
-    setCharacterData({ ...summary, name: toDisplayName(summary.name) });
+    setCharacterData(cardData);
   };
 
   return (
@@ -71,9 +112,9 @@ export default function CharaenoChartPage() {
                   {...register("url", {
                     maxLength: 200,
                     pattern: {
-                      value:
-                        /^https:\/\/charaeno.com\/7th\/[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+$/,
-                      message: "URLの形式が不正です。",
+                      // 取得先の組み立てと同じ規則。版を二箇所に書かない
+                      value: SHEET_URL_PATTERN,
+                      message: CHARACTER_SHEET_URL_INVALID,
                     },
                   })}
                 />
