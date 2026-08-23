@@ -157,6 +157,54 @@ describe("CharacterCard", () => {
       );
     });
 
+    // 反転はアニメーション中に中身ごとアンマウントされるため、
+    // 「チャートが消えたか」ではなく裏面/表面が見えたかで完了を待つ
+    const flip = async (user: ReturnType<typeof userEvent.setup>) => {
+      await user.click(screen.getByRole("button"));
+    };
+    const waitForBackSide = () =>
+      waitFor(
+        () =>
+          expect(
+            within(screen.getByRole("button")).getByText("目星"),
+          ).toBeVisible(),
+        { timeout: 2000 },
+      );
+    const waitForFrontSide = () =>
+      waitFor(
+        () =>
+          expect(
+            within(screen.getByRole("button")).getByText("HP"),
+          ).toBeVisible(),
+        { timeout: 2000 },
+      );
+
+    it("カードを裏返すと、表面が隠れるのでチャートを外す", async () => {
+      stubMatchMedia(true);
+      render(<CharacterCard data={sampleData} />);
+      expect(screen.getAllByTestId("radar-chart")).toHaveLength(1);
+
+      const user = userEvent.setup();
+      await flip(user);
+      await waitForBackSide();
+
+      expect(screen.queryByTestId("radar-chart")).not.toBeInTheDocument();
+    });
+
+    it("裏返してから戻すとチャートが復帰する", async () => {
+      stubMatchMedia(true);
+      render(<CharacterCard data={sampleData} />);
+
+      const user = userEvent.setup();
+      await flip(user);
+      await waitForBackSide();
+
+      await flip(user);
+      await waitForFrontSide();
+
+      expect(screen.getAllByTestId("radar-chart")).toHaveLength(1);
+    });
+
     it("チャートを置く枠自体は両方に残る(高さを保つため)", () => {
       stubMatchMedia(true);
       const { container } = render(<CharacterCard data={sampleData} />);

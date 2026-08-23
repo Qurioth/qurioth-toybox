@@ -125,11 +125,17 @@ const CharacterCard = (props: { data: Investigator }) => {
     </div>
   );
 
+  // チャートは実際に画面に出ているものだけマウントする。隠れた状態でマウントすると
+  // recharts が 0x0 のコンテナを測って警告を出し、描画されない ResponsiveContainer と
+  // ResizeObserver だけが残る。カードが隠れる条件は次の2つで、両方を見る必要がある。
+  //   1. md 未満/以上でのデスクトップ用・モバイル用カードの出し分け
+  //   2. デスクトップ用カードの表裏(裏面では表面が display:none になる)
+  const isDesktopChartVisible = isDesktop && !reverse;
+  const isMobileChartVisible = !isDesktop;
+
   /**
-   * 枠は常に描画し、チャート本体は表示中の側だけマウントする。
-   * 隠れている側でマウントすると、recharts が 0x0 のコンテナを測って警告を出し、
-   * 描画されない ResponsiveContainer と ResizeObserver だけが残るため。
-   * 枠を残すのは、ハイドレーション前後で高さが変わらないようにするため。
+   * 枠は常に描画し、チャート本体は表示中のときだけマウントする。
+   * 枠を残すのは、マウントの有無で高さが変わらないようにするため。
    */
   const renderRadarChart = (isVisible: boolean) => (
     <div className="flex flex-row w-full h-72 justify-center content-center">
@@ -259,7 +265,7 @@ const CharacterCard = (props: { data: Investigator }) => {
                 className="h-96 m-2"
                 style={{ display: reverse ? "none" : "block" }}
               >
-                {renderRadarChart(isDesktop)}
+                {renderRadarChart(isDesktopChartVisible)}
                 {renderAttributeCards()}
               </div>
 
@@ -299,7 +305,7 @@ const CharacterCard = (props: { data: Investigator }) => {
             <div className="min-h-[320px] flex items-end justify-center">
               {renderPortrait("h-[320px]")}
             </div>
-            {renderRadarChart(!isDesktop)}
+            {renderRadarChart(isMobileChartVisible)}
             {renderAttributeCards()}
           </div>
           <div className="px-2 pb-4 space-y-4">
