@@ -1,10 +1,4 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  within,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Investigator } from "@/types/Charaeno7th";
@@ -14,7 +8,7 @@ vi.mock("@/components/recharts/CharacteristicsRadarChart", () => ({
   default: () => <div data-testid="radar-chart" />,
 }));
 
-/** matchMedia の一致結果を差し替える(既定のスタブは常に false) */
+/** matchMedia の一致結果を差し替える(既定のスタブは常に false = モバイル扱い) */
 const stubMatchMedia = (matches: boolean) => {
   vi.stubGlobal("matchMedia", (query: string) => ({
     matches,
@@ -68,148 +62,156 @@ const sampleData: Investigator = {
   chatpalette: "",
 };
 
+/**
+ * md以上での表裏の出し分けは Tailwind の md:hidden で行うため、jsdom では
+ * 可視/不可視を判定できない(テストにCSSが読み込まれない)。
+ * ここでは「隠すクラスが正しい側に付いているか」で代用し、実際の見え方は
+ * ブラウザで確認する。
+ */
+const panelOf = (text: string) =>
+  screen.getByText(text).closest("[class*='md:col-start']");
+
+const isHiddenOnDesktop = (text: string) =>
+  panelOf(text)?.className.includes("md:hidden") ?? null;
+
 describe("CharacterCard", () => {
-  it("初期状態ではステータス面(表面)が表示され、技能表(裏面)は非表示になっている", () => {
-    render(<CharacterCard data={sampleData} />);
-    const card = within(screen.getByRole("button"));
-
-    expect(card.getByText("HP")).toBeVisible();
-    expect(card.getByText("12")).toBeVisible();
-    expect(card.getByText("目星")).not.toBeVisible();
-  });
-
-  it("クリックすると裏面(技能表)に切り替わる", async () => {
-    const user = userEvent.setup();
-    render(<CharacterCard data={sampleData} />);
-    const card = within(screen.getByRole("button"));
-
-    await user.click(screen.getByRole("button"));
-
-    await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
-      timeout: 2000,
-    });
-    expect(card.getByText("HP")).not.toBeVisible();
-  });
-
-  it("キーボード操作(Enter)でも表裏が切り替わる", async () => {
-    const user = userEvent.setup();
-    render(<CharacterCard data={sampleData} />);
-    const card = within(screen.getByRole("button"));
-
-    screen.getByRole("button").focus();
-    await user.keyboard("{Enter}");
-
-    await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
-      timeout: 2000,
-    });
-  });
-
-  it("もう一度クリックすると表面に戻る", async () => {
-    const user = userEvent.setup();
-    render(<CharacterCard data={sampleData} />);
-    const card = within(screen.getByRole("button"));
-
-    await user.click(screen.getByRole("button"));
-    await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
-      timeout: 2000,
-    });
-
-    await user.click(screen.getByRole("button"));
-    await waitFor(() => expect(card.getByText("HP")).toBeVisible(), {
-      timeout: 2000,
-    });
-  });
-
-  it("フリップ中にもう一度クリックしても、表示は一度分しか切り替わらない(既存の挙動)", async () => {
-    render(<CharacterCard data={sampleData} />);
-    const card = within(screen.getByRole("button"));
-
-    fireEvent.click(screen.getByRole("button"));
-    await new Promise((resolve) => setTimeout(resolve, 200)); // アニメーション中に再度クリック
-    fireEvent.click(screen.getByRole("button"));
-
-    await waitFor(() => expect(card.getByText("目星")).toBeVisible(), {
-      timeout: 2000,
-    });
-  });
-
-  describe("レーダーチャートのマウント", () => {
-    it("デスクトップ幅ではデスクトップ側のカードにだけ描画する", () => {
+  describe("デスクトップ(md以上)", () => {
+    it("初期は表面。レーダー・能力値・立ち絵を出し、裏面は隠す", async () => {
       stubMatchMedia(true);
-      const { container } = render(<CharacterCard data={sampleData} />);
+      render(<CharacterCard data={sampleData} />);
 
-      const charts = screen.getAllByTestId("radar-chart");
-      expect(charts).toHaveLength(1);
-      // デスクトップ用カード(hidden md:block)の中にある
-      expect(container.querySelector(".md\\:hidden")).not.toContainElement(
-        charts[0],
-      );
+      expect(isHiddenOnDesktop("HP")).toBe(false);
+      expect(isHiddenOnDesktop("目星")).toBe(true);
+      expect(isHiddenOnDesktop("容姿の描写")).toBe(true);
+      // チャートは dynamic import なので1ティック待つ
+      expect(await screen.findAllByTestId("radar-chart")).toHaveLength(1);
     });
 
-    it("モバイル幅ではモバイル側のカードにだけ描画する", () => {
-      stubMatchMedia(false);
-      const { container } = render(<CharacterCard data={sampleData} />);
+    it("カード全体がボタンとして扱われる", () => {
+      stubMatchMedia(true);
+      render(<CharacterCard data={sampleData} />);
 
-      const charts = screen.getAllByTestId("radar-chart");
-      expect(charts).toHaveLength(1);
-      expect(container.querySelector(".md\\:hidden")).toContainElement(
-        charts[0],
-      );
+      expect(screen.getByRole("button")).toBeInTheDocument();
     });
 
-    // 反転はアニメーション中に中身ごとアンマウントされるため、
-    // 「チャートが消えたか」ではなく裏面/表面が見えたかで完了を待つ
-    const flip = async (user: ReturnType<typeof userEvent.setup>) => {
+    it("クリックすると裏面に切り替わる", async () => {
+      stubMatchMedia(true);
+      const user = userEvent.setup();
+      render(<CharacterCard data={sampleData} />);
+
       await user.click(screen.getByRole("button"));
-    };
-    const waitForBackSide = () =>
-      waitFor(
-        () =>
-          expect(
-            within(screen.getByRole("button")).getByText("目星"),
-          ).toBeVisible(),
-        { timeout: 2000 },
-      );
-    const waitForFrontSide = () =>
-      waitFor(
-        () =>
-          expect(
-            within(screen.getByRole("button")).getByText("HP"),
-          ).toBeVisible(),
-        { timeout: 2000 },
-      );
 
-    it("カードを裏返すと、表面が隠れるのでチャートを外す", async () => {
+      await waitFor(() => expect(isHiddenOnDesktop("目星")).toBe(false), {
+        timeout: 2000,
+      });
+      expect(isHiddenOnDesktop("HP")).toBe(true);
+    });
+
+    it("キーボード操作(Enter)でも切り替わる", async () => {
+      stubMatchMedia(true);
+      const user = userEvent.setup();
+      render(<CharacterCard data={sampleData} />);
+
+      screen.getByRole("button").focus();
+      await user.keyboard("{Enter}");
+
+      await waitFor(() => expect(isHiddenOnDesktop("目星")).toBe(false), {
+        timeout: 2000,
+      });
+    });
+
+    it("もう一度クリックすると表面に戻る", async () => {
+      stubMatchMedia(true);
+      const user = userEvent.setup();
+      render(<CharacterCard data={sampleData} />);
+
+      await user.click(screen.getByRole("button"));
+      await waitFor(() => expect(isHiddenOnDesktop("目星")).toBe(false), {
+        timeout: 2000,
+      });
+
+      await user.click(screen.getByRole("button"));
+      await waitFor(() => expect(isHiddenOnDesktop("HP")).toBe(false), {
+        timeout: 2000,
+      });
+    });
+
+    it("フリップ中にもう一度クリックしても、表示は一度分しか切り替わらない(既存の挙動)", async () => {
       stubMatchMedia(true);
       render(<CharacterCard data={sampleData} />);
-      expect(screen.getAllByTestId("radar-chart")).toHaveLength(1);
 
+      fireEvent.click(screen.getByRole("button"));
+      await new Promise((resolve) => setTimeout(resolve, 200)); // アニメーション中に再度クリック
+      fireEvent.click(screen.getByRole("button"));
+
+      await waitFor(() => expect(isHiddenOnDesktop("目星")).toBe(false), {
+        timeout: 2000,
+      });
+    });
+
+    it("裏返すとチャートを外し、戻すと復帰する", async () => {
+      stubMatchMedia(true);
       const user = userEvent.setup();
-      await flip(user);
-      await waitForBackSide();
+      render(<CharacterCard data={sampleData} />);
+      expect(await screen.findAllByTestId("radar-chart")).toHaveLength(1);
 
+      // アニメーション中は中身ごとアンマウントされるため、
+      // 「チャートが消えたか」ではなく反転が終わったかで待つ
+      await user.click(screen.getByRole("button"));
+      await waitFor(() => expect(isHiddenOnDesktop("目星")).toBe(false), {
+        timeout: 2000,
+      });
       expect(screen.queryByTestId("radar-chart")).not.toBeInTheDocument();
-    });
 
-    it("裏返してから戻すとチャートが復帰する", async () => {
-      stubMatchMedia(true);
+      await user.click(screen.getByRole("button"));
+      await waitFor(() => expect(isHiddenOnDesktop("HP")).toBe(false), {
+        timeout: 2000,
+      });
+      expect(await screen.findAllByTestId("radar-chart")).toHaveLength(1);
+    });
+  });
+
+  describe("モバイル(md未満)", () => {
+    it("表裏の区別なく6要素すべてを出す", async () => {
+      stubMatchMedia(false);
       render(<CharacterCard data={sampleData} />);
 
-      const user = userEvent.setup();
-      await flip(user);
-      await waitForBackSide();
-
-      await flip(user);
-      await waitForFrontSide();
-
-      expect(screen.getAllByTestId("radar-chart")).toHaveLength(1);
+      // 名前・立ち絵・レーダー・能力値・技能表・バックストーリー
+      expect(screen.getByText("テスト太郎")).toBeInTheDocument();
+      expect(screen.getByAltText("portrait")).toBeInTheDocument();
+      expect(await screen.findAllByTestId("radar-chart")).toHaveLength(1);
+      expect(screen.getByText("HP")).toBeInTheDocument();
+      expect(screen.getByText("目星")).toBeInTheDocument();
+      expect(screen.getByText("容姿の描写")).toBeInTheDocument();
     });
 
-    it("チャートを置く枠自体は両方に残る(高さを保つため)", () => {
-      stubMatchMedia(true);
-      const { container } = render(<CharacterCard data={sampleData} />);
+    it("md未満で無条件に隠すクラスは付けない(隠すのは md:hidden だけ)", () => {
+      stubMatchMedia(false);
+      render(<CharacterCard data={sampleData} />);
 
-      expect(container.querySelectorAll("div.h-72")).toHaveLength(2);
+      // md:hidden は md 以上でしか効かないので、モバイルでは全パネルが並ぶ。
+      // 逆に無条件の hidden が付いていると、モバイルで消えてしまう
+      for (const text of ["HP", "目星", "容姿の描写"]) {
+        const className = panelOf(text)?.className ?? "";
+        expect(className.split(/\s+/)).not.toContain("hidden");
+      }
     });
+
+    it("反転しないので、ボタンとしては扱わない", () => {
+      stubMatchMedia(false);
+      render(<CharacterCard data={sampleData} />);
+
+      expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    });
+  });
+
+  it("カードは1枚だけ描画する(デスクトップ用とモバイル用を二重に持たない)", () => {
+    stubMatchMedia(true);
+    const { container } = render(<CharacterCard data={sampleData} />);
+
+    expect(container.querySelectorAll("section")).toHaveLength(2); // カード + バックストーリーの見出し
+    expect(container.querySelectorAll("table")).toHaveLength(1);
+    expect(container.querySelectorAll("img[alt=portrait]")).toHaveLength(1);
+    expect(container.querySelectorAll("div.h-72")).toHaveLength(1);
   });
 });
