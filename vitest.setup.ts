@@ -27,6 +27,20 @@ class ResizeObserverStub {
 // biome-ignore lint/suspicious/noExplicitAny: jsdom has no ResizeObserver implementation
 (globalThis as any).ResizeObserver = ResizeObserverStub;
 
+// jsdomはIntersectionObserverを実装していない(replayページの無限スクロールが依存する)。
+// 交差は起きない前提のスタブなので、追加読み込みは発火しない。
+class IntersectionObserverStub {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: jsdom has no IntersectionObserver implementation
+(globalThis as any).IntersectionObserver = IntersectionObserverStub;
+
 // jsdomはwindow.matchMediaを実装していない(DarkModeContextが依存する)
 window.matchMedia ??= ((query: string) => ({
   matches: false,

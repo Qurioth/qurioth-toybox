@@ -1,383 +1,20 @@
 "use client";
 
 import Template from "@/components/Template";
-import YouTubeEmbed from "@/components/YoutubeEmbed";
+import { replayVideos } from "@/data/youtube/trpg/youtube-id";
 import {
-  type ReplayCharacter,
-  type ReplayVideo,
-  replayVideos,
-} from "@/data/youtube/trpg/youtube-id";
+  type SearchTarget,
+  filterReplays,
+  getSearchSuggestions,
+  getSearchTargetKey,
+  mergeSearchTargets,
+  parseSearchQuery,
+} from "@/utils/replay-search";
 import { Search, X } from "lucide-react";
-import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ReplayCard, { getReplayMediaId } from "./ReplayCard";
 
 const loadSize = 10;
-const suggestionLimit = 8;
-const emptyText = "未設定";
-
-type SearchField = "scenario" | "system" | "gm" | "player" | "character";
-
-type SearchTarget = {
-  field: SearchField;
-  label: string;
-  value: string;
-};
-
-type ParsedSearchQuery = {
-  targets: SearchTarget[];
-  freeQuery: string;
-};
-
-const searchFieldLabels: Record<SearchField, string> = {
-  scenario: "シナリオタイトル",
-  system: "システム名",
-  gm: "GM名",
-  player: "プレイヤー名",
-  character: "キャラクター名",
-};
-
-const searchFieldAliases: Record<string, SearchField> = {
-  scenario: "scenario",
-  sc: "scenario",
-  title: "scenario",
-  シナリオ: "scenario",
-  シナリオタイトル: "scenario",
-  system: "system",
-  sys: "system",
-  システム: "system",
-  システム名: "system",
-  gm: "gm",
-  GM: "gm",
-  GM名: "gm",
-  player: "player",
-  pl: "player",
-  pcplayer: "player",
-  プレイヤー: "player",
-  プレイヤー名: "player",
-  character: "character",
-  chara: "character",
-  pc: "character",
-  キャラクター: "character",
-  キャラクター名: "character",
-};
-
-const displayText = (value?: string) => {
-  return value && value.trim().length > 0 ? value : emptyText;
-};
-
-const hasText = (value?: string) => {
-  return Boolean(value && value.trim().length > 0);
-};
-
-const normalizeSearchText = (value: string) => {
-  return value.normalize("NFKC").trim().toLocaleLowerCase();
-};
-
-const normalizeSearchField = (value: string) => {
-  return value.normalize("NFKC").trim().toLocaleLowerCase();
-};
-
-const getSearchField = (value: string) => {
-  return searchFieldAliases[normalizeSearchField(value)];
-};
-
-const createSearchTarget = (
-  field: SearchField,
-  value: string,
-): SearchTarget => {
-  return {
-    field,
-    label: searchFieldLabels[field],
-    value,
-  };
-};
-
-const getSearchTargetKey = ({ field, value }: SearchTarget) => {
-  return `${field}:${normalizeSearchText(value)}`;
-};
-
-const getReplaySearchTargets = (replay: ReplayVideo): SearchTarget[] => {
-  const targets: SearchTarget[] = [];
-
-  if (hasText(replay.scenarioName)) {
-    targets.push(createSearchTarget("scenario", replay.scenarioName as string));
-  }
-
-  if (hasText(replay.trpgSystemName)) {
-    targets.push(createSearchTarget("system", replay.trpgSystemName as string));
-  }
-
-  if (hasText(replay.gmName)) {
-    targets.push(createSearchTarget("gm", replay.gmName as string));
-  }
-
-  replay.characters?.forEach(({ characterName, playerName }) => {
-    if (hasText(characterName)) {
-      targets.push(createSearchTarget("character", characterName));
-    }
-
-    if (hasText(playerName)) {
-      targets.push(createSearchTarget("player", playerName as string));
-    }
-  });
-
-  return targets;
-};
-
-const parseSearchQuery = (query: string): ParsedSearchQuery => {
-  const targets: SearchTarget[] = [];
-  const freeWords: string[] = [];
-
-  query
-    .split(/[\s,、]+/)
-    .map((word) => word.trim())
-    .filter(Boolean)
-    .forEach((word) => {
-      const match = word.match(/^([^:：]+)[:：](.+)$/);
-
-      if (!match) {
-        freeWords.push(word);
-        return;
-      }
-
-      const field = getSearchField(match[1]);
-
-      if (!field) {
-        freeWords.push(word);
-        return;
-      }
-
-      targets.push(createSearchTarget(field, match[2].trim()));
-    });
-
-  return {
-    targets,
-    freeQuery: freeWords.join(" "),
-  };
-};
-
-const replayMatchesSearch = (replay: ReplayVideo, query: string) => {
-  const words = normalizeSearchText(query).split(/\s+/).filter(Boolean);
-
-  if (words.length === 0) {
-    return true;
-  }
-
-  const targetText = getReplaySearchTargets(replay)
-    .map(({ value }) => normalizeSearchText(value))
-    .join(" ");
-
-  return words.every((word) => targetText.includes(word));
-};
-
-const replayMatchesSearchTarget = (
-  replay: ReplayVideo,
-  selectedTarget: SearchTarget,
-) => {
-  return getReplaySearchTargets(replay).some((target) => {
-    return (
-      target.field === selectedTarget.field &&
-      normalizeSearchText(target.value) ===
-        normalizeSearchText(selectedTarget.value)
-    );
-  });
-};
-
-const getSearchSuggestionQuery = (query: string) => {
-  const words = query.split(/[\s,、]+/);
-  const currentWord = words[words.length - 1] ?? "";
-  const match = currentWord.match(/^([^:：]+)[:：](.*)$/);
-
-  if (!match) {
-    return {
-      field: undefined,
-      query: currentWord,
-    };
-  }
-
-  return {
-    field: getSearchField(match[1]),
-    query: match[2],
-  };
-};
-
-const getSearchSuggestions = (
-  query: string,
-  selectedTargets: SearchTarget[],
-) => {
-  const suggestionQuery = getSearchSuggestionQuery(query);
-  const normalizedQuery = normalizeSearchText(suggestionQuery.query);
-
-  if (!normalizedQuery) {
-    return [];
-  }
-
-  const selectedKeys = new Set(selectedTargets.map(getSearchTargetKey));
-  const suggestions = new Map<string, SearchTarget>();
-
-  for (const replay of replayVideos) {
-    for (const target of getReplaySearchTargets(replay)) {
-      if (suggestionQuery.field && target.field !== suggestionQuery.field) {
-        continue;
-      }
-
-      const key = getSearchTargetKey(target);
-
-      if (selectedKeys.has(key)) {
-        continue;
-      }
-
-      if (!normalizeSearchText(target.value).includes(normalizedQuery)) {
-        continue;
-      }
-
-      if (!suggestions.has(key)) {
-        suggestions.set(key, target);
-      }
-
-      if (suggestions.size >= suggestionLimit) {
-        return Array.from(suggestions.values());
-      }
-    }
-  }
-
-  return Array.from(suggestions.values());
-};
-
-const normalizePassword = (value: string) => {
-  return value.trim().toLocaleLowerCase();
-};
-
-const hasPasswords = (passwords?: string[]) => {
-  return Boolean(passwords && passwords.length > 0);
-};
-
-const getReplayMediaId = (replay: ReplayVideo) => {
-  return replay.videoId ?? replay.playlistId;
-};
-
-const displayCharacters = (characters?: ReplayCharacter[]) => {
-  if (!characters || characters.length === 0) {
-    return emptyText;
-  }
-
-  return characters
-    .map(({ characterName, playerName }) => {
-      if (!playerName) {
-        return characterName;
-      }
-
-      return `${characterName}（${playerName}）`;
-    })
-    .join(" / ");
-};
-
-const ReplayCard = ({ replay }: { replay: ReplayVideo }) => {
-  const [password, setPassword] = useState("");
-  const [isUnlocked, setIsUnlocked] = useState(!hasPasswords(replay.passwords));
-  const [errorMessage, setErrorMessage] = useState("");
-  const shouldShowProtectedContent =
-    !hasPasswords(replay.passwords) || isUnlocked;
-
-  const onSubmitPassword = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const normalizedPassword = normalizePassword(password);
-    const canUnlock = replay.passwords?.some((validPassword) => {
-      return normalizePassword(validPassword) === normalizedPassword;
-    });
-
-    if (canUnlock) {
-      setIsUnlocked(true);
-      setErrorMessage("");
-      return;
-    }
-
-    setErrorMessage("キーワードが一致しません。");
-  };
-
-  return (
-    <article className="w-full max-w-lg overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
-      {shouldShowProtectedContent ? (
-        <YouTubeEmbed videoId={replay.videoId} playlistId={replay.playlistId} />
-      ) : (
-        <div className="flex aspect-video w-full flex-col justify-center gap-4 bg-zinc-100 p-6 text-zinc-800 dark:bg-slate-900 dark:text-zinc-100">
-          <div>
-            <p className="text-base font-bold">限定公開リプレイ</p>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-              この動画を表示するには、シナリオ内に出現した神話生物の名前を入力してください。
-            </p>
-          </div>
-          <form className="flex flex-col gap-3" onSubmit={onSubmitPassword}>
-            <label
-              className="text-sm font-semibold"
-              htmlFor={getReplayMediaId(replay)}
-            >
-              キーワード
-            </label>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <input
-                id={getReplayMediaId(replay)}
-                type="text"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                className="min-w-0 flex-1 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-zinc-100"
-                autoComplete="off"
-              />
-              <button
-                type="submit"
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
-              >
-                表示
-              </button>
-            </div>
-            {errorMessage && (
-              <p className="text-sm text-red-600 dark:text-red-300">
-                {errorMessage}
-              </p>
-            )}
-          </form>
-        </div>
-      )}
-
-      <div className="flex flex-col gap-4 p-4 text-sm text-zinc-800 dark:text-zinc-100">
-        <div>
-          <h2 className="text-lg font-bold">
-            {displayText(replay.scenarioName)}
-          </h2>
-        </div>
-
-        <dl className="grid grid-cols-[6rem_1fr] gap-x-3 gap-y-2">
-          <dt className="font-semibold text-zinc-500 dark:text-zinc-400">
-            TRPGシステム
-          </dt>
-          <dd>{displayText(replay.trpgSystemName)}</dd>
-
-          <dt className="font-semibold text-zinc-500 dark:text-zinc-400">
-            キャラクター
-          </dt>
-          <dd>{displayCharacters(replay.characters)}</dd>
-
-          <dt className="font-semibold text-zinc-500 dark:text-zinc-400">GM</dt>
-          <dd>{displayText(replay.gmName)}</dd>
-
-          <dt className="font-semibold text-zinc-500 dark:text-zinc-400">
-            実施日
-          </dt>
-          <dd>{displayText(replay.playedAt)}</dd>
-
-          {hasText(replay.note) && (
-            <>
-              <dt className="font-semibold text-zinc-500 dark:text-zinc-400">
-                備考
-              </dt>
-              <dd>{replay.note}</dd>
-            </>
-          )}
-        </dl>
-      </div>
-    </article>
-  );
-};
 
 export default function ReplayPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -386,55 +23,45 @@ export default function ReplayPage() {
   >([]);
   const [visibleCount, setVisibleCount] = useState(loadSize);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const parsedSearchQuery = useMemo(() => {
-    return parseSearchQuery(searchQuery);
-  }, [searchQuery]);
-  const activeSearchTargets = useMemo(() => {
-    const targets = [...selectedSearchTargets];
-    const targetKeys = new Set(targets.map(getSearchTargetKey));
 
-    for (const target of parsedSearchQuery.targets) {
-      const key = getSearchTargetKey(target);
-
-      if (!targetKeys.has(key)) {
-        targets.push(target);
-        targetKeys.add(key);
-      }
-    }
-
-    return targets;
-  }, [parsedSearchQuery.targets, selectedSearchTargets]);
-  const filteredReplayVideos = useMemo(() => {
-    return replayVideos.filter(
-      (replay) =>
-        activeSearchTargets.every((target) =>
-          replayMatchesSearchTarget(replay, target),
-        ) && replayMatchesSearch(replay, parsedSearchQuery.freeQuery),
-    );
-  }, [activeSearchTargets, parsedSearchQuery.freeQuery]);
-  const searchSuggestions = useMemo(() => {
-    return getSearchSuggestions(searchQuery, activeSearchTargets);
-  }, [activeSearchTargets, searchQuery]);
+  const parsedSearchQuery = useMemo(
+    () => parseSearchQuery(searchQuery),
+    [searchQuery],
+  );
+  const activeSearchTargets = useMemo(
+    () => mergeSearchTargets(selectedSearchTargets, parsedSearchQuery.targets),
+    [parsedSearchQuery.targets, selectedSearchTargets],
+  );
+  const filteredReplayVideos = useMemo(
+    () =>
+      filterReplays(
+        replayVideos,
+        activeSearchTargets,
+        parsedSearchQuery.freeQuery,
+      ),
+    [activeSearchTargets, parsedSearchQuery.freeQuery],
+  );
+  const searchSuggestions = useMemo(
+    () => getSearchSuggestions(replayVideos, searchQuery, activeSearchTargets),
+    [activeSearchTargets, searchQuery],
+  );
   const hasMore = visibleCount < filteredReplayVideos.length;
-  const visibleReplayVideos = useMemo(() => {
-    return filteredReplayVideos.slice(0, visibleCount);
-  }, [filteredReplayVideos, visibleCount]);
+  const visibleReplayVideos = useMemo(
+    () => filteredReplayVideos.slice(0, visibleCount),
+    [filteredReplayVideos, visibleCount],
+  );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally reset visibleCount when search filters change
   useEffect(() => {
     setVisibleCount(loadSize);
   }, [activeSearchTargets, searchQuery]);
 
-  const onChangeSearchQuery = (value: string) => {
-    setSearchQuery(value);
-  };
-
   const onSelectSuggestion = (suggestion: SearchTarget) => {
     setSelectedSearchTargets((currentTargets) => {
       const suggestionKey = getSearchTargetKey(suggestion);
-      const alreadySelected = currentTargets.some((target) => {
-        return getSearchTargetKey(target) === suggestionKey;
-      });
+      const alreadySelected = currentTargets.some(
+        (target) => getSearchTargetKey(target) === suggestionKey,
+      );
 
       if (alreadySelected) {
         return currentTargets;
@@ -447,9 +74,9 @@ export default function ReplayPage() {
 
   const onRemoveSearchTarget = (targetKey: string) => {
     setSelectedSearchTargets((currentTargets) =>
-      currentTargets.filter((target) => {
-        return getSearchTargetKey(target) !== targetKey;
-      }),
+      currentTargets.filter(
+        (target) => getSearchTargetKey(target) !== targetKey,
+      ),
     );
   };
 
@@ -468,12 +95,9 @@ export default function ReplayPage() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisibleCount((currentCount) => {
-            return Math.min(
-              currentCount + loadSize,
-              filteredReplayVideos.length,
-            );
-          });
+          setVisibleCount((currentCount) =>
+            Math.min(currentCount + loadSize, filteredReplayVideos.length),
+          );
         }
       },
       {
@@ -508,7 +132,7 @@ export default function ReplayPage() {
                 id="replay-search"
                 type="search"
                 value={searchQuery}
-                onChange={(event) => onChangeSearchQuery(event.target.value)}
+                onChange={(event) => setSearchQuery(event.target.value)}
                 className="w-full rounded-md border border-zinc-300 bg-white py-3 pl-10 pr-11 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-zinc-100"
                 placeholder="シナリオタイトル、システム名、GM名、プレイヤー名、キャラクター名"
                 autoComplete="off"
@@ -583,11 +207,9 @@ export default function ReplayPage() {
         </div>
 
         <div className="mx-auto grid w-full max-w-[66rem] grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
-          {visibleReplayVideos.map((replay) => {
-            return (
-              <ReplayCard key={getReplayMediaId(replay)} replay={replay} />
-            );
-          })}
+          {visibleReplayVideos.map((replay) => (
+            <ReplayCard key={getReplayMediaId(replay)} replay={replay} />
+          ))}
         </div>
 
         {filteredReplayVideos.length === 0 ? (
