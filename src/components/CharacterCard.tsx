@@ -13,6 +13,17 @@ const CharacteristicsRadarChart = dynamic(
   },
 );
 
+const CHARACTERISTICS_KEYS = [
+  "str",
+  "con",
+  "pow",
+  "dex",
+  "app",
+  "siz",
+  "int",
+  "edu",
+] as const;
+
 const backstoryLabels = [
   "容姿の描写",
   "イデオロギー／信念",
@@ -53,11 +64,6 @@ const getNoteParagraphs = (note: string) =>
 
 const CharacterCard = (props: { data: Investigator }) => {
   const data = props.data;
-  const characteristics: {
-    subject: string;
-    characteristics: number;
-    fullMark: number;
-  }[] = [];
   const [reverse, setReverse] = useState(false);
   const [classChanging, setClassChanging] = useState(false);
   const nameTextSizeClass = getNameTextSizeClass(data.name);
@@ -79,42 +85,13 @@ const CharacterCard = (props: { data: Investigator }) => {
     { label: "幸運", value: data.attribute.luck },
   ];
 
-  Object.keys(data.characteristics).forEach((key: string) => {
-    let characteristicsData = 0;
-    switch (key) {
-      case "str":
-        characteristicsData = data.characteristics.str;
-        break;
-      case "con":
-        characteristicsData = data.characteristics.con;
-        break;
-      case "pow":
-        characteristicsData = data.characteristics.pow;
-        break;
-      case "dex":
-        characteristicsData = data.characteristics.dex;
-        break;
-      case "app":
-        characteristicsData = data.characteristics.app;
-        break;
-      case "siz":
-        characteristicsData = data.characteristics.siz;
-        break;
-      case "int":
-        characteristicsData = data.characteristics.int;
-        break;
-      case "edu":
-        characteristicsData = data.characteristics.edu;
-        break;
-      default:
-    }
-
-    characteristics.push({
-      subject: key.toUpperCase(),
-      characteristics: characteristicsData,
-      fullMark: 100,
-    });
-  });
+  // レーダーチャートの軸。Object.keys ではAPIのJSONのキー順に依存してしまうため、
+  // 表示順をここで固定する。
+  const characteristics = CHARACTERISTICS_KEYS.map((key) => ({
+    subject: key.toUpperCase(),
+    characteristics: data.characteristics[key],
+    fullMark: 100,
+  }));
 
   const renderName = () => (
     <div
@@ -142,6 +119,16 @@ const CharacterCard = (props: { data: Investigator }) => {
           height={500}
         />
       )}
+    </div>
+  );
+
+  const renderRadarChart = () => (
+    <div className="flex flex-row w-full h-72 justify-center content-center">
+      <CharacteristicsRadarChart
+        name={data.name}
+        dataKey={"characteristics"}
+        data={characteristics}
+      />
     </div>
   );
 
@@ -256,77 +243,21 @@ const CharacterCard = (props: { data: Investigator }) => {
         {!classChanging && (
           <div className="animate-fade grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="justify-center content-center">
-              <div
-                className={`h-12 overflow-hidden text-ellipsis whitespace-nowrap font-serif ${nameTextSizeClass} font-semibold italic leading-tight mt-2 ml-2`}
-              >
-                {data.name}
-              </div>
+              {renderName()}
               <div
                 className="h-96 m-2"
                 style={{ display: reverse ? "none" : "block" }}
               >
-                <div className="flex flex-row w-full h-72 justify-center content-center">
-                  <CharacteristicsRadarChart
-                    name={data.name}
-                    dataKey={"characteristics"}
-                    data={characteristics}
-                  />
-                </div>
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                    <div className="flex justify-center font-semibold pb-2">
-                      HP
-                    </div>
-                    <div className="flex justify-center font-semibold pt-2">
-                      {data.attribute.hp}
-                    </div>
-                  </div>
-                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                    <div className="flex justify-center font-semibold pb-2">
-                      MP
-                    </div>
-                    <div className="flex justify-center font-semibold pt-2">
-                      {data.attribute.mp}
-                    </div>
-                  </div>
-                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                    <div className="flex justify-center font-semibold pb-2">
-                      SAN
-                    </div>
-                    <div className="flex justify-center font-semibold pt-2">
-                      {data.attribute.san.value}
-                    </div>
-                  </div>
-                  <div className="shadow-md divide-y divide-slate-700 p-2 dark:bg-slate-200 rounded border-2 border-purple-50 dark:text-slate-900">
-                    <div className="flex justify-center font-semibold pb-2">
-                      幸運
-                    </div>
-                    <div className="flex justify-center font-semibold pt-2">
-                      {data.attribute.luck}
-                    </div>
-                  </div>
-                </div>
+                {renderRadarChart()}
+                {renderAttributeCards()}
               </div>
 
               <div
-                className="table-wrp block h-96 m-2 p-2"
+                className="block h-96 m-2 p-2"
                 style={{ display: reverse ? "block" : "none" }}
               >
                 <div className="scrollbar-thin h-full overflow-y-auto">
-                  <table className="w-full border-separate border border-slate-500">
-                    <tbody>
-                      {editedSkills.map((skill) => (
-                        <tr key={`${data.name}-skill-${skill.name}`}>
-                          <td className="w-5/6 border border-slate-600 font-serif font-semibold">
-                            {skill.name}
-                          </td>
-                          <td className="w-1/6 border border-slate-600 font-mono font-semibold text-center">
-                            {skill.value}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  {renderSkillTable()}
                 </div>
               </div>
             </div>
@@ -335,27 +266,7 @@ const CharacterCard = (props: { data: Investigator }) => {
               className="grid grid-cols-1 content-center h-[448px]"
               style={{ display: reverse ? "none" : "block" }}
             >
-              <div className="h-[440px]">
-                <div className="w-auto grid grid-cols-1 justify-items-center content-center">
-                  {data.portraitURL ? (
-                    // biome-ignore lint/performance/noImgElement: external portrait URL, domain unknown at build time
-                    <img
-                      className="object-contain h-[440px] animate-in fade-in duration-1000"
-                      src={data.portraitURL || "/image/human_icon.png"}
-                      alt="portrait"
-                    />
-                  ) : (
-                    <Image
-                      className="animate-in fade-in duration-1000"
-                      src={humanIcon}
-                      alt="ortrait"
-                      width={500}
-                      height={500}
-                      objectFit="contain"
-                    />
-                  )}
-                </div>
-              </div>
+              <div className="h-[440px]">{renderPortrait("h-[440px]")}</div>
             </div>
 
             <div
@@ -363,56 +274,7 @@ const CharacterCard = (props: { data: Investigator }) => {
               style={{ display: reverse ? "block" : "none" }}
             >
               <div className="scrollbar-thin h-[434px] overflow-x-hidden overflow-y-auto bg-slate-50 dark:bg-slate-800 m-2">
-                <div className="m-2">
-                  {backstories.length > 0 &&
-                    backstories.map((backstory, backstoryIndex) => (
-                      <section
-                        key={`${data.name}-backstory-${backstory.name}`}
-                        className="mb-3"
-                      >
-                        <h3 className="font-serif font-semibold">
-                          {backstory.name}
-                        </h3>
-                        <div className="pl-5">
-                          <ul className="list-disc pl-5">
-                            {backstory.entries.map((entry, entryIndex) => (
-                              <li
-                                // biome-ignore lint/suspicious/noArrayIndexKey: entries have no natural id, list order is static
-                                key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}`}
-                              >
-                                {entry.text
-                                  .split("\n")
-                                  .map((line, lineIndex) => (
-                                    <div
-                                      // biome-ignore lint/suspicious/noArrayIndexKey: text lines have no natural id, list order is static
-                                      key={`${data.name}-backstory-${backstoryIndex}-${entryIndex}-${lineIndex}`}
-                                    >
-                                      {line}
-                                    </div>
-                                  ))}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </section>
-                    ))}
-                  {noteParagraphs.length > 0 && (
-                    <div className="mt-4">
-                      <h3 className="font-serif font-semibold">メモ</h3>
-                      <div className="pl-5">
-                        {noteParagraphs.map((paragraph, index) => (
-                          <p
-                            // biome-ignore lint/suspicious/noArrayIndexKey: paragraphs have no natural id, list order is static
-                            key={`${data.name}-note-${index}`}
-                            className="mb-3 whitespace-pre-line last:mb-0"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                {renderBackstoriesAndNotes()}
               </div>
             </div>
           </div>
@@ -426,17 +288,11 @@ const CharacterCard = (props: { data: Investigator }) => {
             <div className="min-h-[320px] flex items-end justify-center">
               {renderPortrait("h-[320px]")}
             </div>
-            <div className="flex flex-row w-full h-72 justify-center content-center">
-              <CharacteristicsRadarChart
-                name={data.name}
-                dataKey={"characteristics"}
-                data={characteristics}
-              />
-            </div>
+            {renderRadarChart()}
             {renderAttributeCards()}
           </div>
           <div className="px-2 pb-4 space-y-4">
-            <div className="table-wrp">{renderSkillTable()}</div>
+            {renderSkillTable()}
             <div className="overflow-x-hidden">
               {renderBackstoriesAndNotes()}
             </div>
