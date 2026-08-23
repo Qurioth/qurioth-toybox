@@ -2,9 +2,18 @@
 
 import CharacterCard from "@/components/CharacterCard";
 import Template from "@/components/Template";
+import {
+  CHARACTER_SHEET_FETCH_FAILED,
+  CHARACTER_SHEET_UNEXPECTED_FORMAT,
+} from "@/constants/message";
 import type { Investigator } from "@/types/Charaeno7th";
 
 import { type SubmitHandler, useForm } from "react-hook-form";
+import {
+  isInvestigator,
+  toDisplayName,
+  toSummaryApiUrl,
+} from "@/utils/charaeno-utils";
 import { getFetch } from "@/utils/fetch-utils";
 import { useState } from "react";
 
@@ -14,6 +23,7 @@ type Inputs = {
 
 export default function CharaenoChartPage() {
   const [characterData, setCharacterData] = useState<Investigator>();
+  const [loadError, setLoadError] = useState("");
   const {
     register,
     handleSubmit,
@@ -21,13 +31,26 @@ export default function CharaenoChartPage() {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const characterId = data.url.replace("https://charaeno.com/7th/", "");
-    const charaeno7thApiUrl = `https://charaeno.com/api/v1/7th/${characterId}/summary`;
-    const json = await getFetch(charaeno7thApiUrl);
+    setLoadError("");
 
-    json.name = json.name.replace(/[({[<（【][^)}\]>）】]*[)}\]>）】]/g, "");
-    json.name = json.name.replace(/(^\s+|\s+$)/, "");
-    setCharacterData(json);
+    let summary: unknown;
+
+    try {
+      summary = await getFetch(toSummaryApiUrl(data.url));
+    } catch (error) {
+      console.error(error);
+      setCharacterData(undefined);
+      setLoadError(CHARACTER_SHEET_FETCH_FAILED);
+      return;
+    }
+
+    if (!isInvestigator(summary)) {
+      setCharacterData(undefined);
+      setLoadError(CHARACTER_SHEET_UNEXPECTED_FORMAT);
+      return;
+    }
+
+    setCharacterData({ ...summary, name: toDisplayName(summary.name) });
   };
 
   return (
@@ -72,6 +95,13 @@ export default function CharaenoChartPage() {
               <div className="flex justify-center">
                 <p className="text-red-500 text-sm mt-1">
                   {errors.url.message}
+                </p>
+              </div>
+            )}
+            {loadError && (
+              <div className="flex justify-center">
+                <p role="alert" className="text-red-500 text-sm mt-1">
+                  {loadError}
                 </p>
               </div>
             )}
