@@ -52,6 +52,7 @@ src/
     blurry-blob-demo/  UI実験ページ
   components/     再利用UIコンポーネント(animata/, forms/, recharts/ にサブ分類)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
+                  scenario/ には本文Markdownの記述規約(README.md)と雛形(template.md)がある
   contexts/       React Context
   hooks/          複数の画面から使う汎用フック(`use-<用途>.ts`)
   constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
@@ -70,6 +71,19 @@ src/
 
 新しいツールを追加する際も、`toolCards` / `libraryCards` のようなカード形式で `trpg/page.tsx` の
 入口から辿れるようにするのがこのリポジトリの慣習。
+
+### シナリオデータ(`src/data/scenario`)
+
+シナリオ本文のMarkdownを追加・修正するときは、必ず
+[src/data/scenario/README.md](src/data/scenario/README.md) の記述規約に従うこと
+([ADR-0014](docs/adr/0014-establish-scenario-markdown-conventions.md))。セクションの順序、
+NPC・神話生物のステータス表記、正気度の書式、改行の入れ方まで規約側で確定させている。
+
+- 新規シナリオは [src/data/scenario/template.md](src/data/scenario/template.md) を
+  `src/data/scenario/markdown/<slug>.md` にコピーして書き始める。
+- 書いたら `src/data/scenario/scenario-list.ts` に登録する(登録しないと一覧にも詳細にも出ない)。
+- 本文の描画は `react-markdown` + `remark-gfm` のみ。生HTMLは描画されず、行内改行には行末の
+  半角スペース2つが必要。二次創作の著作権表記は詳細ページ側で自動付与されるため本文に書かない。
 
 ## コーディング規約
 

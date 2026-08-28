@@ -35,3 +35,4 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | [0011](0011-enable-biome-formatter.md) | Biomeのフォーマッタを有効化する | Accepted |
 | [0012](0012-tidy-dependencies.md) | 依存関係を棚卸しし、未使用パッケージの削除と区分の是正を行う | Accepted |
 | [0013](0013-spec-per-screen.md) | specの単位を「機能ごと」から「画面ごと」に変更する | Accepted |
+| [0014](0014-establish-scenario-markdown-conventions.md) | シナリオMarkdownの記述規約を定め、src/data/scenario/README.md に集約する | Accepted |
