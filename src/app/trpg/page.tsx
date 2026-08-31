@@ -5,7 +5,9 @@ import {
   ArrowRight,
   ChartNoAxesCombined,
   Clapperboard,
+  ExternalLink,
   FileText,
+  History,
   Search,
   Table2,
 } from "lucide-react";
@@ -51,6 +53,15 @@ const libraryCards = [
     meta: "動画 / 配信",
     icon: Clapperboard,
   },
+  {
+    title: "TRPG History",
+    href: "https://app.notion.com/p/Qurioth-s-TRPG-History-3a9a54b719f280ebb69de6b048905c4f",
+    description:
+      "これまでに遊んだ・回したセッションの記録を Notion にまとめています。",
+    meta: "Notion(外部サイト)",
+    icon: History,
+    external: true,
+  },
 ];
 
 type CardLinkProps = {
@@ -59,6 +70,7 @@ type CardLinkProps = {
   description: string;
   meta: string;
   icon: typeof Search;
+  external?: boolean;
 };
 
 function CardLink({
@@ -67,18 +79,23 @@ function CardLink({
   description,
   meta,
   icon: Icon,
+  external = false,
 }: CardLinkProps) {
+  const LinkIcon = external ? ExternalLink : ArrowRight;
+
   return (
     <a
       className="group flex h-full flex-col justify-between rounded-lg border border-black/[.08] bg-white p-5 text-left shadow-sm transition-colors hover:border-sky-500 hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-100 dark:border-white/[.145] dark:bg-slate-950 dark:hover:border-sky-400 dark:hover:bg-slate-900 dark:focus:ring-sky-950"
       href={href}
+      rel={external ? "noopener noreferrer" : undefined}
+      target={external ? "_blank" : undefined}
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300">
             <Icon aria-hidden="true" size={22} />
           </div>
-          <ArrowRight
+          <LinkIcon
             aria-hidden="true"
             className="mt-1 shrink-0 text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-sky-600 dark:text-gray-500 dark:group-hover:text-sky-300"
             size={20}
@@ -127,11 +144,11 @@ export default function TrpgPage() {
               Library
             </h2>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
-              シナリオと、動画や配信で公開しているリプレイです。
+              シナリオと、動画や配信で公開しているリプレイ、セッションの記録です。
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {libraryCards.map((card) => (
               <CardLink key={card.href} {...card} />
             ))}
