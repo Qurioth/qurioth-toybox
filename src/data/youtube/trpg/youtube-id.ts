@@ -25,6 +25,19 @@ export type ReplayVideo = ReplayMedia & {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    playlistId: "PLccFsVQis_8U",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "黄金の航路",
+    characters: [
+      { characterName: "レイル・キャノン", playerName: "しおり" },
+      { characterName: "Pieta Leeuwerik", playerName: "Qurioth" },
+      { characterName: "ルコガスター・ガネット", playerName: "小鳥 遊" },
+      { characterName: "ドレー・ナンデス", playerName: "ちよこ" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-08-24, 2026-08-25, 2026-09-03, 2026-09-08",
+  },
+  {
     videoId: "bl9JU0pjiZ4",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "ワールドエンド・dilenmma",
