@@ -35,14 +35,15 @@ const list: {
     title: "硝子檻の虜囚は星海にて夢を見る",
     titleKana: "がらすかんのりょしゅうはせいかいにてゆめをみる",
     players: {
-      min: 3,
-      max: 4,
-    },
-    playTimeHours: {
       min: 4,
       max: 5,
     },
-    summary: "現代日本。バーチャルYouTuber天戌 ノアの配信を見ている。",
+    playTimeHours: {
+      min: 7,
+      max: 7,
+    },
+    summary:
+      "現代日本。バーチャルYouTuber 天戌 ノアの配信を見ていると、彼女が探索者たちの名前を呼ぶ。",
     markdown: readScenarioMarkdown(
       "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
     ),
