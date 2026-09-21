@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { FaCopy } from "react-icons/fa"; // Font Awesomeのコピーアイコン
+import { cn } from "@/utils/class-utils";
 
-const CopyTextBox = (props: { textList: string[] }) => {
+const CopyTextBox = (props: {
+  textList: string[];
+  /** 表示領域の高さを変えたいときに指定する(既定は h-96 の固定高) */
+  className?: string;
+}) => {
   const [copied, setCopied] = useState(false);
 
   // コピーするテキスト
-  const { textList } = props;
+  const { textList, className } = props;
 
   const handleCopy = async () => {
     try {
@@ -31,11 +36,16 @@ const CopyTextBox = (props: { textList: string[] }) => {
         </button>
 
         {/* コピーするテキスト */}
-        <div className="p-6 rounded-lg shadow-lg h-96 scrollbar-thin overflow-x-hidden overflow-y-auto">
+        <div
+          className={cn(
+            "p-6 rounded-lg shadow-lg h-96 scrollbar-thin overflow-x-hidden overflow-y-auto",
+            className,
+          )}
+        >
           {textList.map((text, index) => {
             return (
               // biome-ignore lint/suspicious/noArrayIndexKey: lines may repeat, no natural id
-              <p key={`text-${index}`} className="text-sm">
+              <p key={`text-${index}`} className="text-sm whitespace-pre-wrap">
                 {text}
               </p>
             );
