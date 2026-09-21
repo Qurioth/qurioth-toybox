@@ -56,6 +56,33 @@ describe("parseCheckRoll", () => {
     });
   });
 
+  it("難易度指定 e(イクストリーム)も技能名から外す", () => {
+    const content = `CC<=61e 操縦（ヘリコプター） ${result(12, 0, "3", "3 ＞ 成功")}`;
+
+    expect(parseCheckRoll(content)).toEqual({
+      diceModifier: 0,
+      skill: "操縦（ヘリコプター）",
+      succeeded: true,
+    });
+  });
+
+  it("難易度指定の直後に空白がなくても技能名から外す", () => {
+    const content = `CC<=61h操縦（ヘリコプター） ${result(30, 0, "24", "24 ＞ 成功")}`;
+
+    expect(parseCheckRoll(content)?.skill).toBe("操縦（ヘリコプター）");
+  });
+
+  it("EDU のように e/h で始まる技能名は難易度指定とみなさない", () => {
+    expect(
+      parseCheckRoll(`CC<=50 EDU ${result(50, 0, "10", "10 ＞ ハード成功")}`)
+        ?.skill,
+    ).toBe("EDU");
+    expect(
+      parseCheckRoll(`CC<=50 hoge ${result(50, 0, "10", "10 ＞ ハード成功")}`)
+        ?.skill,
+    ).toBe("hoge");
+  });
+
   it("ボーナス・ダイスの数を正の値として読み取る", () => {
     const content = `CC1<=42 射撃（拳銃） ${result(42, 1, "57, 47", "47 ＞ 失敗")}`;
 
@@ -224,6 +251,18 @@ describe("collectGrowthChecks", () => {
     expect(
       collectGrowthChecks(logs, "アリス", "", options).map((c) => c.skill),
     ).toEqual(["【目星】", "目星", "【回避】（精神世界）"]);
+  });
+
+  it("同じ技能を通常・ハード・イクストリームで振っても1つにまとめる", () => {
+    const logs = [
+      roll("アリス", "CC<=91h 機械修理", "43 ＞ 成功"),
+      roll("アリス", "CC<=91e 機械修理", "17 ＞ 成功"),
+      roll("アリス", "CC<=91 機械修理", success),
+    ];
+
+    expect(collectGrowthChecks(logs, "アリス", "", options)).toEqual([
+      { skill: "機械修理", evidence: logs[0] },
+    ]);
   });
 
   it("他のキャラクターの判定は含めない", () => {

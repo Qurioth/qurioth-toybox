@@ -8,6 +8,8 @@
 | `CC<=60　【DEX】 (1D100<=60) … ＞ 52 ＞ 52 ＞ レギュラー成功`(全角空白) | `{ diceModifier: 0, skill: "【DEX】", succeeded: true }` |
 | `CC<=80h 【知識】 (1D100<=40) … ＞ 35 ＞ 35 ＞ 成功` | `{ diceModifier: 0, skill: "【知識】", succeeded: true }` |
 | `CC<=75 h【知識】 (1D100<=75) … ＞ 99 ＞ 99 ＞ 失敗` | `{ diceModifier: 0, skill: "【知識】", succeeded: false }` |
+| `CC<=61e 操縦（ヘリコプター） (1D100<=12) … ＞ 3 ＞ 3 ＞ 成功` | `{ diceModifier: 0, skill: "操縦（ヘリコプター）", succeeded: true }` |
+| `CC<=50 EDU (1D100<=50) … ＞ 10 ＞ 10 ＞ ハード成功` | `{ diceModifier: 0, skill: "EDU", succeeded: true }`(`E` は難易度指定ではない) |
 | `CC1<=42 射撃（拳銃） (1D100<=42) ボーナス・ペナルティダイス[1] ＞ 57, 47 ＞ 47 ＞ 失敗` | `{ diceModifier: 1, skill: "射撃（拳銃）", succeeded: false }` |
 | `CC-1<=65 【射撃（サブマシンガン）】（精神世界 (1D100<=65) ボーナス・ペナルティダイス[-1] ＞ 42, 12 ＞ 42 ＞ レギュラー成功` | `{ diceModifier: -1, skill: "【射撃（サブマシンガン）】（精神世界", succeeded: true }` |
 | `CC<=50 (1D100<=50) … ＞ 10 ＞ 10 ＞ ハード成功`(技能名なし) | `{ diceModifier: 0, skill: "", succeeded: true }` |
@@ -27,6 +29,7 @@
 | 状況 | 結果 |
 |---|---|
 | 同じ技能で成功が2回 | 1件。`evidence` は1回目 |
+| 同じ技能を `h` / `e` / 指定なしで振って成功 | 1件(難易度指定は技能名に含めない) |
 | 同じ技能でボーナスあり成功 → ボーナスなし成功 | 1件。`evidence` はボーナスなしの行 |
 | 同じ技能でボーナスあり成功のみ | 0件 |
 | 成功と失敗が混在 | 1件 |
