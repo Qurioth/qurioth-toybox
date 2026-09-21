@@ -2,6 +2,7 @@
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-08-23
+**Updated**: 2026-09-21
 **Feature**: [spec.md](../spec.md)
 
 ## Content Quality
@@ -31,9 +32,14 @@
 
 ## Notes
 
-- 本specは既存実装の現行仕様を書き起こしたもの。`plan.md` / `tasks.md` は実際にこの画面を
-  改修するときに作成する([ADR-0013](../../../docs/adr/0013-spec-per-screen.md))。
+- 2026-09-21: JSON形式ログの読み込み(US4)、成長チェック一覧(US5)、タブによる絞り込み(US6)を
+  追加。既存のUS1〜3・FR-001〜011は現行仕様として維持し、追加要件はFR-012以降に採番した
+  ([ADR-0013](../../../docs/adr/0013-spec-per-screen.md))。
+- JSONログの項目名(`channelName`、`extend.roll` など)と判定コマンドの表記(`CC1<=42`、
+  `CC<=80h` など)はCCFOLIA側のデータ形式であり、実装技術ではないため spec に残している。
+  CCFOLIAの書き出し形式が変わった場合は、先に本specを更新する。
+- 成長チェックのルール解釈(ボーナス・ダイス使用時はチェック不可、特性値・アイデア・知識・
+  幸運・正気度は対象外、クトゥルフ神話・信用は利用者選択で除外)は 2026-09-21 に利用者と
+  確認済み。技能名の表記ゆれは正規化しない方針も同時に確定。
 - サイト共通のヘッダー・フッター・配色切替は [001-home](../../001-home/spec.md) が唯一の
   記述箇所のため、本specでは扱わない。
-- 成功度の表記(クリティカル・成功・失敗・ファンブル)はCCFOLIA側のログ表記に依存する。
-  CCFOLIAの表記が変わった場合は本specの前提が崩れるため、先に本specを更新する。

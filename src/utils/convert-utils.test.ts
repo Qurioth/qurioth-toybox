@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { convertDicelog } from "./convert-utils";
+import {
+  convertDicelog,
+  convertJsonDicelog,
+  parseDicelog,
+} from "./convert-utils";
 
 /** CCFOLIA のログ1行分のHTMLを組み立てる */
 const logHtml = (tab: string, name: string, content: string) =>
@@ -28,11 +32,11 @@ describe("convertDicelog", () => {
 
     const result = convertDicelog(html);
 
-    // tab は "<span> " と "</span>" のみを除去する実装のため、"[ ]" は残る(既存の挙動)
+    // tab は角括弧を外して保持する(JSON の channelName と揃えるため)
     // content の "&lt;" はここで元の "<" に戻す
     expect(result).toEqual([
-      { tab: "[メイン]", name: "アリス", content: "1d100<=50 → 23 成功" },
-      { tab: "[メイン]", name: "ボブ", content: "1d100<=50 → 88 失敗" },
+      { tab: "メイン", name: "アリス", content: "1d100<=50 → 23 成功" },
+      { tab: "メイン", name: "ボブ", content: "1d100<=50 → 88 失敗" },
     ]);
   });
 
@@ -46,7 +50,7 @@ describe("convertDicelog", () => {
 
     expect(second).toEqual(first);
     expect(second).toEqual([
-      { tab: "[メイン]", name: "キャロル", content: "1d100<=50 → 5 成功" },
+      { tab: "メイン", name: "キャロル", content: "1d100<=50 → 5 成功" },
     ]);
   });
 
@@ -66,13 +70,13 @@ describe("convertDicelog", () => {
     ].join("");
 
     expect(convertDicelog(html)).toEqual([
-      { tab: "[メイン]", name: "あ", content: "1d100<=50 → 1 成功" },
+      { tab: "メイン", name: "あ", content: "1d100<=50 → 1 成功" },
       {
-        tab: "[メイン]",
+        tab: "メイン",
         name: "とてもとても長いキャラクター名前です",
         content: "1d100<=50 → 2 失敗",
       },
-      { tab: "[メイン]", name: "い", content: "1d100<=50 → 3 成功" },
+      { tab: "メイン", name: "い", content: "1d100<=50 → 3 成功" },
     ]);
   });
 
@@ -84,9 +88,9 @@ describe("convertDicelog", () => {
     ].join("");
 
     expect(convertDicelog(html).map((log) => log.tab)).toEqual([
-      "[メイン]",
-      "[とても長いタブ名です]",
-      "[A]",
+      "メイン",
+      "とても長いタブ名です",
+      "A",
     ]);
   });
 
@@ -98,9 +102,9 @@ describe("convertDicelog", () => {
     ].join("");
 
     expect(convertDicelog(html)).toEqual([
-      { tab: "[メイン]", name: "アリス", content: "1d100<=50 → 1 成功" },
-      { tab: "[メイン]", name: "", content: "" },
-      { tab: "[メイン]", name: "ボブ", content: "1d100<=50 → 2 失敗" },
+      { tab: "メイン", name: "アリス", content: "1d100<=50 → 1 成功" },
+      { tab: "メイン", name: "", content: "" },
+      { tab: "メイン", name: "ボブ", content: "1d100<=50 → 2 失敗" },
     ]);
   });
 
@@ -109,7 +113,7 @@ describe("convertDicelog", () => {
       const html = exportedLogHtml("main", "喪造（モゾウ）", "1D6  (1D6) ＞ 4");
 
       expect(convertDicelog(html)).toEqual([
-        { tab: "[main]", name: "喪造（モゾウ）", content: "1D6  (1D6) ＞ 4" },
+        { tab: "main", name: "喪造（モゾウ）", content: "1D6  (1D6) ＞ 4" },
       ]);
     });
 
@@ -188,13 +192,146 @@ describe("convertDicelog", () => {
 
       expect(convertDicelog(html)).toEqual([
         {
-          tab: "[main]",
+          tab: "main",
           name: "アリス",
           content: "CC<=75 (1D100<=75) ＞ 24 ＞ ハード成功",
         },
-        { tab: "[秘匿(リアン)]", name: "ボブ", content: "1D8+2  (1D8+2) ＞ 8" },
-        { tab: "[info]", name: "KP", content: "・浅草裏長屋 / ・非人小屋" },
+        { tab: "秘匿(リアン)", name: "ボブ", content: "1D8+2  (1D8+2) ＞ 8" },
+        { tab: "info", name: "KP", content: "・浅草裏長屋 / ・非人小屋" },
       ]);
     });
+  });
+});
+
+describe("convertJsonDicelog", () => {
+  it("messages の各要素を tab / name / content に変換する", () => {
+    const json = {
+      messages: [
+        {
+          name: "アリス",
+          text: "こんにちは",
+          type: "text",
+          channelName: "main",
+        },
+      ],
+      images: {},
+    };
+
+    expect(convertJsonDicelog(json)).toEqual([
+      { tab: "main", name: "アリス", content: "こんにちは" },
+    ]);
+  });
+
+  it("ロール行はコマンドと結果を半角スペースで結合して1行にする(HTML書き出しと同じ形)", () => {
+    const json = {
+      messages: [
+        {
+          name: "アリス",
+          text: "CC<=30 【回避】",
+          type: "text",
+          channelName: "main",
+          extend: {
+            roll: {
+              result:
+                "(1D100<=30) ボーナス・ペナルティダイス[0] ＞ 88 ＞ 88 ＞ 失敗",
+              success: false,
+              failure: true,
+            },
+          },
+        },
+      ],
+    };
+
+    expect(convertJsonDicelog(json)[0].content).toBe(
+      "CC<=30 【回避】 (1D100<=30) ボーナス・ペナルティダイス[0] ＞ 88 ＞ 88 ＞ 失敗",
+    );
+  });
+
+  it("text 内の改行は ' / ' 区切りにし、空行と前後の空白を落とす", () => {
+    const json = {
+      messages: [
+        {
+          name: "アリス",
+          text: "\n1行目 \n\n　2行目\n",
+          type: "text",
+          channelName: "other",
+        },
+      ],
+    };
+
+    expect(convertJsonDicelog(json)[0].content).toBe("1行目 / 2行目");
+  });
+
+  it("type が system の行(SAN増減の通知など)は生成しない", () => {
+    const json = {
+      messages: [
+        {
+          name: "",
+          text: "[ アリス ] SAN : 45 → 44",
+          type: "system",
+          channelName: "main",
+        },
+        {
+          name: "アリス",
+          text: "つらい",
+          type: "text",
+          channelName: "main",
+        },
+      ],
+    };
+
+    expect(convertJsonDicelog(json)).toEqual([
+      { tab: "main", name: "アリス", content: "つらい" },
+    ]);
+  });
+
+  it("name や channelName が文字列でなければ空文字にする", () => {
+    const json = {
+      messages: [{ text: "名無し", type: "text", channelName: 1 }],
+    };
+
+    expect(convertJsonDicelog(json)).toEqual([
+      { tab: "", name: "", content: "名無し" },
+    ]);
+  });
+
+  it("messages が配列でなければ空を返す", () => {
+    expect(convertJsonDicelog({ messages: "x" })).toEqual([]);
+    expect(convertJsonDicelog({})).toEqual([]);
+    expect(convertJsonDicelog(null)).toEqual([]);
+  });
+});
+
+describe("parseDicelog", () => {
+  it("'<' で始まる文字列は HTML として変換する", () => {
+    const html = logHtml("メイン", "アリス", "1d100&lt;=50 → 23 成功");
+
+    expect(parseDicelog(html)).toEqual([
+      { tab: "メイン", name: "アリス", content: "1d100<=50 → 23 成功" },
+    ]);
+  });
+
+  it("'{' で始まる文字列は JSON として変換する(前後の空白は無視)", () => {
+    const json = JSON.stringify({
+      messages: [
+        { name: "アリス", text: "やあ", type: "text", channelName: "main" },
+      ],
+    });
+
+    expect(parseDicelog(`\n  ${json}\n`)).toEqual([
+      { tab: "main", name: "アリス", content: "やあ" },
+    ]);
+  });
+
+  it("'{' で始まるが JSON として読めない場合は空を返す(例外を投げない)", () => {
+    expect(parseDicelog('{ "messages": [')).toEqual([]);
+  });
+
+  it("JSON だが messages がない場合は空を返す", () => {
+    expect(parseDicelog('{ "images": {} }')).toEqual([]);
+  });
+
+  it("空文字は HTML 変換に渡され、既存どおり空の DiceLog を1件返す", () => {
+    expect(parseDicelog("")).toEqual([{ tab: "", name: "", content: "" }]);
   });
 });

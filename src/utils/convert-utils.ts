@@ -33,9 +33,12 @@ const decodeHtmlEntities = (text: string) =>
  * "&lt;br&gt;" という文字列まで改行として扱ってしまうため。
  */
 const toSingleLineContent = (text: string) =>
-  text
-    .split(/<br\s*\/?>/)
-    .map((part) => decodeHtmlEntities(part).trim())
+  joinLines(text.split(/<br\s*\/?>/).map(decodeHtmlEntities));
+
+/** 断片の前後空白を落とし、空断片を捨てて " / " でつなぐ(HTML/JSON 共通) */
+const joinLines = (parts: string[]) =>
+  parts
+    .map((part) => part.trim())
     .filter((part) => part !== "")
     .join(" / ");
 
@@ -58,7 +61,9 @@ const convertDicelog = (htmlString: string) => {
     dicelogList.forEach((dicelogStr) => {
       switch (true) {
         case tabReg.test(dicelogStr):
-          dicelog.tab = dicelogStr.replace(/<span> |<\/span>/g, "");
+          // tab は角括弧を外して保持する(JSON の channelName と揃えるため)。
+          // 出力行では grep-utils 側で [tab] と付け直す。
+          dicelog.tab = dicelogStr.replace(/<span> \[|\]<\/span>/g, "");
           break;
         case nameReg.test(dicelogStr):
           dicelog.name = dicelogStr.replace(/<span>|<\/span>/g, "");
@@ -76,4 +81,65 @@ const convertDicelog = (htmlString: string) => {
   return result;
 };
 
-export { convertDicelog };
+/** CCFOLIA の JSON 書き出しのうち、この画面が読む項目だけを表した型 */
+type CcfoliaJsonMessage = {
+  name?: unknown;
+  text?: unknown;
+  type?: unknown;
+  channelName?: unknown;
+  extend?: { roll?: { result?: unknown } };
+};
+
+const asString = (value: unknown) => (typeof value === "string" ? value : "");
+
+/**
+ * CCFOLIA の JSON 書き出し(`{ messages: [...] }` を JSON.parse したもの)を DiceLog に変換する。
+ *
+ * ロール行はコマンド(text)と結果(extend.roll.result)が別項目に分かれているので、
+ * HTML 書き出しと同じ「コマンド 結果」の1行にまとめる。以降の処理(成功度の絞り込み、
+ * 成長チェック)は HTML/JSON を区別せず content の文字列だけを見る。
+ * type が "system" の行(SAN 増減の通知など)は発言者を持たないので生成しない。
+ */
+const convertJsonDicelog = (json: unknown): DiceLog[] => {
+  const messages = (json as { messages?: unknown } | null)?.messages;
+  if (!Array.isArray(messages)) {
+    return [];
+  }
+
+  return messages
+    .filter(
+      (message): message is CcfoliaJsonMessage =>
+        typeof message === "object" &&
+        message !== null &&
+        (message as CcfoliaJsonMessage).type !== "system",
+    )
+    .map((message) => {
+      const text = joinLines(asString(message.text).split("\n"));
+      const rollResult = asString(message.extend?.roll?.result);
+
+      return {
+        tab: asString(message.channelName),
+        name: asString(message.name),
+        content: rollResult === "" ? text : `${text} ${rollResult}`,
+      };
+    });
+};
+
+/**
+ * ファイルの中身から書き出し形式(HTML / JSON)を判別して DiceLog に変換する。
+ * 拡張子は見ない(既存の利用では .txt で HTML を渡している)。
+ * "{" で始まるのに JSON として読めない・messages がない場合は「解釈できない」として空にする。
+ */
+const parseDicelog = (raw: string): DiceLog[] => {
+  if (!raw.trim().startsWith("{")) {
+    return convertDicelog(raw);
+  }
+
+  try {
+    return convertJsonDicelog(JSON.parse(raw));
+  } catch {
+    return [];
+  }
+};
+
+export { convertDicelog, convertJsonDicelog, parseDicelog };
