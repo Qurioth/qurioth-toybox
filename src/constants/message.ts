@@ -15,3 +15,8 @@ export const GROWTH_CHECK_EVIDENCE = "根拠";
 export const GROWTH_SKILL_LIST = "成長技能一覧";
 export const GREP_RESULT_HEADING = "ログ抽出結果";
 export const GROWTH_CHECK_RESULT_HEADING = "成長チェック一覧";
+/** 成長チェック一覧の見出し横の説明(1要素=1行) */
+export const GROWTH_CHECK_DESCRIPTION = [
+  "CC コマンドの技能判定に成功した技能を一覧表示します。",
+  "ボーナス・ダイス付き(CC1、CC2 など)の成功は数えず、ペナルティ・ダイス(CC-1 など)は数えます。",
+].join("\n");

@@ -7,12 +7,14 @@ import {
   EXCLUDE_MYTHOS_AND_CREDIT,
   GREP_RESULT_HEADING,
   GROWTH_CHECK,
+  GROWTH_CHECK_DESCRIPTION,
   GROWTH_CHECK_EVIDENCE,
   GROWTH_CHECK_RESULT_HEADING,
   SUCCESS_LEVEL,
   TAB_NAME,
 } from "@/constants/message";
 import CopyTextBox from "@/components/CopyTextBox";
+import InfoTooltip from "@/components/InfoTooltip";
 import FileInput from "@/components/forms/FileInput";
 import HorizontalCheckBox from "@/components/forms/HorizontalCheckBox";
 import Select from "@/components/forms/Select";
@@ -172,8 +174,12 @@ export default function CcfoliaGrepPage() {
             <CopyTextBox textList={resultText} />
           </section>
           <section className="w-full">
-            <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-white flex items-center gap-1.5">
               {GROWTH_CHECK_RESULT_HEADING}
+              <InfoTooltip
+                id="growth-check-description"
+                text={GROWTH_CHECK_DESCRIPTION}
+              />
             </h3>
             {/* 成長チェックは技能名だけなので短い。固定高にせず内容に合わせ、長いときだけスクロール */}
             <CopyTextBox
