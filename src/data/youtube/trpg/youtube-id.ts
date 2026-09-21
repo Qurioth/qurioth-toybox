@@ -25,6 +25,31 @@ export type ReplayVideo = ReplayMedia & {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    videoId: "5rW4c-ViDAY",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "硝子檻の虜囚は星海にて夢を見る",
+    characters: [
+      { characterName: "面高 佑", playerName: "夜桜" },
+      { characterName: "新谷 丸尾", playerName: "ももみざわ" },
+      { characterName: "呼子 星華", playerName: "つばき" },
+      { characterName: "加賀 壱保", playerName: "小鳥 遊" },
+    ],
+    gmName: "Qurioth",
+    playedAt: "2026-09-20",
+  },
+  {
+    playlistId: "PLZ95GOu1N9GY",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "星に願いを☆",
+    characters: [
+      { characterName: "孔雀 螢", playerName: "Qurioth" },
+      { characterName: "正力 清良", playerName: "つばき" },
+      { characterName: "久我原 恒一", playerName: "リアン" },
+    ],
+    gmName: "しおり",
+    playedAt: "2026-09-05",
+  },
+  {
     playlistId: "PLccFsVQis_8U",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "黄金の航路",
@@ -35,7 +60,7 @@ export const replayVideos: ReplayVideo[] = [
       { characterName: "ドレー・ナンデス", playerName: "ちよこ" },
     ],
     gmName: "リアン",
-    playedAt: "2026-08-24, 2026-08-25, 2026-09-03, 2026-09-08",
+    playedAt: "2026-08-24, 2026-08-25, 2026-09-03, 2026-09-09, 2026-09-10",
   },
   {
     videoId: "bl9JU0pjiZ4",
@@ -190,7 +215,7 @@ export const replayVideos: ReplayVideo[] = [
     scenarioName: "五月病",
     characters: [
       { characterName: "稗田 北朗", playerName: "あたぷけ" },
-      { characterName: "黒井 美沙", playerName: "小鳥" },
+      { characterName: "黒井 美沙", playerName: "小鳥 遊" },
       { characterName: "屍々戸 愚流", playerName: "Qurioth" },
     ],
     gmName: "しおり",
