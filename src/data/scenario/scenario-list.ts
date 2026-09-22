@@ -167,11 +167,11 @@ const list: {
       max: 4,
     },
     playTimeHours: {
-      min: 2,
-      max: 3,
+      min: 3,
+      max: 4,
     },
     summary:
-      "現代日本。探索者たちは全員知り合いだ。みんなで遠出した後、帰りの高速道路で渋滞に巻き込まれる。",
+      "現代日本。帰路の高速道路で渋滞に巻き込まれた探索者たちの前に、不死身の男が空から落ちてくる。",
     markdown: readScenarioMarkdown("the-smile-of-the-bangs-less-goddess.md"),
   },
   Parasite: {
