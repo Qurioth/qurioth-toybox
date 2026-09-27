@@ -171,7 +171,7 @@ const list: {
       max: 4,
     },
     summary:
-      "現代日本。帰路の高速道路で渋滞に巻き込まれた探索者たちの前に、不死身の男が空から落ちてくる。",
+      "現代日本。帰路の高速道路で渋滞に巻き込まれた探索者たちの前に、一人の男が空から落ちてくる。",
     markdown: readScenarioMarkdown("the-smile-of-the-bangs-less-goddess.md"),
   },
   Parasite: {
