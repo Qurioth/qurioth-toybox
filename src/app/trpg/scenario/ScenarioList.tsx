@@ -63,7 +63,7 @@ export default function ScenarioList({
         </div>
 
         <div className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm dark:border-slate-700/80 dark:bg-slate-900/40">
-          <div className="grid gap-4 md:grid-cols-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-6">
             <div className="flex flex-col md:col-span-6">
               <span className="relative">
                 <Search
