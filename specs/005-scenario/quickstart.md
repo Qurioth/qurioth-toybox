@@ -53,7 +53,8 @@ pnpm dev
 ## 3. シナリオ 1 本を移行するときの手順
 
 1. 本文を [contracts/structured-markdown.md](contracts/structured-markdown.md) に照らして
-   整える。見出し名の揺れ、人物の見出しレベル、立ち絵の位置などを直す。文言・数値は変えない。
+   整える。見出し名の揺れ、人物の見出しレベル、立ち絵の位置、規約の項目名、太字の付け忘れ
+   (太字の外の `正気度喪失：` など)を直す。文言・数値は変えない。
 2. `src/data/scenario/scenario-list.ts` の該当エントリに `structured: true` を付ける。
 3. `pnpm test` でデータ適合テストが通ることを確かめる。
 4. 2 章の表のうち 2〜8 を、そのシナリオで確かめる。
