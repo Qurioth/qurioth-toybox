@@ -197,7 +197,7 @@ const list: {
       max: 4,
     },
     summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
-    markdown: readScenarioMarkdown("parasite.md"),
+    page: () => import("@/scenarios/parasite"),
   },
   ShadowFeather: {
     system: "クトゥルフ神話TRPG 7版",
