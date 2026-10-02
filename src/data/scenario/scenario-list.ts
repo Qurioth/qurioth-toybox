@@ -49,6 +49,7 @@ const list: {
     markdown: readScenarioMarkdown(
       "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
     ),
+    structured: true,
   },
   BubbleOnWetHands: {
     system: "クトゥルフ神話TRPG 7版",
@@ -65,6 +66,7 @@ const list: {
     summary:
       "現代日本。知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
     markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
+    structured: true,
   },
   SilentJourney: {
     system: "クトゥルフ神話TRPG 7版",
@@ -81,6 +83,7 @@ const list: {
     summary:
       "駅がある時代、世界であれば、いつ、どこでも。駅で一人の男性とぶつかることから始まる。",
     markdown: readScenarioMarkdown("silent-journey.md"),
+    structured: true,
   },
   AgnusDeiQuiTollisPeccataMundi: {
     system: "クトゥルフ神話TRPG 7版",
@@ -96,6 +99,7 @@ const list: {
     },
     summary: "現代日本。とある教会と併設する孤児院で事件は展開する。",
     markdown: readScenarioMarkdown("agnus-dei-qui-tollis-peccata-mundi.md"),
+    structured: true,
   },
   DasDornroschenDesWahnsinnigenKonigs: {
     system: "クトゥルフ神話TRPG 7版",
@@ -113,6 +117,7 @@ const list: {
     markdown: readScenarioMarkdown(
       "das-dornröschen-des-wahnsinnigen-königs.md",
     ),
+    structured: true,
   },
   TheSoundOfSteppingOnFog: {
     system: "クトゥルフ神話TRPG 7版",
@@ -129,6 +134,7 @@ const list: {
     summary:
       "現代日本。知人の笹本 霧江の依頼で山間の片田舎を訪れることになる。",
     markdown: readScenarioMarkdown("the-sound-of-stepping-on-fog.md"),
+    structured: true,
   },
   QueenOfTheSea: {
     system: "駆け出しアイドルRPG ビギニングアイドル",
@@ -159,6 +165,7 @@ const list: {
     },
     summary: "現代日本。知人の家を訪れることから始まる。",
     markdown: readScenarioMarkdown("palate-of-the-crawling.md"),
+    structured: true,
   },
   TheSmileOfTheBangsLessGoddess: {
     system: "クトゥルフ神話TRPG 7版",
@@ -175,6 +182,7 @@ const list: {
     summary:
       "現代日本。帰路の高速道路で渋滞に巻き込まれた探索者たちの前に、一人の男が空から落ちてくる。",
     markdown: readScenarioMarkdown("the-smile-of-the-bangs-less-goddess.md"),
+    structured: true,
   },
   Parasite: {
     system: "クトゥルフ神話TRPG 7版",
@@ -206,6 +214,7 @@ const list: {
     },
     summary: "現代日本。探索者たちはここ数日、悪夢を見続けていた。",
     markdown: readScenarioMarkdown("shadow-feather.md"),
+    structured: true,
   },
   Nocturne: {
     system: "クトゥルフ神話TRPG 7版",
@@ -221,6 +230,7 @@ const list: {
     },
     summary: "現代日本。知人の誘いに乗ってライブに行くことになる。",
     markdown: readScenarioMarkdown("nocturne.md"),
+    structured: true,
   },
 };
 
