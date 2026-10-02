@@ -30,3 +30,6 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# spec-kit (作業中の spec を指すローカル状態)
+/.specify/feature.json
