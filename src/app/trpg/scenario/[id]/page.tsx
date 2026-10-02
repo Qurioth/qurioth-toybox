@@ -3,6 +3,8 @@ import scenarios from "@/data/scenario/scenario-list";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import LegacyScenarioBody from "./LegacyScenarioBody";
+import StructuredScenario from "./StructuredScenario";
 
 const copyright = `
 本作は、「株式会社アークライト」及び「株式会社KADOKAWA」が権利を有する『クトゥルフ神話TRPG』シリーズの二次創作物です。
@@ -37,28 +39,28 @@ export default async function ScenarioDetailPage(
   const { params } = await paramsObj;
   const resolvedParams = await params;
   const scenario = scenarios[resolvedParams.id];
+  const copyrightNotice = isCthulhuScenario(scenario?.system) && (
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>{copyright}</ReactMarkdown>
+  );
+
+  if (scenario?.structured) {
+    return (
+      <Template>
+        <div className="mx-auto flex w-full max-w-[72rem] flex-col gap-10">
+          <StructuredScenario scenario={scenario} />
+          <div className="prose dark:prose-dark max-w-none">
+            {copyrightNotice}
+          </div>
+        </div>
+      </Template>
+    );
+  }
 
   return (
     <Template>
       <div className="prose dark:prose-dark w-full flex flex-col justify-center">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            img: ({ node, alt, ...props }) => (
-              // biome-ignore lint/performance/noImgElement: markdown-provided image, size unknown at build time
-              <img
-                {...props}
-                alt={alt ?? ""}
-                className="size-40 md:size-60 float-right m-2"
-              />
-            ),
-          }}
-        >
-          {scenario?.markdown}
-        </ReactMarkdown>
-        {isCthulhuScenario(scenario?.system) && (
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{copyright}</ReactMarkdown>
-        )}
+        <LegacyScenarioBody markdown={scenario?.markdown} />
+        {copyrightNotice}
       </div>
     </Template>
   );

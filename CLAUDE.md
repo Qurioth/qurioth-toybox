@@ -84,6 +84,10 @@ NPC・神話生物のステータス表記、正気度の書式、改行の入�
 - 書いたら `src/data/scenario/scenario-list.ts` に登録する(登録しないと一覧にも詳細にも出ない)。
 - 本文の描画は `react-markdown` + `remark-gfm` のみ。生HTMLは描画されず、行内改行には行末の
   半角スペース2つが必要。二次創作の著作権表記は詳細ページ側で自動付与されるため本文に書かない。
+- `scenario-list.ts` で `structured: true` を付けたシナリオは、本文を見出しで区切った構造化表示
+  (目次・人物カードなど)になり、`pnpm test` のデータ適合テストがかかる。移行の条件は
+  [specs/005-scenario/contracts/structured-markdown.md](specs/005-scenario/contracts/structured-markdown.md)
+  を参照([ADR-0015](docs/adr/0015-structure-scenario-markdown-for-display.md))。
 
 ## コーディング規約
 

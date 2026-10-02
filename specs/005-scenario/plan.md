@@ -102,6 +102,7 @@ src/
 │   ├── ScenarioEnding.tsx          # 新規: エンディング・その他報酬
 │   ├── ScenarioTome.tsx            # 新規: 魔導書・アーティファクト
 │   ├── ScenarioMarkdown.tsx        # 新規: 区画の Markdown 描画(判定・正気度・呪文・能力値・作中テキスト・セリフ・読み上げ文の components)
+│   ├── ScenarioHeading.tsx         # 新規: 目次から移動できる見出し(id・scroll-margin・補足の表示)
 │   └── StatGrid.tsx                # 新規: 能力値の格子
 ├── utils/
 │   ├── scenario-structure-utils.ts      # 新規: 見出しによる分割・種別判定・能力値/表記の解釈・目次生成・id 採番

@@ -11,7 +11,7 @@ const readScenarioMarkdown = (fileName: string) => {
   return escapeMarkdownText(markdown);
 };
 
-type Scenario = {
+export type Scenario = {
   title: string;
   titleKana: string;
   system: string;
@@ -25,6 +25,8 @@ type Scenario = {
   };
   summary: string;
   markdown: string;
+  /** 構造化表示へ移行済み。無ければ従来の整形表示(specs/005-scenario) */
+  structured?: true;
 };
 
 const list: {
@@ -188,6 +190,7 @@ const list: {
     },
     summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
     markdown: readScenarioMarkdown("parasite.md"),
+    structured: true,
   },
   ShadowFeather: {
     system: "クトゥルフ神話TRPG 7版",
