@@ -1,8 +1,11 @@
 /**
  * シナリオ本文 Markdown を記述規約(src/data/scenario/README.md)の見出しに沿って区画に分け、
- * 構造化表示に使う構造を組み立てる。
- * 設計は specs/005-scenario/data-model.md と research.md R2〜R4 を参照。
+ * 専用ページの下書き生成(scenario-draft-utils.ts)と表記の強調に使う構造を組み立てる。
+ * 下書き生成スクリプトから Node で直接実行されるため、相対 import は `.ts` 付きで書き、
+ * `@/` のエイリアスは使わない(specs/005-scenario/research.md R10)。
  */
+
+import type { StatEntry } from "../types/scenario-npc.ts";
 
 export type Heading = {
   /** 見出し行の原文(改行文字を含む)。網羅性の再構成に使う */
@@ -239,29 +242,7 @@ export const restoreScenarioMarkdown = (doc: ScenarioDocument) =>
     ]),
   ].join("");
 
-export type TocItem = {
-  id: string;
-  label: string;
-  children: TocItem[];
-};
-
-const TOC_SECTION_KINDS: SectionKind[] = ["character", "ending", "reward"];
-
-/** 目次。全章と、その下の人物・エンディング・その他報酬(research.md R6) */
-export const buildScenarioToc = (doc: ScenarioDocument): TocItem[] =>
-  doc.chapters.map((chapter) => ({
-    id: chapter.heading.id,
-    label: chapter.heading.text,
-    children: chapter.sections
-      .filter((section) => TOC_SECTION_KINDS.includes(section.kind))
-      .map((section) => ({
-        id: section.heading.id,
-        label: section.heading.text,
-        children: [],
-      })),
-  }));
-
-export type StatEntry = { label: string; value: string };
+export type { StatEntry };
 
 export type StatBlock = {
   abilities: StatEntry[];
@@ -414,9 +395,3 @@ export const toEnding = (
 /** `『名前』` から名前を取り出す */
 export const toTomeName = (section: Section) =>
   section.heading.text.replace(/^『(.*)』$/, "$1");
-
-export const READ_ALOUD_MARKER = "[!読み上げ]";
-
-/** 引用の 1 段落目が読み上げ文の目印で始まるか(research.md R10) */
-export const isReadAloud = (text: string) =>
-  text.trimStart().startsWith(READ_ALOUD_MARKER);

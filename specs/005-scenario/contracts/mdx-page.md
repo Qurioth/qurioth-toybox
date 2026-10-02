@@ -18,6 +18,7 @@ export default function BubbleOnWetHandsScenario({
   return (
     <ScenarioPage
       scenario={scenario}
+      toc="sidebar"
       theme={{ accent: "#0e7490", dark: { accent: "#67e8f9" } }}
       className="…ページ独自のレイアウト…"
     >
@@ -40,7 +41,7 @@ export default function BubbleOnWetHandsScenario({
 - 地の文の書き方は [シナリオ本文の記述規約](../../../src/data/scenario/README.md) の4章(表記規約)に
   従う。判定 `**〈目星〉**`、正気度喪失 `**正気度喪失：0 ／ 1D6**`、呪文 `《…》`、物品 `『…』`、
   作中テキストのコードブロック、セリフの引用は、Markdown のまま書けば部品の見た目になる。
-- `{` `}` `<` は MDX では JSX として扱われるので、地の文ではエスケープする(`\{` `\}` `&lt;`)。
+- `{` `}` `<` は MDX では JSX として扱われるので、地の文ではエスケープする(`\{` `\}` `\<`)。
 - コメントは `{/* … */}`。HTML コメント `<!-- -->` は使えない。
 - 生 HTML は使わない。装飾は部品か Tailwind のクラスを持つ JSX で書く。
 
@@ -49,13 +50,13 @@ export default function BubbleOnWetHandsScenario({
 | 部品 | 主な props | 表示 |
 | -- | -- | -- |
 | `ScenarioOverview` | `children`(リード) | 登録情報(システム・人数・時間)とリードをまとめた冒頭の概要。シナリオの情報は詳細画面から渡る |
-| `ScenarioToc` | — | 本文中の `h2` と `data-toc` 付きの見出しを集めた目次。広い画面は常時表示、狭い画面はパネル |
+| `ScenarioToc` | — | 本文中の `h2` と `data-toc` 付きの見出しを集めた目次。広い画面は常時表示、狭い画面はパネル。本文の横に置くときは `ScenarioPage` の `toc="sidebar"` を使う |
 | `NpcCard` | `npc: ScenarioNpc`, `children` | 立ち絵(切り抜かない)・名前と補足・プロフィール・能力値・技能、子要素(セリフ例など)、「CCFOLIA にコピー」ボタン。見出しは目次に載る |
 | `StatGrid` | `stats: NpcStatBlock`, `children` | 能力値の格子と副次ステータス。子要素は格子の下に出す |
 | `ReadAloud` | `children` | 読み上げ文の枠 |
 | `Ending` | `number`, `name`, `children` | ED<番号> と名称を分けた見出しのカード。目次に載る |
 | `Reward` | `title?`, `children` | その他報酬。目次に載る |
-| `Tome` | `name`, `children` | 魔導書・アーティファクトのカード |
+| `Tome` | `name`, `kana?`, `children` | 魔導書・アーティファクトのカード |
 | `Figure` | `src`, `alt`, `caption?` | キャプション付きの図。選ぶと原寸で開く |
 | `Flowchart` | `chart: string` | Mermaid 記法のフローチャート。枠の中でスクロールできる |
 

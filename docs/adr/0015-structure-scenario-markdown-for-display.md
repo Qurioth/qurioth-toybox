@@ -2,7 +2,7 @@
 
 ## ステータス
 
-Accepted
+Superseded by [ADR-0016](0016-scenario-pages-with-mdx.md)
 
 ## 日付
 

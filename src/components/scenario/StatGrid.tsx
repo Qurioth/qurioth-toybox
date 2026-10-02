@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
-import type { StatBlock } from "@/utils/scenario-structure-utils";
+import type { NpcStatBlock } from "@/types/scenario-npc";
 
 /**
- * 能力値の格子。狭い画面で 4 列、md 以上で 8 列(research.md R7)。
- * 項目の形に合わない行(正気度喪失など)は renderLine で本文と同じ書式で描画する
+ * 能力値の格子。狭い画面で 4 列、md 以上で 8 列。
+ * 項目の形に合わない記述(正気度喪失など)は子要素として格子の下に出す
  */
 const StatGrid = ({
   stats,
-  renderLine,
+  children,
 }: {
-  stats: StatBlock;
-  renderLine: (line: string) => ReactNode;
+  stats: NpcStatBlock;
+  children?: ReactNode;
 }) => (
   <div data-notation="stats" className="not-prose my-3 flex flex-col gap-2">
+    {stats.label && (
+      <p className="text-sm font-bold text-zinc-700 dark:text-slate-200">
+        {stats.label}
+      </p>
+    )}
     {stats.abilities.length > 0 && (
       <dl className="grid grid-cols-4 gap-1 md:grid-cols-8">
         {stats.abilities.map((entry) => (
@@ -47,11 +52,9 @@ const StatGrid = ({
         ))}
       </dl>
     )}
-    {stats.rest.map((line) => (
-      <div key={line} className="text-sm text-zinc-700 dark:text-slate-200">
-        {renderLine(line)}
-      </div>
-    ))}
+    {children && (
+      <div className="prose dark:prose-dark max-w-none text-sm">{children}</div>
+    )}
   </div>
 );
 

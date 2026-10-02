@@ -1,8 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  buildScenarioToc,
   classifyStrong,
-  isReadAloud,
   parseStatLines,
   restoreScenarioMarkdown,
   type Section,
@@ -170,30 +168,6 @@ describe("splitScenarioMarkdown", () => {
         markdown,
       );
     }
-  });
-});
-
-describe("buildScenarioToc", () => {
-  const toc = buildScenarioToc(splitScenarioMarkdown(sample));
-
-  it("全章を並べ、人物・エンディング・その他報酬だけを入れ子にする", () => {
-    expect(
-      toc.map((item) => [
-        item.label,
-        item.children.map((child) => child.label),
-      ]),
-    ).toEqual([
-      ["GM 向け情報", []],
-      ["主な NPC", ["沖嶋 深月", "案内人"]],
-      ["潮上灯台跡", []],
-      ["クライマックス", ["神話生物"]],
-      ["シナリオ終了", ["ED1 【帰還】", "その他報酬"]],
-    ]);
-  });
-
-  it("見出しの id で移動先を指す", () => {
-    expect(toc[1].children[0].id).toBe("沖嶋-深月-(オキシマ-ミツキ)");
-    expect(toc[2].id).toBe("潮上灯台跡-(夜間)");
   });
 });
 
@@ -366,7 +340,7 @@ describe("表記の分類", () => {
   });
 });
 
-describe("エンディング・魔導書・読み上げ文", () => {
+describe("エンディング・魔導書", () => {
   const sectionOf = (markdown: string): Section =>
     splitScenarioMarkdown(markdown).chapters[0].sections[0];
 
@@ -384,10 +358,5 @@ describe("エンディング・魔導書・読み上げ文", () => {
     expect(toTomeName(sectionOf("## 廃墟\n### 『フサン謎の七書』\n"))).toBe(
       "フサン謎の七書",
     );
-  });
-
-  it("読み上げ文の目印を見分ける", () => {
-    expect(isReadAloud("[!読み上げ]\n扉を開けると")).toBe(true);
-    expect(isReadAloud("「こんにちは」")).toBe(false);
   });
 });
