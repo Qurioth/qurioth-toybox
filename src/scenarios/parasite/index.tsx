@@ -3,7 +3,7 @@ import ScenarioPage from "@/components/scenario/ScenarioPage";
 import type { ScenarioInfo } from "@/data/scenario/scenario-list";
 import Content from "./content.mdx";
 
-/** 進行の流れ。本文の章立てから起こした下書き */
+/** 進行の流れ。本文の章立てから起こしたもの */
 const PROGRESS_CHART = `flowchart TD
   intro["シナリオの導入<br/>盛華から連絡がある"] --> house["盛華の家<br/>枯死したものに感染"]
   house --> pharmacy["漢方薬局 倪爺留堂<br/>秘蔵の品を対価に紹介を受ける"]
