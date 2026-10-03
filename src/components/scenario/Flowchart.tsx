@@ -23,7 +23,14 @@ const useHtmlDarkClass = () => {
  * Mermaid 記法のフローチャート(FR-026)。mermaid は図のあるページでだけ読み込む。
  * 図が画面より大きいときは枠の中だけでスクロールする
  */
-const Flowchart = ({ chart }: { chart: string }) => {
+const Flowchart = ({
+  chart,
+  fit = false,
+}: {
+  chart: string;
+  /** 図を枠の幅に縮めて収める(サイドバーなど狭い場所に置くとき) */
+  fit?: boolean;
+}) => {
   const id = `flowchart-${useId().replace(/[^a-zA-Z0-9-]/g, "")}`;
   const isDark = useHtmlDarkClass();
   const [svg, setSvg] = useState<string>();
@@ -72,7 +79,9 @@ const Flowchart = ({ chart }: { chart: string }) => {
           // mermaid が securityLevel: "strict" で生成した SVG を挿入する
           // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized by mermaid (securityLevel strict)
           dangerouslySetInnerHTML={{ __html: svg }}
-          className="[&_svg]:max-w-none"
+          className={
+            fit ? "[&_svg]:h-auto [&_svg]:max-w-full" : "[&_svg]:max-w-none"
+          }
         />
       ) : (
         <p className="text-sm text-zinc-500 dark:text-slate-400">

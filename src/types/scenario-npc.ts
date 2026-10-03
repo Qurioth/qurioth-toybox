@@ -19,6 +19,18 @@ export type NpcSkill = {
   note?: string;
 };
 
+/** 立ち絵。カードには顔の辺りを丸く切り抜いたアイコンを出し、選ぶと全体を開く */
+export type NpcPortrait = {
+  src: string;
+  alt?: string;
+  /**
+   * アイコンに映す範囲を変えたいときに書く。x・y は顔の中心の位置、width はアイコンに収める幅で、
+   * どれも画像に対する %(省略した項目は x: 50, y: 20, width: 100)。
+   * face 自体を省略すると、画像の幅いっぱいを映して上から少し下を見せる(全身の立ち絵なら頭から胸元)
+   */
+  face?: { x?: number; y?: number; width?: number };
+};
+
 /**
  * 専用ページの NPC・神話生物 1 体分のデータ。NPC カードの表示と CCFOLIA のコマは
  * このデータから作る(specs/005-scenario/data-model.md)
@@ -27,7 +39,7 @@ export type ScenarioNpc = {
   name: string;
   /** 見出しの補足(読み仮名など) */
   kana?: string;
-  portrait?: { src: string; alt?: string };
+  portrait?: NpcPortrait;
   /** プロフィール。改行を保って表示し、コマのメモにも使う */
   profile?: string;
   stats?: NpcStatBlock[];

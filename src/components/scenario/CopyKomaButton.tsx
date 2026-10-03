@@ -6,7 +6,7 @@ import type { ScenarioNpc } from "@/types/scenario-npc";
 import { toCcfoliaKoma } from "@/utils/ccfolia-koma-utils";
 
 const MESSAGES = {
-  copied: "コピーしました。CCFOLIA の部屋に貼り付けてください",
+  copied: "コピーしました。",
   failed: "コピーできませんでした",
 } as const;
 
@@ -37,7 +37,7 @@ const CopyKomaButton = ({ npc }: { npc: ScenarioNpc }) => {
         className="inline-flex items-center gap-1.5 rounded-md border border-[--scenario-border] px-3 py-1 text-sm font-bold text-zinc-700 transition hover:bg-zinc-100 dark:border-[--scenario-border-dark] dark:text-slate-200 dark:hover:bg-slate-800"
       >
         <Copy className="size-4" aria-hidden="true" />
-        CCFOLIA にコピー
+        CCFOLIA コマ出力
       </button>
       <span
         aria-live="polite"

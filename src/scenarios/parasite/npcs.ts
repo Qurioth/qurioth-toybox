@@ -50,6 +50,7 @@ export const npcs = {
   npc2: {
     name: "倪 爺賦",
     kana: "ニイ ユェフ",
+    portrait: { src: "/images/parasite/yuefu.webp" },
     skills: [
       {
         name: "目星",
@@ -152,6 +153,7 @@ export const npcs = {
   npc3: {
     name: "叶 美月",
     kana: "イェ メイユェ",
+    portrait: { src: "/images/parasite/meiyue.webp" },
   },
   npc4: {
     name: "枯死したもの",

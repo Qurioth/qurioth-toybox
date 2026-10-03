@@ -1,6 +1,6 @@
 # Contract: CCFOLIA のコマ
 
-NPC カードの「CCFOLIA にコピー」でクリップボードに書き込む内容。形式は CCFOLIA 公式ドキュメント
+NPC カードの「CCFOLIA コマ出力」でクリップボードに書き込む内容。形式は CCFOLIA 公式ドキュメント
 「[Clipboard API (beta)](https://docs.ccfolia.com/developer-api/clipboard-api)」(v1.19.0)の
 `CharacterClipboardData` に従う。
 
@@ -45,6 +45,6 @@ NPC カードの「CCFOLIA にコピー」でクリップボードに書き込�
 
 ## 操作と表示(FR-030)
 
-- ボタンの文言は「CCFOLIA にコピー」。
-- 成功したら「コピーしました。CCFOLIA の部屋に貼り付けてください」、失敗したら
+- ボタンの文言は「CCFOLIA コマ出力」。
+- 成功したら「コピーしました。」、失敗したら
   「コピーできませんでした」を、ボタンの近くに数秒表示する(`aria-live="polite"`)。

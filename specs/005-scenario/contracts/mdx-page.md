@@ -30,6 +30,9 @@ export default function BubbleOnWetHandsScenario({
 
 - ページの部品は、詳細画面から `scenario`(登録情報: タイトル・システム・人数・時間)を受け取り、
   そのまま `ScenarioPage` に渡す。`ScenarioPage` はそれを部品(`ScenarioOverview` など)へ届ける。
+- `toc` は `"sidebar"`(本文の右)か `"left"`(本文の左)。`aside` は `{ label, content }` で、
+  `content` を本文の右の列(xl 以上)に `label` を見出しにして置く。それより狭い画面では右下の
+  「`label`」ボタンから開くパネルにする。
 - `ScenarioPage` は、本文の要素に `data-scenario-body` を付け、配色の CSS 変数を設定する。
   レイアウト・背景・演出はページ側で自由に書いてよい。
 - 権利表記とタブ名は詳細画面(`[id]/page.tsx`)が付けるので、ページには書かない。
@@ -51,14 +54,14 @@ export default function BubbleOnWetHandsScenario({
 | -- | -- | -- |
 | `ScenarioOverview` | `children`(リード) | 登録情報(システム・人数・時間)とリードをまとめた冒頭の概要。シナリオの情報は詳細画面から渡る |
 | `ScenarioToc` | — | 本文中の `h2` と `data-toc` 付きの見出しを集めた目次。広い画面は常時表示、狭い画面はパネル。本文の横に置くときは `ScenarioPage` の `toc="sidebar"` を使う |
-| `NpcCard` | `npc: ScenarioNpc`, `children` | 立ち絵(切り抜かない)・名前と補足・プロフィール・能力値・技能、子要素(セリフ例など)、「CCFOLIA にコピー」ボタン。見出しは目次に載る |
+| `NpcCard` | `npc: ScenarioNpc`, `children` | 立ち絵(名前の横に顔の丸いアイコン。選ぶと全体を開く)・名前と補足・プロフィール・能力値・技能、子要素(セリフ例など)、「CCFOLIA コマ出力」ボタン。見出しは目次に載る |
 | `StatGrid` | `stats: NpcStatBlock`, `children` | 能力値の格子と副次ステータス。子要素は格子の下に出す |
 | `ReadAloud` | `children` | 読み上げ文の枠 |
 | `Ending` | `number`, `name`, `children` | ED<番号> と名称を分けた見出しのカード。目次に載る |
 | `Reward` | `title?`, `children` | その他報酬。目次に載る |
 | `Tome` | `name`, `kana?`, `children` | 魔導書・アーティファクトのカード |
 | `Figure` | `src`, `alt`, `caption?` | キャプション付きの図。選ぶと原寸で開く |
-| `Flowchart` | `chart: string` | Mermaid 記法のフローチャート。枠の中でスクロールできる |
+| `Flowchart` | `chart: string`, `fit?` | Mermaid 記法のフローチャート。枠の中でスクロールできる。`fit` で枠の幅に縮めて収める |
 
 Markdown の要素の既定の見た目(`mdx-components.tsx`):
 

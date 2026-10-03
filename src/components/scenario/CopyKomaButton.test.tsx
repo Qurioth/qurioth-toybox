@@ -24,17 +24,13 @@ describe("CopyKomaButton", () => {
     render(<CopyKomaButton npc={npc} />);
     const writeText = mockClipboard(async () => {});
 
-    await user.click(screen.getByRole("button", { name: "CCFOLIA にコピー" }));
+    await user.click(screen.getByRole("button", { name: "CCFOLIA コマ出力" }));
 
     expect(JSON.parse(writeText.mock.calls[0][0])).toEqual({
       kind: "character",
       data: { name: "沖嶋 深月", memo: "写真家。" },
     });
-    expect(
-      await screen.findByText(
-        "コピーしました。CCFOLIA の部屋に貼り付けてください",
-      ),
-    ).toBeInTheDocument();
+    expect(await screen.findByText("コピーしました。")).toBeInTheDocument();
   });
 
   it("書き込めなかったときは失敗を知らせる", async () => {
@@ -44,7 +40,7 @@ describe("CopyKomaButton", () => {
       throw new Error("denied");
     });
 
-    await user.click(screen.getByRole("button", { name: "CCFOLIA にコピー" }));
+    await user.click(screen.getByRole("button", { name: "CCFOLIA コマ出力" }));
 
     expect(
       await screen.findByText("コピーできませんでした"),

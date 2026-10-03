@@ -48,7 +48,13 @@ CSS カスタムプロパティとして外枠に設定し、部品はこれを�
 type ScenarioNpc = {
   name: string;                 // 例: "沖嶋 深月"
   kana?: string;                // 見出しの補足。例: "オキシマ ミツキ"
-  portrait?: { src: string; alt?: string };
+  portrait?: {
+    src: string;
+    alt?: string;
+    // カードの丸いアイコンに映す範囲を変えたいときに書く。x・y は顔の中心、width はアイコンに収める幅
+    // (どれも画像に対する %)。省略時は画像の幅いっぱいを映し、上から少し下を見せる
+    face?: { x?: number; y?: number; width?: number };
+  };
   profile?: string;             // プロフィール(プレーンテキスト、改行あり)。コマのメモにも使う
   stats?: NpcStatBlock[];       // 0 個以上。複数の姿はここで分ける
   skills?: NpcSkill[];          // チャットパレットとカードの技能欄に使う

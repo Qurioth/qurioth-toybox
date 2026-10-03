@@ -55,7 +55,12 @@ src/scenarios/<slug>/
 
 - `theme` は部品(見出しの線、カード、ED の番号など)の色を決める。省略した色は既定のまま。
   ライトとダークは別に指定する。
-- `toc="sidebar"` で、広い画面では本文の横に目次を常に表示する。狭い画面では右下のボタンから開く。
+- `toc="sidebar"` で本文の右に、`toc="left"` で本文の左に、広い画面では目次を常に表示する。
+  狭い画面ではどちらも右下のボタンから開く。
+- `aside={{ label, content }}` に渡した内容(フローチャートなど)は、xl 以上では本文の右の列に
+  `label` を見出しにして常に表示する。それより狭い画面では、目次と同じく右下の「`label`」ボタンから
+  開くパネルにする(目次のボタンがある幅では、その上に並ぶ)。目次を左・フローチャートを右にする例は
+  `src/scenarios/parasite/index.tsx`。狭い列に図を置くときは `<Flowchart fit />` で列の幅に収める。
 - 権利表記とタブ名は詳細画面が付けるので、ページには書かない。
 - 他のシナリオに影響しないよう、グローバルな CSS は足さない。スタイルはページの要素の中で
   Tailwind のクラスとして書く。
@@ -91,7 +96,7 @@ MDX で気を付けること:
 | -- | -- |
 | `<ScenarioOverview subtitle="…">リード</ScenarioOverview>` | 冒頭の概要。タイトル・システム・人数・時間は登録情報から出る |
 | `<ScenarioToc />` | 目次を本文の中に置く(`toc="sidebar"` を使わない場合) |
-| `<NpcCard npc={npcs.key}>セリフ例など</NpcCard>` | NPC カード。立ち絵は切り抜かず、「CCFOLIA にコピー」でコマを持ち出せる |
+| `<NpcCard npc={npcs.key}>セリフ例など</NpcCard>` | NPC カード。立ち絵は名前の横に顔の丸いアイコンで出す(選ぶと全体を開く)。「CCFOLIA コマ出力」でコマを持ち出せる |
 | `<StatGrid stats={{ abilities: […], derived: […] }}>補足</StatGrid>` | 能力値の格子(場面の中の敵など) |
 | `<ReadAloud>描写</ReadAloud>` | 読み上げ文の枠 |
 | `<Ending number="1" name="名称">…</Ending>` | エンディング(目次に載る) |
@@ -111,4 +116,8 @@ MDX で気を付けること:
 - CCFOLIA のコマは、名前・メモ(読み仮名とプロフィール)・HP/MP/SAN・能力値・DB など・
   チャットパレットで作る。形式は
   [contracts/ccfolia-koma.md](../../specs/005-scenario/contracts/ccfolia-koma.md) を参照。
+- 立ち絵は `portrait: { src: "/images/<slug>/<name>.webp" }` で書く。カードのアイコンには画像の幅
+  いっぱいを映し、上から少し下(全身の立ち絵なら頭から胸元)を見せる。合わないときだけ
+  `face: { x, y, width }` を足して映す範囲を変える(x・y が顔の中心、width がアイコンに収める幅。
+  どれも画像に対する %)。
 - コマに立ち絵は入らない(CCFOLIA の制約)。画像は CCFOLIA 上で設定する。

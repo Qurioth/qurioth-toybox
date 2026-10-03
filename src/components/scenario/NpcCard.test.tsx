@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import type { ScenarioNpc } from "@/types/scenario-npc";
 import NpcCard from "./NpcCard";
@@ -54,6 +55,58 @@ describe("NpcCard", () => {
     ).toBeInTheDocument();
     expect(within(card).getByText("ダメージ 1D3+DB")).toBeInTheDocument();
     expect(within(card).getByText("「こんにちは」")).toBeInTheDocument();
+  });
+
+  it("立ち絵は名前の横の丸いアイコンにし、顔の位置をアイコンの中心に合わせる", () => {
+    render(
+      <NpcCard
+        npc={{
+          ...mitsuki,
+          portrait: {
+            src: "/images/sample/mitsuki.png",
+            face: { x: 40, y: 6, width: 50 },
+          },
+        }}
+      />,
+    );
+    const card = screen.getByRole("article", { name: "沖嶋 深月" });
+    const icon = within(card).getByRole("button", {
+      name: "沖嶋 深月を拡大する",
+    });
+    const image = within(icon).getByRole("img", { name: "沖嶋 深月" });
+
+    expect(icon.parentElement).toContainElement(
+      within(card).getByRole("heading", { name: /沖嶋 深月/ }),
+    );
+    expect(image.style.width).toBe("200%");
+    expect(image.style.transform).toBe("translate(-40%, -6%)");
+  });
+
+  it("顔の位置を書かない立ち絵は、画像の幅いっぱいを映して上側を見せる", () => {
+    render(<NpcCard npc={mitsuki} />);
+    const image = within(
+      screen.getByRole("button", { name: "沖嶋 深月を拡大する" }),
+    ).getByRole("img");
+
+    expect(image).toHaveClass("object-cover", "object-[50%_4%]");
+    expect(image.style.transform).toBe("");
+  });
+
+  it("アイコンを選ぶと立ち絵の全体を開く", async () => {
+    const user = userEvent.setup();
+    render(<NpcCard npc={mitsuki} />);
+
+    await user.click(
+      screen.getByRole("button", { name: "沖嶋 深月を拡大する" }),
+    );
+
+    const image = within(screen.getByRole("dialog")).getByRole("img", {
+      name: "沖嶋 深月",
+    });
+    expect(image).toHaveAttribute("src", "/images/sample/mitsuki.png");
+    // スクロールせず画面に収まる大きさで開く(原寸の max-w-none ではない)
+    expect(image).toHaveClass("max-h-[calc(100dvh-3.75rem)]");
+    expect(image).not.toHaveClass("max-w-none");
   });
 
   it("能力値も立ち絵も技能もない人物では、その欄を出さない", () => {
