@@ -70,7 +70,7 @@ export const toCcfoliaKoma = (npc: ScenarioNpc): CharacterClipboardData => {
     ),
   ];
 
-  const memo = [npc.kana, npc.profile].filter(Boolean).join("\n");
+  const memo = npc.kana;
   const dex = findValue(abilities, "DEX");
   const initiative = dex === undefined ? undefined : toInteger(dex);
 

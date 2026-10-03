@@ -32,7 +32,7 @@ src/scenarios/<slug>/
 6. [quickstart](../../specs/005-scenario/quickstart.md) の確認項目を通し、`pnpm test` を通して
    コミットする(1 本 = 1 コミットが目安)。
 
-下書きは機械的な変換なので、NPC の並びやプロフィールの置き場所などは必要に応じて直す。
+下書きは機械的な変換なので、NPC の並びなどは必要に応じて直す。
 
 - 技能を解析できなかった NPC は、技能を `npcs.ts` に入れていない。
   - カードの子要素に元の小節が残っている。
@@ -96,7 +96,7 @@ MDX で気を付けること:
 | -- | -- |
 | `<ScenarioOverview subtitle="…">リード</ScenarioOverview>` | 冒頭の概要。タイトル・システム・人数・時間は登録情報から出る |
 | `<ScenarioToc />` | 目次を本文の中に置く(`toc="sidebar"` を使わない場合) |
-| `<NpcCard npc={npcs.key}>セリフ例など</NpcCard>` | NPC カード。立ち絵は名前の横に顔の丸いアイコンで出す(選ぶと全体を開く)。「CCFOLIA コマ出力」でコマを持ち出せる |
+| `<NpcCard npc={npcs.key}>プロフィール・セリフ例など</NpcCard>` | NPC カード。立ち絵は名前の横に顔の丸いアイコンで出す(選ぶと全体を開く)。「CCFOLIA コマ出力」でコマを持ち出せる |
 | `<StatGrid stats={{ abilities: […], derived: […] }}>補足</StatGrid>` | 能力値の格子(場面の中の敵など) |
 | `<ReadAloud>描写</ReadAloud>` | 読み上げ文の枠 |
 | `<Ending number="1" name="名称">…</Ending>` | エンディング(目次に載る) |
@@ -111,9 +111,10 @@ MDX で気を付けること:
 
 型は [src/types/scenario-npc.ts](../types/scenario-npc.ts) の `ScenarioNpc`。
 
-- 名前・読み仮名・立ち絵・プロフィール・ステータス(複数の姿は `stats` に並べる)・技能を持つ。
+- 名前・読み仮名・立ち絵・ステータス(複数の姿は `stats` に並べる)・技能を持つ。
+- プロフィールはデータに入れず、`<NpcCard>` の子要素に Markdown で書く(能力値・技能の下に出る)。
 - 能力値は規約の順(STR CON POW DEX APP SIZ INT EDU)に並べる。
-- CCFOLIA のコマは、名前・メモ(読み仮名とプロフィール)・HP/MP/SAN・能力値・DB など・
+- CCFOLIA のコマは、名前・メモ(読み仮名)・HP/MP/SAN・能力値・DB など・
   チャットパレットで作る。形式は
   [contracts/ccfolia-koma.md](../../specs/005-scenario/contracts/ccfolia-koma.md) を参照。
 - 立ち絵は `portrait: { src: "/images/<slug>/<name>.webp" }` で書く。カードのアイコンには画像の幅

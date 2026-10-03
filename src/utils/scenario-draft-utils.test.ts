@@ -106,7 +106,6 @@ describe("createScenarioDraft", () => {
       name: "沖嶋 深月",
       kana: "オキシマ ミツキ",
       portrait: { src: "/images/sample/mitsuki.png" },
-      profile: "女性。写真家。\n探索者たちの共通の知人。",
       stats: [
         {
           abilities: [
@@ -127,8 +126,17 @@ describe("createScenarioDraft", () => {
         { name: "近接戦闘（格闘）", value: 25, note: "ダメージ 1D3+DB" },
       ],
     });
-    expect(draft.contentMdx).toContain("<NpcCard npc={npcs.mitsuki}>");
-    expect(draft.contentMdx).toContain("#### セリフ例");
+    // プロフィールは行内改行を保ったまま、カードの子要素の先頭に残す
+    expect(draft.contentMdx).toContain(
+      lines(
+        "<NpcCard npc={npcs.mitsuki}>",
+        "",
+        "女性。写真家。  ",
+        "探索者たちの共通の知人。",
+        "",
+        "#### セリフ例",
+      ),
+    );
     expect(draft.contentMdx).not.toMatch(/^#### ステータス$/m);
   });
 

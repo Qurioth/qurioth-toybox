@@ -5,8 +5,6 @@ export const npcs = {
   npc1: {
     name: "木古 盛華",
     kana: "キコ セイカ",
-    profile:
-      "男性。新聞記者。探索者たちの共通の知人。\n探索者と関わりを持たせづらい場合、職業・年齢・性別は変更してよい。",
     stats: [
       {
         abilities: [

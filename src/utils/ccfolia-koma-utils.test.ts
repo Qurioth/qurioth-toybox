@@ -6,7 +6,6 @@ const mitsuki: ScenarioNpc = {
   name: "沖嶋 深月",
   kana: "オキシマ ミツキ",
   portrait: { src: "/images/sample/mitsuki.png" },
-  profile: "女性。写真家。",
   stats: [
     {
       abilities: [
@@ -37,7 +36,7 @@ describe("toCcfoliaKoma", () => {
       kind: "character",
       data: {
         name: "沖嶋 深月",
-        memo: "オキシマ ミツキ\n女性。写真家。",
+        memo: "オキシマ ミツキ",
         initiative: 60,
         status: [
           { label: "HP", value: 13, max: 13 },
@@ -69,9 +68,9 @@ describe("toCcfoliaKoma", () => {
   });
 
   it("能力値・技能のない人物は持っている項目だけにする", () => {
-    expect(toCcfoliaKoma({ name: "案内人", profile: "町の案内人。" })).toEqual({
+    expect(toCcfoliaKoma({ name: "案内人", kana: "アンナイニン" })).toEqual({
       kind: "character",
-      data: { name: "案内人", memo: "町の案内人。" },
+      data: { name: "案内人", memo: "アンナイニン" },
     });
     expect(toCcfoliaKoma({ name: "名無し" })).toEqual({
       kind: "character",

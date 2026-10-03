@@ -161,17 +161,6 @@ export const parseSkills = (body: string): NpcSkill[] | undefined => {
   return skills;
 };
 
-/** 装飾のない地の文だけのプロフィールか(データにしても書式を失わない) */
-const isPlainText = (text: string) =>
-  !/(\*\*|`|!\[|\[|^\s*([-*>|#]|\d+\.)\s)/m.test(text);
-
-const toPlainText = (text: string) =>
-  text
-    .split("\n")
-    .map((line) => line.trimEnd())
-    .join("\n")
-    .trim();
-
 const NPC_KEY_PATTERN = /^[A-Za-z][A-Za-z0-9]*$/;
 
 const toNpcKey = (section: Section, used: Set<string>) => {
@@ -209,12 +198,10 @@ const convertCharacter = (
     };
   }
 
+  // プロフィールは書式を保つよう、データにせずカードの子要素(MDX)に残す
   const children: string[] = [];
   const profile = character.profile.trim();
-  if (profile) {
-    if (isPlainText(profile)) npc.profile = toPlainText(profile);
-    else children.push(convertMarkdown(profile));
-  }
+  if (profile) children.push(convertMarkdown(profile));
 
   const stats: NpcStatBlock[] = [];
   for (const subsection of character.subsections) {

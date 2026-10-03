@@ -9,7 +9,6 @@ const mitsuki: ScenarioNpc = {
   name: "沖嶋 深月",
   kana: "オキシマ ミツキ",
   portrait: { src: "/images/sample/mitsuki.png" },
-  profile: "女性。写真家。\n探索者たちの共通の知人。",
   stats: [
     {
       abilities: [
@@ -29,9 +28,10 @@ const mitsuki: ScenarioNpc = {
 };
 
 describe("NpcCard", () => {
-  it("立ち絵・見出し・プロフィール・能力値・技能・子要素を 1 枚のカードにまとめる", () => {
+  it("立ち絵・見出し・能力値・技能・子要素(プロフィールやセリフ例)を 1 枚のカードにまとめる", () => {
     render(
       <NpcCard npc={mitsuki}>
+        <p>女性。写真家。探索者たちの共通の知人。</p>
         <p>「こんにちは」</p>
       </NpcCard>,
     );
@@ -110,7 +110,11 @@ describe("NpcCard", () => {
   });
 
   it("能力値も立ち絵も技能もない人物では、その欄を出さない", () => {
-    render(<NpcCard npc={{ name: "案内人", profile: "プロフィールだけ。" }} />);
+    render(
+      <NpcCard npc={{ name: "案内人" }}>
+        <p>プロフィールだけ。</p>
+      </NpcCard>,
+    );
     const card = screen.getByRole("article", { name: "案内人" });
 
     expect(within(card).queryByRole("img")).not.toBeInTheDocument();

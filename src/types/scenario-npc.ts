@@ -37,11 +37,9 @@ export type NpcPortrait = {
  */
 export type ScenarioNpc = {
   name: string;
-  /** 見出しの補足(読み仮名など) */
+  /** 見出しの補足(読み仮名など)。コマのメモにも使う */
   kana?: string;
   portrait?: NpcPortrait;
-  /** プロフィール。改行を保って表示し、コマのメモにも使う */
-  profile?: string;
   stats?: NpcStatBlock[];
   skills?: NpcSkill[];
 };

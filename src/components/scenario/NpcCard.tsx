@@ -60,7 +60,7 @@ const PortraitIcon = ({
 
 /**
  * NPC・神話生物のカード(specs/005-scenario/contracts/mdx-page.md 3 章)。
- * 名前・立ち絵・プロフィール・能力値・技能はデータから、セリフ例などの自由な記述は子要素から出す。
+ * 名前・立ち絵・能力値・技能はデータから、プロフィールやセリフ例などの自由な記述は子要素から出す。
  * 立ち絵は名前の左に丸いアイコンで出し、能力値の有無にかかわらずどの人物も同じ見え方にする
  */
 const NpcCard = ({
@@ -93,11 +93,6 @@ const NpcCard = ({
         <CopyKomaButton npc={npc} />
       </div>
     </div>
-    {npc.profile && (
-      <p className="whitespace-pre-line leading-7 text-zinc-800 dark:text-slate-100">
-        {npc.profile}
-      </p>
-    )}
     {npc.stats?.map((stats, index) => (
       // biome-ignore lint/suspicious/noArrayIndexKey: stat blocks are static
       <StatGrid key={index} stats={stats} />

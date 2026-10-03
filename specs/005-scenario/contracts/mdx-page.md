@@ -54,7 +54,7 @@ export default function BubbleOnWetHandsScenario({
 | -- | -- | -- |
 | `ScenarioOverview` | `children`(リード) | 登録情報(システム・人数・時間)とリードをまとめた冒頭の概要。シナリオの情報は詳細画面から渡る |
 | `ScenarioToc` | — | 本文中の `h2` と `data-toc` 付きの見出しを集めた目次。広い画面は常時表示、狭い画面はパネル。本文の横に置くときは `ScenarioPage` の `toc="sidebar"` を使う |
-| `NpcCard` | `npc: ScenarioNpc`, `children` | 立ち絵(名前の横に顔の丸いアイコン。選ぶと全体を開く)・名前と補足・プロフィール・能力値・技能、子要素(セリフ例など)、「CCFOLIA コマ出力」ボタン。見出しは目次に載る |
+| `NpcCard` | `npc: ScenarioNpc`, `children` | 立ち絵(名前の横に顔の丸いアイコン。選ぶと全体を開く)・名前と補足・能力値・技能、子要素(プロフィールやセリフ例など)、「CCFOLIA コマ出力」ボタン。見出しは目次に載る |
 | `StatGrid` | `stats: NpcStatBlock`, `children` | 能力値の格子と副次ステータス。子要素は格子の下に出す |
 | `ReadAloud` | `children` | 読み上げ文の枠 |
 | `Ending` | `number`, `name`, `children` | ED<番号> と名称を分けた見出しのカード。目次に載る |

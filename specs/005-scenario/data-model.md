@@ -55,7 +55,6 @@ type ScenarioNpc = {
     // (どれも画像に対する %)。省略時は画像の幅いっぱいを映し、上から少し下を見せる
     face?: { x?: number; y?: number; width?: number };
   };
-  profile?: string;             // プロフィール(プレーンテキスト、改行あり)。コマのメモにも使う
   stats?: NpcStatBlock[];       // 0 個以上。複数の姿はここで分ける
   skills?: NpcSkill[];          // チャットパレットとカードの技能欄に使う
 };
@@ -110,7 +109,7 @@ Clipboard API (beta)。項目ごとの対応は [contracts/ccfolia-koma.md](cont
 | -- | -- |
 | サブタイトル・H1・リード | `<ScenarioOverview>` の子要素(リード)。タイトル・人数・時間は登録情報から部品が出す |
 | `##` の章 | `## 見出し` のまま |
-| 人物(`SectionKind = character`)の `###` | `npcs.ts` に `ScenarioNpc` を足し、`<NpcCard npc={npcs.<key>}>` を置く。立ち絵・プロフィール・`ステータス` の小節・(解析できれば)`技能` の小節はデータへ。他の小節は子要素の MDX |
+| 人物(`SectionKind = character`)の `###` | `npcs.ts` に `ScenarioNpc` を足し、`<NpcCard npc={npcs.<key>}>` を置く。立ち絵・`ステータス` の小節・(解析できれば)`技能` の小節はデータへ。プロフィールと他の小節は子要素の MDX |
 | 人物以外の能力値の段落(場面内の敵など) | `<StatGrid stats={…}>`。形に合わない行(正気度喪失など)は子要素の MDX |
 | `ED<番号> 【名称】` の `###` | `<Ending number="1" name="…">` |
 | `その他報酬` の `###` | `<Reward>` |

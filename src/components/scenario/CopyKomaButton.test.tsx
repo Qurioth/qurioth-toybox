@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import CopyKomaButton from "./CopyKomaButton";
 
-const npc = { name: "沖嶋 深月", profile: "写真家。" };
+const npc = { name: "沖嶋 深月", kana: "オキシマ ミツキ" };
 
 const mockClipboard = (writeText: (text: string) => Promise<void>) => {
   const spy = vi.fn(writeText);
@@ -28,7 +28,7 @@ describe("CopyKomaButton", () => {
 
     expect(JSON.parse(writeText.mock.calls[0][0])).toEqual({
       kind: "character",
-      data: { name: "沖嶋 深月", memo: "写真家。" },
+      data: { name: "沖嶋 深月", memo: "オキシマ ミツキ" },
     });
     expect(await screen.findByText("コピーしました。")).toBeInTheDocument();
   });
