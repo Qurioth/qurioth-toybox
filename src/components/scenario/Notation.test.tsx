@@ -18,8 +18,15 @@ describe("表記の強調(MDX)", () => {
       ].join("\n"),
     );
 
-    expect(notations(container, "check")).toEqual(["〈目星〉", "〈STR〉"]);
+    // 難易度は判定と 1 つの強調にまとめる
+    expect(notations(container, "check")).toEqual([
+      "〈目星〉",
+      "〈STR〉 のハード",
+    ]);
     expect(notations(container, "difficulty")).toEqual([" のハード"]);
+    expect(
+      container.querySelector('[data-notation="difficulty"]')?.parentElement,
+    ).toHaveAttribute("data-notation", "check");
     expect(notations(container, "sanity-loss")).toEqual([
       "正気度喪失：0 ／ 1D6",
       "正気度喪失：1D10",

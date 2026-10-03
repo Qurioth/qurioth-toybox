@@ -108,15 +108,17 @@ export const decorate = (children: ReactNode): ReactNode[] => {
     let text = child;
     const difficulty = afterCheck ? splitDifficulty(text) : undefined;
     if (difficulty) {
+      // 判定と難易度(`〈STR〉 のハード`)を 1 つの強調にまとめる
+      const check = result.pop() as ReactElement<{ children?: ReactNode }>;
       result.push(
-        <span
-          // biome-ignore lint/suspicious/noArrayIndexKey: segments are derived from static text
-          key={`${index}-difficulty`}
-          data-notation="difficulty"
+        <strong
+          key={check.key}
+          data-notation="check"
           className={NOTATION_STYLES.check}
         >
-          {difficulty.difficulty}
-        </span>,
+          {check.props.children}
+          <span data-notation="difficulty">{difficulty.difficulty}</span>
+        </strong>,
       );
       text = difficulty.rest;
     }
