@@ -114,7 +114,7 @@ const AsideColumn = ({
   <section
     aria-label={aside.label}
     className={cn(
-      "sticky top-24 hidden max-h-[calc(100vh-7rem)] min-w-0 overflow-y-auto xl:block",
+      "scrollbar-subtle sticky top-24 hidden max-h-[calc(100vh-7rem)] min-w-0 overflow-y-auto xl:block",
       className,
     )}
   >

@@ -47,7 +47,7 @@ const ScenarioAsidePanel = ({
         className="xl:hidden"
       >
         <div className="fixed inset-0 z-50 bg-black/30" aria-hidden="true" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-zinc-100 p-4 shadow-xl dark:bg-slate-900">
+        <DialogPanel className="scrollbar-subtle fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-zinc-100 p-4 shadow-xl dark:bg-slate-900">
           <div className="mb-3 flex items-center justify-between">
             <DialogTitle className="font-bold text-zinc-900 dark:text-white">
               {label}

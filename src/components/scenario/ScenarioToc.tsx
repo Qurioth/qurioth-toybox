@@ -118,7 +118,7 @@ const ScenarioToc = () => {
     <>
       <nav
         aria-label={TOC_LABEL}
-        className="not-prose sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block"
+        className="scrollbar-subtle not-prose sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block"
       >
         <p className="mb-2 px-2 text-xs font-bold text-zinc-500 dark:text-slate-400">
           {TOC_LABEL}
@@ -138,7 +138,7 @@ const ScenarioToc = () => {
 
       <Dialog open={open} onClose={setOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50 bg-black/30" aria-hidden="true" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-zinc-100 p-4 shadow-xl dark:bg-slate-900">
+        <DialogPanel className="scrollbar-subtle fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-zinc-100 p-4 shadow-xl dark:bg-slate-900">
           <div className="mb-3 flex items-center justify-between">
             <DialogTitle className="font-bold text-zinc-900 dark:text-white">
               {TOC_LABEL}
