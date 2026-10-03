@@ -135,6 +135,14 @@ const config: Config = {
             "border-radius": "5px",
           },
         },
+        // 細く、溝を透明にして背景になじませる(ダークモードで白い溝が目立たないように)
+        ".scrollbar-subtle": {
+          "scrollbar-width": "thin",
+          "scrollbar-color": "#d4d4d8 transparent",
+          ".dark &": {
+            "scrollbar-color": "#334155 transparent",
+          },
+        },
       });
     }),
   ],

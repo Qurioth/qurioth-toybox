@@ -11,13 +11,18 @@
     "format:check": "biome format .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "scenario:draft": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/create-scenario-draft.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.8",
     "@heroicons/react": "^2.1.5",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.3.8",
     "clsx": "^2.1.1",
     "lucide-react": "^0.439.0",
+    "mermaid": "^12.0.0",
     "next": "^16.0.10",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -30,10 +35,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.6",
+    "@mdx-js/mdx": "^3.1.1",
     "@tailwindcss/typography": "^0.5.20",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

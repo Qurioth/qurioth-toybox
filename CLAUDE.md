@@ -18,6 +18,7 @@ pnpm lint     # Biome lint(旧 next lint / ESLint から移行)
 pnpm format   # Biome フォーマッタで整形(検査のみは pnpm format:check)
 pnpm typecheck # TypeScript の型チェック(tsc --noEmit)
 pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
+pnpm scenario:draft <シナリオID>  # 既存のシナリオ本文から専用ページの下書きを作る(ADR-0016)
 ```
 
 パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
@@ -39,7 +40,10 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
   `slate` など他のパレットは差し替えられていない。
 - フォーム: `react-hook-form`(`trpg/charaeno-chart` の URL 入力フォームで使用)
 - グラフ: `recharts`(`charaeno-chart` のレーダーチャート等)
-- Markdown 描画: `react-markdown` + `remark-gfm`(シナリオ本文の表示に使用)
+- Markdown 描画: `react-markdown` + `remark-gfm`(専用ページを持たないシナリオ本文の表示に使用)
+- MDX: `@next/mdx`(シナリオの専用ページ `src/scenarios/<slug>/content.mdx`。設定は `next.config.mjs`、
+  要素と部品の対応は `src/mdx-components.tsx`)
+- フローチャート: `mermaid`(シナリオの専用ページで、図のあるページでだけクライアントで読み込む)
 - パスエイリアス: `@/*` → `./src/*`(`tsconfig.json`)
 
 ## ディレクトリ構成
@@ -50,9 +54,11 @@ src/
     trpg/         TRPG向けツール群(下記参照)
     other/        写真ページなどその他コンテンツ
     blurry-blob-demo/  UI実験ページ
-  components/     再利用UIコンポーネント(animata/, forms/, recharts/ にサブ分類)
+  components/     再利用UIコンポーネント(animata/, forms/, recharts/, scenario/ にサブ分類。
+                  scenario/ はシナリオの専用ページの部品集)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
                   scenario/ には本文Markdownの記述規約(README.md)と雛形(template.md)がある
+  scenarios/      シナリオ1本ごとの専用ページ(<slug>/index.tsx・content.mdx・npcs.ts)
   contexts/       React Context
   hooks/          複数の画面から使う汎用フック(`use-<用途>.ts`)
   constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
@@ -84,6 +90,10 @@ NPC・神話生物のステータス表記、正気度の書式、改行の入�
 - 書いたら `src/data/scenario/scenario-list.ts` に登録する(登録しないと一覧にも詳細にも出ない)。
 - 本文の描画は `react-markdown` + `remark-gfm` のみ。生HTMLは描画されず、行内改行には行末の
   半角スペース2つが必要。二次創作の著作権表記は詳細ページ側で自動付与されるため本文に書かない。
+- シナリオは1本ずつ専用ページ(`src/scenarios/<slug>/`)へ移行している。専用ページがあるシナリオは
+  そちらが本文の正で、`scenario-list.ts` には `markdown` の代わりに `page` を書く(元の Markdown は
+  削除する)。作り方・部品・移行手順は [src/scenarios/README.md](src/scenarios/README.md) を参照
+  ([ADR-0016](docs/adr/0016-scenario-pages-with-mdx.md))。表記規約は専用ページの地の文にも適用する。
 
 ## コーディング規約
 

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { ComponentType } from "react";
 import { escapeMarkdownText } from "@/utils/markdown-utils";
 
 const readScenarioMarkdown = (fileName: string) => {
@@ -11,9 +12,9 @@ const readScenarioMarkdown = (fileName: string) => {
   return escapeMarkdownText(markdown);
 };
 
-type Scenario = {
+/** 専用ページの部品に渡す登録情報 */
+export type ScenarioInfo = {
   title: string;
-  titleKana: string;
   system: string;
   players: {
     min: number;
@@ -23,8 +24,17 @@ type Scenario = {
     min: number;
     max: number;
   };
+};
+
+export type ScenarioPageComponent = ComponentType<{ scenario: ScenarioInfo }>;
+
+export type Scenario = ScenarioInfo & {
+  titleKana: string;
   summary: string;
-  markdown: string;
+  /** 未移行のシナリオの本文。専用ページへ移行したら削除する */
+  markdown?: string;
+  /** 専用ページ(src/scenarios/<slug>)。あれば詳細画面はこれを表示する(specs/005-scenario) */
+  page?: () => Promise<{ default: ScenarioPageComponent }>;
 };
 
 const list: {
@@ -62,7 +72,7 @@ const list: {
     },
     summary:
       "現代日本。知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
-    markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
+    page: () => import("@/scenarios/bubble-on-wet-hands"),
   },
   SilentJourney: {
     system: "クトゥルフ神話TRPG 7版",
@@ -187,7 +197,7 @@ const list: {
       max: 4,
     },
     summary: "現代日本。体調不良の知人から連絡があり、尋ねる。",
-    markdown: readScenarioMarkdown("parasite.md"),
+    page: () => import("@/scenarios/parasite"),
   },
   ShadowFeather: {
     system: "クトゥルフ神話TRPG 7版",

@@ -30,6 +30,11 @@ specs/
   `/speckit-specify` を使うときは `--short-name` で英語のスラッグを明示すること。
   スラッグの自動生成はASCII以外を落とすため、日本語の説明だけを渡すと
   `specs/001-/` のように空スラッグのディレクトリができてしまう。
+- 既存画面の spec を改修するときは、`/speckit-specify` に
+  `SPECIFY_FEATURE_DIRECTORY=specs/<番号>-<画面slug>` を渡して対象を明示する。
+- 作業中の spec を指す `.specify/feature.json` はローカル状態のため git 管理しない。
+  clone 直後や新しい worktree では存在しないので、`/speckit-plan` などの前に
+  `/speckit-specify` を実行するか `SPECIFY_FEATURE_DIRECTORY` を指定する。
 - テンプレートは `.specify/templates/`(公式spec-kitのテンプレート)を参照。
 - 開発の進め方は [CLAUDE.md](../CLAUDE.md) の「開発フロー」節、原則は
   [.specify/memory/constitution.md](../.specify/memory/constitution.md) を参照。
