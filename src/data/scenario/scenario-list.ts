@@ -72,7 +72,7 @@ const list: {
     },
     summary:
       "現代日本。知人の沖嶋 深月の依頼で一人の男性を捜し、海沿いの町へ赴く。",
-    markdown: readScenarioMarkdown("bubble-on-wet-hands.md"),
+    page: () => import("@/scenarios/bubble-on-wet-hands"),
   },
   SilentJourney: {
     system: "クトゥルフ神話TRPG 7版",
