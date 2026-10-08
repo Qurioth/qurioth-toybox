@@ -7,7 +7,7 @@ export const npcs = {
     kana: "オキシマ ミツキ",
     portrait: {
       src: "/images/bubble-on-wet-hands/mitsuki.webp",
-      face: { x: 51, y: 19, width: 49 },
+      face: { x: 49, y: 12, width: 30 },
     },
     skills: [
       {
@@ -133,7 +133,7 @@ export const npcs = {
     kana: "ワタシブネ コウキチ",
     portrait: {
       src: "/images/bubble-on-wet-hands/kokichi.webp",
-      face: { x: 44, y: 19, width: 49 },
+      face: { x: 48, y: 12, width: 30 },
     },
     skills: [
       {
