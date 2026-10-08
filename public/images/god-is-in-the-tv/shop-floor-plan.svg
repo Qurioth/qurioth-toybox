@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="600" viewBox="0 0 820 600" font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif">
+  <title>占いサロン「Quarzstimme」の間取り</title>
+  <defs>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#7fd6e8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7fd6e8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp">
+      <stop offset="0" stop-color="#f0c66e" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f0c66e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="820" height="600" fill="#1a1624"/>
+
+  <text x="30" y="26" font-size="18" font-weight="bold" fill="#e8dcc0">占いサロン「Quarzstimme」間取り</text>
+
+  <!-- 共用廊下 -->
+  <rect x="30" y="520" width="500" height="56" fill="#2a2733"/>
+  <text x="80" y="554" font-size="14" fill="#9a93a8">雑居ビル 共用廊下</text>
+
+  <!-- 床 -->
+  <rect x="30" y="40" width="500" height="480" fill="#2e2440"/>
+  <rect x="150" y="40" width="380" height="160" fill="#221a30"/>
+  <rect x="349" y="200" width="181" height="320" fill="#3a2850"/>
+
+  <!-- 間接照明 -->
+  <circle cx="440" cy="360" r="110" fill="url(#lamp)"/>
+  <circle cx="100" cy="330" r="80" fill="url(#lamp)"/>
+
+  <!-- 外壁 (入口部分は開口) -->
+  <path d="M252 520 L30 520 L30 40 L530 40 L530 520 L310 520" fill="none" stroke="#c9a45c" stroke-width="6" stroke-linejoin="miter"/>
+
+  <!-- 作業部屋の窓 -->
+  <rect x="190" y="36" width="70" height="8" fill="#1a1624" stroke="#c9a45c" stroke-width="2"/>
+
+  <!-- 作業部屋の間仕切り (西側にカーテン) -->
+  <line x1="150" y1="40" x2="150" y2="105" stroke="#c9a45c" stroke-width="4"/>
+  <line x1="150" y1="185" x2="150" y2="200" stroke="#c9a45c" stroke-width="4"/>
+  <line x1="150" y1="200" x2="530" y2="200" stroke="#c9a45c" stroke-width="4"/>
+  <path d="M150 105 q -7 5 0 10 t 0 10 t 0 10 t 0 10 t 0 10 t 0 10 t 0 10 t 0 10" fill="none" stroke="#b07ad6" stroke-width="3"/>
+
+  <!-- 1 作業机とノート -->
+  <rect x="190" y="55" width="110" height="42" fill="#5b3f2e" stroke="#c9a45c" stroke-width="2"/>
+  <rect x="230" y="64" width="28" height="20" fill="#e8dcc0" stroke="#c9a45c" stroke-width="1"/>
+  <rect x="230" y="105" width="30" height="24" rx="4" fill="#6b4a36" stroke="#c9a45c" stroke-width="1.5"/>
+
+  <!-- 2 原石 -->
+  <circle cx="355" cy="110" r="40" fill="url(#glow)"/>
+  <circle cx="355" cy="110" r="24" fill="#5b3f2e" stroke="#c9a45c" stroke-width="2"/>
+  <polygon points="355,92 369,104 365,124 345,124 341,104" fill="#7fd6e8" stroke="#bff0fa" stroke-width="2"/>
+
+  <!-- 3 資料棚 -->
+  <rect x="370" y="170" width="130" height="24" fill="#4a3326" stroke="#c9a45c" stroke-width="2"/>
+
+  <!-- 4 給湯スペース -->
+  <rect x="430" y="46" width="94" height="34" fill="#3b4250" stroke="#8c96a6" stroke-width="2"/>
+  <rect x="440" y="52" width="36" height="22" rx="4" fill="#23262e" stroke="#8c96a6" stroke-width="1.5"/>
+  <circle cx="500" cy="63" r="8" fill="#23262e" stroke="#8c96a6" stroke-width="1.5"/>
+
+  <!-- 6 陳列棚 -->
+  <rect x="36" y="46" width="108" height="24" fill="#4a3326" stroke="#c9a45c" stroke-width="2"/>
+  <rect x="36" y="70" width="24" height="200" fill="#4a3326" stroke="#c9a45c" stroke-width="2"/>
+  <g fill="#7fd6e8" opacity="0.8">
+    <circle cx="60" cy="58" r="3"/><circle cx="85" cy="58" r="3"/><circle cx="110" cy="58" r="3"/><circle cx="132" cy="58" r="3"/>
+    <circle cx="48" cy="95" r="3"/><circle cx="48" cy="130" r="3"/><circle cx="48" cy="165" r="3"/><circle cx="48" cy="200" r="3"/><circle cx="48" cy="235" r="3"/>
+  </g>
+
+  <!-- 12 待合ソファとローテーブル -->
+  <rect x="36" y="285" width="12" height="80" fill="#4d2238" stroke="#c9a45c" stroke-width="1.5"/>
+  <rect x="48" y="285" width="30" height="80" rx="4" fill="#6a2f4a" stroke="#c9a45c" stroke-width="1.5"/>
+  <circle cx="108" cy="325" r="14" fill="#5b3f2e" stroke="#c9a45c" stroke-width="1.5"/>
+
+  <!-- 7 ショーケースと 8 レジカウンター -->
+  <rect x="95" y="390" width="90" height="28" fill="#274150" stroke="#7fd6e8" stroke-width="2"/>
+  <rect x="185" y="390" width="28" height="95" fill="#5b3f2e" stroke="#c9a45c" stroke-width="2"/>
+
+  <!-- 9 占いテーブルと椅子 -->
+  <circle cx="440" cy="360" r="40" fill="#5b3f2e" stroke="#c9a45c" stroke-width="2"/>
+  <circle cx="440" cy="360" r="22" fill="url(#glow)"/>
+  <circle cx="440" cy="360" r="9" fill="#7fd6e8" stroke="#bff0fa" stroke-width="1.5"/>
+  <rect x="487" y="347" width="24" height="26" rx="4" fill="#7e4fb0" stroke="#d2b3f0" stroke-width="1.5"/>
+  <rect x="369" y="348" width="24" height="24" rx="4" fill="#6b4a36" stroke="#c9a45c" stroke-width="1.5"/>
+  <rect x="428" y="291" width="24" height="24" rx="4" fill="#6b4a36" stroke="#c9a45c" stroke-width="1.5"/>
+  <rect x="428" y="405" width="24" height="24" rx="4" fill="#6b4a36" stroke="#c9a45c" stroke-width="1.5"/>
+
+  <!-- 10 パーテーションと観葉植物 -->
+  <rect x="341" y="300" width="8" height="196" fill="#4d3b5e" stroke="#c9a45c" stroke-width="1.5"/>
+  <circle cx="345" cy="292" r="9" fill="#3f6b44" stroke="#8fbf7a" stroke-width="1.5"/>
+  <circle cx="505" cy="495" r="12" fill="#3f6b44" stroke="#8fbf7a" stroke-width="1.5"/>
+
+  <!-- 11 入口 -->
+  <line x1="310" y1="520" x2="310" y2="462" stroke="#c9a45c" stroke-width="3"/>
+  <path d="M310 462 A58 58 0 0 0 252 520" fill="none" stroke="#c9a45c" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- 部屋名 -->
+  <text x="300" y="160" font-size="14" font-weight="bold" fill="#d9c7f0" text-anchor="middle">作業部屋 (奥の部屋)</text>
+  <text x="230" y="250" font-size="14" font-weight="bold" fill="#e8dcc0" text-anchor="middle">店舗スペース</text>
+  <text x="440" y="470" font-size="14" font-weight="bold" fill="#e8dcc0" text-anchor="middle">鑑定スペース</text>
+
+  <!-- 番号マーカー -->
+  <g font-size="13" font-weight="bold" fill="#1a1624" text-anchor="middle">
+    <circle cx="315" cy="58" r="11" fill="#c9a45c"/><text x="315" y="63">1</text>
+    <circle cx="395" cy="82" r="11" fill="#c9a45c"/><text x="395" y="87">2</text>
+    <circle cx="515" cy="160" r="11" fill="#c9a45c"/><text x="515" y="165">3</text>
+    <circle cx="477" cy="98" r="11" fill="#c9a45c"/><text x="477" y="103">4</text>
+    <circle cx="128" cy="145" r="11" fill="#c9a45c"/><text x="128" y="150">5</text>
+    <circle cx="100" cy="88" r="11" fill="#c9a45c"/><text x="100" y="93">6</text>
+    <circle cx="78" cy="200" r="11" fill="#c9a45c"/><text x="78" y="205">6</text>
+    <circle cx="140" cy="376" r="11" fill="#c9a45c"/><text x="140" y="381">7</text>
+    <circle cx="199" cy="500" r="11" fill="#c9a45c"/><text x="199" y="505">8</text>
+    <circle cx="482" cy="318" r="11" fill="#c9a45c"/><text x="482" y="323">9</text>
+    <circle cx="365" cy="440" r="11" fill="#c9a45c"/><text x="365" y="444" font-size="11">10</text>
+    <circle cx="240" cy="470" r="11" fill="#c9a45c"/><text x="240" y="474" font-size="11">11</text>
+    <circle cx="112" cy="356" r="11" fill="#c9a45c"/><text x="112" y="360" font-size="11">12</text>
+  </g>
+
+  <!-- 凡例 -->
+  <g font-size="13" fill="#e8dcc0">
+    <text x="560" y="62" font-size="15" font-weight="bold">凡例</text>
+    <text x="560" y="90">1  作業机 (手書きのノート・椅子)</text>
+    <text x="560" y="114">2  拳大の原石 (台座の上)</text>
+    <text x="560" y="138">3  資料棚</text>
+    <text x="578" y="155" fill="#a99fbd">(放送スケジュール表の控え)</text>
+    <text x="560" y="179">4  給湯スペース (流し・電気ポット)</text>
+    <text x="560" y="203">5  カーテン (作業部屋の入口)</text>
+    <text x="560" y="227">6  陳列棚 (水晶・パワーストーン)</text>
+    <text x="560" y="251">7  ショーケース (アクセサリー)</text>
+    <text x="560" y="275">8  レジカウンター</text>
+    <text x="560" y="299">9  占いテーブル</text>
+    <text x="578" y="316" fill="#a99fbd">(紫の椅子が明日菜の席)</text>
+    <text x="560" y="340">10  パーテーション・観葉植物</text>
+    <text x="578" y="357" fill="#a99fbd">(入口から鑑定席を目隠し)</text>
+    <text x="560" y="381">11  入口 (ドアベル付き)</text>
+    <text x="560" y="405">12  待合ソファ・ローテーブル</text>
+    <text x="560" y="460" fill="#a99fbd">店全体で約 6m × 6m</text>
+    <text x="560" y="480" fill="#a99fbd">上側が建物の奥</text>
+  </g>
+</svg>

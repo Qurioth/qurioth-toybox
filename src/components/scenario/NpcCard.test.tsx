@@ -109,6 +109,66 @@ describe("NpcCard", () => {
     expect(image).not.toHaveClass("max-w-none");
   });
 
+  it("技能の下に呪文とアーティファクトの欄を出し、出典のないものを本シナリオ独自と示す", async () => {
+    const user = userEvent.setup();
+    render(
+      <NpcCard
+        npc={{
+          name: "占い師",
+          spells: [
+            {
+              name: "精神的従属(特化型)",
+              details: [
+                { label: "コスト", value: "3マジック・ポイント" },
+                { label: "効果", value: "通常の《精神的従属》に準ずる。" },
+              ],
+            },
+            { name: "夢を送る", source: "基本ルールブック" },
+          ],
+          spellNote: "キーパーが選ぶその他の呪文。",
+          artifacts: [{ name: "水晶の数珠" }],
+        }}
+      />,
+    );
+    const card = screen.getByRole("article", { name: "占い師" });
+    const spells = within(card)
+      .getByRole("heading", { name: "呪文" })
+      .closest("section") as HTMLElement;
+    const [original, rulebook] = within(spells).getAllByRole("listitem");
+
+    expect(
+      within(original).getByText("《精神的従属(特化型)》"),
+    ).toHaveAttribute("data-notation", "spell");
+    expect(within(original).getByText("本シナリオ独自")).toBeInTheDocument();
+    expect(within(rulebook).getByText("基本ルールブック")).toBeInTheDocument();
+    expect(
+      within(rulebook).queryByText("本シナリオ独自"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(spells).getByText("キーパーが選ぶその他の呪文。"),
+    ).toBeInTheDocument();
+
+    // 説明は名前の行を開くと読める。説明の中の表記も強調する
+    const details = original.querySelector("details") as HTMLDetailsElement;
+    expect(details.open).toBe(false);
+    await user.click(within(original).getByText("《精神的従属(特化型)》"));
+    expect(details.open).toBe(true);
+    expect(within(original).getByText("3マジック・ポイント")).toBeVisible();
+    expect(within(original).getByText("《精神的従属》")).toHaveAttribute(
+      "data-notation",
+      "spell",
+    );
+
+    const artifacts = within(card)
+      .getByRole("heading", { name: "アーティファクト" })
+      .closest("section") as HTMLElement;
+    expect(within(artifacts).getByText("『水晶の数珠』")).toHaveAttribute(
+      "data-notation",
+      "tome",
+    );
+    expect(within(artifacts).getByText("本シナリオ独自")).toBeInTheDocument();
+  });
+
   it("能力値も立ち絵も技能もない人物では、その欄を出さない", () => {
     render(
       <NpcCard npc={{ name: "案内人" }}>
@@ -120,6 +180,10 @@ describe("NpcCard", () => {
     expect(within(card).queryByRole("img")).not.toBeInTheDocument();
     expect(within(card).queryByText("STR")).not.toBeInTheDocument();
     expect(within(card).queryByText("技能")).not.toBeInTheDocument();
+    expect(within(card).queryByText("呪文")).not.toBeInTheDocument();
+    expect(
+      within(card).queryByText("アーティファクト"),
+    ).not.toBeInTheDocument();
   });
 });
 

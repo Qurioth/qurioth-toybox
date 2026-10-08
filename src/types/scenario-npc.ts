@@ -19,6 +19,22 @@ export type NpcSkill = {
   note?: string;
 };
 
+/** 呪文・アーティファクトの説明の 1 項目。例: { label: "コスト", value: "3マジック・ポイント" } */
+export type NpcMagicDetail = { label: string; value: string };
+
+/**
+ * NPC が使う呪文、または持つアーティファクト 1 つ。
+ * `source` を書いたものは既刊に準拠したもの、書かないものは本シナリオ独自のものとして扱う
+ */
+export type NpcMagic = {
+  /** 《》『』を除いた名前。例: "夢を送る" */
+  name: string;
+  /** 準拠する既刊の書名。例: "基本ルールブック" */
+  source?: string;
+  /** 必要時間・コスト・効果など。カードでは名前の行を開くと出る */
+  details?: NpcMagicDetail[];
+};
+
 /** 立ち絵。カードには顔の辺りを丸く切り抜いたアイコンを出し、選ぶと全体を開く */
 export type NpcPortrait = {
   src: string;
@@ -42,4 +58,8 @@ export type ScenarioNpc = {
   portrait?: NpcPortrait;
   stats?: NpcStatBlock[];
   skills?: NpcSkill[];
+  spells?: NpcMagic[];
+  /** 呪文欄の末尾に添える一文。例: "キーパーが選ぶその他の呪文。" */
+  spellNote?: string;
+  artifacts?: NpcMagic[];
 };

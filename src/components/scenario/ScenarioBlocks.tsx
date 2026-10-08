@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 
 const toId = (text: string) => text.trim().replace(/\s+/g, "-");
 
-/** 読み上げ文。GM がそのまま読み上げる描写を枠で囲む(FR-022) */
+/** 描写(読み上げ文)。GM がそのまま読み上げる描写を枠で囲む(FR-022) */
 export const ReadAloud = ({ children }: { children?: ReactNode }) => (
   <aside
     data-notation="read-aloud"
-    className="not-prose my-4 rounded-lg border-2 border-amber-500/70 bg-amber-50 p-4 leading-8 text-zinc-900 shadow-sm dark:border-amber-400/60 dark:bg-amber-950/40 dark:text-slate-100 [&_p+p]:mt-3"
+    className="not-prose my-4 flow-root rounded-lg border-2 border-amber-500/70 bg-amber-50 p-4 leading-8 text-zinc-900 shadow-sm dark:border-amber-400/60 dark:bg-amber-950/40 dark:text-slate-100 [&_p+p]:mt-3"
   >
     <p className="mb-2 text-xs font-bold tracking-wide text-amber-700 dark:text-amber-300">
-      読み上げ
+      描写
     </p>
     {children}
   </aside>

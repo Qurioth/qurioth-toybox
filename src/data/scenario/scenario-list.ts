@@ -40,6 +40,22 @@ export type Scenario = ScenarioInfo & {
 const list: {
   [key: string]: Scenario;
 } = {
+  GodIsInTheTv: {
+    system: "クトゥルフ神話TRPG 7版",
+    title: "God is in the TV",
+    titleKana: "ごっどいずいんざてぃーびー",
+    players: {
+      min: 3,
+      max: 5,
+    },
+    playTimeHours: {
+      min: 5,
+      max: 6,
+    },
+    summary:
+      "1月の現代の日本。探索者たちは路上で倒れていた占い師の喜瀬 明日菜を介抱することから始まる。",
+    page: () => import("@/scenarios/god-is-in-the-tv"),
+  },
   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
     system: "クトゥルフ神話TRPG 7版",
     title: "硝子檻の虜囚は星海にて夢を見る",
