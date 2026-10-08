@@ -70,9 +70,10 @@ const list: {
     },
     summary:
       "現代日本。バーチャルYouTuber 天戌 ノアの配信を見ていると、彼女が探索者たちの名前を呼ぶ。",
-    markdown: readScenarioMarkdown(
-      "the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars.md",
-    ),
+    page: () =>
+      import(
+        "@/scenarios/the-prisoner-in-the-glass-cage-dreams-in-the-sea-of-stars"
+      ),
   },
   BubbleOnWetHands: {
     system: "クトゥルフ神話TRPG 7版",

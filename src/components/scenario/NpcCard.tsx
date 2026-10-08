@@ -232,7 +232,8 @@ const NpcCard = ({
       toLabel={(name) => `『${name}』`}
     />
     {children && (
-      <div className="prose dark:prose-dark max-w-none border-t border-zinc-200 pt-3 dark:border-slate-700">
+      // 外枠の not-prose で prose の余白・箇条書きの記号が消えるため、ここで付け直す
+      <div className="prose dark:prose-dark max-w-none border-t border-zinc-200 pt-3 dark:border-slate-700 [&>*+*]:mt-3 [&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6">
         {children}
       </div>
     )}
