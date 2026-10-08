@@ -7,8 +7,9 @@ import { cn } from "@/utils/class-utils";
 
 /**
  * 選ぶと画像をダイアログで開く画像(FR-025 / SC-008)。
- * 既定は原寸で開き、ダイアログの中でスクロールして細部を読める(地図など)。
- * fit を付けると、画面に収まる大きさで開き、ダイアログの幅を画像に揃える(立ち絵など)
+ * ダイアログの大きさは画像に揃える。
+ * 既定は原寸で開き、画面に収まらなければダイアログの中でスクロールして細部を読める(地図など)。
+ * fit を付けると、画面に収まる大きさに縮めて開く(立ち絵など)
  */
 const ZoomableImage = ({
   src,
@@ -47,25 +48,10 @@ const ZoomableImage = ({
 
       <Dialog open={open} onClose={setOpen} className="relative z-50">
         <div className="fixed inset-0 bg-black/70" aria-hidden="true" />
-        <div
-          className={cn(
-            "fixed inset-2 sm:inset-8",
-            fit && "flex items-center justify-center",
-          )}
-        >
-          <DialogPanel
-            className={cn(
-              "flex flex-col overflow-hidden rounded-lg bg-zinc-100 dark:bg-slate-900",
-              fit ? "max-h-full max-w-full" : "size-full",
-            )}
-          >
-            {/* fit のときは見出しの長さでダイアログが画像より広がらないよう、幅を画像に従わせる */}
-            <div
-              className={cn(
-                "flex h-11 shrink-0 items-center justify-between gap-2 border-b border-zinc-300 px-2 dark:border-slate-700",
-                fit && "w-0 min-w-full",
-              )}
-            >
+        <div className="fixed inset-2 flex items-center justify-center sm:inset-8">
+          <DialogPanel className="flex max-h-full max-w-full flex-col overflow-hidden rounded-lg bg-zinc-100 dark:bg-slate-900">
+            {/* 見出しの長さでダイアログが画像より広がらないよう、幅を画像に従わせる */}
+            <div className="flex h-11 w-0 min-w-full shrink-0 items-center justify-between gap-2 border-b border-zinc-300 px-2 dark:border-slate-700">
               <DialogTitle className="truncate text-sm font-bold text-zinc-900 dark:text-white">
                 {alt}
               </DialogTitle>
@@ -87,7 +73,8 @@ const ZoomableImage = ({
                 className="block h-auto max-h-[calc(100dvh-3.75rem)] w-auto max-w-[calc(100vw-1rem)] sm:max-h-[calc(100dvh-6.75rem)] sm:max-w-[calc(100vw-4rem)]"
               />
             ) : (
-              <div className="min-h-0 flex-1 overflow-auto">
+              // 画面に収まる画像はその大きさのダイアログで、収まらない画像は画面いっぱいでスクロールする
+              <div className="min-h-0 overflow-auto">
                 {/* biome-ignore lint/performance/noImgElement: shown at natural size for zooming */}
                 <img src={src} alt={alt} className="max-w-none" />
               </div>

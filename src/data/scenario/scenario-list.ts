@@ -52,8 +52,9 @@ const list: {
       min: 5,
       max: 6,
     },
-    summary: "現代日本。路上で倒れていた占い師 喜瀬 明日菜を介抱する。",
-    markdown: readScenarioMarkdown("god-is-in-the-tv.md"),
+    summary:
+      "1月の現代の日本。探索者たちは路上で倒れていた占い師の喜瀬 明日菜を介抱することから始まる。",
+    page: () => import("@/scenarios/god-is-in-the-tv"),
   },
   ThePrisonerInTheGlassCageDreamsInTheSeaOfStars: {
     system: "クトゥルフ神話TRPG 7版",

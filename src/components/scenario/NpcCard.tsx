@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
-import { ZoomIn } from "lucide-react";
-import type { NpcPortrait, ScenarioNpc } from "@/types/scenario-npc";
+import { ChevronRight, ZoomIn } from "lucide-react";
+import type { NpcMagic, NpcPortrait, ScenarioNpc } from "@/types/scenario-npc";
 import CopyKomaButton from "./CopyKomaButton";
+import { decorate } from "./Notation";
+import { cn } from "@/utils/class-utils";
 import StatGrid from "./StatGrid";
 import ZoomableImage from "./ZoomableImage";
 
@@ -57,6 +59,110 @@ const PortraitIcon = ({
     </ZoomableImage>
   );
 };
+
+/** 出典のバッジ。既刊の書名、なければ本シナリオ独自であることを示す */
+const SourceBadge = ({ source }: { source?: string }) =>
+  source ? (
+    <span className="whitespace-nowrap rounded border border-[--scenario-border] px-1.5 text-xs text-zinc-500 dark:border-[--scenario-border-dark] dark:text-slate-400">
+      {source}
+    </span>
+  ) : (
+    <span className="whitespace-nowrap rounded bg-[--scenario-accent] px-1.5 text-xs font-bold text-white dark:bg-[--scenario-accent-dark] dark:text-zinc-900">
+      本シナリオ独自
+    </span>
+  );
+
+/** 呪文・アーティファクト 1 つ。説明があるものは名前の行を開くと出す */
+const hasDetails = (item: NpcMagic) =>
+  item.details !== undefined && item.details.length > 0;
+
+const MagicItem = ({
+  item,
+  label,
+  indent,
+}: {
+  item: NpcMagic;
+  label: string;
+  /** 同じ欄に開閉できる行があるとき、矢印の幅だけ字下げして名前の位置を揃える */
+  indent: boolean;
+}) => {
+  const heading = (
+    <>
+      <span>{decorate(label)}</span>
+      <SourceBadge source={item.source} />
+    </>
+  );
+  if (!item.details || !hasDetails(item)) {
+    return (
+      <li
+        className={cn("flex flex-wrap items-center gap-x-2", indent && "pl-6")}
+      >
+        {heading}
+      </li>
+    );
+  }
+  return (
+    <li>
+      <details className="group">
+        <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-2 [&::-webkit-details-marker]:hidden">
+          <ChevronRight
+            className="size-4 shrink-0 text-zinc-500 transition-transform group-open:rotate-90 motion-reduce:transition-none dark:text-slate-400"
+            aria-hidden="true"
+          />
+          {heading}
+        </summary>
+        <dl className="ml-6 mt-1 grid grid-cols-[max-content_1fr] gap-x-3 gap-y-0.5">
+          {item.details.map((detail) => (
+            <div key={detail.label} className="contents">
+              <dt className="text-zinc-500 dark:text-slate-400">
+                {detail.label}
+              </dt>
+              <dd className="min-w-0">{decorate(detail.value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </details>
+    </li>
+  );
+};
+
+/** 呪文欄・アーティファクト欄 */
+const MagicSection = ({
+  title,
+  items,
+  toLabel,
+  note,
+}: {
+  title: string;
+  items?: NpcMagic[];
+  toLabel: (name: string) => string;
+  note?: string;
+}) =>
+  (items && items.length > 0) || note ? (
+    <section className="border-t border-zinc-200 pt-3 dark:border-slate-700">
+      <h4 className="mb-1 font-bold text-zinc-900 dark:text-white">{title}</h4>
+      <ul className="flex flex-col gap-1 text-sm text-zinc-800 dark:text-slate-100">
+        {items?.map((item) => (
+          <MagicItem
+            key={item.name}
+            item={item}
+            label={toLabel(item.name)}
+            indent={items.some(hasDetails)}
+          />
+        ))}
+      </ul>
+      {note && (
+        <p
+          className={cn(
+            "mt-1 text-sm text-zinc-500 dark:text-slate-400",
+            items?.some(hasDetails) && "pl-6",
+          )}
+        >
+          {note}
+        </p>
+      )}
+    </section>
+  ) : null;
 
 /**
  * NPC・神話生物のカード(specs/005-scenario/contracts/mdx-page.md 3 章)。
@@ -114,6 +220,17 @@ const NpcCard = ({
         </ul>
       </section>
     )}
+    <MagicSection
+      title="呪文"
+      items={npc.spells}
+      toLabel={(name) => `《${name}》`}
+      note={npc.spellNote}
+    />
+    <MagicSection
+      title="アーティファクト"
+      items={npc.artifacts}
+      toLabel={(name) => `『${name}』`}
+    />
     {children && (
       <div className="prose dark:prose-dark max-w-none border-t border-zinc-200 pt-3 dark:border-slate-700">
         {children}

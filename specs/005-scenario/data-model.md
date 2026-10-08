@@ -57,6 +57,15 @@ type ScenarioNpc = {
   };
   stats?: NpcStatBlock[];       // 0 個以上。複数の姿はここで分ける
   skills?: NpcSkill[];          // チャットパレットとカードの技能欄に使う
+  spells?: NpcMagic[];          // カードの呪文欄に使う
+  spellNote?: string;           // 呪文欄の末尾の一文。例: "キーパーが選ぶその他の呪文。"
+  artifacts?: NpcMagic[];       // カードのアーティファクト欄に使う
+};
+
+type NpcMagic = {
+  name: string;                 // 《》『』を除いた名前。例: "夢を送る"
+  source?: string;              // 準拠する既刊の書名。省略すると「本シナリオ独自」と表示する
+  details?: { label: string; value: string }[]; // 必要時間・コスト・効果など。名前の行を開くと出る
 };
 
 type NpcStatBlock = {
@@ -81,7 +90,7 @@ type NpcSkill = {
 - `skills[].value` は 0〜999 の整数。
 - 能力値を持たない存在は `abilities: []` で、`derived` から書き始める(耐久力のみの存在など)。
 
-**MDX 側の書き方**: カードの見た目のうち、データにしない記述(セリフ例・呪文・装甲・正気度喪失・
+**MDX 側の書き方**: カードの見た目のうち、データにしない記述(セリフ例・装甲・正気度喪失・
 行動パターン・備考など)は `<NpcCard>` の子要素として MDX で書く。
 
 ```mdx
