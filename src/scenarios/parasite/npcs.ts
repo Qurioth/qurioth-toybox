@@ -50,7 +50,7 @@ export const npcs = {
     kana: "ニイ ユェフ",
     portrait: {
       src: "/images/parasite/yuefu.webp",
-      face: { x: 54, y: 10, width: 50 },
+      face: { x: 49, y: 11, width: 30 },
     },
     skills: [
       {
@@ -156,7 +156,7 @@ export const npcs = {
     kana: "イェ メイユェ",
     portrait: {
       src: "/images/parasite/meiyue.webp",
-      face: { x: 48, y: 10, width: 52 },
+      face: { x: 48, y: 12, width: 30 },
     },
   },
   npc4: {
