@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import type { Investigator as Investigator6th } from "@/types/Charaeno6th";
 import type { Investigator as Investigator7th } from "@/types/Charaeno7th";
-import { toCardDataFrom6th, toCardDataFrom7th } from "./character-card-utils";
+import type { IacharaInvestigator } from "@/utils/iachara-utils";
+import {
+  toCardDataFrom6th,
+  toCardDataFrom7th,
+  toCardDataFromIachara7th,
+} from "./character-card-utils";
 
 const investigator7th = (
   override: Partial<Investigator7th> = {},
@@ -456,5 +461,70 @@ describe("toCardDataFrom6th", () => {
 
     expect(cardData.name).toBe("間 紅葉");
     expect(cardData.portraitURL).toBe("https://example.com/a.png");
+  });
+});
+
+describe("toCardDataFromIachara7th", () => {
+  const iacharaInvestigator: IacharaInvestigator = {
+    name: "テスト太郎",
+    portraitURL: "https://example.com/a.png",
+    characteristics: {
+      str: 40,
+      con: 50,
+      pow: 60,
+      dex: 55,
+      app: 85,
+      siz: 70,
+      int: 75,
+      edu: 120,
+    },
+    attribute: { hp: 12, mp: 10, san: 64, luck: 50 },
+    skills: [
+      { name: "目星", value: 73, edited: true },
+      { name: "母国語", value: 75, edited: false },
+    ],
+    backstory: [
+      { heading: "容姿の描写", text: "小柄" },
+      { heading: "重要な人々", text: "" },
+      { heading: "イデオロギー/信念", text: "一つ目\n\n二つ目" },
+    ],
+    note: "メモ本文",
+  };
+
+  it("7版と同じ尺度で能力値を割合にし、HP・MP・SAN・幸運を並べる", () => {
+    const cardData = toCardDataFromIachara7th(iacharaInvestigator);
+
+    expect(cardData.characteristics.at(0)).toEqual({
+      subject: "STR",
+      value: 40,
+    });
+    expect(cardData.characteristics.at(-1)).toEqual({
+      subject: "EDU",
+      value: 100,
+    });
+    expect(cardData.attributes).toEqual([
+      { label: "HP", value: 12 },
+      { label: "MP", value: 10 },
+      { label: "SAN", value: 64 },
+      { label: "幸運", value: 50 },
+    ]);
+  });
+
+  it("編集された技能だけを残す", () => {
+    expect(toCardDataFromIachara7th(iacharaInvestigator).skills).toEqual([
+      { name: "目星", value: 73 },
+    ]);
+  });
+
+  it("バックストーリーは書かれた見出しのまま、空の項目を落としてメモを続ける", () => {
+    expect(toCardDataFromIachara7th(iacharaInvestigator).sections).toEqual([
+      { heading: "容姿の描写", kind: "list", blocks: ["小柄"] },
+      {
+        heading: "イデオロギー/信念",
+        kind: "list",
+        blocks: ["一つ目", "二つ目"],
+      },
+      { heading: "メモ", kind: "text", blocks: ["メモ本文"] },
+    ]);
   });
 });

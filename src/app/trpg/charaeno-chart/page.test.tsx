@@ -5,6 +5,8 @@ import {
   CHARACTER_SHEET_FETCH_FAILED,
   CHARACTER_SHEET_UNEXPECTED_FORMAT,
   CHARACTER_SHEET_URL_INVALID,
+  IACHARA_FILE_NOT_SELECTED,
+  IACHARA_TEXT_UNEXPECTED_FORMAT,
 } from "@/constants/message";
 import { DarkModeProvider } from "@/contexts/dark-mode-context";
 import CharaenoChartPage from "./page";
@@ -258,5 +260,124 @@ describe("CharaenoChartPage", () => {
       expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     });
     consoleError.mockRestore();
+  });
+
+  describe("いあきゃらのテキストファイル", () => {
+    const iacharaText = `いあきゃらテキスト 7版 v2.0.1
+【基本情報】
+名前: 文字太郎 (もじたろう)
+
+【能力値】
+        現在値  能力値  増加分  一時的
+STR         65      65       0       0
+CON         50      50       0       0
+POW         60      60       0       0
+DEX         40      40       0       0
+APP         55      55       0       0
+SIZ         70      70       0       0
+INT         80      80       0       0
+EDU         80      80       0       0
+HP          12      12       0       0
+MP          13      13       0       0
+正気度      60      60       0       0
+幸運        85      85       0       0
+
+正気度 64 / 88
+
+【技能値】
+技能名                  合計  初期値   職業P   興味P  成長分  その他
+目星                      73      25      40       0       8       0
+
+【メモ】
+いあきゃらのメモ
+`;
+
+    const switchToFile = () =>
+      userEvent.setup().click(screen.getByRole("button", { name: "File" }));
+
+    const uploadText = async (text: string) => {
+      const file = new File([text], "character.txt", { type: "text/plain" });
+      await userEvent
+        .setup()
+        .upload(screen.getByLabelText("Iachara Text File (7th)"), file);
+    };
+
+    it("最初はURLの入力欄だけを出し、切り替えるとファイルの選択欄に入れ替わる", async () => {
+      renderPage();
+
+      expect(screen.getByLabelText("Character Sheet URL")).toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Iachara Text File (7th)"),
+      ).not.toBeInTheDocument();
+
+      await switchToFile();
+
+      expect(
+        screen.getByLabelText("Iachara Text File (7th)"),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Character Sheet URL"),
+      ).not.toBeInTheDocument();
+
+      await userEvent
+        .setup()
+        .click(screen.getByRole("button", { name: "URL" }));
+
+      expect(screen.getByLabelText("Character Sheet URL")).toBeInTheDocument();
+    });
+
+    it("ファイルを選ぶと、URLを入力せずにカードを表示する", async () => {
+      const fetchMock = stubFetch(valid7thSummary);
+
+      renderPage();
+      await switchToFile();
+      await uploadText(iacharaText);
+
+      expect(await screen.findAllByText("文字太郎")).not.toHaveLength(0);
+      expect(screen.getByText("64")).toBeInTheDocument();
+      expect(screen.getByText("85")).toBeInTheDocument();
+      expect(screen.getByText("目星")).toBeInTheDocument();
+      expect(screen.getByText("いあきゃらのメモ")).toBeInTheDocument();
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("ファイルを選ばずに Submit するとファイルを選ぶよう促す", async () => {
+      renderPage();
+      await switchToFile();
+      await userEvent
+        .setup()
+        .click(screen.getByRole("button", { name: "Submit" }));
+
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        IACHARA_FILE_NOT_SELECTED,
+      );
+    });
+
+    it("切り替えても表示中のカードは残る", async () => {
+      renderPage();
+      await switchToFile();
+      await uploadText(iacharaText);
+      await screen.findAllByText("文字太郎");
+
+      await userEvent
+        .setup()
+        .click(screen.getByRole("button", { name: "URL" }));
+
+      expect(screen.getAllByText("文字太郎")).not.toHaveLength(0);
+    });
+
+    it("いあきゃらの7版のテキストでなければエラーを表示し、カードを消す", async () => {
+      renderPage();
+      await switchToFile();
+      await uploadText(iacharaText);
+      await screen.findAllByText("文字太郎");
+
+      await uploadText("ただのテキスト");
+
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        IACHARA_TEXT_UNEXPECTED_FORMAT,
+      );
+      expect(screen.queryByText("文字太郎")).not.toBeInTheDocument();
+    });
   });
 });

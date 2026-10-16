@@ -6,6 +6,9 @@ export const CHARACTER_SHEET_FETCH_FAILED =
   "キャラクターシートを取得できませんでした。URLを確認して、時間をおいて試してください。";
 export const CHARACTER_SHEET_UNEXPECTED_FORMAT =
   "取得したキャラクターシートの形式が想定と異なります。";
+export const IACHARA_FILE_NOT_SELECTED = "ファイルを選択してください。";
+export const IACHARA_TEXT_UNEXPECTED_FORMAT =
+  "いあきゃらの7版のテキストとして読み込めませんでした。テキスト出力したファイルを選んでください。";
 export const TAB_NAME = "タブ";
 export const ALL_TABS = "すべて";
 export const GROWTH_CHECK = "成長チェック";

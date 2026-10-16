@@ -6,6 +6,7 @@ import type {
   CharacteristicPoint,
   SkillRow,
 } from "@/types/CharacterCard";
+import type { IacharaInvestigator } from "@/utils/iachara-utils";
 
 const CHARACTERISTICS_KEYS = [
   "str",
@@ -179,4 +180,38 @@ export const toCardDataFrom6th = (
     },
     { heading: "メモ", text: investigator.note },
   ]),
+});
+
+/**
+ * いあきゃらの7版のテキストをカードの描画用データへ変換する。
+ *
+ * 表面・裏面に載せる項目は Charaeno の7版と揃える。バックストーリーの見出しは、
+ * いあきゃらの表記(「イデオロギー/信念」など)のまま出す。
+ */
+export const toCardDataFromIachara7th = (
+  investigator: IacharaInvestigator,
+): CharacterCardData => ({
+  name: investigator.name,
+  portraitURL: investigator.portraitURL,
+  characteristics: toCharacteristicPoints(
+    investigator.characteristics,
+    CAPS_7TH,
+  ),
+  attributes: [
+    { label: "HP", value: investigator.attribute.hp },
+    { label: "MP", value: investigator.attribute.mp },
+    { label: "SAN", value: investigator.attribute.san },
+    { label: "幸運", value: investigator.attribute.luck },
+  ],
+  skills: toSkillRows(investigator.skills),
+  sections: [
+    ...investigator.backstory
+      .map((entry) => ({
+        heading: entry.heading,
+        kind: "list" as const,
+        blocks: toParagraphs(entry.text),
+      }))
+      .filter((section) => section.blocks.length > 0),
+    ...toTextSections([{ heading: "メモ", text: investigator.note }]),
+  ],
 });

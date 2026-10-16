@@ -1,13 +1,20 @@
+import { cn } from "@/utils/class-utils";
+
 const FileInput = (props: {
   label: string;
   readFile: (file?: File) => Promise<void>;
+  /** 見出しを画面には出さず、支援技術向けにだけ残す(隣の入力欄と高さを揃えたいとき) */
+  hideLabel?: boolean;
 }) => {
-  const { label, readFile } = props;
+  const { label, readFile, hideLabel = false } = props;
 
   return (
     <div className="w-full">
       <label
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className={cn(
+          "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+          hideLabel && "sr-only",
+        )}
         htmlFor="file_input"
       >
         {label}
