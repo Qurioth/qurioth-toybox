@@ -25,6 +25,31 @@ export type ReplayVideo = ReplayMedia & {
 
 export const replayVideos: ReplayVideo[] = [
   {
+    playlistId: "PLMHYT6cZ46Wk",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "ヒトナリ・シティ",
+    characters: [
+      { characterName: "風島 蘭", playerName: "つばき" },
+      { characterName: "宝居 三喜", playerName: "小鳥 遊" },
+      { characterName: "写野 千映", playerName: "Qurioth" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-10-17",
+  },
+  {
+    videoId: "t0fjayRdTik",
+    trpgSystemName: "クトゥルフ神話TRPG 7版",
+    scenarioName: "解なくおこる",
+    characters: [
+      { characterName: "富嶽 雷理", playerName: "Qurioth" },
+      { characterName: "正力 清良", playerName: "つばき" },
+      { characterName: "小烏 福音", playerName: "小鳥 遊" },
+      { characterName: "ゆめぴりか こめお", playerName: "ちよこ" },
+    ],
+    gmName: "リアン",
+    playedAt: "2026-10-17",
+  },
+  {
     videoId: "5rW4c-ViDAY",
     trpgSystemName: "クトゥルフ神話TRPG 7版",
     scenarioName: "硝子檻の虜囚は星海にて夢を見る",
