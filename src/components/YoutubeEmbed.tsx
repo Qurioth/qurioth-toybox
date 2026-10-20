@@ -16,6 +16,7 @@ const YouTubeEmbed = ({
             title="YouTube video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            loading="lazy"
           />
         </div>
       )}
@@ -29,6 +30,7 @@ const YouTubeEmbed = ({
             title="YouTube playlist"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            loading="lazy"
           />
         </div>
       )}
