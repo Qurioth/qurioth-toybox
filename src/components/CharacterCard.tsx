@@ -50,18 +50,19 @@ const CharacterCard = (props: { data: CharacterCardData }) => {
     </div>
   );
 
-  const renderPortrait = (heightClass: string) => (
-    <div className="w-auto grid grid-cols-1 justify-items-center content-center">
+  // 立ち絵は縦横比がまちまちなので、上端(顔のある側)を基準に正方形へ切り抜いて表示する
+  const renderPortrait = (sizeClass: string) => (
+    <div className="w-full grid grid-cols-1 justify-items-center content-center">
       {data.portraitURL ? (
         // biome-ignore lint/performance/noImgElement: external portrait URL, domain unknown at build time
         <img
-          className={`object-contain ${heightClass} max-w-full animate-in fade-in duration-1000`}
+          className={`aspect-square w-full ${sizeClass} object-cover object-top animate-in fade-in duration-1000`}
           src={data.portraitURL || "/image/human_icon.png"}
           alt="portrait"
         />
       ) : (
         <Image
-          className={`object-contain ${heightClass} max-w-full animate-in fade-in duration-1000`}
+          className={`aspect-square w-full ${sizeClass} object-cover object-top animate-in fade-in duration-1000`}
           src={humanIcon}
           alt="portrait"
           width={500}
@@ -231,11 +232,13 @@ const CharacterCard = (props: { data: CharacterCardData }) => {
           <div
             className={cn(
               "flex min-h-[320px] items-end justify-center px-2",
-              "md:col-start-2 md:row-start-1 md:row-span-2 md:min-h-0 md:items-center md:px-0",
+              // md以上では右に余白を取る。立ち絵は上下中央に置かれるので、縮んだ分だけ
+              // 下端が上がらないよう上にも同じ余白を足して、下の余白を変えずに保つ
+              "md:col-start-2 md:row-start-1 md:row-span-2 md:min-h-0 md:items-center md:pl-0 md:pr-1 md:pt-1",
               hiddenOnBack,
             )}
           >
-            {renderPortrait("h-[320px] md:h-[440px]")}
+            {renderPortrait("max-w-[320px] md:max-w-[440px]")}
           </div>
 
           <div
