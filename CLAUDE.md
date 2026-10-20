@@ -70,7 +70,8 @@ src/
 
 - `ccfolia-grep` — CCFOLIA のダイスログを解析し、キャラクター毎の成功/失敗(クトゥルフ神話TRPGは
   クリティカル/ファンブルも)を集計する。
-- `charaeno-chart` — Charaeno に保存したキャラクターシートのステータスをレーダーチャート表示。
+- `charaeno-chart` — Charaeno に保存したキャラクターシート、またはいあきゃらでファイル出力したテキストの
+  ステータスをレーダーチャート表示。
 - `connection-table` — 「ふしぎもののけRPG ゆうやけこやけ」の人間関係(コネクション)管理表。
 - `scenario` — 自作シナリオの一覧・詳細(`src/data/scenario` の Markdown を描画)。
 - `replay` — YouTube のリプレイ動画/配信のまとめ。

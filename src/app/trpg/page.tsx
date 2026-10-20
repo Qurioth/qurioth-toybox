@@ -22,10 +22,10 @@ const toolCards = [
     icon: Search,
   },
   {
-    title: "Charaeno Chart Card",
+    title: "CoC Character Chart Card",
     href: "/trpg/charaeno-chart",
     description:
-      "Charaeno に保管されたキャラクターのステータスをレーダーチャートで表示します。",
+      "Charaeno に保管されたキャラクター、またはいあきゃらからファイル出力したキャラクターのステータスをレーダーチャートで表示します。",
     meta: "クトゥルフ神話TRPG",
     icon: ChartNoAxesCombined,
   },

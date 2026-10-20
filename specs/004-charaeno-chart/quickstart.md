@@ -111,7 +111,7 @@ Network で、取得先が `/api/v1/6th/{id}/summary` になっていること(`
 
 `http://localhost:3000/trpg` を開く。
 
-**期待**: Charaeno Chart Card の対応システムが「クトゥルフ神話TRPG」になっている
+**期待**: CoC Character Chart Card の対応システムが「クトゥルフ神話TRPG」になっている
 (「7版」が付いていない)。この画面の仕様は [002-trpg](../002-trpg/spec.md) 側にある。
 
 ---
