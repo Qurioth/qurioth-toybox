@@ -111,7 +111,7 @@ export default function PhotographPage() {
           // biome-ignore lint/suspicious/noArrayIndexKey: fixed-count layout columns, order never changes
           <div className="grid gap-4" key={colIdx}>
             {col.map((img) => (
-              <div key={img.name}>
+              <div key={img.id}>
                 <ImageWithSkeleton
                   className="h-auto max-w-full rounded-lg"
                   src={`https://www.dropbox.com/scl/fi/${img.id}/${img.name}?rlkey=${img.rlkey}&st=${img.st}&raw=1`}
