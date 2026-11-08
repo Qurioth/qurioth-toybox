@@ -33,3 +33,6 @@ next-env.d.ts
 
 # spec-kit (作業中の spec を指すローカル状態)
 /.specify/feature.json
+
+# 写真のリスト(元の写真のフォルダ名を公開しないため。ADR-0017)
+/src/data/photograph/albums/*.txt

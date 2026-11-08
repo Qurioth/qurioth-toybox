@@ -19,6 +19,7 @@ pnpm format   # Biome フォーマッタで整形(検査のみは pnpm format:ch
 pnpm typecheck # TypeScript の型チェック(tsc --noEmit)
 pnpm test     # Vitest(テスティングトロフィー戦略。ADR-0008参照)
 pnpm scenario:draft <シナリオID>  # 既存のシナリオ本文から専用ページの下書きを作る(ADR-0016)
+pnpm photo:sync <slug> [--dry-run] [--prune]  # 写真のリストを圧縮して R2 に上げ、アルバムデータを作る(ADR-0017)
 ```
 
 パッケージマネージャは pnpm(`pnpm-lock.yaml` を使用、Corepack 経由で `package.json` の
@@ -44,6 +45,10 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
 - MDX: `@next/mdx`(シナリオの専用ページ `src/scenarios/<slug>/content.mdx`。設定は `next.config.mjs`、
   要素と部品の対応は `src/mdx-components.tsx`)
 - フローチャート: `mermaid`(シナリオの専用ページで、図のあるページでだけクライアントで読み込む)
+- 写真: Cloudflare R2 に置き、`workers/photo/` の Worker で `*.workers.dev` から配信する。
+  取り込みは `scripts/photo-sync.ts`(`sharp` で圧縮、`aws4fetch` で R2 に送信)。手元の PC でだけ
+  動かし、ビルドと CI は生成済みのアルバムデータだけを読む
+  ([ADR-0017](docs/adr/0017-store-photos-in-r2.md))。
 - パスエイリアス: `@/*` → `./src/*`(`tsconfig.json`)
 
 ## ディレクトリ構成
@@ -52,18 +57,22 @@ CI もそこから読み取る([ADR-0010](docs/adr/0010-adopt-mise-for-node-vers
 src/
   app/            App Router のページ・ルート
     trpg/         TRPG向けツール群(下記参照)
-    other/        写真ページなどその他コンテンツ
+    other/        写真(アルバム単位)・動画などその他コンテンツ
     blurry-blob-demo/  UI実験ページ
   components/     再利用UIコンポーネント(animata/, forms/, recharts/, scenario/ にサブ分類。
                   scenario/ はシナリオの専用ページの部品集)
   data/           静的データ(trpg/photograph/scenario/youtube 等ドメインごとにサブフォルダ)
                   scenario/ には本文Markdownの記述規約(README.md)と雛形(template.md)がある
+                  photograph/albums/ の json と index.ts は pnpm photo:sync が生成する
+                  (写真のリスト *.txt は git 管理外。手順と雛形は photograph/README.md・album-template.txt)
   scenarios/      シナリオ1本ごとの専用ページ(<slug>/index.tsx・content.mdx・npcs.ts)
   contexts/       React Context
   hooks/          複数の画面から使う汎用フック(`use-<用途>.ts`)
   constants/      定数(ドメイン値は dicelog.ts、UI文言は message.ts)
   utils/          純粋関数のユーティリティ(`<用途>-utils.ts` で命名)
   types/, image/
+scripts/          手元で動かすスクリプト(scenario:draft、photo:sync)
+workers/photo/    写真を R2 から配信する Cloudflare Worker(Next.js とは別にデプロイする)
 ```
 
 ### `src/app/trpg` 配下の主なツール
