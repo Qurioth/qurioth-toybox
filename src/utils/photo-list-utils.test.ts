@@ -109,6 +109,59 @@ describe("parsePhotoList", () => {
   });
 });
 
+describe("parsePhotoList の表紙(# cover:)", () => {
+  const photos = ["2025年\\x\\a.JPG", "2025年\\x\\b.JPG", "2025年\\y\\b.JPG"];
+
+  it("書かなければ表紙の指定は無い", () => {
+    expect(parsePhotoList(list(...photos), ROOT).coverLine).toBeUndefined();
+  });
+
+  it("ファイル名だけで、大文字小文字を問わずに当てる", () => {
+    const parsed = parsePhotoList(list("# cover: a.jpg", ...photos), ROOT);
+
+    expect(parsed.coverLine).toBe(4);
+    expect(parsed.errors).toEqual([]);
+  });
+
+  it("フォルダから書けば、同じファイル名の写真を区別できる", () => {
+    const parsed = parsePhotoList(
+      list(...photos, "# cover: 2025年/y/b.JPG"),
+      ROOT,
+    );
+
+    expect(parsed.coverLine).toBe(5);
+  });
+
+  it('絶対パスや " で囲んだパスでも当てる', () => {
+    const parsed = parsePhotoList(
+      list('# cover: "F:\\Pictures\\2025年\\x\\b.JPG"', ...photos),
+      ROOT,
+    );
+
+    expect(parsed.coverLine).toBe(5);
+  });
+
+  it("リストに無い写真、またはファイル名で複数に当たる写真は、cover の行のエラーにする", () => {
+    expect(
+      parsePhotoList(list("# cover: z.JPG", ...photos), ROOT).errors,
+    ).toEqual([
+      {
+        line: 3,
+        message: "表紙(# cover:)に指定した写真がリストにありません",
+      },
+    ]);
+    expect(
+      parsePhotoList(list("# cover: b.JPG", ...photos), ROOT).errors,
+    ).toEqual([
+      {
+        line: 3,
+        message:
+          "表紙(# cover:)に当たる写真が複数あります。フォルダから書いてください",
+      },
+    ]);
+  });
+});
+
 describe("isValidSlug", () => {
   it("英小文字・数字・- だけを受け付ける", () => {
     expect(isValidSlug("2025-04-nemophila")).toBe(true);

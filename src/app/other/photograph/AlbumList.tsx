@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Album } from "@/data/photograph/album-types";
-import { photoUrl, sortAlbums } from "@/utils/photograph-utils";
+import { albumCover, photoUrl, sortAlbums } from "@/utils/photograph-utils";
 
 /** 撮影日の新しい順にアルバムのカードを並べる。1つも無いときはその旨を示す */
 const AlbumList = ({ albums }: { albums: Record<string, Album> }) => {
@@ -16,8 +16,9 @@ const AlbumList = ({ albums }: { albums: Record<string, Album> }) => {
 
   return (
     <div className="mx-auto grid w-full max-w-[66rem] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {sortedAlbums.map(({ slug, title, date, photos }) => {
-        const cover = photos[0];
+      {sortedAlbums.map((album) => {
+        const { slug, title, date, photos } = album;
+        const cover = albumCover(album);
 
         return (
           <Link

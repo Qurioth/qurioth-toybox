@@ -89,6 +89,8 @@ type Plan = {
   slug: string;
   title: string;
   date: string;
+  /** 表紙にする写真の key。指定がなければ undefined */
+  cover?: string;
   sources: Source[];
   existing: Album | null;
   rewrittenText: string | null;
@@ -148,6 +150,8 @@ const inspect = async (slug: string): Promise<Plan | null> => {
   const sources: Source[] = [];
   const similarities: SimilarityInput[] = [];
   const keyLines = new Map<string, number>();
+  /** 行番号ごとの写真の key と元のファイル(同じ写真で無視した行も含む。表紙を探すため) */
+  const lineSources = new Map<number, { key: string; file: string }>();
 
   for (const entry of parsed.entries) {
     const original = path.join(sourceRoot, entry.path);
@@ -175,6 +179,7 @@ const inspect = async (slug: string): Promise<Plan | null> => {
 
     const buffer = fs.readFileSync(file);
     const key = sha256Key(buffer);
+    lineSources.set(entry.line, { key, file });
     const firstLine = keyLines.get(key);
     if (firstLine !== undefined) {
       notices.push(
@@ -204,6 +209,13 @@ const inspect = async (slug: string): Promise<Plan | null> => {
   console.log(
     `  写真: ${sources.length}枚(新規 ${added}枚・既存 ${sources.length - added}枚)`,
   );
+  const cover =
+    parsed.coverLine === undefined
+      ? undefined
+      : lineSources.get(parsed.coverLine);
+  if (cover) {
+    console.log(`  表紙: ${path.basename(cover.file)}`);
+  }
   if (removed > 0) {
     console.log(
       `  外した写真: ${removed}枚(R2 に残っています。消すには --prune)`,
@@ -236,6 +248,7 @@ const inspect = async (slug: string): Promise<Plan | null> => {
     slug,
     title: parsed.title as string,
     date: parsed.date as string,
+    cover: cover?.key,
     sources,
     existing,
     rewrittenText: parsed.rewrittenText,
@@ -428,7 +441,12 @@ for (const plan of plans) {
     uploaded++;
   }
 
-  const album: Album = { title: plan.title, date: plan.date, photos };
+  const album: Album = {
+    title: plan.title,
+    date: plan.date,
+    ...(plan.cover && { cover: plan.cover }),
+    photos,
+  };
   const jsonPath = path.join(albumsDir, `${plan.slug}.json`);
   fs.writeFileSync(jsonPath, `${JSON.stringify(album, null, 2)}\n`);
   written.push(jsonPath);

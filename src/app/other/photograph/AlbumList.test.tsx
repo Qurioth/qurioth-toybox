@@ -51,7 +51,7 @@ describe("AlbumList", () => {
     ).toEqual(["福岡", "梅"]);
   });
 
-  it("表紙は先頭の写真の 640px 版で、大きさを持つ", () => {
+  it("表紙の指定が無ければ、先頭の写真の 640px 版を表紙にし、大きさを持つ", () => {
     render(<AlbumList albums={albums} />);
 
     const cover = within(screen.getAllByRole("link")[0]).getByRole("img");
@@ -59,6 +59,37 @@ describe("AlbumList", () => {
     expect(cover).toHaveAttribute("width", "1280");
     expect(cover).toHaveAttribute("height", "1920");
     expect(cover).toHaveAttribute("loading", "lazy");
+  });
+
+  it("表紙を指定したアルバムは、その写真を表紙にする", () => {
+    const fukuoka = albums["2026-01-fukuoka"];
+    render(
+      <AlbumList
+        albums={{
+          ...albums,
+          "2026-01-fukuoka": { ...fukuoka, cover: "cccccccccccccccc" },
+        }}
+      />,
+    );
+
+    const cover = within(screen.getAllByRole("link")[0]).getByRole("img");
+    expect(cover).toHaveAttribute("src", photoUrl("cccccccccccccccc", 640));
+    expect(cover).toHaveAttribute("height", "853");
+  });
+
+  it("指定した表紙がアルバムに無ければ、先頭の写真を表紙にする", () => {
+    const fukuoka = albums["2026-01-fukuoka"];
+    render(
+      <AlbumList
+        albums={{
+          ...albums,
+          "2026-01-fukuoka": { ...fukuoka, cover: "ffffffffffffffff" },
+        }}
+      />,
+    );
+
+    const cover = within(screen.getAllByRole("link")[0]).getByRole("img");
+    expect(cover).toHaveAttribute("src", photoUrl("bbbbbbbbbbbbbbbb", 640));
   });
 
   it("アルバムが無いときはその旨を出す", () => {

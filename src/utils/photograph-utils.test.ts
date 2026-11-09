@@ -6,6 +6,7 @@ import {
   type PhotoRow,
   photoSrcSet,
   photoUrl,
+  pickAlbum,
   rowTargetHeight,
   sortAlbums,
 } from "./photograph-utils";
@@ -98,6 +99,27 @@ describe("sortAlbums", () => {
     sortAlbums(albums);
 
     expect(albums).toEqual(before);
+  });
+});
+
+describe("pickAlbum", () => {
+  const album = (date: string): Album => ({
+    title: date,
+    date,
+    photos: [landscape("a")],
+  });
+  const albums = { old: album("2025-03-01"), latest: album("2026-01-15") };
+
+  it("指定した slug のアルバムを返す", () => {
+    expect(pickAlbum(albums, "old")).toBe(albums.old);
+  });
+
+  it("無い slug なら撮影日の最も新しいアルバムを返す", () => {
+    expect(pickAlbum(albums, "missing")?.date).toBe("2026-01-15");
+  });
+
+  it("アルバムが1つも無ければ undefined", () => {
+    expect(pickAlbum({}, "missing")).toBeUndefined();
   });
 });
 

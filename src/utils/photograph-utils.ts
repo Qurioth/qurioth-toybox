@@ -18,6 +18,10 @@ export const photoSrcSet = ({ key, width }: Photo): string =>
     (size) => `${photoUrl(key, size)} ${Math.min(size, width)}w`,
   ).join(", ");
 
+/** アルバムの表紙。`cover` の写真が無ければ先頭の写真(spec FR-003) */
+export const albumCover = ({ cover, photos }: Album): Photo =>
+  photos.find(({ key }) => key === cover) ?? photos[0];
+
 /** 撮影日の新しい順(同じ日は slug の昇順)に並べ、slug を付けた新しい配列を返す */
 export const sortAlbums = (
   albums: Record<string, Album>,
@@ -28,6 +32,12 @@ export const sortAlbums = (
       if (a.date !== b.date) return a.date < b.date ? 1 : -1;
       return a.slug < b.slug ? -1 : 1;
     });
+
+/** 指定した slug のアルバム。無ければ撮影日の最も新しいアルバム。アルバムが1つも無ければ undefined */
+export const pickAlbum = (
+  albums: Record<string, Album>,
+  slug: string,
+): Album | undefined => albums[slug] ?? sortAlbums(albums)[0];
 
 /** 行の高さの目安(px)。表示幅の半分を超えないようにする(spec FR-005) */
 export const rowTargetHeight = (width: number): number =>

@@ -22,6 +22,8 @@ export type PhotoListError = {
 export type ParsedPhotoList = {
   title?: string;
   date?: string;
+  /** `# cover:` で表紙に指定した写真の行番号。指定がなければ undefined */
+  coverLine?: number;
   entries: PhotoListEntry[];
   errors: PhotoListError[];
   /** 絶対パスを相対パスに直したリストの全文。直す行が無ければ null */
@@ -46,6 +48,39 @@ export const isValidDate = (value: string): boolean => {
 
 const toBackslash = (path: string) => path.replace(/\//g, "\\");
 
+const unquote = (value: string) => value.replace(/^"(.*)"$/, "$1").trim();
+
+const fileName = (path: string) => path.slice(path.lastIndexOf("\\") + 1);
+
+/**
+ * `# cover:` の値に当たる写真の行番号を探す。フォルダを含めて書いたときはパス全体で、ファイル名
+ * だけのときはファイル名で比べる(大文字小文字は問わない)。
+ */
+const findCover = (
+  cover: string,
+  entries: PhotoListEntry[],
+  rootPrefix: string,
+): { line: number } | { error: string } => {
+  let target = toBackslash(unquote(cover)).toLowerCase();
+  if (target.startsWith(rootPrefix)) target = target.slice(rootPrefix.length);
+
+  const matches = entries.filter(({ path }) =>
+    target.includes("\\")
+      ? path.toLowerCase() === target
+      : fileName(path).toLowerCase() === target,
+  );
+  if (matches.length === 0) {
+    return { error: "表紙(# cover:)に指定した写真がリストにありません" };
+  }
+  if (matches.length > 1) {
+    return {
+      error:
+        "表紙(# cover:)に当たる写真が複数あります。フォルダから書いてください",
+    };
+  }
+  return { line: matches[0].line };
+};
+
 /**
  * リストの全文を読む。パスの行は前後の空白と `"` を取り除き、区切りを `\` に揃える。
  * `sourceRoot` の下を指す絶対パスは相対パスに直し、その結果を `rewrittenText` で返す
@@ -64,20 +99,24 @@ export const parsePhotoList = (
     rewrittenText: null,
   };
   let rewritten = false;
+  let cover: { value: string; line: number } | undefined;
 
   lines.forEach((rawLine, index) => {
     const line = index + 1;
     const trimmed = rawLine.trim();
 
     if (trimmed.startsWith("#")) {
-      const header = trimmed.match(/^#\s*(title|date)\s*:\s*(.*)$/);
+      const header = trimmed.match(/^#\s*(title|date|cover)\s*:\s*(.*)$/);
       if (header?.[1] === "title") result.title = header[2].trim();
       if (header?.[1] === "date") result.date = header[2].trim();
+      if (header?.[1] === "cover" && header[2].trim() !== "") {
+        cover = { value: header[2].trim(), line };
+      }
       return;
     }
     if (trimmed === "") return;
 
-    let path = toBackslash(trimmed.replace(/^"(.*)"$/, "$1").trim());
+    let path = toBackslash(unquote(trimmed));
 
     if (ABSOLUTE_PATH.test(path)) {
       if (!path.toLowerCase().startsWith(rootPrefix)) {
@@ -121,6 +160,11 @@ export const parsePhotoList = (
   }
   if (result.entries.length === 0) {
     result.errors.push({ line: null, message: "写真が1枚もありません" });
+  }
+  if (cover && result.entries.length > 0) {
+    const found = findCover(cover.value, result.entries, rootPrefix);
+    if ("line" in found) result.coverLine = found.line;
+    else result.errors.push({ line: cover.line, message: found.error });
   }
   if (rewritten) {
     result.rewrittenText = lines.join("\n");

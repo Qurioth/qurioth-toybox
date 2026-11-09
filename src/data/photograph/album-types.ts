@@ -16,6 +16,8 @@ export type Album = {
   title: string;
   /** 撮影日。`YYYY-MM-DD`。一覧はこの日付の新しい順に並ぶ */
   date: string;
-  /** 並び順のとおり。先頭の写真が表紙になる */
+  /** 表紙にする写真の key(リストの `# cover:`)。無ければ先頭の写真が表紙になる */
+  cover?: string;
+  /** 並び順のとおり */
   photos: Photo[];
 };

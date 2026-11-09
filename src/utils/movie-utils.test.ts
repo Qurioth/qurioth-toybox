@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { MovieVideo } from "@/data/youtube/movie/movie-videos";
-import { sortMoviesByShotAt } from "./movie-utils";
+import { pickMovie, sortMoviesByShotAt } from "./movie-utils";
 
 const movie = (videoId: string, shotAt?: string): MovieVideo => ({
   videoId,
@@ -48,5 +48,21 @@ describe("sortMoviesByShotAt", () => {
     sortMoviesByShotAt(movies);
 
     expect(ids(movies)).toEqual(["a", "b"]);
+  });
+});
+
+describe("pickMovie", () => {
+  const movies = [movie("old", "2025-03-01"), movie("latest", "2026-01-15")];
+
+  it("指定した動画IDの動画を返す", () => {
+    expect(pickMovie(movies, "old")?.videoId).toBe("old");
+  });
+
+  it("無い動画IDなら撮影日の最も新しい動画を返す", () => {
+    expect(pickMovie(movies, "missing")?.videoId).toBe("latest");
+  });
+
+  it("動画が1本も無ければ undefined", () => {
+    expect(pickMovie([], "missing")).toBeUndefined();
   });
 });

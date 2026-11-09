@@ -30,7 +30,9 @@ src/data/photograph/
    URL になる名前で、英小文字・数字・`-` だけ(例: `2025-04-nemophila`)。
 2. **アルバムの情報を書く**: `# title:` にタイトル、`# date:` に撮影日(`YYYY-MM-DD`)を書く。
 3. **写真を書く**: エクスプローラーで写真を選び、右クリック →「パスとしてコピー」で貼り付ける。
-   1行に1枚。書いた順に並び、先頭の写真が表紙になる。
+   1行に1枚。書いた順に並び、先頭の写真が表紙になる。別の写真を表紙にするときは、
+   `# cover: DSC_0008.JPG` のようにファイル名を書く(同じ名前の写真が複数あるときはフォルダから書く)。
+   すでに公開したアルバムの表紙を変えるときも、`# cover:` を書いて 4〜6 をやり直す。
 4. **確かめる**: 何もアップロードせずに、枚数・圧縮後の大きさ・似ている写真・書き間違いを表示する。
 
    ```bash
@@ -57,6 +59,8 @@ src/data/photograph/
 - **アルバムを消す**: `albums/<slug>.txt` と `albums/<slug>.json` を消してから、残っている
   どれかのアルバムで `pnpm photo:sync <slug> --prune`(または `pnpm photo:sync --all --prune`)を
   実行する。`index.ts` が作り直され、画像も R2 から消える。
+- **`/other` のカードの写真を変える**: `src/constants/photograph.ts` の `OTHER_COVER_ALBUM` に
+  アルバムの slug を書く。カードにはそのアルバムの表紙が出る。`photo:sync` は要らない。
 
 ## うまくいかないとき
 
@@ -64,6 +68,7 @@ src/data/photograph/
 - `n行目: ファイルが見つかりません`: パスの打ち間違いか、元の写真のフォルダ名が変わった。
 - `n行目: NX Studio で JPG に書き出してください`: NEF しかない。NX Studio で同じフォルダに JPG を
   書き出す。
+- `n行目: 表紙(# cover:)に…`: `# cover:` の写真がリストに無いか、同じファイル名の写真が複数ある。
 - `pnpm` が「No version is set for shim」で動かない: `corepack pnpm photo:sync ...` で実行する。
 
 詳しい仕様は [specs/009-photograph/contracts/photo-sync-cli.md](../../../specs/009-photograph/contracts/photo-sync-cli.md)。
