@@ -11,3 +11,11 @@ export const sortMoviesByShotAt = (movies: MovieVideo[]): MovieVideo[] =>
     if (b.shotAt === undefined) return -1;
     return a.shotAt < b.shotAt ? 1 : -1;
   });
+
+/** 指定した動画IDの動画。無ければ撮影日の最も新しい動画。動画が1本も無ければ undefined */
+export const pickMovie = (
+  movies: MovieVideo[],
+  videoId: string,
+): MovieVideo | undefined =>
+  movies.find((movie) => movie.videoId === videoId) ??
+  sortMoviesByShotAt(movies)[0];

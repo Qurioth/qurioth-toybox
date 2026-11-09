@@ -38,3 +38,4 @@ typo修正や依存パッケージの更新など、影響の小さい変更に�
 | [0014](0014-establish-scenario-markdown-conventions.md) | シナリオMarkdownの記述規約を定め、src/data/scenario/README.md に集約する | Accepted |
 | [0015](0015-structure-scenario-markdown-for-display.md) | シナリオ本文はMarkdownを正とし、記述規約に沿って構造化して表示する | Superseded by [ADR-0016](0016-scenario-pages-with-mdx.md) |
 | [0016](0016-scenario-pages-with-mdx.md) | シナリオごとの専用ページをMDXで作り、共通の部品集で組み立てる | Accepted |
+| [0017](0017-store-photos-in-r2.md) | 写真を Cloudflare R2 に置き、手元のリストから圧縮して取り込む | Accepted |

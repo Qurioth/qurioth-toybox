@@ -1,0 +1,15 @@
+// 写真を配信する Worker の設定(ADR-0017)。
+// デプロイ: pnpm dlx wrangler deploy --config workers/photo/wrangler.jsonc
+{
+  "name": "qurioth-photos",
+  "main": "index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "r2_buckets": [
+    {
+      "binding": "PHOTOS",
+      // R2 で作ったバケット名と揃える(.env.local の R2_BUCKET と同じ)
+      "bucket_name": "qurioth-photos"
+    }
+  ]
+}

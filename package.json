@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "scenario:draft": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/create-scenario-draft.ts"
+    "scenario:draft": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/create-scenario-draft.ts",
+    "photo:sync": "node --env-file-if-exists=.env.local --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/photo-sync.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
@@ -47,9 +48,11 @@
     "@vitejs/plugin-react": "^6.2.1",
     "@vitest/coverage-v8": "^4.1.12",
     "autoprefixer": "^10.6.2",
+    "aws4fetch": "^1.0.20",
     "flowbite": "2.5.1",
     "jsdom": "^30.1.3",
     "postcss": "^8.5.32",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-animated": "^1.1.2",
