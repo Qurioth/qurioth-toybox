@@ -36,3 +36,6 @@ next-env.d.ts
 
 # 写真のリスト(元の写真のフォルダ名を公開しないため。ADR-0017)
 /src/data/photograph/albums/*.txt
+
+# wrangler(Worker のデプロイ時に作られる一時ファイル・ローカル状態。ADR-0017)
+.wrangler/
